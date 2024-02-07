@@ -2,6 +2,7 @@ package main.finalproject;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -33,10 +34,11 @@ public class HelloApplication extends Application {
         mediumMode.setToggleGroup(difficultyGroup);
         hardMode.setToggleGroup(difficultyGroup);
 
-        VBox VBox = new VBox(10,label);
+        HBox Difficulty_Radios_Hbox = new HBox(10,easyMode,mediumMode,hardMode);
+        Difficulty_Radios_Hbox.setAlignment(Pos.CENTER);
+        Difficulty_Radios_Hbox.setPadding(new Insets(5));
+        VBox VBox = new VBox(10,label,Difficulty_Radios_Hbox);
         VBox.setAlignment(Pos.CENTER);
-        VBox.getChildren().add(new HBox(10,easyMode,mediumMode,hardMode));
-
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
