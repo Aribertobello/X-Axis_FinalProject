@@ -14,7 +14,7 @@ Such features and mechanics include the following:
 -Multiple levels (Increasing difficulty as levels go up)
 -Certain obstacles used for protection
 -Engaging interactions (drag and release mechanism to launch grenade,spear,smoke ect...)
--Projectile and Game Physics (Factors such as velocity, and acceleration, wind resistance, friction drag force in water ect...)
+-Game Physics (Factors such as velocity, and acceleration, wind resistance, friction drag force in water ect...)
 -Power ups (Making the projectile weapon faster, more damage,ect..)
 -A time limit per player called a "turn". (30 seconds to make a choice)
 -Variety of classes and loadouts (Light class, medium class, heavy class)
@@ -24,6 +24,16 @@ Such features and mechanics include the following:
 -Max of 2 grenades for each type, main weapon is unlimited.
 -Smoke grenades able to hide from other people.
 -Theme mode (Light/dark)
--Access to old levels and new levels
+-Access to previous levels and new levels
 -Making the player be able to jump to one position to another each "turn" for a certain range of distance using projectile motion (There will be a max distance that the character can jump to)
 
+Section 4: Physic Topics
+-Projectile motion (KE, PE)
+-Newtonian gravitational force
+-Vectors algebra
+
+(optional)
+-Mechanics (impulse)
+-Fluid dynamics
+-Waves
+-Special relativity
