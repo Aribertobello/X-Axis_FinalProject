@@ -3,7 +3,7 @@ Idea 2: Physics engine
 
 
 Section 1: Executive summary
-[Name] is a 2D projectile game made purely for interactive entertainment offering a fun and challenging experience. The main idea behind Ballistic Odyssey is centered around the concept of trying to shoot an enemy AI using different kinds of weapons and power ups.
+[Name] is a 2D projectile game made purely for interactive entertainment offering a fun and challenging experience. The main idea behind Ballistic Odyssey is centered around the concept of trying to shoot a computer enemy using different kinds of weapons and power ups.
 The game will feature an immersive user interface which will let players easily navigate the game and choose their own customizable UI settings. In addition, [Name] will also implement progressive difficulty levels as well as an enemy 
 difficulty and a scoring system to determine the player’s skills and abilities. This scoring system will add depth to the game itself and the player’s experience as it will make him have a competitive spirit and encourage him to play more.
 
@@ -26,6 +26,7 @@ Such features and mechanics include the following:
 -Theme mode (Light/dark)
 -Access to previous levels and new levels
 -Making the player be able to jump to one position to another each "turn" for a certain range of distance using projectile motion (There will be a max distance that the character can jump to)
+-Zooms on projectiles and characters
 
 Section 4: Physic Topics
 -Projectile motion (KE, PE)
