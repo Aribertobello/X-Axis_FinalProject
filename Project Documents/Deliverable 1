@@ -15,6 +15,7 @@ Such features and mechanics include the following:
 App divided into two modes: the Game (which is the main part of the app) and education Mode where the user can discover the math and physics behind the game, and do some simultauions.
 -play against Other player or computer
 -computer has various difficulties
+-game will be played at multiple scales : human scale-astronomical scale.
 -Multiple levels (Increasing difficulty as levels go up)
 -Certain obstacles used for protection
 -Engaging interactions (drag and release mechanism to launch grenade,spear,smoke ect...)
