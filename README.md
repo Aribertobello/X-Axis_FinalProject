@@ -9,3 +9,4 @@ Coding Style - Push and pull requests using 3 different branches for each teamat
 
 
 Notes: App management link: https://team-project-x-axis.atlassian.net/jira/software/projects/XA/boards/1
+Project Proposal doc link : https://docs.google.com/document/d/1Y4xAgeDuhKZAUTRiC9ax89UEbc2Ujx_RGtUsSCVHcmE/edit?usp=sharing
