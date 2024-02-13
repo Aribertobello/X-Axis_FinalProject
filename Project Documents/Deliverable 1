@@ -4,42 +4,43 @@ Idea 2: Physics engine
 
 
 Section 1: Executive summary
-[Name] is a 2D projectile game made purely for interactive entertainment offering a fun and challenging experience. The main idea behind Ballistic Odyssey is centered around the concept of trying to shoot a computer enemy using different kinds of weapons and power ups.
-The game will feature an immersive user interface which will let players easily navigate the game and choose their own customizable UI settings. In addition, [Name] will also implement progressive difficulty levels as well as an enemy 
-difficulty and a scoring system to determine the player’s skills and abilities. This scoring system will add depth to the game itself and the player’s experience as it will make him have a competitive spirit and encourage him to play more.
+[Name] is a 2D projectile game made purely for interactive entertainment offering a fun and challenging experience. The main idea behind [Name] is centered around the concept of trying to shoot a Projectile at either an opponent 
+  in order to defeat it or in order to reach a goal and progress through the game using different kinds of weapons and power ups.
+  The game will feature an immersive user interface which will let players easily navigate the game and choose their own customizable UI settings. In addition, [Name] will also implement progressive difficulty levels as well as an enemy 
+  difficulty and a scoring system to determine the player’s skills and abilities. This scoring system will add depth to the game itself and the player’s experience as it will make him have a competitive spirit and encourage him to play more.
 
 Section 3: Solutions and approach
-In order to provide a fun and immersive gaming experience for the user, the 2D projectile game will heavily focus on implementing many key features and mechanics to engage interaction and overall enjoyable gameplay .
+  In order to provide a fun and immersive gaming experience for the user, the 2D projectile game will heavily focus on implementing many key features and mechanics to engage interaction and overall enjoyable gameplay .
 
 Such features and mechanics include the following:
-App divided into two modes: the Game (which is the main part of the app) and education Mode where the user can discover the math and physics behind the game, and do some simultauions.
--play against Other player or computer
--computer has various difficulties
--game will be played at multiple scales : human scale-astronomical scale.
--Multiple levels (Increasing difficulty as levels go up)
--Certain obstacles used for protection
--Engaging interactions (drag and release mechanism to launch grenade,spear,smoke ect...)
--Game Physics (Factors such as velocity, and acceleration, wind resistance, friction drag force in water ect...)
--Power ups (Making the projectile weapon faster, more damage,ect..)
--A time limit per player called a "turn". (30 seconds to make a choice)
--Variety of classes and loadouts (Light class, medium class, heavy class)
--Medium class includes a rail gun able to shoot through thin obstacles (straight direction),smoke grenades, an impact grenades.
--Light class includes a spear, a projectile grenade launching other grenades on impact.
--Heavy class includes a mortar, smoke grenades, impact grenades.
--Max of 2 grenades for each type, main weapon is unlimited.
--Smoke grenades able to hide from other people.
--Theme mode (Light/dark)
--Access to previous levels and new levels
--Making the player be able to jump to one position to another each "turn" for a certain range of distance using projectile motion (There will be a max distance that the character can jump to)
--Zooms on projectiles and characters
+  App divided into two modes: the Game (which is the main part of the app) and education Mode where the user can discover the math and physics behind the game, and do some simultauions.
+    -play against Other player or computer
+    -computer has various difficulties
+    -game will be played at multiple scales : human scale-astronomical scale.
+    -Multiple levels (Increasing difficulty as levels go up)
+    -Certain obstacles used for protection
+    -Engaging interactions (drag and release mechanism to launch grenade,spear,smoke ect...)
+    -Game Physics (Factors such as velocity, and acceleration, wind resistance, friction drag force in water ect...)
+    -Power ups (Making the projectile weapon faster, more damage,ect..)
+    -A time limit per player called a "turn". (30 seconds to make a choice)
+    -Variety of classes and loadouts (Light class, medium class, heavy class)
+    -Medium class includes a rail gun able to shoot through thin obstacles (straight direction),smoke grenades, an impact grenades.
+    -Light class includes a spear, a projectile grenade launching other grenades on impact.
+    -Heavy class includes a mortar, smoke grenades, impact grenades.
+    -Max of 2 grenades for each type, main weapon is unlimited.
+    -Smoke grenades able to hide from other people.
+    -Theme mode (Light/dark)
+    -Access to previous levels and new levels
+    -Making the player be able to jump to one position to another each "turn" for a certain range of distance using projectile motion (There will be a max distance that the character can jump to)
+    -Zooms on projectiles and characters
 
 Section 4: Physic Topics
--Projectile motion (KE, PE)
--Newtonian gravitational force
--Vectors algebra
+    -Projectile motion (KE, PE)
+    -Newtonian gravitational force
+    -Vectors algebra
 
 (optional)
--Mechanics (impulse)
--Fluid dynamics
--Waves
--Special relativity
+    -Mechanics (impulse)
+    -Fluid dynamics
+    -Waves
+    -Special relativity
