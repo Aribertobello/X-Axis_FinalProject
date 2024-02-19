@@ -1,46 +1,80 @@
 Idea 1: Projectile Game using smooth animations and game physics <= Chosen Idea
-
 Idea 2: Physics engine
 
 
 Section 1: Executive summary
-[Name] is a 2D projectile game made purely for interactive entertainment offering a fun and challenging experience. The main idea behind [Name] is centered around the concept of trying to shoot a Projectile at either an opponent 
-  in order to defeat it or in order to reach a goal and progress through the game using different kinds of weapons and power ups.
-  The game will feature an immersive user interface which will let players easily navigate the game and choose their own customizable UI settings. In addition, [Name] will also implement progressive difficulty levels as well as an enemy 
-  difficulty and a scoring system to determine the player’s skills and abilities. This scoring system will add depth to the game itself and the player’s experience as it will make him have a competitive spirit and encourage him to play more.
+IDEA SELECTED: Projectile Game using smooth animations and game physics 
+The Project will cover the physics of motion, The main of the app will be a game where the player must throw /launch projectiles in order to win, 
+additionally there will be the option to play against an enemy, which could be the computer or another person using the same computer. 
+Where each opponent will take turns to launch things at the enemy in order to destroy them.
+There will also be an educational mode, where the app will show and create educational animations using the mechanics of the game which are based off of physics and math. 
+The main menu will present the player with these options
 
-Section 3: Solutions and approach
-  In order to provide a fun and immersive gaming experience for the user, the 2D projectile game will heavily focus on implementing many key features and mechanics to engage interaction and overall enjoyable gameplay .
+Project background:
+We are in an era in which most video games are offered to people to only consume explicit content such as action, violence without actually gaining real knowledge. 
+However, this game will do the opposite by offering the player an experience in which the user will have to think with his brain in order to succeed in the game. 
+With that said, this game will help develop the player’s critical thinking and decision making by thinking of making the right move.
 
-Such features and mechanics include the following:
-  App divided into two modes: the Game (which is the main part of the app) and education Mode where the user can discover the math and physics behind the game, and do some simultauions.
-    -play against Other player or computer
-    -computer has various difficulties
-    -game will be played at multiple scales : human scale-astronomical scale.
-    -Multiple levels (Increasing difficulty as levels go up)
-    -Certain obstacles used for protection
-    -Engaging interactions (drag and release mechanism to launch grenade,spear,smoke ect...)
-    -Game Physics (Factors such as velocity, and acceleration, wind resistance, friction drag force in water ect...)
-    -Power ups (Making the projectile weapon faster, more damage,ect..)
-    -A time limit per player called a "turn". (30 seconds to make a choice)
-    -Variety of classes and loadouts (Light class, medium class, heavy class)
-    -Medium class includes a rail gun able to shoot through thin obstacles (straight direction),smoke grenades, an impact grenades.
-    -Light class includes a spear, a projectile grenade launching other grenades on impact.
-    -Heavy class includes a mortar, smoke grenades, impact grenades.
-    -Max of 2 grenades for each type, main weapon is unlimited.
-    -Smoke grenades able to hide from other people.
-    -Theme mode (Light/dark)
-    -Access to previous levels and new levels
-    -Making the player be able to jump to one position to another each "turn" for a certain range of distance using projectile motion (There will be a max distance that the character can jump to)
-    -Zooms on projectiles and characters
+Section 3: Solutions and approach:
+In order to provide a fun and immersive gaming experience for the user, the game will heavily focus on implementing many key features and mechanics to engage interaction and overall enjoyable gameplay .
 
-Section 4: Physic Topics
-    -Projectile motion (KE, PE)
-    -Newtonian gravitational force
-    -Vectors algebra
+  -General app features:
+    App is divided into two modes: the Game (which is the main part of the app) and Education Mode where the user can discover the mathematics and physics behind the game, and do some simulations.
+    Option to play against Other player or computer
+    A time limit per player called a "turn". (30 seconds to make a choice)
+    Access to previous levels and new levels
 
-(optional)
-    -Mechanics (impulse)
-    -Fluid dynamics
-    -Waves
-    -Special relativity
+  -Layout/design features:
+    Settings menu icon top right during game (pause button, exit button)
+    weapon/loadout selection button at bottom of the screen during play (where one can cycle though available weapons
+
+  -Physics/Math features: 
+    The game will be played at multiple scales : human scale(Classical Projectile Motion) -astronomical scale(Astronomic Motion ).
+    Game Physics (Factors such as velocity, acceleration, forces, ect...)
+    Physic Topics:
+        -Classical Projectile motion (Newton's 3 laws, mass acceleration, force) -> the physics which dictate how an object moves through space
+        -Newtonian gravitational force -> the physics which dictate how an object moves through space when large gravitational and astronomical forces are applied on it
+        -Vectors algebra -> vectors are at the very essence of predicting how bodies move in space. {X-Y space will be used for this project}
+
+  -Game features:
+    Computer has various difficulties (easy, medium, hard).
+    Multiple levels (Increasing difficulty as levels go up).
+    Coordinate sytem
+    Certain obstacles used for protection.
+    Engaging interactions (drag and release mechanism to launch grenade,spear,smoke ect...).
+    Power ups (Making the projectile weapon faster, more damage,ect..).
+    A time limit per player called a "turn". (30 seconds to make a choice).
+    Variety of classes and loadouts (Light class, medium class, heavy class).
+    Medium class includes a rail gun able to shoot through thin obstacles (straight direction), smoke grenades, and impact grenades.
+    Light class includes a spear, a projectile grenade launching other grenades on impact.
+    Heavy class includes a mortar, smoke grenades, impact grenades.
+    Max of 2 grenades for each type of class, main weapon usage is unlimited.
+    Deploying smoke grenades gives the player the ability to hide from the opponent.
+    Live Tracking of Variables displayed on screen (Education Mode) 
+    Pause Button to pause the motion of object (Education Mode)
+
+  -additional/optional features:
+    Impulse mechanics
+    Fluid dynamics
+    Waves
+    Special relativity
+    Player can jump to one place to another (using projectile motion)
+    Zooms on projectiles and characters
+    3 players per team 
+    Reverse Motion/ live Playback of Notion (Education Mode)
+    Bounce Mechanics
+
+Section 4: Dependencies libraries and tools used to create the project
+  - JAVA FX
+  -Scene Builder
+
+Section 5: Potential difficulties:
+  Making grenades and bullets rotate in the air while getting to trajectory.
+  Making projectile grenades collide with objects such as obstacles and surfaces.
+  Creating smooth effects of explosions.
+  Making smoke effects displaying on screen.
+
+Section 6 Delivery:
+  We think this project is doable in 7 weeks because we have a clear plan of what to execute and when to execute despite challenges. In addition, as long as we stay consistent, communicate, and organise our ideas as well as tracking every update and reviewing them by each team member, everything should be fine.
+
+
