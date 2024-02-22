@@ -1,4 +1,4 @@
-package main.finalproject;
+package main.bulletbattleground;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -9,7 +9,6 @@ public class HelloController {
 
     @FXML
     protected void onHelloButtonClick() {
-        welcomeText.setText("UPDATE!!!!!!!!!!!!!!!!");
+        welcomeText.setText("Welcome to JavaFX Application!");
     }
-
 }
