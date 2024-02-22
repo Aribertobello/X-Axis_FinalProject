@@ -3,7 +3,11 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
+<<<<<<< HEAD:.idea/gradle.xml
+        <option name="externalProjectPath" value="$PROJECT_DIR$/Final-Project" />
+=======
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+>>>>>>> main:BulletBattleGround/.idea/gradle.xml
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
