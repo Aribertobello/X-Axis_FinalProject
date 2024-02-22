@@ -1,8 +1,8 @@
-module main.bulletbattleground {
+module com.example.bulletbattleground {
     requires javafx.controls;
     requires javafx.fxml;
-            
-                            
-    opens main.bulletbattleground to javafx.fxml;
-    exports main.bulletbattleground;
+
+
+    opens com.example.bulletbattleground to javafx.fxml;
+    exports com.example.bulletbattleground;
 }
