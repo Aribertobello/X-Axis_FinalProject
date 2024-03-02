@@ -1,4 +1,4 @@
-package com.example.bulletbattleground;
+package com.example.bulletbattleground.utility;
 
 import javafx.scene.shape.Line;
 

@@ -1,4 +1,6 @@
-package com.example.bulletbattleground;
+package com.example.bulletbattleground.utility;
+
+import com.example.bulletbattleground.utility.Vector;
 
 import java.util.ArrayList;
 

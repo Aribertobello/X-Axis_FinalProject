@@ -1,9 +1,27 @@
-package com.example.bulletbattleground;
+package com.example.bulletbattleground.utility;
 
 public class Vector {
     protected double x;
     protected double y;
-    protected double z;
+
+
+
+
+
+
+
+    public Vector(double x,double y){
+        this.x = x;
+        this.y = y;
+    }
+
+
+
+
+
+
+
+
     protected double magnitude(){
         return 0;
     }
@@ -25,4 +43,5 @@ public class Vector {
     protected double angle(){
         return 0;
     }
+
 }
