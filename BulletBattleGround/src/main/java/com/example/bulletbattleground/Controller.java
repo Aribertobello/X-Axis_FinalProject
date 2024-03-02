@@ -29,7 +29,11 @@ public class Controller {
 
     private Button EXITBTN;
 
+<<<<<<< Updated upstream
    
+=======
+
+>>>>>>> Stashed changes
     private Button MAINMENUBTN;
 
 

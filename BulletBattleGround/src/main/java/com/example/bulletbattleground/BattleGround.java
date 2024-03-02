@@ -7,9 +7,23 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+<<<<<<< Updated upstream
 import java.util.Objects;
 
 public class BattleGround extends Application {
+=======
+import java.util.ArrayList;
+import java.util.Objects;
+
+public class BattleGround extends Application {
+    protected ArrayList<String> pVeLevelsArrayList = new ArrayList<String>();
+    protected ArrayList<String> pVcLevelsArrayList = new ArrayList<String>();
+    protected ArrayList<String> mapsArrayList = new ArrayList<String>();
+    protected String UserDataLocation;
+    protected Game activeGame;
+    protected User user;
+
+>>>>>>> Stashed changes
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(BattleGround.class.getResource("mainMenuScene.fxml"));
