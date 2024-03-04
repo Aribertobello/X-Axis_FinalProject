@@ -18,7 +18,7 @@ public class BattleGround extends Application {
     static protected ArrayList<String> pVcLevelsArrayList = new ArrayList<String>();
     static protected ArrayList<String> mapsArrayList = new ArrayList<String>();
     static protected String UserDataLocation = "";
-    static protected Game activeGame = new Game(FileManager.defaultLevel());
+    static protected Game activeGame = new Game(FileManager.defaultLevelPvp());
     static protected User user = new User();
 
     @Override
@@ -29,8 +29,6 @@ public class BattleGround extends Application {
         stage.setScene(MainMenuscene);
         stage.show();
     }
-
-
     public static void main(String[] args) {
         launch();
     }

@@ -1,4 +1,6 @@
 package com.example.bulletbattleground.gameObjects.projectiles;
 
-public class Rocket {
+import com.example.bulletbattleground.game.Projectile;
+
+public class Rocket extends Projectile {
 }

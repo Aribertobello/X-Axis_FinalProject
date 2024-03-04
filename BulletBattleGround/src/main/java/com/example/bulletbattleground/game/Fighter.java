@@ -11,11 +11,16 @@ public class Fighter extends Rectangle {
     protected Bounds bounds;
     protected Loadout loadout;
     protected int health;
-    protected Coordinate coordinate;
-
-
+    protected Coordinate coordinate = new Coordinate(0,0);
+    public Fighter(int coordinateX, int coordinateY){
+        super(40,40);
+        loadout = new Loadout("light");
+        coordinate.setX(coordinateX);
+        coordinate.setY(coordinateY);
+        this.setLayoutX(coordinateX);
+        this.setLayoutY(coordinateY);
+    }
     public HBox headsUpDisplay(){
         return this.loadout.display();
     }
-
 }

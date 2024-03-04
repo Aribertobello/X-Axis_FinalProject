@@ -1,5 +1,6 @@
 package com.example.bulletbattleground.game;
 
+import com.example.bulletbattleground.gameObjects.Loot;
 import com.example.bulletbattleground.utility.Coordinate;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -15,43 +16,35 @@ public class Mapp extends Pane {
     protected int scale;
     protected Projectile activeProjectile;
     protected com.example.bulletbattleground.gameObjects.Loot Loot;
-
-    protected Circle floor;
-
-
-
+    Loot loot;
+    protected Circle earth;
     public Mapp(){
-        floor = new Circle(0,6731000,6371000-500, Color.SADDLEBROWN);
-        this.getChildren().add(floor);
+        earth = new Circle(540,673100640,673100000, Color.SADDLEBROWN);
+        this.getChildren().add(earth);
     }
     public Mapp(String type){
         if(type.equalsIgnoreCase("earth")){
-            floor = new Circle(6731000,63710000,63710000-900, Color.GREY);
-
+            earth = new Circle(540,673100640,673100000, Color.SEAGREEN);
+            this.getChildren().add(earth);
         }
         if(type.equalsIgnoreCase("space")){
-            floor = new Circle(6731000,63710000,63710000, Color.GREY);
+            this.setStyle("-fx-background-color: black;");
+            earth = new Circle(900,600,120, Color.CORNFLOWERBLUE);
+            this.getChildren().add(earth);
         }
     }
-
-
-
-
-
     protected void update(){
-
-
-
     }
-    public void addFighter(Fighter fighter){}
+    public void addFighter(Fighter fighter){
+        people.add(fighter);
+        getChildren().add(fighter);
+    }
     public void addObstacle(Obstacle Obstacle){
         getChildren().add(Obstacle);
-        System.out.println(getChildren().get(0));
     }
     public void addForces(Projectile projectile){}
     public Boolean checkCollision(Projectile projectile){
         return null;
     }
     protected void explosion(Coordinate coordinate){}
-
 }

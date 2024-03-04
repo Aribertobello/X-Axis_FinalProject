@@ -1,5 +1,7 @@
 package com.example.bulletbattleground;
 import com.example.bulletbattleground.BattleGround;
+import com.example.bulletbattleground.fileManagement.FileManager;
+import com.example.bulletbattleground.game.Game;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -42,6 +44,7 @@ public class Controller {
     }
     public void player_environ_btn_clicked(ActionEvent e){
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        BattleGround.activeGame = new Game(FileManager.defaultLevelPve());
         stage.setScene(BattleGround.activeGame);
         stage.setMaximized(true);
         stage.show();
