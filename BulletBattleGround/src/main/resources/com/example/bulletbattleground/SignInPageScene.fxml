@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="408.0" prefWidth="611.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bulletbattleground.User">
+   <children>
+      <VBox alignment="CENTER" layoutX="-1.0" layoutY="-1.0" prefHeight="258.0" prefWidth="613.0" spacing="10.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="143.0" text="HELLO">
+               <font>
+                  <Font name="Berlin Sans FB Demi Bold" size="40.0" />
+               </font>
+            </Label>
+            <HBox fx:id="AccountHbox" alignment="CENTER" prefHeight="105.0" prefWidth="600.0" spacing="20.0">
+               <children>
+                  <Button fx:id="signInButton" mnemonicParsing="false" onAction="#SignIn" prefHeight="83.0" prefWidth="228.0" text="SIGN IN">
+                     <font>
+                        <Font name="Berlin Sans FB Bold" size="40.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="LoginButton" mnemonicParsing="false" onAction="#Login" prefHeight="83.0" prefWidth="228.0" text="LOGIN">
+                     <font>
+                        <Font name="Berlin Sans FB Bold" size="40.0" />
+                     </font>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox layoutX="-1.0" layoutY="276.0" prefHeight="97.0" prefWidth="614.0">
+         <children>
+            <HBox fx:id="UserNameHBOX" alignment="CENTER" prefHeight="60.0" prefWidth="600.0" spacing="20.0">
+               <children>
+                  <Label text="Username:" />
+                  <TextField fx:id="UserNameTextField" />
+               </children>
+            </HBox>
+            <HBox fx:id="passwordHBOX" alignment="CENTER" prefHeight="64.0" prefWidth="600.0" spacing="20.0">
+               <children>
+                  <Label text="Password:" />
+                  <TextField fx:id="PassWordTextField" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

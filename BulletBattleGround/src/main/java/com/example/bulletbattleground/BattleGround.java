@@ -26,7 +26,7 @@ public class BattleGround extends Application {
 >>>>>>> Stashed changes
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(BattleGround.class.getResource("mainMenuScene.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(BattleGround.class.getResource("SignInPageScene.fxml"));
         Scene MainMenuscene = new Scene(fxmlLoader.load());
         stage.setTitle("Hello!");
         stage.setScene(MainMenuscene);
