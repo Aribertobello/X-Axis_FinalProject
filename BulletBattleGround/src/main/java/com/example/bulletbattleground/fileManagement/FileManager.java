@@ -36,6 +36,8 @@ public class FileManager {
         return map;
     }
 
-
+    public static void createPveLevel(String file){}
+    public static void createPvCLevel(String file){}
+    public static void saveUserdata(String file){}
 
 }

@@ -16,12 +16,9 @@ public class Mapp extends Pane {
     protected int scale;
     protected Projectile activeProjectile;
     protected com.example.bulletbattleground.gameObjects.Loot Loot;
-    Loot loot;
+    protected Loot loot;
     protected Circle earth;
-    public Mapp(){
-        earth = new Circle(540,673100640,673100000, Color.SADDLEBROWN);
-        this.getChildren().add(earth);
-    }
+
     public Mapp(String type){
         if(type.equalsIgnoreCase("earth")){
             earth = new Circle(540,673100640,673100000, Color.SEAGREEN);
