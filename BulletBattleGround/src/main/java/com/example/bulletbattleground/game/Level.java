@@ -7,6 +7,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
 public class Level extends AnchorPane {
@@ -15,9 +16,10 @@ public class Level extends AnchorPane {
 
     protected Mapp map;
     protected HBox headsUpDisplay = new HBox(new Label("HUD"));
-    protected Arrow trajectoryArrow;
+    protected Line trajectoryLine = new Line();//TODO
     protected Coordinate origin;
     protected Fighter selectedFighter;
+    protected boolean dragging = true;
     protected String type;
     protected void update(){
         map.setPrefWidth(((Stage) this.getScene().getWindow()).getWidth());
@@ -33,22 +35,26 @@ public class Level extends AnchorPane {
         headsUpDisplay.setPrefHeight(200);
         headsUpDisplay.setFillHeight(false);
         headsUpDisplay.setStyle("-fx-background-color: lightblue; -fx-border-color: black");
-        AnchorPane.setBottomAnchor(headsUpDisplay,5.0);
+        AnchorPane.setBottomAnchor(headsUpDisplay, 5.0);
     }
     public Level(Mapp map,String type){
         this.type = type;
-        if(this.type.equalsIgnoreCase("pve")){
+        if (this.type.equalsIgnoreCase("pve")){
             map.loot = new Loot(1303,700);
             map.getChildren().add(map.loot);
-        }if(this.type.equalsIgnoreCase("pvp")){
+        } if (this.type.equalsIgnoreCase("pvp")){ //TODO
         }
         this.map = map;
-        this.getChildren().addAll(this.map,headsUpDisplay);
+        this.getChildren().addAll(this.map, headsUpDisplay);
         headsUpDisplay.setAlignment(Pos.CENTER);
         headsUpDisplay.setMaxHeight(200);
         headsUpDisplay.setPrefHeight(200);
         headsUpDisplay.setFillHeight(false);
         headsUpDisplay.setStyle("-fx-background-color: white; -fx-border-color: black");
-        AnchorPane.setBottomAnchor(headsUpDisplay,5.0);
+        AnchorPane.setBottomAnchor(headsUpDisplay, 5.0);
+    }
+
+    public void setDragging(boolean dragging) {
+        this.dragging = dragging;
     }
 }

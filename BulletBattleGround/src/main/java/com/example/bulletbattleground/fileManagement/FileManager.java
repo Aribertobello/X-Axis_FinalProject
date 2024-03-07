@@ -8,13 +8,12 @@ import com.example.bulletbattleground.gameObjects.obstacles.SmokeScreen;
 import com.example.bulletbattleground.gameObjects.obstacles.Wall;
 
 public class FileManager {
-
-
     public static Level defaultLevelPvp(){
         Mapp map = defaultMapPvp();
         Level level = new Level(map,"pvp");
         return level;
     }
+
     public static Mapp defaultMapPvp(){
         Mapp map = new Mapp("earth");
         //map.addObstacle(new SmokeScreen(40,500,600));
@@ -23,6 +22,7 @@ public class FileManager {
         map.addFighter(new Computer(1600,600));
         return map;
     }
+
     public static Level defaultLevelPve(){
         Mapp map = defaultMapPve();
         Level level = new Level(map,"pve");

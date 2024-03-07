@@ -1,8 +1,8 @@
 package com.example.bulletbattleground.gameObjects;
 
 import com.example.bulletbattleground.game.Loadout;
-import com.example.bulletbattleground.utility.Bounds;
 import com.example.bulletbattleground.utility.Coordinate;
+import com.example.bulletbattleground.utility.HitBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -19,5 +19,5 @@ public class Loot extends Rectangle {
     }
 
     protected Coordinate coordinate;
-    protected Bounds bounds;
+    protected HitBox hitBox;
 }
