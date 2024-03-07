@@ -14,9 +14,9 @@ import java.util.ArrayList;
 
 
 public class BattleGround extends Application {
-    static protected ArrayList<String> pVeLevelsArrayList = new ArrayList<String>();
-    static protected ArrayList<String> pVcLevelsArrayList = new ArrayList<String>();
-    static protected ArrayList<String> mapsArrayList = new ArrayList<String>();
+    static protected ArrayList<String> pVeLevelsArrayList = new ArrayList<>();
+    static protected ArrayList<String> pVcLevelsArrayList = new ArrayList<>();
+    static protected ArrayList<String> mapsArrayList = new ArrayList<>();
     static protected String UserDataLocation = "";
     static protected Game activeGame = new Game(FileManager.defaultLevelPvp());
     static protected User user = new User();

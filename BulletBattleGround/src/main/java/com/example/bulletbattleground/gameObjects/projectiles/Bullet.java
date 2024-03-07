@@ -1,8 +1,8 @@
 package com.example.bulletbattleground.gameObjects.projectiles;
 
 import com.example.bulletbattleground.game.Projectile;
-import com.example.bulletbattleground.utility.Bounds;
+import com.example.bulletbattleground.utility.HitBox;
 
 public class Bullet extends Projectile {
-    protected Bounds bounds;
+    protected HitBox hitBox;
 }

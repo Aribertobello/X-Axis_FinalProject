@@ -13,8 +13,8 @@ public class Computer extends Fighter {
     public Computer(int coordinateX, int coordinateY) {
         super(coordinateX, coordinateY);
 
-        Image Image = new Image("C:\\Users\\aribe\\IdeaProjects\\X-Axis_FinalProject\\BulletBattleGround\\build\\classes\\EnemyImage.png");
-        this.setFill(new ImagePattern(Image));
+        //Image Image = new Image("C:\\Users\\aribe\\IdeaProjects\\X-Axis_FinalProject\\BulletBattleGround\\build\\classes\\EnemyImage.png");
+        //this.setFill(new ImagePattern(Image));
     }
 
     protected Vector calculateLaunchAngle(){

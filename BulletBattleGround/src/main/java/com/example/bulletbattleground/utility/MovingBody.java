@@ -19,7 +19,7 @@ public abstract class MovingBody extends Group {
     protected Vector Velocity(){
         return null;
     }
-    protected double KE(){
+    protected double kE(){
         return 0;
     }
 }

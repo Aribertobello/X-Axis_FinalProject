@@ -24,4 +24,13 @@ public class Coordinate {
     public void setY(double y) {
         this.y = y;
     }
+
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
 }
