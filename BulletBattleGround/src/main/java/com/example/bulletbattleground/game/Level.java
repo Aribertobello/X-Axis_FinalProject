@@ -1,6 +1,7 @@
 package com.example.bulletbattleground.game;
 
 import com.example.bulletbattleground.gameObjects.Loot;
+import com.example.bulletbattleground.gameObjects.fighters.Ally;
 import com.example.bulletbattleground.utility.Arrow;
 import com.example.bulletbattleground.utility.Coordinate;
 import javafx.geometry.Pos;
@@ -11,20 +12,17 @@ import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
 public class Level extends AnchorPane {
-
-
-
     protected Mapp map;
     protected HBox headsUpDisplay = new HBox(new Label("HUD"));
     protected Line trajectoryLine = new Line();//TODO
     protected Coordinate origin;
-    protected Fighter selectedFighter;
-    protected boolean dragging = true;
+    protected Ally selectedFighter;
+    protected boolean dragging = false;
     protected String type;
-    protected void update(){
+    protected void update(double dt){
         map.setPrefWidth(((Stage) this.getScene().getWindow()).getWidth());
         headsUpDisplay.setPrefWidth(((Stage) this.getScene().getWindow()).getWidth());
-        map.update();
+        map.update(dt);
     }
     protected void displayLoadout(Fighter selectedFighter){}
     public Level(){
@@ -38,6 +36,7 @@ public class Level extends AnchorPane {
         AnchorPane.setBottomAnchor(headsUpDisplay, 5.0);
     }
     public Level(Mapp map,String type){
+
         this.type = type;
         if (this.type.equalsIgnoreCase("pve")){
             map.loot = new Loot(1303,700);
@@ -46,14 +45,14 @@ public class Level extends AnchorPane {
         }
         this.map = map;
         this.getChildren().addAll(this.map, headsUpDisplay);
-        headsUpDisplay.setAlignment(Pos.CENTER);
+        this.getChildren().add(trajectoryLine);// TODO arrow
+        //headsUpDisplay.setAlignment(Pos.CENTER);
         headsUpDisplay.setMaxHeight(200);
         headsUpDisplay.setPrefHeight(200);
         headsUpDisplay.setFillHeight(false);
         headsUpDisplay.setStyle("-fx-background-color: white; -fx-border-color: black");
         AnchorPane.setBottomAnchor(headsUpDisplay, 5.0);
     }
-
     public void setDragging(boolean dragging) {
         this.dragging = dragging;
     }
