@@ -10,12 +10,16 @@ public class Projectile extends MovingBody {
     protected int damage;
     protected HitBox hitBox;
     protected Vector lift;
-    protected void move(){}
+    protected void move(double time){}
     protected void release(){}
 
 
     public void setVelocity(Vector vector) {
         this.velocityX = vector.getX();
         this.velocityY = vector.getY();
+    }
+
+    public void setCoordinate(Coordinate coordinate) {
+        this.coordinate = coordinate;
     }
 }

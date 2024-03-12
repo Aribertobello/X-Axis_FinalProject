@@ -11,8 +11,6 @@ public class Loadout {
     protected Projectile mainWeapon;
     String type;
     protected ArrayList<Grenade> grenades = new ArrayList<Grenade>();
-
-
     public Loadout(String type){
         this.type = type;
         if(type.equalsIgnoreCase("light")){
@@ -22,13 +20,15 @@ public class Loadout {
         }
         if(type.equalsIgnoreCase("medium")){
             mainWeapon = new Spear();
+            grenades.add(new Grenade());
+            grenades.add(new SmokeGrenade());
         }
         if(type.equalsIgnoreCase("heavy")){
             mainWeapon = new Rocket();
+            grenades.add(new Grenade());
+            grenades.add(new SmokeGrenade());
         }
-
     }
-
     public HBox display(){
         Label typeLabel = new Label(type+" class   ");
         Label remaining = new Label("remaining Grenades:   ");

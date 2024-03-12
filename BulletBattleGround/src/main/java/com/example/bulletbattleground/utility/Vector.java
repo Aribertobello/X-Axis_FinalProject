@@ -27,7 +27,7 @@ public class Vector {
     }
 
     protected double magnitude(){
-        return 0;
+        return Math.sqrt(x*x+y*y);
     }
     protected Vector unitVector(){
         return null;
@@ -42,8 +42,15 @@ public class Vector {
         return null;
     }
     protected static Vector vectorSum(Vector...Vectors){
-        return null;
+        double sumX = 0;
+        double sumY = 0;
+        for(Vector vector : Vectors){
+            sumX = sumX + vector.x;
+            sumY = sumY + vector.y;
+        }
+        return new Vector(sumX,sumY);
     }
+
     protected double angle(){
         return 0;
     }
