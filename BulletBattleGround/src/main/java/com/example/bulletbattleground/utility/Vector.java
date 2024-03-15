@@ -26,22 +26,22 @@ public class Vector {
         this.y = y;
     }
 
-    protected double magnitude(){
+    public double magnitude(){
         return Math.sqrt(x*x+y*y);
     }
-    protected Vector unitVector(){
+    public Vector unitVector(){
         return null;
     }
-    protected Vector normal(){
+    public Vector normal(){
         return null;
     }
-    protected static double dotProduct(Vector...Vectors){
+    public static double dotProduct(Vector...Vectors){
         return 0;
     }
-    protected static Vector crossProduct(Vector vector1, Vector vector2){
+    public static Vector crossProduct(Vector vector1, Vector vector2){
         return null;
     }
-    protected static Vector vectorSum(Vector...Vectors){
+    public static Vector vectorSum(Vector...Vectors){
         double sumX = 0;
         double sumY = 0;
         for(Vector vector : Vectors){
@@ -51,8 +51,15 @@ public class Vector {
         return new Vector(sumX,sumY);
     }
 
-    protected double angle(){
-        return 0;
+    public double angle(){
+        return 180*Math.atan(y/x)/Math.PI;
+    }
+    @Override
+    public String toString() {
+        return '<' +
+                " " + x +
+                ", " + y +
+                '>';
     }
 
 }

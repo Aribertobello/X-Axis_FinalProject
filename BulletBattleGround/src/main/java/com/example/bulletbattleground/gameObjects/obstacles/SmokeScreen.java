@@ -2,6 +2,7 @@ package com.example.bulletbattleground.gameObjects.obstacles;
 
 import com.example.bulletbattleground.game.Obstacle;
 import com.example.bulletbattleground.utility.Coordinate;
+import com.example.bulletbattleground.utility.HitBox;
 import com.example.bulletbattleground.utility.Vector;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
@@ -23,6 +24,11 @@ public class SmokeScreen extends Obstacle {
         label.setLayoutX(coordinateX-radius);
         label.setLayoutY(coordinateY);
         this.getChildren().addAll(ball,label);
+    }
+
+    @Override
+    protected HitBox hitBox() {
+        return null;
     }
 
     @Override
