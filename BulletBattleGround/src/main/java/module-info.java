@@ -1,6 +1,7 @@
 module com.example.bulletbattleground {
     requires javafx.controls;
     requires javafx.fxml;
+    requires static lombok;
 
 
     opens com.example.bulletbattleground to javafx.fxml;

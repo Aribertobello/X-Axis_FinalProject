@@ -11,11 +11,11 @@ public class Coordinate {
     }
 
     protected double distance(Coordinate coordinate){
-        return 0;
+        return distanceVector(coordinate).magnitude();
     }
 
     protected Vector distanceVector(Coordinate coordinate){
-        return null;
+        return new Vector(this.getX()-coordinate.getX(),this.getY()-coordinate.getY());
     }
 
     public void setX(double x) {
@@ -32,5 +32,11 @@ public class Coordinate {
 
     public double getY() {
         return y;
+    }
+
+
+    @Override
+    public String toString() {
+        return '(' + " " + x + ", " + y + ')';
     }
 }

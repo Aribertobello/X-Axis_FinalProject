@@ -29,8 +29,8 @@ public class FileManager {
         Mapp map = new Mapp("earth");
         //map.addObstacle(new SmokeScreen(40,500,600));
         map.addObstacle(new Wall(160, 12, 900, 480));
-        map.addFighter(new Ally(200, 600));
-        map.addFighter(new Computer(1600, 600));
+        map.addFighter(new Ally(200, 600,2));
+        map.addFighter(new Computer(1600, 600,1));
         return map;
     }
 
@@ -44,7 +44,7 @@ public class FileManager {
         Mapp map = new Mapp("space");
         //map.addObstacle(new SmokeScreen(40,500,600));
         map.addObstacle(new Wall(160, 12, 900, 440));
-        map.addFighter(new Ally(200, 600));
+        map.addFighter(new Ally(200, 600,1));
         return map;
     }
 
