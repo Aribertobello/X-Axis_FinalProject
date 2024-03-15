@@ -18,7 +18,7 @@ public class Game extends Scene{
     protected Level level;
     protected Boolean gameWon;
     protected Integer tickRate = 100;
-    protected double time;
+    protected double time = 0;
     protected Timeline timeline;
 
     private double DragStartX, DragStartY;
@@ -36,8 +36,8 @@ public class Game extends Scene{
         System.out.println("wow");
         timeline = new Timeline(new KeyFrame(Duration.millis(1), e
                 -> {
-                    time = time + (1/tickRate);
-                    tick((1.0/tickRate));
+                    time = time + (1.0/tickRate);
+                    tick(1.0/tickRate);
                 }));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
@@ -82,12 +82,12 @@ public class Game extends Scene{
             level.trajectoryLine.setEndY(0);
             double velocityX = -event.getSceneX() + dragStartX[0];
             double velocityY = -event.getSceneY() + dragStartY[0];
-            if (event.getButton() == MouseButton.PRIMARY && clickNb.get() > 1) {
-                level.selectedFighter.launchProjectile(level.selectedFighter.loadout.mainWeapon, new Vector(-event.getSceneX() + dragStartX[0], -event.getSceneY() + dragStartY[0]), level.origin);
+            if (event.getButton() == MouseButton.PRIMARY && clickNb.get() > 0) {
+                level.selectedFighter.launchProjectile(level.selectedFighter.loadout.mainWeapon, new Vector(-event.getSceneX() + dragStartX[0], -event.getSceneY() + dragStartY[0]),level.origin);
                 clickNb.set(0);
             }// TODO -LAUNCH MAIN PROJECTILE
-            if (event.getButton() == MouseButton.SECONDARY && clickNb.get() > 1) {
-                level.selectedFighter.launchProjectile(level.selectedFighter.loadout.grenades.get(0), new Vector(-event.getSceneX() + dragStartX[0], -event.getSceneY() + dragStartY[0]), level.origin);
+            if (event.getButton() == MouseButton.SECONDARY && clickNb.get() > 0) {
+                level.selectedFighter.launchProjectile(level.selectedFighter.loadout.grenades.get(0), new Vector(-event.getSceneX() + dragStartX[0], -event.getSceneY() + dragStartY[0]),level.origin);
                 level.selectedFighter.loadout.grenades.remove(level.selectedFighter.loadout.grenades.get(0));
                 clickNb.set(0);
             }// TODO -LAUNCH GRENADE
@@ -101,7 +101,9 @@ public class Game extends Scene{
                     System.out.println("Fighter selected"); //TODO remove this in final code
                     level.headsUpDisplay.getChildren().clear();
                     level.selectedFighter = (Ally) fighter;
-                    level.origin = new Coordinate(level.selectedFighter.coordinate.getX()+level.selectedFighter.getWidth(),level.selectedFighter.coordinate.getY());
+                    level.origin = new Coordinate(
+                            level.selectedFighter.getCoordinate().getX()+level.selectedFighter.getWidth()/2
+                            ,level.selectedFighter.getCoordinate().getY()-level.selectedFighter.getHeight()/2);
                     level.selectedFighter.setStroke(Color.CYAN);
                     level.headsUpDisplay.getChildren().add(fighter.headsUpDisplay());
                 });

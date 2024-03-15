@@ -1,6 +1,7 @@
 package com.example.bulletbattleground.game;
 
 import com.example.bulletbattleground.gameObjects.Loot;
+import com.example.bulletbattleground.gameObjects.projectiles.Grenade;
 import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.Vector;
 import javafx.scene.layout.Pane;
@@ -8,6 +9,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 
@@ -15,11 +18,15 @@ public class Mapp extends Pane {
     protected ArrayList<Fighter> people = new ArrayList<Fighter>();
     protected ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
     protected int scale;
+    @Getter
+    @Setter
     protected Projectile activeProjectile;
-    protected com.example.bulletbattleground.gameObjects.Loot Loot;
+    @Getter
+    @Setter
+    protected short buffer = 0;
     protected Loot loot;
     protected Circle earth;
-    protected Vector[] environmentForces = {new Vector(0,9.8),new Vector(0,-4)};
+    public Vector[] environmentForces = {new Vector(0,9.8),new Vector(0,-4)};
 
     public Mapp(String type){
         if(type.equalsIgnoreCase("earth")){
@@ -36,30 +43,52 @@ public class Mapp extends Pane {
     protected void update(double dt){
         if(activeProjectile!=null) {
             activeProjectile.move(dt);
+            buffer++;
+            if(buffer>10) {
+                if (activeProjectile instanceof Grenade) {
+                    if (((Grenade) activeProjectile).getFuseTimer() == 0) {
+                        explosion(activeProjectile.getCoordinate());
+                    }
+                } else {
+                    checkCollision(activeProjectile);
+                }
+            }
+        }
+        else {
+            buffer = 0;
         }
     }
     public void addFighter(Fighter fighter){
         people.add(fighter);
         getChildren().add(fighter);
-        fighter.loadout.mainWeapon.forces.add(new Vector(
-                environmentForces[0].getX()*fighter.loadout.mainWeapon.mass,environmentForces[0].getY()*fighter.loadout.mainWeapon.mass));
-        fighter.loadout.mainWeapon.forces.add(new Vector(
-                environmentForces[1].getX()*fighter.loadout.mainWeapon.mass,environmentForces[1].getY()*fighter.loadout.mainWeapon.mass));
     }
-    public void addObstacle(Obstacle Obstacle){
-        getChildren().add(Obstacle);
+    public void addObstacle(Obstacle obstacle){
+        obstacles.add(obstacle);
+        getChildren().add(obstacle);
     }
     public void addForces(Projectile projectile){}
     public Boolean checkCollision(Projectile projectile){
-        return null;
+        for (Obstacle obstacle : obstacles){
+            if(projectile.hitBox().overlaps(obstacle.hitBox())){
+                activeProjectile.bounce(obstacle.hitBox());
+                return true;
+            }
+        }
+        for(Fighter fighter : people){
+            if(projectile.hitBox().overlaps(fighter.hitBox())){
+                fighter.setHealth(fighter.getHealth()-projectile.getDamage());
+                this.getChildren().remove(activeProjectile);
+                activeProjectile = null;
+                if(fighter.getHealth()<=0){
+                    people.remove(fighter);
+                    this.getChildren().remove(fighter);
+                }
+                return true;
+            }
+        }
+        return false;
     }
-    protected void explosion(Coordinate coordinate){}
-
-
-    public void setActiveProjectile(Projectile activeProjectile) {
-        this.activeProjectile = activeProjectile;
-    }
-    public Projectile getActiveProjectile() {
-        return activeProjectile;
+    protected void explosion(Coordinate coordinate){
+        activeProjectile.setVelocity(new Vector(0,0));
     }
 }

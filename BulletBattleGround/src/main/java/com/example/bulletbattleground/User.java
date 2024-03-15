@@ -44,7 +44,7 @@ public class User {
     private FileManager fileManager;
     public User() {
         try {
-            fileManager = new FileManager("C:\\Users\\matth\\X-Axis_FinalProject\\BulletBattleGround\\Data.txt");
+            fileManager = new FileManager("C:\\Users\\aribe\\IdeaProjects\\X-Axis_FinalProject\\BulletBattleGround\\Data.txt");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -63,7 +63,7 @@ public class User {
             loggedin=false;
         }
 
-        if (loggedin == true){
+        if (true){
             {
                 FXMLLoader fxmlLoader = new FXMLLoader(BattleGround.class.getResource("mainMenuScene.fxml"));
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
