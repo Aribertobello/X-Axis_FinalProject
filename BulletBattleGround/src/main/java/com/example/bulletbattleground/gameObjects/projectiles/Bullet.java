@@ -23,7 +23,6 @@ public class Bullet extends Projectile {
     }
     @Override
     public void move(double time) {
-
         this.coordinate.setX( (acceleration().getX()/2)*time*time + velocityX*time + coordinate.getX() );
         this.coordinate.setY( (acceleration().getY()/2)*time*time + velocityY*time + coordinate.getY() );
         this.setVelocityX( acceleration().getX()*time + velocityX );

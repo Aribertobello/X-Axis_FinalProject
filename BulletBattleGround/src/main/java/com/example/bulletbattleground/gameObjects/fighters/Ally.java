@@ -11,8 +11,8 @@ import javafx.scene.paint.Color;
 public class Ally extends Fighter {
 
 
-    public Ally(int coordinateX, int coordinateY) {
-        super(coordinateX, coordinateY);
+    public Ally(int coordinateX, int coordinateY,int type) {
+        super(coordinateX, coordinateY,type);
         this.setFill(Color.ROYALBLUE);
         setHealth(20);
     }

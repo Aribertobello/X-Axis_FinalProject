@@ -63,7 +63,7 @@ public class User {
             loggedin=false;
         }
 
-        if (true){
+        if (true)/*<---TODO change back to normal login*/{
             {
                 FXMLLoader fxmlLoader = new FXMLLoader(BattleGround.class.getResource("mainMenuScene.fxml"));
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
