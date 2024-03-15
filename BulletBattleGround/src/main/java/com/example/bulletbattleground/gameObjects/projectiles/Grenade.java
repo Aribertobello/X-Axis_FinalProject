@@ -12,7 +12,7 @@ import lombok.Setter;
 
 public class Grenade extends Projectile {
     public Grenade(){
-        fuseTimer = 5.0;
+        fuseTimer = 7.0;
         this.lift = new Vector(0,0);
         this.getChildren().add(new Circle(10, Color.PALEGREEN));
         this.forces.add(lift);
@@ -34,9 +34,10 @@ public class Grenade extends Projectile {
         this.coordinate.setY( (acceleration().getY()/2)*time*time + velocityY*time + coordinate.getY() );
         this.setVelocityX( acceleration().getX()*time + velocityX );
         this.setVelocityY( acceleration().getY()*time + velocityY );
+        this.fuseTimer-=time;
+
         this.getChildren().get(0).setLayoutX(coordinate.getX());
         this.getChildren().get(0).setLayoutY(coordinate.getY());
-        this.fuseTimer-=time;
     }
     @Override
     public void setCoordinate(Coordinate coordinate) {

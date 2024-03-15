@@ -3,6 +3,7 @@ package com.example.bulletbattleground.utility;
 import com.example.bulletbattleground.game.Fighter;
 import com.example.bulletbattleground.game.Obstacle;
 import com.example.bulletbattleground.game.Projectile;
+import com.example.bulletbattleground.gameObjects.Loot;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
 import com.example.bulletbattleground.gameObjects.obstacles.Wall;
 import javafx.scene.Group;
@@ -19,6 +20,8 @@ public class HitBox extends Group {
     protected ArrayList<Coordinate> points = new ArrayList();
     protected Coordinate center;
     protected double radius;
+    public ArrayList<Line> border = new ArrayList<>();
+    public boolean displayed = false;
     public HitBox(Projectile projectile){
         this.radius = ((Circle)projectile.getChildren().get(0)).getRadius();
         this.center = new Coordinate(projectile.getCoordinate().getX(),projectile.getCoordinate().getY());
@@ -63,8 +66,20 @@ public class HitBox extends Group {
             }
         this.setVisible(false);
     }
-    public ArrayList<Line> border = new ArrayList<>();
-    public boolean displayed = false;
+    public HitBox(Loot loot) {
+        center = new Coordinate(loot.getCoordinate().getX(),loot.getCoordinate().getY());
+        double height = 40;
+        double thickness = 40;
+        for (int i = 0; i < 40+1; i++) {
+            points.add(new Coordinate(center.getX()-thickness/2,center.getY()-height/2+i));
+            points.add(new Coordinate(center.getX()+thickness/2,center.getY()-height/2+i));
+        }
+        for (int i = 1; i < 40; i++) {
+            points.add(new Coordinate(center.getX()-thickness/2+i,center.getY()-height/2));
+            points.add(new Coordinate(center.getX()-thickness/2+i,center.getY()+height/2));
+        }
+        this.setVisible(false);
+    }
     public boolean overlaps(HitBox HitBox){
         for(Coordinate point : HitBox.points){
             if(point.distance(this.center)<=radius){

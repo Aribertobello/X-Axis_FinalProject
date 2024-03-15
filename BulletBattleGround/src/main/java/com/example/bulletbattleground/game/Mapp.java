@@ -46,8 +46,9 @@ public class Mapp extends Pane {
             buffer++;
             if(buffer>10) {
                 if (activeProjectile instanceof Grenade) {
-                    if (((Grenade) activeProjectile).getFuseTimer() == 0) {
+                    if (((Grenade) activeProjectile).getFuseTimer() <= 0) {
                         explosion(activeProjectile.getCoordinate());
+                        checkCollision(activeProjectile);
                     }
                 } else {
                     checkCollision(activeProjectile);
@@ -85,6 +86,11 @@ public class Mapp extends Pane {
                 }
                 return true;
             }
+        }
+        if(loot!=null&&projectile.hitBox().overlaps(loot.hitBox())){
+            this.getChildren().remove(loot);
+            loot = null;
+            //TODO Game Won
         }
         return false;
     }

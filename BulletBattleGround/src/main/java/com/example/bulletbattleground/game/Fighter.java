@@ -20,9 +20,17 @@ public class Fighter extends Rectangle {
     @Getter
     @Setter
     protected Coordinate coordinate = new Coordinate(0,0);
-    public Fighter(int coordinateX, int coordinateY){
+    public Fighter(int coordinateX, int coordinateY, int type){
         super(40,40);
-        loadout = new Loadout("light");
+        if(type==1){
+            loadout = new Loadout("light");
+        }
+        if(type==2){
+            loadout = new Loadout("medium");
+        }
+        if(type==3){
+            loadout = new Loadout("heavy");
+        }
         coordinate.setX(coordinateX);
         coordinate.setY(coordinateY);
         this.setLayoutX(coordinateX-20);
