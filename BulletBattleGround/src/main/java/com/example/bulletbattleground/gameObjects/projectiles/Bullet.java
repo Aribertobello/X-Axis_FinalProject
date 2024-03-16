@@ -13,7 +13,6 @@ public class Bullet extends Projectile {
     public HitBox hitBox(){
         return new HitBox(this);
     }
-
     public Bullet(){
         this.getChildren().add(new Circle(2, Color.DARKGRAY));
         this.damage = 3;

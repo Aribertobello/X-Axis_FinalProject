@@ -23,7 +23,7 @@ public class Mapp extends Pane {
     protected Projectile activeProjectile;
     @Getter
     @Setter
-    protected short buffer = 0;
+    protected int buffer = 0;
     protected Loot loot;
     protected Circle earth;
     public Vector[] environmentForces = {new Vector(0,9.8),new Vector(0,-4)};
@@ -44,7 +44,7 @@ public class Mapp extends Pane {
         if(activeProjectile!=null) {
             activeProjectile.move(dt);
             buffer++;
-            if(buffer>10) {
+            if(buffer>50) {
                 if (activeProjectile instanceof Grenade) {
                     if (((Grenade) activeProjectile).getFuseTimer() <= 0) {
                         explosion(activeProjectile.getCoordinate());
