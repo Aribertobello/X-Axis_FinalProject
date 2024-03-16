@@ -39,9 +39,17 @@ public class Vector {
         }
         return new Vector(sumX,sumY);
     }
-
     public double angle(){
         return 180*Math.atan(y/x)/Math.PI;
+    }
+    public Vector scale(double magnitude){
+        double scale = magnitude/this.magnitude();
+        return new Vector(x*scale,y*scale);
+    }
+    public Vector rotate(double angle){
+        return new Vector(
+                x*Math.cos(angle)-y*Math.sin(angle/Math.PI*180)
+                ,x*Math.sin(angle)+y*Math.cos(angle/Math.PI*180));
     }
     @Override
     public String toString() {

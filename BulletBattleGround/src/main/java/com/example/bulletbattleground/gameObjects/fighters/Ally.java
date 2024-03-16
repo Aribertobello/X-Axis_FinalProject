@@ -17,8 +17,8 @@ public class Ally extends Fighter {
         setHealth(20);
     }
     public void launchProjectile(Projectile projectile, Vector velocity,Coordinate coordinate){
-        projectile.setCoordinate(new Coordinate(coordinate.getX(),coordinate.getY()));
         projectile.setVelocity(velocity);
+        projectile.setCoordinate(new Coordinate(coordinate.getX(),coordinate.getY()));
         projectile.forces.clear();
         projectile.forces.add(new Vector(
                 ((Mapp)getParent()).environmentForces[0].getX()*projectile.getMass(),((Mapp)getParent()).environmentForces[0].getY()*projectile.getMass()));
