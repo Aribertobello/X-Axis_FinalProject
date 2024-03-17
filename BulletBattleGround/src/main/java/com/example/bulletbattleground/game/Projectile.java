@@ -17,17 +17,16 @@ public class Projectile extends MovingBody {
     @Setter
     @Getter
     protected Vector lift;
+
     public void bounce(HitBox hitBox){
         this.setVelocity(new Vector(-this.velocityX,velocityY));
     }
     protected void move(double time){}
     protected void release(){}
-
     public void setVelocity(Vector vector) {
         this.velocityX = vector.getX();
         this.velocityY = vector.getY();
     }
-
     @Override
     public HitBox hitBox() {
         return null;

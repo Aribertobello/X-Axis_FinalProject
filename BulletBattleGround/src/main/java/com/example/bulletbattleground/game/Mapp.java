@@ -51,6 +51,7 @@ public class Mapp extends Pane {
                         checkCollision(activeProjectile);
                     }
                 } else {
+
                     checkCollision(activeProjectile);
                 }
             }

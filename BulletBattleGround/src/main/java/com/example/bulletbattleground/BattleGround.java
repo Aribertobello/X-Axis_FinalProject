@@ -18,7 +18,7 @@ public class BattleGround extends Application {
     static protected ArrayList<String> pVcLevelsArrayList = new ArrayList<>();
     static protected ArrayList<String> mapsArrayList = new ArrayList<>();
     static protected String UserDataLocation = "";
-    static protected Game activeGame = new Game(FileManager.defaultLevelPvp());
+    static protected Game activeGame = new Game(FileManager.defaultLevelPvc());
     static protected User user = new User();
 
     @Override
