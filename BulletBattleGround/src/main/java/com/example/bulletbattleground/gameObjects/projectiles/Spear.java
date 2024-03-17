@@ -39,7 +39,7 @@ public class Spear extends Projectile {
         this.coordinate = coordinate;
     }
     public void allign() {
-        if(getVelocityX()!=0 && getVelocityY()!=0) {
+        if(velocity().magnitude()!=0) {
             double x1 = getChildren().get(0).getLayoutX()+velocity().scale(3).getX(), y1 = getChildren().get(0).getLayoutY()+velocity().scale(3).getY();
             double x2 = x1+velocity().scale(3).rotate(270).getX(), y2 = y1+velocity().scale(3).rotate(270).getY();
             double x3 = x2-velocity().scale(45).getX(), y3 = y2-velocity().scale(45).getY();

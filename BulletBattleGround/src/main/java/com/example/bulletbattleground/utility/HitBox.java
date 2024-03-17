@@ -92,5 +92,4 @@ public class HitBox extends Group {
         this.setVisible(true);
         this.displayed = true;
     }
-
 }

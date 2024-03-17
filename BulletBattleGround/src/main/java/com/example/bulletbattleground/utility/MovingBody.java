@@ -23,14 +23,14 @@ public abstract class MovingBody extends Group {
     public Vector netForce(){
         return Vector.vectorSum(forces.toArray(new Vector[forces.size()]));
     }
-    protected Vector acceleration(){
+    public Vector acceleration(){
         forces.toArray(new Vector[2]);
         return new Vector(netForce().getX()/mass,netForce().getY()/mass);
     }
-    protected Vector velocity(){
+    public Vector velocity(){
         return new Vector(velocityX,velocityY);
     }
-    protected double kE(){
+    public double kE(){
         return mass*Math.pow(velocity().magnitude(),2)/2;
     }
 

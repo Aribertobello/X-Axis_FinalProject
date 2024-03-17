@@ -19,17 +19,17 @@ public class FileManager {
         managerFile = new File(filePath);
     }
 
-    public static Level defaultLevelPvp() {
-        Mapp map = defaultMapPvp();
+    public static Level defaultLevelPvc() {
+        Mapp map = defaultMapPvc();
         Level level = new Level(map, "pvp");
         return level;
     }
 
-    public static Mapp defaultMapPvp() {
+    public static Mapp defaultMapPvc() {
         Mapp map = new Mapp("earth");
         //map.addObstacle(new SmokeScreen(40,500,600));
         map.addObstacle(new Wall(160, 12, 900, 480));
-        map.addFighter(new Ally(200, 600,2));
+        map.addFighter(new Ally(200, 600,3));
         map.addFighter(new Computer(1600, 600,1));
         return map;
     }
