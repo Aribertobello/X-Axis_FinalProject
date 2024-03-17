@@ -18,7 +18,7 @@
         </HBox>
         <HBox layoutX="679.0" layoutY="36.0" prefHeight="682.0" prefWidth="200.0">
             <children>
-                <Button fx:id="freeplayBtn" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="767.0" prefWidth="265.0" text="FREE PLAY" />
+                <Button fx:id="freeplayBtn" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#freePlayButton" prefHeight="767.0" prefWidth="265.0" text="FREE PLAY" />
             </children>
         </HBox>
     </children>

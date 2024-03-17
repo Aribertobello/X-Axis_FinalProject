@@ -26,6 +26,7 @@ public class Controller {
 
     private Button educationModebtn;
 
+    @FXML
     private Button freeplayBtn;
 
     private Button playbtn;
@@ -80,4 +81,13 @@ public class Controller {
         stage.close();
     }
 
+    @FXML
+    public void freePlayButton(ActionEvent actionEvent) {
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        BattleGround.activeGame = new Game(FileManager.defaultLevelPvp());
+        stage.setScene(BattleGround.activeGame);
+        stage.setMaximized(true);
+        stage.show();
+        BattleGround.activeGame.run();
+    }
 }

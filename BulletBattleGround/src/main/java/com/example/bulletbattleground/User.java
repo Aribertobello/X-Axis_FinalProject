@@ -76,7 +76,7 @@ public class User {
     }
 
     @FXML
-    void SignIn(ActionEvent event) throws IOException{
+    void SignUp(ActionEvent event) throws IOException{
         username = UserNameTextField.getText();
         password = PassWordTextField.getText();
 
