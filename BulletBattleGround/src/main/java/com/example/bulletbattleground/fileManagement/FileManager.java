@@ -21,8 +21,7 @@ public class FileManager {
 
     public static Level defaultLevelPvc() {
         Mapp map = defaultMapPvc();
-        Level level = new Level(map, "pvp");
-        return level;
+        return new Level(map, "pvp");
     }
 
     public static Mapp defaultMapPvc() {
@@ -31,6 +30,18 @@ public class FileManager {
         map.addObstacle(new Wall(160, 12, 900, 480));
         map.addFighter(new Ally(200, 600,3));
         map.addFighter(new Computer(1600, 600,1));
+        return map;
+    }
+    public static Level defaultLevelPvp() {
+        Mapp map = defaultMapPvp();
+        return new Level(map, "pvp");
+    }
+    public static Mapp defaultMapPvp() {
+        Mapp map = new Mapp("earth");
+        //map.addObstacle(new SmokeScreen(40,500,600));
+        map.addObstacle(new Wall(160, 12, 900, 480));
+        map.addFighter(new Ally(200, 600,3));
+        map.addFighter(new Ally(1600, 600,2));
         return map;
     }
 
