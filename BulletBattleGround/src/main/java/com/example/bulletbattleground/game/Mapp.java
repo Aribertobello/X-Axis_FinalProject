@@ -4,8 +4,11 @@ import com.example.bulletbattleground.gameObjects.Loot;
 import com.example.bulletbattleground.gameObjects.projectiles.Grenade;
 import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.Vector;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
@@ -13,6 +16,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Mapp extends Pane {
     protected ArrayList<Fighter> people = new ArrayList<Fighter>();
@@ -36,7 +40,9 @@ public class Mapp extends Pane {
         }
         if(type.equalsIgnoreCase("space")){
             this.setStyle("-fx-background-color: Black;");
-            earth = new Circle(900,600,120, Color.CORNFLOWERBLUE);
+            earth = new Circle(900,600,120);
+            Image earth_image = new Image("file:earth_Image.png");
+            earth.setFill(new ImagePattern(earth_image));
             this.getChildren().add(earth);
         }
     }
