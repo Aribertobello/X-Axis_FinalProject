@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.util.Duration;
 
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Game extends Scene{
@@ -24,12 +25,20 @@ public class Game extends Scene{
     private double DragStartX, DragStartY;
     private boolean dragging = false;
     Line trajectoryLine = new Line();
-
+    private boolean printCoordinate = false;
+    //int AngleCalculation = tan^-1(mouseY/mouseX);
 
 
     public Game(Level level) {
         super(level);
         this.level = level;
+
+        this.setOnMouseMoved(event -> {
+        double mouseX = event.getSceneX();
+        double mouseY = event.getSceneY();
+        System.out.println("Mouse coordinates: (" + mouseX + ", " + mouseY + ")");
+
+        });
     }
     public void run(){
         handleClick();

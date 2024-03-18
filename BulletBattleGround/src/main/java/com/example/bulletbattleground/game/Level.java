@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 public class Level extends AnchorPane {
     protected Mapp map;
     protected HBox headsUpDisplay = new HBox(new Label("HUD"));
+   // Label angleLabel = new Label("Angle: " + AngleCalculation);
     protected Line trajectoryLine = new Line();//TODO
     protected Coordinate origin;
     protected Ally selectedFighter;

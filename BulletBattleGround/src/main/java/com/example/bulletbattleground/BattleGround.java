@@ -7,10 +7,12 @@ import com.example.bulletbattleground.game.Mapp;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
 
 
 public class BattleGround extends Application {
@@ -30,6 +32,7 @@ public class BattleGround extends Application {
         stage.show();
     }
     public static void main(String[] args) {
-        launch();
-    }
+        launch(); }
+
+
 }

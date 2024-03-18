@@ -5,30 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="833d3a10-b118-4a0d-a6f8-16d2331a4470" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/modules/BulletBattleGround.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/cody_history.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/BattleGround.class" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/BattleGround.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/module-info.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/libs/BulletBattleGround-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/libs/BulletBattleGround-1.0-SNAPSHOT.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/BattleGround.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/BattleGround.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/Level.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/Loadout.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/Loadout.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/Mapp.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/Mapp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/Projectile.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/Projectile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/gameObjects/fighters/Ally.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/gameObjects/fighters/Ally.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/gameObjects/projectiles/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/gameObjects/projectiles/Bullet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/utility/MovingBody.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/utility/MovingBody.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/utility/Vector.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/utility/Vector.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodyActiveAccount">
+    <option name="activeAccountId" value="VXNlcjozNDYzOTY=" />
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$/BulletBattleGround">
@@ -61,9 +57,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2d2kOH9XStBcCxXcJpTg0fBqQaf" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -72,10 +68,12 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Gradle.BulletBattleGround [:BattleGround.main()].executor": "Run",
+    "RunOnceActivity.CodyHistoryLlmMigration": "true",
+    "RunOnceActivity.CodyProjectSettingsMigration": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Ariberto",
+    "git-widget-placeholder": "Michel",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/2289243/X-Axis_FinalProject",
     "project.structure.last.edited": "Modules",
