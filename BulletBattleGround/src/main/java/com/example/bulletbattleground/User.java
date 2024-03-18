@@ -44,7 +44,7 @@ public class User {
     private FileManager fileManager;
     public User() {
         try {
-            fileManager = new FileManager("C:\\Users\\aribe\\IdeaProjects\\X-Axis_FinalProject\\BulletBattleGround\\Data.txt");
+            fileManager = new FileManager("C:\\Users\\aribe\\IdeaProjects\\X-Axis_FinalProject\\Data.txt");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

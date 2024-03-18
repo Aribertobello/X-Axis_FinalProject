@@ -8,8 +8,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="658.0" prefWidth="1254.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bulletbattleground.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="658.0" prefWidth="1254.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bulletbattleground.Controller">
    <children>
       <HBox alignment="CENTER" layoutX="12.0" layoutY="71.0" prefHeight="580.0" prefWidth="1231.0" spacing="8.0">
          <children>
@@ -21,7 +20,7 @@
                   <Font name="Comic Sans MS Bold Italic" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="player_environ_btn1" mnemonicParsing="false" onAction="#player_environ_btn_clicked" prefHeight="550.0" prefWidth="512.0" style="-fx-border-color: black; -fx-background-radius: 100; -fx-border-radius: 100; -fx-background-color: lightblue; -fx-border-width: 0;" styleClass="submenu" stylesheets="@scratch.css" text="PLAYER VS ENVIRONMENT" textAlignment="CENTER">
+            <Button fx:id="player_player_btn" mnemonicParsing="false" onAction="#player_player_btn_clicked" prefHeight="550.0" prefWidth="512.0" style="-fx-border-color: black; -fx-background-radius: 100; -fx-border-radius: 100; -fx-background-color: lightblue; -fx-border-width: 0;" styleClass="submenu" stylesheets="@scratch.css" text="PLAYER VS PLAYER" textAlignment="CENTER">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>

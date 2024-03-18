@@ -20,8 +20,10 @@ public class Controller {
 
     @FXML
     private Button player_computer_btn;
+    @FXML
     private Button player_environ_btn;
 
+    @FXML
     private Button player_player_btn;
 
     private Button educationModebtn;
@@ -38,13 +40,14 @@ public class Controller {
 
     public void player_computer_btn_clicked(ActionEvent event)  {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        BattleGround.activeGame = new Game(FileManager.defaultLevelPvc());
         stage.setScene(BattleGround.activeGame);
         stage.setMaximized(true);
         stage.show();
         BattleGround.activeGame.run();
     }
-    public void player_environ_btn_clicked(ActionEvent e){
-        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+    public void player_environ_btn_clicked(ActionEvent event){
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         BattleGround.activeGame = new Game(FileManager.defaultLevelPve());
         stage.setScene(BattleGround.activeGame);
         stage.setMaximized(true);
@@ -54,6 +57,7 @@ public class Controller {
 
     public void player_player_btn_clicked(ActionEvent e){
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        BattleGround.activeGame = new Game(FileManager.defaultLevelPvp());
         stage.setScene(BattleGround.activeGame);
         stage.setMaximized(true);
         stage.show();
@@ -84,7 +88,7 @@ public class Controller {
     @FXML
     public void freePlayButton(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        BattleGround.activeGame = new Game(FileManager.defaultLevelPvp());
+        BattleGround.activeGame = new Game(FileManager.defaultLevelPve());
         stage.setScene(BattleGround.activeGame);
         stage.setMaximized(true);
         stage.show();
