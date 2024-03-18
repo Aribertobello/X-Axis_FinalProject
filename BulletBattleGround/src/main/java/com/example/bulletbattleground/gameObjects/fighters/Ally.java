@@ -6,15 +6,19 @@ import com.example.bulletbattleground.game.Projectile;
 import com.example.bulletbattleground.gameObjects.projectiles.Rocket;
 import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.Vector;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 
 public class Ally extends Fighter {
 
 
     public Ally(int coordinateX, int coordinateY,int type) {
         super(coordinateX, coordinateY,type);
-        this.setFill(Color.ROYALBLUE);
+        Image Ally_image = new Image("file:Light_Class_Img.png");
+        this.setFill(new ImagePattern(Ally_image));
+      //  this.setFill(Color.ROYALBLUE);
         setHealth(20);
     }
     public void launchProjectile(Projectile projectile, Vector velocity,Coordinate coordinate){
