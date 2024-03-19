@@ -54,8 +54,11 @@ public class FileManager {
 
     public static Mapp defaultMapPve() {
         Mapp map = new Mapp("space");
-        map.addObstacle(new SpaceShip(40,500,600));
         map.addObstacle(new Wall(160, 12, 900, 440));
+        map.addObstacle(new SpaceShip(-10,500,200));
+        map.addObstacle(new SpaceShip(20,900,600));
+        map.addObstacle(new SpaceShip(-30,1300,800));
+        map.addObstacle(new SpaceShip(25,400,100));
         map.addFighter(new Ally(200, 600,1));
         return map;
     }
@@ -79,7 +82,6 @@ public class FileManager {
             bufferedWriter.newLine();
             bufferedWriter.close();
             System.out.println("Data written to file successfully.");
-
         } catch (IOException e) {
             System.out.println("Error writing to file: " + e.getMessage());
         }

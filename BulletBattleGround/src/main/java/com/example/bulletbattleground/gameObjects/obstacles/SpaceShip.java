@@ -1,10 +1,13 @@
 package com.example.bulletbattleground.gameObjects.obstacles;
 
+import com.example.bulletbattleground.game.Mapp;
 import com.example.bulletbattleground.game.Obstacle;
 import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.HitBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
+
+import java.util.Random;
 
 public class SpaceShip extends Obstacle {
     double speed;
@@ -30,8 +33,10 @@ public class SpaceShip extends Obstacle {
 
     @Override
     protected void move(double dt) {
-        if(coordinate.getY()<=-160||coordinate.getY()>1500){
-            speed = -speed;
+        if(coordinate.getY()<=-160||coordinate.getY()>1200){
+            Random random = new Random();
+            setX(random.nextInt((int)((Mapp)this.getParent()).getWidth()/4,(int)(2*((Mapp)this.getParent()).getWidth()/3)));
+            speed = -speed*(random.nextInt(5,51))/Math.abs(speed);
         }
         setY(-speed * dt + coordinate.getY());
     }
@@ -41,23 +46,12 @@ public class SpaceShip extends Obstacle {
         this.coordinate.setX(x);
         double width = 40;
         double height = 80;
-        if(speed>=0.0){
-
-            double x1 = coordinate.getX() + width / 2, y1 = coordinate.getY() + height / 2 + 25;
-            double x2 = coordinate.getX() - width / 2, y2 = coordinate.getY() + height / 2;
-            double x3 = coordinate.getX() - width / 2, y3 = coordinate.getY() - height / 2 + 10;
-            double x4 = coordinate.getX() - width / 2 - 10, y4 = coordinate.getY() - height / 2;
-            double x5 = coordinate.getX() + width / 2, y5 = coordinate.getY() - height / 2;
-            (((Polygon) (getChildren()).get(0))).getPoints().setAll(x1, y1, x2, y2, x3, y3, x4, y4, x5, y5);
-            (((Polygon) (getChildren()).get(0))).setRotate(90);
-        }else {
             double x1 = coordinate.getX() - width / 2, y1 = coordinate.getY() - height / 2 - 25;
             double x2 = coordinate.getX() + width / 2, y2 = coordinate.getY() - height / 2;
             double x3 = coordinate.getX() + width / 2, y3 = coordinate.getY() + height / 2 - 10;
             double x4 = coordinate.getX() + width / 2 + 10, y4 = coordinate.getY() + height / 2;
             double x5 = coordinate.getX() - width / 2, y5 = coordinate.getY() + height / 2;
             (((Polygon) (getChildren()).get(0))).getPoints().setAll(x1, y1, x2, y2, x3, y3, x4, y4, x5, y5);
-        }
     }
 
     @Override
@@ -66,7 +60,6 @@ public class SpaceShip extends Obstacle {
         double width = 40;
         double height = 80;
         if(speed<=0.0){
-
             double x1 = coordinate.getX() + width / 2, y1 = coordinate.getY() + height / 2 + 25;
             double x2 = coordinate.getX() - width / 2, y2 = coordinate.getY() + height / 2;
             double x3 = coordinate.getX() - width / 2, y3 = coordinate.getY() - height / 2 + 10;
