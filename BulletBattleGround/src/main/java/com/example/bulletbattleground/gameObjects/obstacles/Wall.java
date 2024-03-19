@@ -39,7 +39,7 @@ public class Wall extends Obstacle {
     }
 
     @Override
-    protected void move() {
+    protected void move(double dt) {
         //this.setY();
     }
 

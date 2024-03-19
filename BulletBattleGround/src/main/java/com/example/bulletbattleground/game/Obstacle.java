@@ -19,7 +19,7 @@ public abstract class Obstacle extends Group{
     protected boolean ispenetrable;
     protected abstract HitBox hitBox();
 
-    protected abstract void move();
+    protected abstract void move(double dt);
     protected abstract void setX(double x);
     protected abstract void setY(double y);
 }

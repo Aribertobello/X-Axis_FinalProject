@@ -9,11 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class SmokeScreen extends Obstacle {
-
-
-
     protected int radius;
-
     public SmokeScreen(double radius,double coordinateX,double coordinateY){
         this.coordinate = new Coordinate(coordinateX,coordinateY);
         ispenetrable = true;
@@ -25,15 +21,12 @@ public class SmokeScreen extends Obstacle {
         label.setLayoutY(coordinateY);
         this.getChildren().addAll(ball,label);
     }
-
     @Override
     protected HitBox hitBox() {
         return null;
     }
-
     @Override
-    protected void move() {
-        //this.setY();
+    protected void move(double dt) {
     }
 
     @Override

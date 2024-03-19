@@ -49,6 +49,9 @@ public class Mapp extends Pane {
     protected void update(double dt){
         if(activeProjectile!=null) {
             activeProjectile.move(dt);
+            for(Obstacle obstacle:obstacles){
+                obstacle.move(dt);
+            }
             buffer++;
             if(buffer>50) {
                 if (activeProjectile instanceof Grenade) {
