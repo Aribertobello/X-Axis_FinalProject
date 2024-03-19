@@ -55,7 +55,7 @@ public class User {
         username = UserNameTextField.getText();
         password = PassWordTextField.getText();
 
-        if(FileManager.loadUserData(username,password)){
+        if( true/*FileManager.loadUserData(username,password)*/){
             loggedin=true;
         }
 
