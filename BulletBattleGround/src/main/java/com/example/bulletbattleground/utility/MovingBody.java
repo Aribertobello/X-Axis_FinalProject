@@ -10,16 +10,17 @@ import java.util.ArrayList;
 public abstract class MovingBody extends Group {
     @Setter
     @Getter
-    protected double velocityX;
+    private Coordinate coordinate;
     @Setter
     @Getter
-    protected double velocityY;
+    private double velocityX;
     @Setter
     @Getter
-    protected double mass;
+    private double velocityY;
+    @Setter
+    @Getter
+    private double mass;
     public ArrayList<Vector> forces = new ArrayList<>();
-
-    public abstract HitBox hitBox();
     public Vector netForce(){
         return Vector.vectorSum(forces.toArray(new Vector[forces.size()]));
     }
@@ -34,4 +35,6 @@ public abstract class MovingBody extends Group {
         return mass*Math.pow(velocity().magnitude(),2)/2;
     }
 
+    public abstract void move(double dt);
+    public abstract void bounce(HitBox hitBox);
 }

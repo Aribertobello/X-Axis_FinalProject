@@ -11,9 +11,8 @@ import javafx.scene.shape.Circle;
 public class SmokeScreen extends Obstacle {
     protected int radius;
     public SmokeScreen(double radius,double coordinateX,double coordinateY){
-        this.coordinate = new Coordinate(coordinateX,coordinateY);
+        setCoordinate(new Coordinate(coordinateX,coordinateY));
         ispenetrable = true;
-        Velocity = new Vector(0,0);
         this.radius = (int) (radius);
         Circle ball = new Circle(coordinateX,coordinateY,radius,Color.GREY);
         Label label = new Label("SMOKE SCREEN");
@@ -22,23 +21,28 @@ public class SmokeScreen extends Obstacle {
         this.getChildren().addAll(ball,label);
     }
     @Override
-    protected HitBox hitBox() {
+    public HitBox hitBox() {
         return null;
     }
+
     @Override
-    protected void move(double dt) {
+    public void move(double dt) {
+        super.move(dt);
     }
+
+    @Override
+    public void bounce(HitBox hitBox) {}
 
     @Override
     protected void setX(double x) {
         this.getChildren().get(0).setLayoutX(x);
-        this.coordinate.setX(x);
+        getCoordinate().setX(x);
     }
 
     @Override
     protected void setY(double y) {
         this.getChildren().get(0).setLayoutX(y);
-        this.coordinate.setX(y);
+        getCoordinate().setX(y);
     }
 
 

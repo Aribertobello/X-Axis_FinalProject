@@ -38,7 +38,7 @@ public class FileManager {
         return new Level(map, "pvp");
     }
     public static Mapp defaultMapPvp() {
-        Mapp map = new Mapp("earth");
+        Mapp map = new Mapp("space");
         //map.addObstacle(new SmokeScreen(40,500,600));
         map.addObstacle(new Wall(160, 12, 900, 480));
         map.addFighter(new Ally(200, 600,3));

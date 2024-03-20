@@ -12,12 +12,12 @@ module com.example.bulletbattleground {
     opens com.example.bulletbattleground.utility to javafx.fxml;
     exports com.example.bulletbattleground.fileManagement;
     opens com.example.bulletbattleground.fileManagement to javafx.fxml;
-    exports com.example.bulletbattleground.gameObjects;
-    opens com.example.bulletbattleground.gameObjects to javafx.fxml;
     exports com.example.bulletbattleground.gameObjects.fighters;
     opens com.example.bulletbattleground.gameObjects.fighters to javafx.fxml;
     exports com.example.bulletbattleground.gameObjects.projectiles;
     opens com.example.bulletbattleground.gameObjects.projectiles to javafx.fxml;
     exports com.example.bulletbattleground.gameObjects.obstacles;
     opens com.example.bulletbattleground.gameObjects.obstacles to javafx.fxml;
+    exports com.example.bulletbattleground.gameObjects.Loot;
+    opens com.example.bulletbattleground.gameObjects.Loot to javafx.fxml;
 }

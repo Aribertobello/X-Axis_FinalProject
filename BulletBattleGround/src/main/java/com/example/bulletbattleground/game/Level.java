@@ -1,8 +1,7 @@
 package com.example.bulletbattleground.game;
 
-import com.example.bulletbattleground.gameObjects.Loot;
+import com.example.bulletbattleground.gameObjects.Loot.Loot;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
-import com.example.bulletbattleground.utility.Arrow;
 import com.example.bulletbattleground.utility.Coordinate;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -10,6 +9,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
+import lombok.Getter;
+import lombok.Setter;
 
 public class Level extends AnchorPane {
     protected Mapp map;
@@ -18,6 +19,8 @@ public class Level extends AnchorPane {
     protected Line trajectoryLine = new Line();//TODO
     protected Coordinate origin;
     protected Ally selectedFighter;
+    @Getter
+    @Setter
     protected boolean dragging = false;
     protected String type;
     protected void update(double dt){
@@ -53,8 +56,5 @@ public class Level extends AnchorPane {
         headsUpDisplay.setFillHeight(false);
         headsUpDisplay.setStyle("-fx-background-color: white; -fx-border-color: black");
         AnchorPane.setBottomAnchor(headsUpDisplay, 5.0);
-    }
-    public void setDragging(boolean dragging) {
-        this.dragging = dragging;
     }
 }

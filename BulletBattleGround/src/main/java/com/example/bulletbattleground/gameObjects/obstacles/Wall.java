@@ -11,15 +11,12 @@ import lombok.Setter;
 
 public class Wall extends Obstacle {
 
-
     @Getter
     @Setter
     int thickness;
     @Getter
     @Setter
     int height;
-
-
     public Wall(int height, int thickness,int coordinateX, int coordinateY){
         setHeight(height);
         setThickness(thickness);
@@ -29,29 +26,27 @@ public class Wall extends Obstacle {
         label.setLayoutX(coordinateX-(double)thickness/2);
         label.setLayoutY(coordinateY);
         this.getChildren().addAll(rectangle,label);
-        this.coordinate = new Coordinate(coordinateX,coordinateY);
-        hitBox();
+        this.setCoordinate(new Coordinate(coordinateX, coordinateY));
     }
-
     @Override
-    protected HitBox hitBox() {
+    public HitBox hitBox() {
         return new HitBox(this);
     }
-
     @Override
-    protected void move(double dt) {
-        //this.setY();
+    public void move(double dt) {
+        super.move(dt);
     }
-
+    @Override
+    public void bounce(HitBox hitBox) {
+    }
     @Override
     protected void setX(double x) {
-        this.getChildren().get(0).setLayoutX(x-(double)thickness/2);
-        this.coordinate.setX(x);
+        ((Rectangle)this.getChildren().get(0)).setX(x-(double)thickness/2);
+        this.getCoordinate().setX(x);
     }
-
     @Override
     protected void setY(double y) {
-        this.getChildren().get(0).setLayoutX(y-(double)height/2);
-        this.coordinate.setX(y);
+        ((Rectangle)this.getChildren().get(0)).setY(y-(double)height/2);
+        this.getCoordinate().setY(y);
     }
 }
