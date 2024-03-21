@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.util.Duration;
 
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Game extends Scene{
@@ -23,13 +24,14 @@ public class Game extends Scene{
 
     private double DragStartX, DragStartY;
     private boolean dragging = false;
-    Line trajectoryLine = new Line();
 
+    private boolean printCoordinate = false;
 
 
     public Game(Level level) {
         super(level,1920,1080);
         this.level = level;
+
     }
     public void run(){
         handleClick();
@@ -72,10 +74,15 @@ public class Game extends Scene{
                     level.trajectoryLine.setStartY(level.origin.getY());
                     level.trajectoryLine.setEndX(level.origin.getX() + dragX);
                     level.trajectoryLine.setEndY(level.origin.getY() + dragY);
+
                 }
             }
         });
         this.setOnMouseReleased(event -> {
+
+            Vector direction = new Vector(level.trajectoryLine.getEndX()-level.trajectoryLine.getStartX(),level.trajectoryLine.getEndY()-level.trajectoryLine.getStartY());
+            System.out.println("Mouse coordinates:"+(-direction.angle()));
+
             level.trajectoryLine.setStartX(0);
             level.trajectoryLine.setStartY(0);
             level.trajectoryLine.setEndX(0);

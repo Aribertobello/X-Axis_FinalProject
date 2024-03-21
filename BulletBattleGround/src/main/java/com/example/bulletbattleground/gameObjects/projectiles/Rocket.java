@@ -7,7 +7,6 @@ import com.example.bulletbattleground.utility.Vector;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
-import javafx.stage.Screen;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,8 +17,6 @@ public class Rocket extends Projectile {
     @Getter
     @Setter
     double dropZone;
-    static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
-
     public Rocket(){
         this.nausea = 3;
         this.getChildren().add(new Circle(2, Color.DARKGRAY));
@@ -27,7 +24,7 @@ public class Rocket extends Projectile {
         this.damage = 3;
         this.lift = new Vector(0,-2.0);
         this.forces.add(lift);
-        this.mass = 0.5;
+        this.setMass(9.0);
     }
     @Override
     public HitBox hitBox(){
@@ -35,30 +32,28 @@ public class Rocket extends Projectile {
     }
     @Override
     public void move(double time) {
-        if(coordinate.getY()<-20){
+        forces.clear();
+        if(getCoordinate().getY()<-20){
             setCoordinate(new Coordinate(dropZone,1));
             setVelocity(new Vector(0,50));
             forces.clear();
-        }else if(coordinate.getX()!=dropZone){
+        }else if(getCoordinate().getX()!=dropZone){
             setVelocity(new Vector(0, -50));
             forces.clear();
         }
-        this.coordinate.setX( (acceleration().getX()/2)*time*time + velocityX*time + coordinate.getX() );
-        this.coordinate.setY( (acceleration().getY()/2)*time*time + velocityY*time + coordinate.getY()  );
-        this.setVelocityX( acceleration().getX()*time + velocityX );
-        this.setVelocityY( acceleration().getY()*time + velocityY );
-        allign();
-
-        this.getChildren().get(0).setLayoutX(coordinate.getX());
-        this.getChildren().get(0).setLayoutY(coordinate.getY());
+        align();
+        super.move(time);
+    }
+    @Override
+    public void bounce(HitBox hitBox) {
     }
     @Override
     public void setCoordinate(Coordinate coordinate) {
         this.getChildren().get(0).setLayoutX(coordinate.getX());
         this.getChildren().get(0).setLayoutY(coordinate.getY());
-        this.coordinate = coordinate;
+        super.setCoordinate(coordinate);
     }
-    public void allign() {
+    public void align() {
         if(velocity().magnitude()!=0) {
             double x0= getChildren().get(0).getLayoutX()+velocity().scale(3).getX(), y0 = getChildren().get(0).getLayoutY()+velocity().scale(3).getY();
             double x1 = x0+velocity().scale(3).getX(), y1 = y0+velocity().scale(3).getY();;

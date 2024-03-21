@@ -7,17 +7,17 @@ import lombok.Setter;
 @Getter
 public class Coordinate {
 
-    protected double x;
-    protected double y;
+    private double x;
+    private double y;
 
     public Coordinate(double x, double y) {
         this.x = x;
         this.y = y;
     }
-    protected double distance(Coordinate coordinate){
+    public double distance(Coordinate coordinate){
         return distanceVector(coordinate).magnitude();
     }
-    protected Vector distanceVector(Coordinate coordinate){
+    public Vector distanceVector(Coordinate coordinate){
         return new Vector(this.getX()-coordinate.getX(),this.getY()-coordinate.getY());
     }
     @Override

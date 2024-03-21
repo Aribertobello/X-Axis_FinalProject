@@ -6,6 +6,7 @@ import com.example.bulletbattleground.game.Mapp;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
 import com.example.bulletbattleground.gameObjects.fighters.Computer;
 import com.example.bulletbattleground.gameObjects.obstacles.SmokeScreen;
+import com.example.bulletbattleground.gameObjects.obstacles.SpaceShip;
 import com.example.bulletbattleground.gameObjects.obstacles.Wall;
 import javafx.stage.Screen;
 
@@ -16,10 +17,11 @@ public class FileManager {
 
     private static File managerFile;
 
-    static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
     public FileManager(String filePath) throws FileNotFoundException {
         managerFile = new File(filePath);
     }
+
+    static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
 
     public static Level defaultLevelPvc() {
         Mapp map = defaultMapPvc();
@@ -39,11 +41,11 @@ public class FileManager {
         return new Level(map, "pvp");
     }
     public static Mapp defaultMapPvp() {
-        Mapp map = new Mapp("earth");
+        Mapp map = new Mapp("space");
         //map.addObstacle(new SmokeScreen(40,500,600));
-        map.addObstacle(new Wall(160, 12, screenWidth-900, 480));
+        map.addObstacle(new Wall(160, 12, 900, 480));
         map.addFighter(new Ally(200, 600,3));
-        map.addFighter(new Ally(screenWidth-200, 600,2));
+        map.addFighter(new Ally(1600, 600,2));
         return map;
     }
 
@@ -55,8 +57,10 @@ public class FileManager {
 
     public static Mapp defaultMapPve() {
         Mapp map = new Mapp("space");
-        //map.addObstacle(new SmokeScreen(40,500,600));
-        map.addObstacle(new Wall(160, 12, screenWidth-900, 440));
+        map.addObstacle(new SpaceShip(-10,500,200));
+        map.addObstacle(new SpaceShip(20,900,600));
+        map.addObstacle(new SpaceShip(-30,1300,800));
+        map.addObstacle(new SpaceShip(25,400,100));
         map.addFighter(new Ally(200, 600,1));
         return map;
     }
@@ -80,7 +84,6 @@ public class FileManager {
             bufferedWriter.newLine();
             bufferedWriter.close();
             System.out.println("Data written to file successfully.");
-
         } catch (IOException e) {
             System.out.println("Error writing to file: " + e.getMessage());
         }

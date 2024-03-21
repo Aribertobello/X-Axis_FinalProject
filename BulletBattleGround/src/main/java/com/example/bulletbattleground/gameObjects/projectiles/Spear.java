@@ -19,24 +19,21 @@ public class Spear extends Projectile {
         this.damage = 6;
         this.lift = new Vector(0,-0.5);
         this.forces.add(lift);
-        this.mass = 0.5;
+        this.setMass(3.0);
     }
     @Override
     public void move(double time) {
-        this.coordinate.setX( (acceleration().getX()/2)*time*time + velocityX*time + coordinate.getX() );
-        this.coordinate.setY( (acceleration().getY()/2)*time*time + velocityY*time + coordinate.getY() );
-        this.setVelocityX( acceleration().getX()*time + velocityX );
-        this.setVelocityY( acceleration().getY()*time + velocityY );
-
-        this.getChildren().get(0).setLayoutX(coordinate.getX());
-        this.getChildren().get(0).setLayoutY(coordinate.getY());
         allign();
+        super.move(time);
+    }
+    @Override
+    public void bounce(HitBox hitBox) {
     }
     @Override
     public void setCoordinate(Coordinate coordinate) {
         this.getChildren().get(0).setLayoutX(coordinate.getX());
         this.getChildren().get(0).setLayoutY(coordinate.getY());
-        this.coordinate = coordinate;
+        super.setCoordinate(coordinate);
     }
     public void allign() {
         if(velocity().magnitude()!=0) {

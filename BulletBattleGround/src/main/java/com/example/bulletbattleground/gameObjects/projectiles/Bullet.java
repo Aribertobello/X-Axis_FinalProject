@@ -15,6 +15,23 @@ import javafx.util.Duration;
 public class Bullet extends Projectile {
 
     @Override
+    public void bounce(HitBox hitBox) {
+        double energyDissipated = this.getMass();
+
+         System.out.println(velocity().angle());
+        System.out.println(velocity());
+
+        setVelocityX(-getVelocityX());
+
+        System.out.println("new " +velocity().angle());
+        System.out.println(velocity());
+    }
+    @Override
+    public void move(double time){
+        super.move(time);
+        this.getChildren().get(0).setRotate(velocity().angle());
+    }
+    @Override
     public HitBox hitBox(){
         return new HitBox(this);
     }
@@ -27,30 +44,12 @@ public class Bullet extends Projectile {
         this.damage = 3;
         this.lift = new Vector(0,-2.0);
         this.forces.add(lift);
-        this.mass = 0.5;
-
-
-        Timeline bulletAnimation = new Timeline(new KeyFrame(Duration.millis(1), e
-                -> {
-            small_bullet.setRotate(velocity().angle());
-        }));
-        bulletAnimation.setCycleCount(Timeline.INDEFINITE);
-        bulletAnimation.play();
-    }
-    @Override
-    public void move(double time) {
-        this.coordinate.setX( (acceleration().getX()/2)*time*time + velocityX*time + coordinate.getX() );
-        this.coordinate.setY( (acceleration().getY()/2)*time*time + velocityY*time + coordinate.getY() );
-        this.setVelocityX( acceleration().getX()*time + velocityX );
-        this.setVelocityY( acceleration().getY()*time + velocityY );
-
-        this.getChildren().get(0).setLayoutX(coordinate.getX());
-        this.getChildren().get(0).setLayoutY(coordinate.getY());
+        setMass(0.5);
     }
     @Override
     public void setCoordinate(Coordinate coordinate) {
         this.getChildren().get(0).setLayoutX(coordinate.getX());
         this.getChildren().get(0).setLayoutY(coordinate.getY());
-        this.coordinate = coordinate;
+        super.setCoordinate(coordinate);
     }
 }
