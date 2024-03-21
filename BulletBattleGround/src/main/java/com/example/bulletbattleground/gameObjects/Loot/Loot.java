@@ -1,6 +1,5 @@
-package com.example.bulletbattleground.gameObjects;
+package com.example.bulletbattleground.gameObjects.Loot;
 
-import com.example.bulletbattleground.game.Loadout;
 import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.HitBox;
 import javafx.scene.paint.Color;

@@ -18,17 +18,11 @@ public class Ally extends Fighter {
         super(coordinateX, coordinateY,type);
         Image Ally_image = new Image("file:Light_Class_Img.png");
         this.setFill(new ImagePattern(Ally_image));
-      //  this.setFill(Color.ROYALBLUE);
         setHealth(20);
     }
     public void launchProjectile(Projectile projectile, Vector velocity,Coordinate coordinate){
-        projectile.setVelocity(velocity);
-        projectile.setCoordinate(new Coordinate(coordinate.getX(),coordinate.getY()));
-        projectile.forces.clear();
-        projectile.forces.add(new Vector(
-                ((Mapp)getParent()).environmentForces[0].getX()*projectile.getMass(),((Mapp)getParent()).environmentForces[0].getY()*projectile.getMass()));
-        projectile.forces.add(new Vector(
-                ((Mapp)getParent()).environmentForces[1].getX()*projectile.getMass(),((Mapp)getParent()).environmentForces[1].getY()*projectile.getMass()));
+        projectile.release(velocity,new Coordinate(coordinate.getX(),coordinate.getY()));
+        ((Mapp)getParent()).addForces(projectile);
         if(((Mapp)this.getParent()).getActiveProjectile() == null){
             ((Mapp)this.getParent()).getChildren().add(projectile);
             ((Mapp)this.getParent()).setActiveProjectile(projectile);

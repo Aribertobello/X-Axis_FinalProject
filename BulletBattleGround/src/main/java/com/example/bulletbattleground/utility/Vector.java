@@ -19,10 +19,10 @@ public class Vector {
         return Math.sqrt(x*x+y*y);
     }
     public Vector unitVector(){
-        return null;
+        return new Vector(x/magnitude(),y/magnitude());
     }
     public Vector normal(){
-        return null;
+        return new Vector(-y,x);
     }
     public static double dotProduct(Vector...Vectors){
         return 0;
@@ -40,11 +40,18 @@ public class Vector {
         return new Vector(sumX,sumY);
     }
     public double angle(){
-        return 180*Math.atan(y/x)/Math.PI;
+        if(x>=0){
+            return 180*Math.atan(y/x)/Math.PI;
+        } else {
+            return 180*Math.atan(y/x)/Math.PI+180;
+        }
     }
     public Vector scale(double magnitude){
         double scale = magnitude/this.magnitude();
         return new Vector(x*scale,y*scale);
+    }
+    public Vector multiply(double scaler){
+        return new Vector(x*scaler,y*scaler);
     }
     public Vector rotate(double angle){
         return new Vector(

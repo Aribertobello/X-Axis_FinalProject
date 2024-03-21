@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/BulletBattleGround.iml" filepath="$PROJECT_DIR$/.idea/modules/BulletBattleGround.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/BulletBattleGround.main.iml" filepath="$PROJECT_DIR$/.idea/modules/BulletBattleGround.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BulletBattleGround.test.iml" filepath="$PROJECT_DIR$/.idea/modules/BulletBattleGround.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/X-Axis_FinalProject.iml" filepath="$PROJECT_DIR$/.idea/X-Axis_FinalProject.iml" />
     </modules>
   </component>

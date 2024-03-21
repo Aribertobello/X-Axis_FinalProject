@@ -7,28 +7,34 @@ import com.example.bulletbattleground.utility.Vector;
 import lombok.Getter;
 import lombok.Setter;
 
-public class Projectile extends MovingBody {
-    @Setter
-    @Getter
-    protected Coordinate coordinate;
+import java.util.Arrays;
+
+public abstract class Projectile extends MovingBody {
     @Setter
     @Getter
     protected int damage;
     @Setter
     @Getter
     protected Vector lift;
+    public abstract HitBox hitBox();
+    public void move(double time){
+        getCoordinate().setX( (acceleration().getX()/2)*time*time + getVelocityX()*time + getCoordinate().getX() );
+        getCoordinate().setY( (acceleration().getY()/2)*time*time + getVelocityY()*time + getCoordinate().getY() );
+        this.setVelocityX( acceleration().getX()*time + getVelocityX() );
+        this.setVelocityY( acceleration().getY()*time + getVelocityY() );
 
-    public void bounce(HitBox hitBox){
-        this.setVelocity(new Vector(-this.velocityX,velocityY));
+        this.getChildren().get(0).setLayoutX(getCoordinate().getX());
+        this.getChildren().get(0).setLayoutY(getCoordinate().getY());
+        }
+    public void release(Vector velocity,Coordinate coordinate,Vector...Forces){
+        setVelocity(velocity);
+        setCoordinate(coordinate);
+        forces.clear();
+        forces.add(lift);
+        forces.addAll(Arrays.asList(Forces));
     }
-    protected void move(double time){}
-    protected void release(){}
     public void setVelocity(Vector vector) {
-        this.velocityX = vector.getX();
-        this.velocityY = vector.getY();
-    }
-    @Override
-    public HitBox hitBox() {
-        return null;
+        setVelocityX(vector.getX());
+        setVelocityY(vector.getY());
     }
 }

@@ -3,21 +3,20 @@ package com.example.bulletbattleground.utility;
 import com.example.bulletbattleground.game.Fighter;
 import com.example.bulletbattleground.game.Obstacle;
 import com.example.bulletbattleground.game.Projectile;
-import com.example.bulletbattleground.gameObjects.Loot;
-import com.example.bulletbattleground.gameObjects.fighters.Ally;
+import com.example.bulletbattleground.gameObjects.Loot.Loot;
+import com.example.bulletbattleground.gameObjects.obstacles.SpaceShip;
 import com.example.bulletbattleground.gameObjects.obstacles.Wall;
 import javafx.scene.Group;
-import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Polygon;
 
 import java.util.ArrayList;
 
 public class HitBox extends Group {
 
-    protected ArrayList<Coordinate> points = new ArrayList();
+    protected ArrayList<Coordinate> points = new ArrayList<>();
     protected Coordinate center;
     protected double radius;
     public ArrayList<Line> border = new ArrayList<>();
@@ -35,21 +34,43 @@ public class HitBox extends Group {
         for (double i = 0; i < 360; i=i+6) {
             points.add(new Coordinate(center.getX()+radius*Math.cos(Math.PI*i/180),center.getY()+radius*Math.sin(Math.PI*i/180)));
         }
+        Polygon hitBox = new Polygon();
+        for (Coordinate point : points) {
+            hitBox.getPoints().addAll(point.getX(),point.getY());
+        }
+        this.getChildren().add(hitBox);
     }
     public HitBox(Obstacle obstacle){
         center = new Coordinate(obstacle.getCoordinate().getX(),obstacle.getCoordinate().getY());
         if (obstacle instanceof Wall) {
             double height = ((Wall)obstacle).getHeight();
             double thickness = ((Wall)obstacle).getThickness();
-            for (int i = 0; i < ((Wall)obstacle).getHeight()+1; i++) {
+            for (int i = 0; i < height+1; i++) {
                 points.add(new Coordinate(center.getX()-thickness/2,center.getY()-height/2+i));
                 points.add(new Coordinate(center.getX()+thickness/2,center.getY()-height/2+i));
             }
-            for (int i = 1; i < ((Wall)obstacle).getThickness(); i++) {
+            for (int i = 1; i < thickness; i++) {
                 points.add(new Coordinate(center.getX()-thickness/2+i,center.getY()-height/2));
                 points.add(new Coordinate(center.getX()-thickness/2+i,center.getY()+height/2));
             }
         }
+        if (obstacle instanceof SpaceShip) {
+            double height = 40;
+            double thickness = 80;
+            for (int i = 0; i < height+1; i++) {
+                points.add(new Coordinate(center.getX()-thickness/2,center.getY()-height/2+i));
+                points.add(new Coordinate(center.getX()+thickness/2,center.getY()-height/2+i));
+            }
+            for (int i = 1; i < thickness; i++) {
+                points.add(new Coordinate(center.getX()-thickness/2+i,center.getY()-height/2));
+                points.add(new Coordinate(center.getX()-thickness/2+i,center.getY()+height/2));
+            }
+        }
+        Polygon hitBox = new Polygon();
+        for (Coordinate point : points) {
+            hitBox.getPoints().addAll(point.getX(),point.getY());
+        }
+        this.getChildren().add(hitBox);
         this.setVisible(false);
     }
     public HitBox(Fighter fighter){
@@ -64,6 +85,11 @@ public class HitBox extends Group {
                 points.add(new Coordinate(center.getX()-thickness/2+i,center.getY()-height/2));
                 points.add(new Coordinate(center.getX()-thickness/2+i,center.getY()+height/2));
             }
+        Polygon hitBox = new Polygon();
+        for (Coordinate point : points) {
+            hitBox.getPoints().addAll(point.getX(),point.getY());
+        }
+        this.getChildren().add(hitBox);
         this.setVisible(false);
     }
     public HitBox(Loot loot) {
@@ -78,6 +104,11 @@ public class HitBox extends Group {
             points.add(new Coordinate(center.getX()-thickness/2+i,center.getY()-height/2));
             points.add(new Coordinate(center.getX()-thickness/2+i,center.getY()+height/2));
         }
+        Polygon hitBox = new Polygon();
+        for (Coordinate point : points) {
+            hitBox.getPoints().addAll(point.getX(),point.getY());
+        }
+        this.getChildren().add(hitBox);
         this.setVisible(false);
     }
     public boolean overlaps(HitBox HitBox){
@@ -88,8 +119,8 @@ public class HitBox extends Group {
         }
         return false;
     }
-    protected void setDisplayed(){
-        this.setVisible(true);
-        this.displayed = true;
+    protected void setDisplayed(boolean isDisplayed){
+        this.setVisible(isDisplayed);
+        this.displayed = isDisplayed;
     }
 }
