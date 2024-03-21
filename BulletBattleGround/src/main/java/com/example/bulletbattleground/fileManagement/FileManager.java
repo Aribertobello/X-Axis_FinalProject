@@ -54,7 +54,6 @@ public class FileManager {
 
     public static Mapp defaultMapPve() {
         Mapp map = new Mapp("space");
-        map.addObstacle(new Wall(160, 12, 900, 440));
         map.addObstacle(new SpaceShip(-10,500,200));
         map.addObstacle(new SpaceShip(20,900,600));
         map.addObstacle(new SpaceShip(-30,1300,800));

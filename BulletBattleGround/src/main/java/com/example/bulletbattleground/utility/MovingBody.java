@@ -34,6 +34,9 @@ public abstract class MovingBody extends Group {
     public double kE(){
         return mass*Math.pow(velocity().magnitude(),2)/2;
     }
+    public double momentum(){
+        return mass*velocity().magnitude();
+    }
 
     public abstract void move(double dt);
     public abstract void bounce(HitBox hitBox);

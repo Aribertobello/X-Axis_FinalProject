@@ -16,9 +16,21 @@ public class Bullet extends Projectile {
 
     @Override
     public void bounce(HitBox hitBox) {
-        setVelocityX(-getVelocityX());
-    }
+        double energyDissipated = this.getMass();
 
+         System.out.println(velocity().angle());
+        System.out.println(velocity());
+
+        setVelocityX(-getVelocityX());
+
+        System.out.println("new " +velocity().angle());
+        System.out.println(velocity());
+    }
+    @Override
+    public void move(double time){
+        super.move(time);
+        this.getChildren().get(0).setRotate(velocity().angle());
+    }
     @Override
     public HitBox hitBox(){
         return new HitBox(this);
@@ -33,12 +45,6 @@ public class Bullet extends Projectile {
         this.lift = new Vector(0,-2.0);
         this.forces.add(lift);
         setMass(0.5);
-        Timeline bulletAnimation = new Timeline(new KeyFrame(Duration.millis(1), e
-                -> {
-            small_bullet.setRotate(velocity().angle());
-        }));
-        bulletAnimation.setCycleCount(Timeline.INDEFINITE);
-        bulletAnimation.play();
     }
     @Override
     public void setCoordinate(Coordinate coordinate) {

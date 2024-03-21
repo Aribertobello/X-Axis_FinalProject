@@ -14,6 +14,9 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
 public class Mapp extends Pane {
     private int type;
     protected ArrayList<Fighter> people = new ArrayList<Fighter>();
@@ -83,10 +86,10 @@ public class Mapp extends Pane {
         } else {
             projectile.setMass(2000);
             Coordinate earthCenterOfGravity = new Coordinate(earth.getCenterX(),earth.getCenterY());
-            double bigG = 6.67*Math.pow(10,-11);
-            double massEarth = 5.97*Math.pow(10,24);
+            double bigG = 6.67* pow(10,-11);
+            double massEarth = 5.97* pow(10,24);
             Vector distance = earthCenterOfGravity.distanceVector(projectile.getCoordinate());
-            double gMagnitude = (bigG*massEarth*projectile.getMass())/Math.pow(distance.magnitude()+120*106183,2);
+            double gMagnitude = (bigG*massEarth*projectile.getMass())/ pow(distance.magnitude()+120*106183,2);
             Vector gForce = distance.scale(gMagnitude);
             environmentForces[0] = gForce;
             environmentForces[1] = new Vector(-0.00,0);
@@ -104,7 +107,23 @@ public class Mapp extends Pane {
     public Boolean checkCollision(Projectile projectile){
         for (Obstacle obstacle : obstacles){
             if(projectile.hitBox().overlaps(obstacle.hitBox())){
-                activeProjectile.bounce(obstacle.hitBox());
+
+                double m1 = projectile.getMass();
+                double m2 = obstacle.getMass();
+                double k1 = projectile.kE();
+                double k2 = obstacle.kE();
+                double p1 = projectile.momentum();
+                double p2 = obstacle.momentum();
+                double eDisspated = 0;
+                double eFinal = k1+k2-eDisspated;
+
+                double v1  = (-sqrt(2*eFinal*pow(m1,2) + 2*eFinal*m2*m1 - m1*pow(p1,2) - m1*pow(p2,2) - 2*m1*p1*p2)/sqrt(m2) + (m1*p1)/m2 + (m1*p2)/m2)/(pow(m1,2)/m2 + m1);
+
+
+                projectile.setVelocityX(projectile.velocity().scale(v1).getX());
+                projectile.setVelocityY(projectile.velocity().scale(v1).getY());
+                projectile.bounce(obstacle.hitBox());
+                obstacle.bounce(projectile.hitBox());
                 return true;
             }
         }

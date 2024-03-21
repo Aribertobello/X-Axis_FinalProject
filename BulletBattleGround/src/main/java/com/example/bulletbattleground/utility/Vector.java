@@ -40,7 +40,11 @@ public class Vector {
         return new Vector(sumX,sumY);
     }
     public double angle(){
-        return 180*Math.atan(y/x)/Math.PI;
+        if(x>=0){
+            return 180*Math.atan(y/x)/Math.PI;
+        } else {
+            return 180*Math.atan(y/x)/Math.PI+180;
+        }
     }
     public Vector scale(double magnitude){
         double scale = magnitude/this.magnitude();

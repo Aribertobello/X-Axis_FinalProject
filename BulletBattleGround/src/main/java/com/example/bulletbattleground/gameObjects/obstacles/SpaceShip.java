@@ -24,6 +24,7 @@ public class SpaceShip extends Obstacle {
         ship.setFill(Color.WHITESMOKE);
         ship.setStroke(Color.BLUE);
         this.getChildren().add(ship);
+        setMass(190000);
     }
     @Override
     public HitBox hitBox() {
