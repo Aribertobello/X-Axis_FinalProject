@@ -8,15 +8,21 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class Loot extends Rectangle {
-    public Loot(int coordinateX,int coordinateY){
-        super(40,40);
+
+    public Loot(int coordinateX, int coordinateY) {
+        super(40, 40);
         this.setFill(Color.GOLD);
-        coordinate = new Coordinate(coordinateX,coordinateY);
+        coordinate = new Coordinate(coordinateX, coordinateY);
         this.setLayoutX(coordinateX);
         this.setLayoutY(coordinateY);
     }
+
     @Getter
     @Setter
     protected Coordinate coordinate;
-    public HitBox hitBox(){return new HitBox(this);};
+
+    public HitBox hitBox() {
+        return new HitBox(this);
+    }
+
 }

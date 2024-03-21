@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ public class Controller {
 
     @FXML
     private Button player_computer_btn;
+
     @FXML
     private Button player_environ_btn;
 
@@ -46,6 +48,7 @@ public class Controller {
         stage.show();
         BattleGround.activeGame.run();
     }
+
     public void player_environ_btn_clicked(ActionEvent event){
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         BattleGround.activeGame = new Game(FileManager.defaultLevelPve());
@@ -58,8 +61,10 @@ public class Controller {
     public void player_player_btn_clicked(ActionEvent e){
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         BattleGround.activeGame = new Game(FileManager.defaultLevelPvp());
+        //double screenWidth = Screen.getPrimary().getBounds().getWidth();
+        //System.out.println("Screen width: " + screenWidth + " pixels");
         stage.setScene(BattleGround.activeGame);
-        stage.setMaximized(true);
+        stage.setMaximized(false);
         stage.show();
         BattleGround.activeGame.run();
     }
@@ -71,6 +76,7 @@ public class Controller {
         stage.setScene(submenuScene);
         stage.show();
     }
+
     public void switchToMainMenu(ActionEvent event) throws IOException {
          FXMLLoader fxmlLoader = new FXMLLoader(BattleGround.class.getResource("mainMenuScene.fxml"));
          Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

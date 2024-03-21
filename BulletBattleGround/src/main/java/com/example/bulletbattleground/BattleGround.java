@@ -14,12 +14,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-
 public class BattleGround extends Application {
     static protected ArrayList<String> pVeLevelsArrayList = new ArrayList<>();
     static protected ArrayList<String> pVcLevelsArrayList = new ArrayList<>();
     static protected ArrayList<String> mapsArrayList = new ArrayList<>();
-    static protected String UserDataLocation = "";
+    static protected String userDataLocation = "";
     static protected Game activeGame = new Game(FileManager.defaultLevelPvc());
     static protected User user = new User();
 
@@ -31,8 +30,9 @@ public class BattleGround extends Application {
         stage.setScene(MainMenuscene);
         stage.show();
     }
-    public static void main(String[] args) {
-        launch(); }
 
+    public static void main(String[] args) {
+        launch();
+    }
 
 }
