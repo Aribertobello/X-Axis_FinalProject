@@ -1,5 +1,6 @@
 package com.example.bulletbattleground.utility;
 
+import com.example.bulletbattleground.MathematicsInterface;
 import com.example.bulletbattleground.utility.Vector;
 import javafx.scene.Group;
 import lombok.Getter;
@@ -7,7 +8,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 
-public abstract class MovingBody extends Group {
+public abstract class MovingBody extends Group implements MathematicsInterface {
     @Setter
     @Getter
     private Coordinate coordinate;
@@ -21,23 +22,29 @@ public abstract class MovingBody extends Group {
     @Getter
     private double mass;
     public ArrayList<Vector> forces = new ArrayList<>();
-    public Vector netForce(){
+
+    public Vector netForce() {
         return Vector.vectorSum(forces.toArray(new Vector[forces.size()]));
     }
-    public Vector acceleration(){
+
+    public Vector acceleration() {
         forces.toArray(new Vector[2]);
-        return new Vector(netForce().getX()/mass,netForce().getY()/mass);
+        return new Vector(netForce().getX() / mass, netForce().getY() / mass);
     }
-    public Vector velocity(){
-        return new Vector(velocityX,velocityY);
+
+    public Vector velocity() {
+        return new Vector(velocityX, velocityY);
     }
-    public double kE(){
-        return mass*Math.pow(velocity().magnitude(),2)/2;
+
+    public double kE() {
+        return mass * Math.pow(velocity().magnitude(), 2) / 2;
     }
-    public double momentum(){
-        return mass*velocity().magnitude();
+
+    public double momentum() {
+        return mass * velocity().magnitude();
     }
 
     public abstract void move(double dt);
+
     public abstract void bounce(HitBox hitBox);
 }

@@ -9,16 +9,17 @@ import javafx.scene.paint.ImagePattern;
 
 public class Computer extends Fighter {
 
-
-    public Computer(int coordinateX, int coordinateY,int type) {
-        super(coordinateX, coordinateY,type);
-
+    public Computer(int coordinateX, int coordinateY, int type) {
+        super(coordinateX, coordinateY, type);
         //Image Image = new Image("C:\\Users\\aribe\\IdeaProjects\\X-Axis_FinalProject\\BulletBattleGround\\build\\classes\\EnemyImage.png");
         //this.setFill(new ImagePattern(Image));
     }
 
-    protected Vector calculateLaunchAngle(){
+    protected Vector calculateLaunchAngle() {
         return null;
     }
-    protected void LaunchProjectile(Projectile projectile){}
+
+    protected void LaunchProjectile(Projectile projectile) {
+        //TODO
+    }
 }

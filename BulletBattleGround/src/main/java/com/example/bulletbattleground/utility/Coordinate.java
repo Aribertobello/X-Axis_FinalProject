@@ -14,12 +14,15 @@ public class Coordinate {
         this.x = x;
         this.y = y;
     }
-    public double distance(Coordinate coordinate){
+
+    public double distance(Coordinate coordinate) {
         return distanceVector(coordinate).magnitude();
     }
-    public Vector distanceVector(Coordinate coordinate){
-        return new Vector(this.getX()-coordinate.getX(),this.getY()-coordinate.getY());
+
+    public Vector distanceVector(Coordinate coordinate) {
+        return new Vector(this.getX() - coordinate.getX(), this.getY() - coordinate.getY());
     }
+
     @Override
     public String toString() {
         return '(' + " " + x + ", " + y + ')';

@@ -21,6 +21,7 @@ public class Controller {
 
     @FXML
     private Button player_computer_btn;
+
     @FXML
     private Button player_environ_btn;
 
@@ -47,6 +48,7 @@ public class Controller {
         stage.show();
         BattleGround.activeGame.run();
     }
+
     public void player_environ_btn_clicked(ActionEvent event){
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         BattleGround.activeGame = new Game(FileManager.defaultLevelPve());
@@ -74,6 +76,7 @@ public class Controller {
         stage.setScene(submenuScene);
         stage.show();
     }
+
     public void switchToMainMenu(ActionEvent event) throws IOException {
          FXMLLoader fxmlLoader = new FXMLLoader(BattleGround.class.getResource("mainMenuScene.fxml"));
          Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

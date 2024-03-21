@@ -17,11 +17,11 @@ public class FileManager {
 
     private static File managerFile;
 
+    static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
+
     public FileManager(String filePath) throws FileNotFoundException {
         managerFile = new File(filePath);
     }
-
-    static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
 
     public static Level defaultLevelPvc() {
         Mapp map = defaultMapPvc();
@@ -32,20 +32,22 @@ public class FileManager {
         Mapp map = new Mapp("earth");
         //map.addObstacle(new SmokeScreen(40,500,600));
         map.addObstacle(new Wall(160, 12, 900, 480));
-        map.addFighter(new Ally(200, 600,3));
-        map.addFighter(new Computer(screenWidth-200, 600,1));
+        map.addFighter(new Ally(200, 600, 3));
+        map.addFighter(new Computer(screenWidth - 200, 600, 1));
         return map;
     }
+
     public static Level defaultLevelPvp() {
         Mapp map = defaultMapPvp();
         return new Level(map, "pvp");
     }
+
     public static Mapp defaultMapPvp() {
         Mapp map = new Mapp("space");
         //map.addObstacle(new SmokeScreen(40,500,600));
         map.addObstacle(new Wall(160, 12, 900, 480));
-        map.addFighter(new Ally(200, 600,3));
-        map.addFighter(new Ally(1600, 600,2));
+        map.addFighter(new Ally(200, 600, 3));
+        map.addFighter(new Ally(screenWidth - 200, 600, 2));
         return map;
     }
 
@@ -57,18 +59,18 @@ public class FileManager {
 
     public static Mapp defaultMapPve() {
         Mapp map = new Mapp("space");
-        map.addObstacle(new SpaceShip(-10,500,200));
-        map.addObstacle(new SpaceShip(20,900,600));
-        map.addObstacle(new SpaceShip(-30,1300,800));
-        map.addObstacle(new SpaceShip(25,400,100));
-        map.addFighter(new Ally(200, 600,1));
+        map.addObstacle(new SpaceShip(-10, 500, 200));
+        map.addObstacle(new SpaceShip(20, 900, 600));
+        map.addObstacle(new SpaceShip(-30, 1300, 800));
+        map.addObstacle(new SpaceShip(25, 400, 100));
+        map.addFighter(new Ally(200, 600, 1));
         return map;
     }
 
-    public static void createPveLevel(String file) {
+    public static void createPveLevel(String file) { //TODO
     }
 
-    public static void createPvCLevel(String file) {
+    public static void createPvCLevel(String file) { //TODO
     }
 
     public static void saveUserdata(String username, String password) {
@@ -90,8 +92,8 @@ public class FileManager {
     }
 
     public static boolean loadUserData(String username, String Password) throws FileNotFoundException {
-        boolean matchingUserName= false;
-        boolean matchingPassWord= false;
+        boolean matchingUserName = false;
+        boolean matchingPassWord = false;
 
         Scanner scanner = new Scanner(managerFile);
         while (scanner.hasNextLine()) {
@@ -105,10 +107,9 @@ public class FileManager {
                     } else {
                         matchingUserName = false;
                     }
-                }
-                else if (line.startsWith("Password: ") && matchingUserName) { //Makes sure that the password matches with the correct username
+                } else if (line.startsWith("Password: ") && matchingUserName) { //Makes sure that the password matches with the correct username
                     String storedPassword = line.substring("Password: ".length());
-                    if(storedPassword.equals(Password)){
+                    if (storedPassword.equals(Password)) {
                         matchingPassWord = true;
                         return true; //true means valid credentials for password and username
                     }
