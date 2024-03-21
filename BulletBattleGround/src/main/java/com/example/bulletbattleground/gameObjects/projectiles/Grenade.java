@@ -11,10 +11,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class Grenade extends Projectile {
+
+    Circle grenade = new Circle(10,Color.BLUE);
     public Grenade(){
-        fuseTimer = 7.0;
-        this.lift = new Vector(0,0);
-        this.getChildren().add(new Circle(10, Color.PALEGREEN));
+        fuseTimer = 20.0;
+        this.lift = new Vector(0,0);;
+        this.getChildren().add(grenade);
         this.forces.add(lift);
         this.mass = 0.5;
     }
@@ -27,7 +29,9 @@ public class Grenade extends Projectile {
     protected double fuseTimer;
     @Getter
     @Setter
-    protected int ExplosionRadius;
+    protected double ExplosionRadius= grenade.getRadius() + 5.0; //+5 is an invented value
+    Circle explosionCircle = new Circle(ExplosionRadius);
+
     @Override
     public void move(double time) {
         this.coordinate.setX( (acceleration().getX()/2)*time*time + velocityX*time + coordinate.getX() );
@@ -38,7 +42,14 @@ public class Grenade extends Projectile {
 
         this.getChildren().get(0).setLayoutX(coordinate.getX());
         this.getChildren().get(0).setLayoutY(coordinate.getY());
+
+        if(fuseTimer<=0) {
+            grenade.setRadius(0); //grenade exploded
+        }
+
     }
+
+
     @Override
     public void setCoordinate(Coordinate coordinate) {
         this.getChildren().get(0).setLayoutX(coordinate.getX());

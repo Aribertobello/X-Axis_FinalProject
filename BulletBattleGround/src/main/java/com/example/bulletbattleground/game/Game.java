@@ -28,7 +28,7 @@ public class Game extends Scene{
 
 
     public Game(Level level) {
-        super(level);
+        super(level,1920,1080);
         this.level = level;
     }
     public void run(){

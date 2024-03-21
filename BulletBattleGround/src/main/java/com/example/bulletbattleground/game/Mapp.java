@@ -37,6 +37,7 @@ public class Mapp extends Pane {
             this.setStyle("-fx-background-color: #bce1f5;");
             earth = new Circle(540,673100640,673100000, Color.SEAGREEN);
             this.getChildren().add(earth);
+
         }
         if(type.equalsIgnoreCase("space")){
             this.setStyle("-fx-background-color: Black;");

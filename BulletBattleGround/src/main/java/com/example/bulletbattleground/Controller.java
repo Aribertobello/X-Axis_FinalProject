@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -58,8 +59,10 @@ public class Controller {
     public void player_player_btn_clicked(ActionEvent e){
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         BattleGround.activeGame = new Game(FileManager.defaultLevelPvp());
+        //double screenWidth = Screen.getPrimary().getBounds().getWidth();
+        //System.out.println("Screen width: " + screenWidth + " pixels");
         stage.setScene(BattleGround.activeGame);
-        stage.setMaximized(true);
+        stage.setMaximized(false);
         stage.show();
         BattleGround.activeGame.run();
     }

@@ -7,6 +7,7 @@ import com.example.bulletbattleground.utility.Vector;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
+import javafx.stage.Screen;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,6 +18,8 @@ public class Rocket extends Projectile {
     @Getter
     @Setter
     double dropZone;
+    static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
+
     public Rocket(){
         this.nausea = 3;
         this.getChildren().add(new Circle(2, Color.DARKGRAY));
@@ -41,7 +44,7 @@ public class Rocket extends Projectile {
             forces.clear();
         }
         this.coordinate.setX( (acceleration().getX()/2)*time*time + velocityX*time + coordinate.getX() );
-        this.coordinate.setY( (acceleration().getY()/2)*time*time + velocityY*time + coordinate.getY() );
+        this.coordinate.setY( (acceleration().getY()/2)*time*time + velocityY*time + coordinate.getY()  );
         this.setVelocityX( acceleration().getX()*time + velocityX );
         this.setVelocityY( acceleration().getY()*time + velocityY );
         allign();
