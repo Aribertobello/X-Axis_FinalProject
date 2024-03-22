@@ -10,29 +10,34 @@ import lombok.Setter;
 import java.util.Arrays;
 
 public abstract class Projectile extends MovingBody {
+
     @Setter
     @Getter
     protected int damage;
+
     @Setter
     @Getter
     protected Vector lift;
-    public abstract HitBox hitBox();
-    public void move(double time){
-        getCoordinate().setX( (acceleration().getX()/2)*time*time + getVelocityX()*time + getCoordinate().getX() );
-        getCoordinate().setY( (acceleration().getY()/2)*time*time + getVelocityY()*time + getCoordinate().getY() );
-        this.setVelocityX( acceleration().getX()*time + getVelocityX() );
-        this.setVelocityY( acceleration().getY()*time + getVelocityY() );
 
+    public abstract HitBox hitBox();
+
+    public void move(double time) {
+        getCoordinate().setX((acceleration().getX() / 2) * time * time + getVelocityX() * time + getCoordinate().getX());
+        getCoordinate().setY((acceleration().getY() / 2) * time * time + getVelocityY() * time + getCoordinate().getY());
+        this.setVelocityX(acceleration().getX() * time + getVelocityX());
+        this.setVelocityY(acceleration().getY() * time + getVelocityY());
         this.getChildren().get(0).setLayoutX(getCoordinate().getX());
         this.getChildren().get(0).setLayoutY(getCoordinate().getY());
-        }
-    public void release(Vector velocity,Coordinate coordinate,Vector...Forces){
+    }
+
+    public void release(Vector velocity, Coordinate coordinate, Vector... Forces) {
         setVelocity(velocity);
         setCoordinate(coordinate);
         forces.clear();
         forces.add(lift);
         forces.addAll(Arrays.asList(Forces));
     }
+
     public void setVelocity(Vector vector) {
         setVelocityX(vector.getX());
         setVelocityY(vector.getY());

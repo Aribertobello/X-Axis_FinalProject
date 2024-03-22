@@ -14,38 +14,43 @@ import javafx.util.Duration;
 
 public class Bullet extends Projectile {
 
-    @Override
-    public void bounce(HitBox hitBox) {
-        double energyDissipated = this.getMass();
-
-         System.out.println(velocity().angle());
-        System.out.println(velocity());
-
-        setVelocityX(-getVelocityX());
-
-        System.out.println("new " +velocity().angle());
-        System.out.println(velocity());
-    }
-    @Override
-    public void move(double time){
-        super.move(time);
-        this.getChildren().get(0).setRotate(velocity().angle());
-    }
-    @Override
-    public HitBox hitBox(){
-        return new HitBox(this);
-    }
-    public Bullet(){
+    public Bullet() {
         Circle small_bullet = new Circle(10);
         small_bullet.setRotate(90);
         Image smallBulletImg = new Image("file:smallBullet.png");
         small_bullet.setFill(new ImagePattern(smallBulletImg));
         this.getChildren().add(small_bullet);
         this.damage = 3;
-        this.lift = new Vector(0,-2.0);
+        this.lift = new Vector(0, -2.0);
         this.forces.add(lift);
         setMass(0.5);
     }
+
+    @Override
+    public void bounce(HitBox hitBox) {
+
+        double energyDissipated = this.getMass();
+
+        System.out.println(velocity().angle());
+        System.out.println(velocity());
+
+        setVelocityX(-getVelocityX());
+
+        System.out.println("new " + velocity().angle());
+        System.out.println(velocity());
+    }
+
+    @Override
+    public void move(double time) {
+        super.move(time);
+        this.getChildren().get(0).setRotate(velocity().angle());
+    }
+
+    @Override
+    public HitBox hitBox() {
+        return new HitBox(this);
+    }
+
     @Override
     public void setCoordinate(Coordinate coordinate) {
         this.getChildren().get(0).setLayoutX(coordinate.getX());

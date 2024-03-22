@@ -36,12 +36,13 @@ public class User {
     protected int pVCMaxLevelIndex;
     protected String password;
     protected String username;
-    protected String usernameTest= "Lucas";
-    protected String passwordTest= "Lucas";
+    protected String usernameTest = "Lucas";
+    protected String passwordTest = "Lucas";
     protected boolean loggedin;
-    protected boolean isSignedIn= false;
+    protected boolean isSignedIn = false;
 
     private FileManager fileManager;
+
     public User() {
         try {
             fileManager = new FileManager("C:\\Users\\aribe\\IdeaProjects\\X-Axis_FinalProject\\Data.txt");
@@ -51,19 +52,20 @@ public class User {
     }
 
     @FXML
-    void Login(ActionEvent event)  throws IOException{
+    void Login(ActionEvent event) throws IOException {
+
         username = UserNameTextField.getText();
         password = PassWordTextField.getText();
 
-        if( true/*FileManager.loadUserData(username,password)*/){
-            loggedin=true;
+        if (true/*FileManager.loadUserData(username,password)*/) {
+            loggedin = true;
         }
 
-        if(username.isEmpty()||password.isEmpty()){
-            loggedin=false;
+        if (username.isEmpty() || password.isEmpty()) {
+            loggedin = false;
         }
 
-        if (true)/*<---TODO change back to normal login*/{
+        if (true)/*<---TODO change back to normal login*/ {
             {
                 FXMLLoader fxmlLoader = new FXMLLoader(BattleGround.class.getResource("mainMenuScene.fxml"));
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -76,14 +78,15 @@ public class User {
     }
 
     @FXML
-    void SignUp(ActionEvent event) throws IOException{
+    void SignUp(ActionEvent event) throws IOException {
+
         username = UserNameTextField.getText();
         password = PassWordTextField.getText();
 
-        if(username.isEmpty()||password.isEmpty()){
-            isSignedIn=false;
-        }
-        else {
+        if (username.isEmpty() || password.isEmpty()) {
+            isSignedIn = false;
+        } else {
+
             if (isSignedIn = true) {
                 FileManager.saveUserdata(username, password);
                 FXMLLoader fxmlLoader = new FXMLLoader(BattleGround.class.getResource("mainMenuScene.fxml"));
@@ -92,8 +95,8 @@ public class User {
                 stage.setScene(mainMenuScene);
                 stage.show();
             }
+
         }
     }
-
 
 }
