@@ -34,11 +34,18 @@ public class Game extends Scene {
 
     private boolean printCoordinate = false;
 
+    /**
+     *
+     * @param level
+     */
     public Game(Level level) {
         super(level);
         this.level = level;
     }
 
+    /**
+     *
+     */
     public void run() {
         handleClick();
         System.out.println("wow");
@@ -52,10 +59,17 @@ public class Game extends Scene {
         timeline.play();
     }
 
+    /**
+     *
+     * @param dt
+     */
     protected void tick(double dt) {
         level.update(dt);
     }
 
+    /**
+     *
+     */
     protected void handleClick() {
 
         final double[] dragStartX = {0.0};

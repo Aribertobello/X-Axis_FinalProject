@@ -36,12 +36,19 @@ public class Level extends AnchorPane {
 
     static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
 
+    /**
+     *
+     * @param dt
+     */
     protected void update(double dt) {
         map.setPrefWidth(((Stage) this.getScene().getWindow()).getWidth());
         headsUpDisplay.setPrefWidth(((Stage) this.getScene().getWindow()).getWidth());
         map.update(dt);
     }
 
+    /**
+     *
+     */
     public Level() {
         this.getChildren().addAll(headsUpDisplay);
         headsUpDisplay.setAlignment(Pos.CENTER);
@@ -53,6 +60,11 @@ public class Level extends AnchorPane {
         AnchorPane.setBottomAnchor(headsUpDisplay, 5.0);
     }
 
+    /**
+     *
+     * @param map
+     * @param type
+     */
     public Level(Mapp map, String type) {
         this.type = type;
 
@@ -76,6 +88,10 @@ public class Level extends AnchorPane {
         AnchorPane.setBottomAnchor(headsUpDisplay, 5.0);
     }
 
+    /**
+     *
+     * @param selectedFighter
+     */
     protected void displayLoadout(Fighter selectedFighter) {
         //TODO
     }

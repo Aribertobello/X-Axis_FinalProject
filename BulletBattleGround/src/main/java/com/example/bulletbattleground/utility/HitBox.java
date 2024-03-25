@@ -22,6 +22,10 @@ public class HitBox extends Group {
     public ArrayList<Line> border = new ArrayList<>();
     public boolean displayed = false;
 
+    /**
+     *
+     * @param projectile
+     */
     public HitBox(Projectile projectile) {
         this.radius = ((Circle) projectile.getChildren().get(0)).getRadius();
         this.center = new Coordinate(projectile.getCoordinate().getX(), projectile.getCoordinate().getY());
@@ -42,6 +46,10 @@ public class HitBox extends Group {
         this.getChildren().add(hitBox);
     }
 
+    /**
+     *
+     * @param obstacle
+     */
     public HitBox(Obstacle obstacle) {
         center = new Coordinate(obstacle.getCoordinate().getX(), obstacle.getCoordinate().getY());
         if (obstacle instanceof Wall) {
@@ -76,6 +84,10 @@ public class HitBox extends Group {
         this.setVisible(false);
     }
 
+    /**
+     *
+     * @param fighter
+     */
     public HitBox(Fighter fighter) {
         center = new Coordinate(fighter.getCoordinate().getX(), fighter.getCoordinate().getY());
         double height = 40;
@@ -96,6 +108,10 @@ public class HitBox extends Group {
         this.setVisible(false);
     }
 
+    /**
+     *
+     * @param loot
+     */
     public HitBox(Loot loot) {
         center = new Coordinate(loot.getCoordinate().getX(), loot.getCoordinate().getY());
         double height = 40;
@@ -116,6 +132,12 @@ public class HitBox extends Group {
         this.setVisible(false);
     }
 
+
+    /**
+     *
+     * @param HitBox
+     * @return
+     */
     public boolean overlaps(HitBox HitBox) {
         for (Coordinate point : HitBox.points) {
             if (point.distance(this.center) <= radius) {
@@ -125,6 +147,10 @@ public class HitBox extends Group {
         return false;
     }
 
+    /**
+     *
+     * @param isDisplayed
+     */
     protected void setDisplayed(boolean isDisplayed) {
         this.setVisible(isDisplayed);
         this.displayed = isDisplayed;

@@ -21,15 +21,25 @@ public abstract class Projectile extends MovingBody {
 
     public abstract HitBox hitBox();
 
+    /**
+     *
+     * @param time
+     */
     public void move(double time) {
         getCoordinate().setX((acceleration().getX() / 2) * time * time + getVelocityX() * time + getCoordinate().getX());
         getCoordinate().setY((acceleration().getY() / 2) * time * time + getVelocityY() * time + getCoordinate().getY());
-        this.setVelocityX(acceleration().getX() * time + getVelocityX());
-        this.setVelocityY(acceleration().getY() * time + getVelocityY());
+        this.setVelocityX((acceleration().getX() * time + getVelocityX()));
+        this.setVelocityY((acceleration().getY() * time + getVelocityY()));
         this.getChildren().get(0).setLayoutX(getCoordinate().getX());
         this.getChildren().get(0).setLayoutY(getCoordinate().getY());
     }
 
+    /**
+     *
+     * @param velocity
+     * @param coordinate
+     * @param Forces
+     */
     public void release(Vector velocity, Coordinate coordinate, Vector... Forces) {
         setVelocity(velocity);
         setCoordinate(coordinate);
@@ -38,6 +48,10 @@ public abstract class Projectile extends MovingBody {
         forces.addAll(Arrays.asList(Forces));
     }
 
+    /**
+     *
+     * @param vector
+     */
     public void setVelocity(Vector vector) {
         setVelocityX(vector.getX());
         setVelocityY(vector.getY());
