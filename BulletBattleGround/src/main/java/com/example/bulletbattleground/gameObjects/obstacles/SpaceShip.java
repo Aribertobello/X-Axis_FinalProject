@@ -33,11 +33,6 @@ public class SpaceShip extends Obstacle {
     }
 
     @Override
-    public HitBox hitBox() {
-        return new HitBox(this);
-    }
-
-    @Override
     public void move(double dt) {
 
         if (getCoordinate().getY() <= -160 || getCoordinate().getY() > 1200) {

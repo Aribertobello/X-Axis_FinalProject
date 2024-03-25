@@ -47,18 +47,6 @@ public class Grenade extends Projectile {
     }
 
     @Override
-    public void setCoordinate(Coordinate coordinate) {
-        this.getChildren().get(0).setLayoutX(coordinate.getX());
-        this.getChildren().get(0).setLayoutY(coordinate.getY());
-        super.setCoordinate(coordinate);
-    }
-
-    @Override
-    public HitBox hitBox() {
-        return new HitBox(this);
-    }
-
-    @Override
     public String toString() {
         return "Grenade";
     }

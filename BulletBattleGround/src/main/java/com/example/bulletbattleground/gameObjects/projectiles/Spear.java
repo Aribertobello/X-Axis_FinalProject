@@ -10,10 +10,6 @@ import javafx.scene.shape.Polygon;
 
 public class Spear extends Projectile {
 
-    @Override
-    public HitBox hitBox() {
-        return new HitBox(this);
-    }
 
     public Spear() {
         this.getChildren().add(new Circle(2, Color.DARKGRAY));

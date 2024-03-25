@@ -4,6 +4,7 @@ import com.example.bulletbattleground.game.Fighter;
 import com.example.bulletbattleground.game.Mapp;
 import com.example.bulletbattleground.game.Projectile;
 import com.example.bulletbattleground.gameObjects.projectiles.Rocket;
+import com.example.bulletbattleground.utility.BattleGroundObject;
 import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.Vector;
 import javafx.scene.image.Image;
@@ -11,7 +12,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 
-public class Ally extends Fighter {
+import java.util.HashMap;
+
+public class Ally extends Fighter implements BattleGroundObject {
 
     public Ally(int coordinateX, int coordinateY, int type) {
         super(coordinateX, coordinateY, type);
