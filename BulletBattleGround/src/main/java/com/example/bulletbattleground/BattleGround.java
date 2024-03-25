@@ -22,6 +22,13 @@ public class BattleGround extends Application {
     static protected Game activeGame = new Game(FileManager.defaultLevelPvc());
     static protected User user = new User();
 
+    /**
+     * The entry point for the JavaFX application. Initializes the primary stage
+     * and loads the sign-in page scene.
+     *
+     * @param stage The primary stage of the application.
+     * @throws IOException If an error occurs while loading the sign-in page scene.
+     */
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(BattleGround.class.getResource("SignInPageScene.fxml"));
