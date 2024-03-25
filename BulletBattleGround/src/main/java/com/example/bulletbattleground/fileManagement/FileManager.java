@@ -19,7 +19,12 @@ public class FileManager {
 
     static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
 
-
+    /**
+     * Constructs a new FileManager instance with the specified file path.
+     *
+     * @param filePath The path to the file managed by this FileManager.
+     * @throws FileNotFoundException If the file specified by the filePath does not exist.
+     */
     public FileManager(String filePath) throws FileNotFoundException {
         managerFile = new File(filePath);
     }
@@ -111,6 +116,12 @@ public class FileManager {
     public static void createPvCLevel(String file) { //TODO
     }
 
+    /**
+     * Saves user data (username and password) to the file managed by this FileManager.
+     *
+     * @param username The username to be saved.
+     * @param password The password associated with the username.
+     */
     public static void saveUserdata(String username, String password) {
         try {
             FileWriter fileWriter = new FileWriter(managerFile, true); // true for append mode. (means you can add stuff to the text file without overwriting the current data)
@@ -129,6 +140,14 @@ public class FileManager {
         }
     }
 
+    /**
+     * Loads user data from the file managed by this FileManager and checks if the provided username and password match the stored credentials from the player.
+     *
+     * @param username The username to be verified.
+     * @param Password The password to be verified with the correct username.
+     * @return true if the provided username and password match the player's stored credentials, false otherwise.
+     * @throws FileNotFoundException If the file managed by this FileManager is not found.
+     */
     public static boolean loadUserData(String username, String Password) throws FileNotFoundException {
         boolean matchingUserName = false;
         boolean matchingPassWord = false;

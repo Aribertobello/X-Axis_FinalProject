@@ -14,6 +14,11 @@ import javafx.util.Duration;
 
 public class Bullet extends Projectile {
 
+    /**
+     * Constructs a new Bullet object.
+     * Creates the Bullet object using a circle shape and an image.
+     * The bullet has a default damage value of 3, upward lift force, and a set mass.
+     */
     public Bullet() {
         Circle small_bullet = new Circle(10);
         small_bullet.setRotate(90);
