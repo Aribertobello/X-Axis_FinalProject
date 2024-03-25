@@ -12,14 +12,30 @@ public abstract class Obstacle extends MovingBody {
 
     protected boolean ispenetrable;
 
+    /**
+     *
+     * @param dt
+     */
     public void move(double dt) {
         setX(getVelocityX() * dt + getCoordinate().getX());
         setY(getVelocityY() * dt + getCoordinate().getY());
     }
 
+    /**
+     *
+     * @return
+     */
     public abstract HitBox hitBox();
 
+    /**
+     *
+     * @param x
+     */
     protected abstract void setX(double x);
 
+    /**
+     *
+     * @param y
+     */
     protected abstract void setY(double y);
 }

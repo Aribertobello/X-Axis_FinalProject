@@ -22,6 +22,11 @@ public class BattleGround extends Application {
     static protected Game activeGame = new Game(FileManager.defaultLevelPvc());
     static protected User user = new User();
 
+    /**
+     *
+     * @param stage
+     * @throws IOException
+     */
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(BattleGround.class.getResource("SignInPageScene.fxml"));
@@ -31,6 +36,10 @@ public class BattleGround extends Application {
         stage.show();
     }
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         launch();
     }

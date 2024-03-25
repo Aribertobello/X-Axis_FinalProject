@@ -39,7 +39,6 @@ public class Controller {
 
     private Button MAINMENUBTN;
 
-
     public void player_computer_btn_clicked(ActionEvent event)  {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         BattleGround.activeGame = new Game(FileManager.defaultLevelPvc());

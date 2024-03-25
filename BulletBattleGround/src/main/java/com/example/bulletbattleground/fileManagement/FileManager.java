@@ -19,29 +19,55 @@ public class FileManager {
 
     static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
 
+
     public FileManager(String filePath) throws FileNotFoundException {
         managerFile = new File(filePath);
     }
 
+    /**
+     *Generates the default level for the player vs computer mode
+     * calls the defaultMapPvc to generate the map of the level
+     * @return applications default level for PVC
+     */
     public static Level defaultLevelPvc() {
         Mapp map = defaultMapPvc();
         return new Level(map, "pvp");
     }
 
+    /**
+     *generates the default map for player vs computer game mode
+     * map is of type earth
+     * map includes a 12x160 wall at 900,480
+     * map has a player at 200,600 of type 3
+     * map has an opponent at screenWidth - 200,600 of type
+     * @return applications default map for PVC
+     */
     public static Mapp defaultMapPvc() {
         Mapp map = new Mapp("earth");
-        //map.addObstacle(new SmokeScreen(40,500,600));
         map.addObstacle(new Wall(160, 12, 900, 480));
         map.addFighter(new Ally(200, 600, 3));
         map.addFighter(new Computer(screenWidth - 200, 600, 1));
         return map;
     }
 
+    /**
+     *Generates the default level for the player vs player mode
+     * calls the defaultMapPvp to generate the map of the level
+     * @return applications default level for PVP
+     */
     public static Level defaultLevelPvp() {
         Mapp map = defaultMapPvp();
         return new Level(map, "pvp");
     }
 
+    /**
+     *generates the default map for player vs computer game mode
+     * map is of type earth
+     * map includes a 12x160 wall at 900,480
+     * map has a player at 200,600 of type 3
+     * map has a player at screenWidth - 200,600 of type 2
+     * @return applications default map for PVC
+     */
     public static Mapp defaultMapPvp() {
         Mapp map = new Mapp("space");
         //map.addObstacle(new SmokeScreen(40,500,600));
@@ -51,12 +77,24 @@ public class FileManager {
         return map;
     }
 
+    /**
+     *Generates the default level for the player vs environment mode
+     * calls the defaultMapPve to generate the map of the level
+     * @return applications default level for PVE
+     */
     public static Level defaultLevelPve() {
         Mapp map = defaultMapPve();
         Level level = new Level(map, "pve");
         return level;
     }
 
+    /**
+     *generates the default map for player vs environnement game mode
+     * map is of type space
+     * map includes 4 moving spaceships
+     * map has a player at 200,600 of type 1
+     * @return applications default map for PVE
+     */
     public static Mapp defaultMapPve() {
         Mapp map = new Mapp("space");
         map.addObstacle(new SpaceShip(-10, 500, 200));
