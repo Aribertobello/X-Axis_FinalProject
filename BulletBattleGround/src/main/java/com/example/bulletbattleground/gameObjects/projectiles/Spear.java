@@ -12,10 +12,6 @@ import javafx.scene.transform.Rotate;
 
 public class Spear extends Projectile {
 
-    @Override
-    public HitBox hitBox() {
-        return new HitBox(this);
-    }
 
     Circle spearHitBox;
     Circle spear;

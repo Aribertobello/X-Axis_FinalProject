@@ -19,7 +19,6 @@ public abstract class Projectile extends MovingBody {
     @Getter
     protected Vector lift;
 
-    public abstract HitBox hitBox();
 
     public void move(double time) {
         getCoordinate().setX((acceleration().getX() / 2) * time * time + getVelocityX() * time + getCoordinate().getX());
@@ -41,5 +40,15 @@ public abstract class Projectile extends MovingBody {
     public void setVelocity(Vector vector) {
         setVelocityX(vector.getX());
         setVelocityY(vector.getY());
+    }
+    @Override
+    public void setCoordinate(Coordinate coordinate) {
+        this.getChildren().get(0).setLayoutX(coordinate.getX());
+        this.getChildren().get(0).setLayoutY(coordinate.getY());
+        super.setCoordinate(coordinate);
+    }
+    public HitBox hitBox(){
+        hitBox = new HitBox(this);
+        return hitBox;
     }
 }

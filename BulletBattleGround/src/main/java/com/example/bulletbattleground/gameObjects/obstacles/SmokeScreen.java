@@ -23,10 +23,6 @@ public class SmokeScreen extends Obstacle {
         this.getChildren().addAll(ball, label);
     }
 
-    @Override
-    public HitBox hitBox() {
-        return null;
-    }
 
     @Override
     public void move(double dt) {

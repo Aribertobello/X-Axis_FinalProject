@@ -6,6 +6,9 @@ import com.example.bulletbattleground.utility.Vector;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseButton;
@@ -34,24 +37,24 @@ public class Game extends Scene {
 
     private boolean dragging = false;
 
+    private boolean isTicking;
+
     private boolean printCoordinate = false;
 
     public Game(Level level) {
         super(level);
 
+
         Button pausebtn = new Button("Pause");
-        pausebtn.setOnAction(event -> {
-            if (timeline.getStatus() == Animation.Status.PAUSED){
-                timeline.play();
-            } else {
-                timeline.pause();
-            }
-        } );
+        pausebtn.setOnAction(new pauseEvent());
         pausebtn.setPrefWidth(250);
         pausebtn.setPrefHeight(20);
         level.getChildren().add(pausebtn);
 
+        //TODO add this to fxml and handle click
+
         this.level = level;
+        isTicking=true;
     }
 
 
@@ -69,6 +72,7 @@ public class Game extends Scene {
     }
 
     protected void tick(double dt) {
+
         level.update(dt);
     }
 
@@ -154,6 +158,20 @@ public class Game extends Scene {
                 });
             }
         }
+        this.setOnKeyPressed(new pauseEvent());
 
+    }
+    private class pauseEvent implements EventHandler {
+
+        @Override
+        public void handle(Event t) {
+            if(timeline.getStatus() == Animation.Status.PAUSED){
+                isTicking = true;
+                timeline.play();
+            }else{
+                timeline.pause();
+                isTicking = false;
+            }
+        }
     }
 }
