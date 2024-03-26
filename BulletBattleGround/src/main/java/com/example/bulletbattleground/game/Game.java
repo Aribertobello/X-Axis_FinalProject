@@ -44,7 +44,7 @@ public class Game extends Scene {
     public Game(Level level) {
         super(level);
 
-        //-----------
+
         Button pausebtn = new Button("Pause");
         pausebtn.setOnAction(new pauseEvent());
         pausebtn.setPrefWidth(250);
@@ -56,6 +56,7 @@ public class Game extends Scene {
         this.level = level;
         isTicking=true;
     }
+
 
     public void run() {
         handleClick();

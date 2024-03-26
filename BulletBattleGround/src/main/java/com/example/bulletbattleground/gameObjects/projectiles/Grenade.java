@@ -4,7 +4,9 @@ import com.example.bulletbattleground.game.Projectile;
 import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.HitBox;
 import com.example.bulletbattleground.utility.Vector;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Ellipse;
 import lombok.Getter;
@@ -16,6 +18,8 @@ public class Grenade extends Projectile {
 
     public Grenade() {
         fuseTimer = 15.0;
+        Image grenadeImg = new Image("file:grenade.png");
+        grenade.setFill(new ImagePattern(grenadeImg));
         this.lift = new Vector(0, 0);
         this.getChildren().add(grenade);
         this.forces.add(lift);
