@@ -17,8 +17,8 @@ public class Spear extends Projectile {
         return new HitBox(this);
     }
 
-    Circle spearHitBox; = new Circle(2, Color.DARKGRAY);
-    Circle spear; = new Circle(20, Color.BLUE);
+    Circle spearHitBox;
+    Circle spear;
 
     //Polygon p = new Polygon();
 
