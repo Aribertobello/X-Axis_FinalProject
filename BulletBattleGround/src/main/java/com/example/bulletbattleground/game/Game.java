@@ -3,9 +3,11 @@ package com.example.bulletbattleground.game;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
 import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.Vector;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -36,8 +38,22 @@ public class Game extends Scene {
 
     public Game(Level level) {
         super(level);
+
+        Button pausebtn = new Button("Pause");
+        pausebtn.setOnAction(event -> {
+            if (timeline.getStatus() == Animation.Status.PAUSED){
+                timeline.play();
+            } else {
+                timeline.pause();
+            }
+        } );
+        pausebtn.setPrefWidth(250);
+        pausebtn.setPrefHeight(20);
+        level.getChildren().add(pausebtn);
+
         this.level = level;
     }
+
 
     public void run() {
         handleClick();
