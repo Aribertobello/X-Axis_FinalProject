@@ -34,7 +34,6 @@ public class Rocket extends Projectile {
     @Override
     public void move(double time) {
 
-        forces.clear();
 
         if (getCoordinate().getY() < -20) {
             setCoordinate(new Coordinate(dropZone, 1));
