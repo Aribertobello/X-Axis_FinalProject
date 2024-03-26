@@ -39,7 +39,7 @@ public class Loadout {
 
     public HBox display() {
         Label typeLabel = new Label(type + " class   ");
-        Label remaining = new Label("remaining Grenades:   ");
+        Label remaining = new Label("remaining Grenades:   " + grenades.size());
         HBox LoadoutBox = new HBox(10, typeLabel, remaining);
 
         for (Grenade grenade : grenades) {

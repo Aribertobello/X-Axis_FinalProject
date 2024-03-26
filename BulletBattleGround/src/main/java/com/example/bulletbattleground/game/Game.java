@@ -6,6 +6,7 @@ import com.example.bulletbattleground.utility.Vector;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -33,6 +34,10 @@ public class Game extends Scene {
     private boolean dragging = false;
 
     private boolean printCoordinate = false;
+    Label mouseCoordinatesLabel = new Label();
+
+
+
 
     public Game(Level level) {
         super(level);
@@ -102,6 +107,9 @@ public class Game extends Scene {
 
             Vector direction = new Vector(level.trajectoryLine.getEndX() - level.trajectoryLine.getStartX(), level.trajectoryLine.getEndY() - level.trajectoryLine.getStartY());
             System.out.println("Mouse coordinates:" + (-direction.angle()));
+            double angle = 180 -  direction.angle() ;
+            level.headsUpDisplay.getChildren().add(mouseCoordinatesLabel);
+            mouseCoordinatesLabel.setText("Mouse coordinates: " + angle);
 
             level.trajectoryLine.setStartX(0);
             level.trajectoryLine.setStartY(0);
