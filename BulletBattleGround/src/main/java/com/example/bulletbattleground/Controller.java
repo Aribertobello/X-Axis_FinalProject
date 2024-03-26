@@ -65,6 +65,7 @@ public class Controller {
         //System.out.println("Screen width: " + screenWidth + " pixels");
         stage.setScene(BattleGround.activeGame);
         stage.setMaximized(true);
+        stage.setFullScreen(true);
         stage.show();
         BattleGround.activeGame.run();
     }
