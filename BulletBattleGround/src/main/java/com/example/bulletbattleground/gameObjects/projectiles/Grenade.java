@@ -28,7 +28,7 @@ public class Grenade extends Projectile {
 
     @Getter
     @Setter
-    protected int ExplosionRadius;
+    protected double ExplosionRadius;
 
     @Override
     public void bounce(HitBox hitBox) {
@@ -40,22 +40,10 @@ public class Grenade extends Projectile {
         super.move(time);
         fuseTimer = fuseTimer - time;
 
-        if (fuseTimer == 0) {
+        if (fuseTimer <= 0.0) {
             grenade.setRadius(0);
         }
 
-    }
-
-    @Override
-    public void setCoordinate(Coordinate coordinate) {
-        this.getChildren().get(0).setLayoutX(coordinate.getX());
-        this.getChildren().get(0).setLayoutY(coordinate.getY());
-        super.setCoordinate(coordinate);
-    }
-
-    @Override
-    public HitBox hitBox() {
-        return new HitBox(this);
     }
 
     @Override
