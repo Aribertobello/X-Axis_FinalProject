@@ -10,11 +10,9 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-<<<<<<< HEAD
+
 import javafx.scene.control.Label;
-=======
 import javafx.scene.control.Button;
->>>>>>> matt
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
