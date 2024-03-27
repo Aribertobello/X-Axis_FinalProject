@@ -31,7 +31,7 @@ public class FileManager {
     public static Mapp defaultMapPvc() {
         Mapp map = new Mapp("earth");
         //map.addObstacle(new SmokeScreen(40,500,600));
-        map.addObstacle(new Wall(160, 12, 900, 480));
+        map.addObstacle(new Wall(160, 12, 900, 480,90));
         map.addFighter(new Ally(200, 600, 3));
         map.addFighter(new Computer(screenWidth - 200, 600, 1));
         return map;
@@ -45,7 +45,7 @@ public class FileManager {
     public static Mapp defaultMapPvp() {
         Mapp map = new Mapp("space");
         //map.addObstacle(new SmokeScreen(40,500,600));
-        map.addObstacle(new Wall(160, 12, 900, 480));
+        map.addObstacle(new Wall(160, 12, 900, 480,300));
         map.addFighter(new Ally(200, 600, 3));
         map.addFighter(new Ally(screenWidth - 200, 600, 2));
         return map;
@@ -59,11 +59,12 @@ public class FileManager {
 
     public static Mapp defaultMapPve() {
         Mapp map = new Mapp("space");
-        map.addObstacle(new SpaceShip(-10, 500, 200));
+        //map.addObstacle(new SpaceShip(0, 200, 500));
+        map.addFighter(new Ally(200, 600, 1));
         map.addObstacle(new SpaceShip(20, 900, 600));
         map.addObstacle(new SpaceShip(-30, 1300, 800));
         map.addObstacle(new SpaceShip(25, 400, 100));
-        map.addFighter(new Ally(200, 600, 1));
+        map.addObstacle(new SpaceShip(0, 200, 500));
         return map;
     }
 

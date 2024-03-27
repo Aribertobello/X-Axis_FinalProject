@@ -3,10 +3,18 @@ package com.example.bulletbattleground.game;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
 import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.Vector;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
+<<<<<<< HEAD
 import javafx.scene.control.Label;
+=======
+import javafx.scene.control.Button;
+>>>>>>> matt
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -33,6 +41,8 @@ public class Game extends Scene {
 
     private boolean dragging = false;
 
+    private boolean isTicking;
+
     private boolean printCoordinate = false;
     Label mouseCoordinatesLabel = new Label();
 
@@ -41,8 +51,20 @@ public class Game extends Scene {
 
     public Game(Level level) {
         super(level);
+
+
+        Button pausebtn = new Button("Pause");
+        pausebtn.setOnAction(new pauseEvent());
+        pausebtn.setPrefWidth(250);
+        pausebtn.setPrefHeight(20);
+        level.getChildren().add(pausebtn);
+
+        //TODO add this to fxml and handle click
+
         this.level = level;
+        isTicking=true;
     }
+
 
     public void run() {
         handleClick();
@@ -58,6 +80,7 @@ public class Game extends Scene {
     }
 
     protected void tick(double dt) {
+
         level.update(dt);
     }
 
@@ -146,6 +169,20 @@ public class Game extends Scene {
                 });
             }
         }
+        this.setOnKeyPressed(new pauseEvent());
 
+    }
+    private class pauseEvent implements EventHandler {
+
+        @Override
+        public void handle(Event t) {
+            if(timeline.getStatus() == Animation.Status.PAUSED){
+                isTicking = true;
+                timeline.play();
+            }else{
+                timeline.pause();
+                isTicking = false;
+            }
+        }
     }
 }

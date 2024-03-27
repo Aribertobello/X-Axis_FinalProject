@@ -28,8 +28,10 @@ public class Vector {
         return new Vector(-y, x);
     }
 
-    public static double dotProduct(Vector... Vectors) {
-        return 0;
+    public static double dotProduct(Vector vector1, Vector vector2) {
+        double x = vector1.getX()*vector2.getX();
+        double y = vector1.getY()* vector2.getY();
+        return x+y;
     }
 
     public static Vector crossProduct(Vector vector1, Vector vector2) {
@@ -56,11 +58,16 @@ public class Vector {
 
     public Vector scale(double magnitude) {
         double scale = magnitude / this.magnitude();
-        return new Vector(x * scale, y * scale);
+        return this.multiply(Math.abs(scale));
     }
 
-    public Vector multiply(double scaler) {
-        return new Vector(x * scaler, y * scaler);
+    public Vector multiply(double scalar) {
+        return new Vector(x * scalar, y * scalar);
+    }
+
+    public Vector projectOver(Vector vector){
+        Vector Reflexion = vector.unitVector().multiply(dotProduct(this,vector.unitVector()));
+        return Reflexion;
     }
 
     public Vector rotate(double angle) {

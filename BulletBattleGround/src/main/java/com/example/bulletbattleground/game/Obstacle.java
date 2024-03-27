@@ -17,9 +17,11 @@ public abstract class Obstacle extends MovingBody {
         setY(getVelocityY() * dt + getCoordinate().getY());
     }
 
-    public abstract HitBox hitBox();
-
     protected abstract void setX(double x);
 
     protected abstract void setY(double y);
+    public HitBox hitBox(){
+        hitBox = new HitBox(this);
+        return hitBox;
+    }
 }
