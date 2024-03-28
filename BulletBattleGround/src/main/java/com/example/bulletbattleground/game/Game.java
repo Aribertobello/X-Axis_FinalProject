@@ -135,6 +135,8 @@ public class Game extends Scene {
             mouseCoordinatesLabel.setText(" Mouse coordinates: " + angle + "  Degrees  ");
             level.headsUpDisplay.getChildren().add(healthBar);
             healthBar.setMaxSize(100,100);
+            healthBar.setStyle("-fx-accent: red;");
+
 
             level.trajectoryLine.setStartX(0);
             level.trajectoryLine.setStartY(0);
