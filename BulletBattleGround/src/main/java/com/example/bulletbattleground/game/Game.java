@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -43,6 +44,7 @@ public class Game extends Scene {
 
     private boolean printCoordinate = false;
     Label mouseCoordinatesLabel = new Label();
+    private ProgressBar healthBar = new ProgressBar();
 
 
 
@@ -130,7 +132,9 @@ public class Game extends Scene {
             System.out.println("Mouse coordinates:" + (-direction.angle()));
             double angle = 180 -  direction.angle() ;
             level.headsUpDisplay.getChildren().add(mouseCoordinatesLabel);
-            mouseCoordinatesLabel.setText("Mouse coordinates: " + angle);
+            mouseCoordinatesLabel.setText(" Mouse coordinates: " + angle + "  Degrees  ");
+            level.headsUpDisplay.getChildren().add(healthBar);
+            healthBar.setMaxSize(100,100);
 
             level.trajectoryLine.setStartX(0);
             level.trajectoryLine.setStartY(0);
