@@ -1,6 +1,7 @@
 package com.example.bulletbattleground.game;
 
 import com.example.bulletbattleground.gameObjects.Loot.Loot;
+import com.example.bulletbattleground.gameObjects.projectiles.Bullet;
 import com.example.bulletbattleground.gameObjects.projectiles.Grenade;
 import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.HitBox;
@@ -66,7 +67,7 @@ public class Mapp extends Pane {
 
     }
 
-    protected void update(double dt) {
+    public void update(double dt) {
 
         for (Obstacle obstacle : obstacles) {
             obstacle.move(dt);
@@ -190,7 +191,11 @@ public class Mapp extends Pane {
         return false;
     }
 
-    protected void explosion(Coordinate coordinate) {
+    public void explosion(Coordinate coordinate) {
         activeProjectile.setVelocity(new Vector(0, 0));
+    }
+
+    public void nethod(){
+        Bullet bullet = new Bullet();
     }
 }
