@@ -81,10 +81,9 @@ public class Mapp extends Pane {
             if (buffer > 50) {
 
                 if (activeProjectile instanceof Grenade) {
-
+                    checkCollision(activeProjectile);
                     if (((Grenade) activeProjectile).getFuseTimer() <= 0) {
                         explosion(activeProjectile.getCoordinate());
-                        checkCollision(activeProjectile);
                     }
 
                 } else {
@@ -195,7 +194,4 @@ public class Mapp extends Pane {
         activeProjectile.setVelocity(new Vector(0, 0));
     }
 
-    public void nethod(){
-        Bullet bullet = new Bullet();
-    }
 }

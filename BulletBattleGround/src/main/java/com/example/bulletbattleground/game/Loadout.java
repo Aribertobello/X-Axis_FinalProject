@@ -20,6 +20,7 @@ public class Loadout {
         if (type.equalsIgnoreCase("light")) {
             mainWeapon = new Bullet();
             grenades.add(new Grenade());
+            grenades.add(new Grenade());
             grenades.add(new SmokeGrenade());
         }
 
@@ -32,6 +33,7 @@ public class Loadout {
         if (type.equalsIgnoreCase("heavy")) {
             mainWeapon = new Rocket();
             grenades.add(new Grenade());
+            grenades.add(new SmokeGrenade());
             grenades.add(new SmokeGrenade());
         }
 
