@@ -130,8 +130,8 @@ public class Mapp extends Pane {
     public void addForces(Projectile projectile) {
 
         if (type == 0) {
-            environmentForces[0] = environmentForces[0].multiply(projectile.getMass());
-            environmentForces[1] = environmentForces[1].multiply(projectile.getMass());
+           // environmentForces[0] = environmentForces[0].multiply(projectile.getMass());
+            //environmentForces[1] = environmentForces[1].multiply(projectile.getMass());
         } else {
             projectile.setMass(2000);
             Coordinate earthCenterOfGravity = new Coordinate(earth.getCenterX(), earth.getCenterY());
@@ -152,7 +152,6 @@ public class Mapp extends Pane {
             projectile.forces.add(environmentForces[0]);
             projectile.forces.add(environmentForces[1]);
         }
-
     }
 
     public Boolean checkCollision(Projectile projectile) {

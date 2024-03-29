@@ -1,8 +1,9 @@
 package com.example.bulletbattleground.utility;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-
+@AllArgsConstructor
 public class Vector {
     @Getter
     @Setter
@@ -11,10 +12,6 @@ public class Vector {
     @Setter
     protected double y;
 
-    public Vector(double x, double y) {
-        this.x = x;
-        this.y = y;
-    }
 
     public double magnitude() {
         return Math.sqrt(x * x + y * y);
@@ -81,7 +78,7 @@ public class Vector {
         return '<' +
                 " " + x +
                 ", " + y +
-                '>';
+                " >" ;
     }
 
 }

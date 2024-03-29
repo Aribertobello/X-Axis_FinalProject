@@ -14,7 +14,7 @@ import javafx.scene.paint.ImagePattern;
 
 import java.util.HashMap;
 
-public class Ally extends Fighter implements BattleGroundObject {
+public class Ally extends Fighter {
 
     public Ally(int coordinateX, int coordinateY, int type) {
         super(coordinateX, coordinateY, type);

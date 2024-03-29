@@ -1,25 +1,27 @@
 package com.example.bulletbattleground.game;
 
-import com.example.bulletbattleground.utility.Coordinate;
-import com.example.bulletbattleground.utility.HitBox;
-import com.example.bulletbattleground.utility.MovingBody;
-import com.example.bulletbattleground.utility.Vector;
+import com.example.bulletbattleground.utility.*;
 import javafx.scene.Group;
 import lombok.Getter;
 import lombok.Setter;
 
-public abstract class Obstacle extends MovingBody {
+public abstract class Obstacle extends MovingBody implements BattleGroundObject {
 
     protected boolean ispenetrable;
 
     public void move(double dt) {
-        setX(getVelocityX() * dt + getCoordinate().getX());
-        setY(getVelocityY() * dt + getCoordinate().getY());
+        setCoordinate(getVelocityX() * dt + getCoordinate().getX(),getVelocityY() * dt + getCoordinate().getY());
     }
-
-    protected abstract void setX(double x);
-
-    protected abstract void setY(double y);
+    @Override
+    public void setCoordinate(Coordinate coordinate){
+        super.setCoordinate(coordinate);
+        allign();
+    }
+    @Override
+    public void setCoordinate(double x, double y){
+        super.setCoordinate(x,y);
+        allign();
+    }
     public HitBox hitBox(){
         hitBox = new HitBox(this);
         return hitBox;

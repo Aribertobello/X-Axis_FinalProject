@@ -47,11 +47,8 @@ public class Game extends Scene {
     private ProgressBar healthBar = new ProgressBar();
 
 
-
-
     public Game(Level level) {
         super(level);
-
 
         Button pausebtn = new Button("Pause");
         pausebtn.setOnAction(new pauseEvent());
@@ -72,7 +69,7 @@ public class Game extends Scene {
 
         timeline = new Timeline(new KeyFrame(Duration.millis(1), e
                 -> {
-            time = time + (1.0 / tickRate);
+            time += (1.0 / tickRate);
             tick(1.0 / tickRate);
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);
@@ -182,8 +179,12 @@ public class Game extends Scene {
                 isTicking = true;
                 timeline.play();
             }else{
+                //Debug
+                Object variableOfInterest = level.map.activeProjectile;
+                //----------------
                 timeline.pause();
                 isTicking = false;
+
             }
         }
     }
