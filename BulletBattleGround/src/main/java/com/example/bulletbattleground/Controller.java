@@ -101,4 +101,8 @@ public class Controller {
         stage.show();
         BattleGround.activeGame.run();
     }
+
+    public void launchLevelOne(ActionEvent actionEvent) {
+
+    }
 }
