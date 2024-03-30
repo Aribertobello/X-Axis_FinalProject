@@ -71,5 +71,6 @@ public class Ally extends Fighter implements BattleGroundObject {
         System.out.println(projectile.netForce().magnitude());
         System.out.println(projectile.netForce().angle());
 
+
     }
 }

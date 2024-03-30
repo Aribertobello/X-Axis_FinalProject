@@ -35,7 +35,7 @@ public class Mapp extends Pane {
 
     @Getter
     @Setter
-    protected Projectile activeProjectile;
+    public Projectile activeProjectile;
 
     @Getter
     @Setter

@@ -48,4 +48,5 @@ public class Loadout {
 
         return LoadoutBox;
     }
+
 }

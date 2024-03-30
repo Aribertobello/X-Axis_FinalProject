@@ -21,11 +21,9 @@ public class Level extends AnchorPane {
     @Setter
     protected boolean dragging = false;
 
-    protected Mapp map;
+    public Mapp map;
 
     protected HBox headsUpDisplay = new HBox(new Label("HUD"));
-    // Label angleLabel = new Label("Angle: " + AngleCalculation);
-
     protected Line trajectoryLine = new Line();//TODO
 
     protected Coordinate origin;

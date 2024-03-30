@@ -92,6 +92,7 @@ public abstract class MovingBody extends Group {
         a.bounce(b.hitBox());
         b.bounce(a.hitBox());
     }
+
 }
 
 

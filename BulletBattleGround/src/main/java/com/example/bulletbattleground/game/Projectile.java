@@ -51,4 +51,5 @@ public abstract class Projectile extends MovingBody {
         hitBox = new HitBox(this);
         return hitBox;
     }
+
 }
