@@ -17,7 +17,7 @@ public class Grenade extends Projectile {
     Circle grenade = new Circle(10, Color.PALEGREEN);
 
     public Grenade() {
-        fuseTimer = 15.0;
+        fuseTimer = 25.0;
         Image grenadeImg = new Image("file:grenade.png");
         grenade.setFill(new ImagePattern(grenadeImg));
         this.lift = new Vector(0, 0);

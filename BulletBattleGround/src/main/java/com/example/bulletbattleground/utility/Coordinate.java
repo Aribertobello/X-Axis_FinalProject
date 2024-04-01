@@ -15,6 +15,10 @@ public class Coordinate {
         this.y = y;
     }
 
+    public void displace(Vector vector){
+        setX(x+ vector.getX());
+        setY(y+ vector.getY());
+    }
     public double distance(Coordinate coordinate) {
         return distanceVector(coordinate).magnitude();
     }

@@ -20,6 +20,7 @@ public class Loadout {
         if (type.equalsIgnoreCase("light")) {
             mainWeapon = new Bullet();
             grenades.add(new Grenade());
+            grenades.add(new Grenade());
             grenades.add(new SmokeGrenade());
         }
 
@@ -33,13 +34,14 @@ public class Loadout {
             mainWeapon = new Rocket();
             grenades.add(new Grenade());
             grenades.add(new SmokeGrenade());
+            grenades.add(new SmokeGrenade());
         }
 
     }
 
     public HBox display() {
         Label typeLabel = new Label(type + " class   ");
-        Label remaining = new Label("remaining Grenades:   ");
+        Label remaining = new Label("remaining Grenades:   " + grenades.size());
         HBox LoadoutBox = new HBox(10, typeLabel, remaining);
 
         for (Grenade grenade : grenades) {
