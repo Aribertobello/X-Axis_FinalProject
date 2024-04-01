@@ -43,14 +43,8 @@ public class Wall extends Obstacle {
     }
 
     @Override
-    protected void setX(double x) {
-        ((Rectangle) this.getChildren().get(0)).setX(x - (double) thickness / 2);
-        this.getCoordinate().setX(x);
-    }
-
-    @Override
-    protected void setY(double y) {
-        ((Rectangle) this.getChildren().get(0)).setY(y - (double) height / 2);
-        this.getCoordinate().setY(y);
+    public void allign() {
+        ((Rectangle) this.getChildren().get(0)).setX(getCoordinate().getX() - (double) thickness / 2);
+        ((Rectangle) this.getChildren().get(0)).setY(getCoordinate().getY() - (double) height / 2);
     }
 }

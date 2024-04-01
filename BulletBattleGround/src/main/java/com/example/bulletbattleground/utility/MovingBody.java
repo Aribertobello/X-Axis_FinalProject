@@ -46,6 +46,10 @@ public abstract class MovingBody extends Group {
     public double momentum() {
         return mass * velocity().magnitude();
     }
+    public void setCoordinate(double x, double y){
+        coordinate.setX(x);
+        coordinate.setY(y);
+    }
 
     public abstract void move(double dt);
 
@@ -60,9 +64,6 @@ public abstract class MovingBody extends Group {
         Coordinate point2;
 
 
-
-
-
         if (index+1==b.hitBox.getPoints().size()){
             point1 = b.hitBox.getPoints().get(index-1);
             point2 = b.hitBox.getPoints().get(0);
@@ -75,6 +76,10 @@ public abstract class MovingBody extends Group {
         }
         Vector aReflexion = Vector.vectorSum(a.velocity(),a.velocity().projectOver(point1.distanceVector(point2).normal()).multiply(-2));
 
+        double x1;
+        double y1;
+        double x2;
+        double y2;
         double m1 = a.getMass();
         double m2 = b.getMass();
         double k1 = a.kE();
@@ -83,12 +88,13 @@ public abstract class MovingBody extends Group {
         double p2 = b.momentum();
         double eDissipated = 0;
         double eFinal = k1 + k2 - eDissipated;
-        double v1 = (-sqrt(2 * eFinal * pow(m1, 2) + 2 * eFinal * m2 * m1 - m1 * pow(p1, 2) - m1 * pow(p2, 2) - 2 * m1 * p1 * p2) / sqrt(m2) + (m1 * p1) / m2 + (m1 * p2) / m2) / (pow(m1, 2) / m2 + m1);
+        double v1 = (sqrt(2 * eFinal * pow(m1, 2) + 2 * eFinal * m2 * m1 - m1 * pow(p1, 2) - m1 * pow(p2, 2) - 2 * m1 * p1 * p2) / sqrt(m2) + (m1 * p1) / m2 + (m1 * p2) / m2) / (pow(m1, 2) / m2 + m1);
         double v2 = (p1+p2-m1*v1)/m1;
+        a.getCoordinate().displace(aReflexion.unitVector());
         a.setVelocityX(aReflexion.scale(v1).getX());
         a.setVelocityY(aReflexion.scale( v1).getY());
-        //a.setVelocityX(bReflexion.scale(-v2).getX());
-        // a.setVelocityY(bReflexion.scale(-v2).getY());
+        //a.setVelocityX(bReflexion.scale(-v2).getX()); TODO V2
+        // a.setVelocityY(bReflexion.scale(-v2).getY()); TODO V2
         a.bounce(b.hitBox());
         b.bounce(a.hitBox());
     }

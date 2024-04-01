@@ -23,27 +23,17 @@ public class SmokeScreen extends Obstacle {
         this.getChildren().addAll(ball, label);
     }
 
-
     @Override
     public void move(double dt) {
         super.move(dt);
     }
-
     @Override
     public void bounce(HitBox hitBox) {
         //TODO
     }
-
     @Override
-    protected void setX(double x) {
-        this.getChildren().get(0).setLayoutX(x);
-        getCoordinate().setX(x);
+    public void allign() {
+        this.getChildren().get(0).setLayoutX(getCoordinate().getX());
+        this.getChildren().get(0).setLayoutX(getCoordinate().getY());
     }
-
-    @Override
-    protected void setY(double y) {
-        this.getChildren().get(0).setLayoutX(y);
-        getCoordinate().setX(y);
-    }
-
 }

@@ -1,7 +1,6 @@
 package com.example.bulletbattleground.game;
 
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
-import com.example.bulletbattleground.gameObjects.projectiles.Bullet;
 import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.Vector;
 import javafx.animation.Animation;
@@ -46,18 +45,17 @@ public class Game extends Scene {
     private boolean printCoordinate = false;
     Label mouseCoordinatesLabel = new Label();
     private ProgressBar healthBar = new ProgressBar();
-   // Label Velocity = new Label("  Velocity: ");
-    //Label Kenetics = new Label("  Kinetics: ");
-   // Projectile projectile = level.map.activeProjectile;
+
+
     public Game(Level level) {
         super(level);
-
 
         Button pausebtn = new Button("Pause");
         pausebtn.setOnAction(new pauseEvent());
         pausebtn.setPrefWidth(250);
         pausebtn.setPrefHeight(20);
         level.getChildren().add(pausebtn);
+
         //TODO add this to fxml and handle click
 
         this.level = level;
@@ -71,7 +69,7 @@ public class Game extends Scene {
 
         timeline = new Timeline(new KeyFrame(Duration.millis(1), e
                 -> {
-            time = time + (1.0 / tickRate);
+            time += (1.0 / tickRate);
             tick(1.0 / tickRate);
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);
@@ -134,8 +132,6 @@ public class Game extends Scene {
             mouseCoordinatesLabel.setText(" Mouse coordinates: " + angle + "  Degrees  ");
             level.headsUpDisplay.getChildren().add(healthBar);
             healthBar.setMaxSize(100,100);
-            healthBar.setStyle("-fx-accent: red; -fx-progress-bar-indeterminate-fill: red;");
-            healthBar.setProgress(level.selectedFighter.health);
 
             level.trajectoryLine.setStartX(0);
             level.trajectoryLine.setStartY(0);
@@ -183,8 +179,12 @@ public class Game extends Scene {
                 isTicking = true;
                 timeline.play();
             }else{
+                //Debug
+                Object variableOfInterest = level.map.activeProjectile;
+                //----------------
                 timeline.pause();
                 isTicking = false;
+
             }
         }
     }
