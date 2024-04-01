@@ -59,7 +59,8 @@ public class Game extends Scene {
         pausebtn.setOnAction(new pauseEvent());
         pausebtn.setPrefWidth(250);
         pausebtn.setPrefHeight(20);
-        level.getChildren().add(pausebtn);
+        pausebtn.setLayoutX(900);
+        ((AnchorPane)level.getChildren().get(0)).getChildren().add(pausebtn);
 
         //TODO add this to fxml and handle click
 
@@ -131,9 +132,9 @@ public class Game extends Scene {
             Vector direction = new Vector(level.trajectoryLine.getEndX() - level.trajectoryLine.getStartX(), level.trajectoryLine.getEndY() - level.trajectoryLine.getStartY());
             System.out.println("Mouse coordinates:" + (-direction.angle()));
             double angle = 180 -  direction.angle() ;
-            level.getHeadsUpDisplay().getChildren().add(mouseCoordinatesLabel);
+            //level.getHeadsUpDisplay().getChildren().add(mouseCoordinatesLabel);
             mouseCoordinatesLabel.setText(" Mouse coordinates: " + angle + "  Degrees  ");
-            level.getHeadsUpDisplay().getChildren().add(healthBar);
+            //level.getHeadsUpDisplay().getChildren().add(healthBar);
             healthBar.setMaxSize(100,100);
 
             level.trajectoryLine.setStartX(0);
@@ -161,13 +162,11 @@ public class Game extends Scene {
                     clickNb.getAndIncrement();
                     System.out.println(clickNb);
                     System.out.println("Fighter selected"); //TODO remove this in final code
-                    level.getHeadsUpDisplay().getChildren().clear();
                     level.selectedFighter = (Ally) fighter;
                     level.origin = new Coordinate(
                             level.selectedFighter.getCoordinate().getX() + level.selectedFighter.getWidth() / 2
                             , level.selectedFighter.getCoordinate().getY() - level.selectedFighter.getHeight() / 2);
                     level.selectedFighter.setStroke(Color.CYAN);
-                    level.getHeadsUpDisplay().getChildren().add(fighter.headsUpDisplay());
                 });
             }
         }

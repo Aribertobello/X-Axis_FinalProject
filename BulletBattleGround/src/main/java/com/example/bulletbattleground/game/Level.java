@@ -67,7 +67,7 @@ public class Level extends AnchorPane {
     protected boolean dragging = false;
 
     public Mapp map;
-    
+
     protected Line trajectoryLine = new Line();//TODO
 
     protected Coordinate origin;
