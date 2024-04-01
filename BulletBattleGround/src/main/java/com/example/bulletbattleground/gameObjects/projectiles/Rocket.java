@@ -33,17 +33,13 @@ public class Rocket extends Projectile {
 
     @Override
     public void move(double time) {
-
-
+        forces.clear();
         if (getCoordinate().getY() < -20) {
             setCoordinate(new Coordinate(dropZone, 1));
             setVelocity(new Vector(0, 50));
-            forces.clear();
         } else if (getCoordinate().getX() != dropZone) {
             setVelocity(new Vector(0, -50));
-            forces.clear();
         }
-
         align();
         super.move(time);
     }

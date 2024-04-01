@@ -72,9 +72,4 @@ public class Spear extends Projectile {
         spear.setLayoutX(pivotX);
         spear.setLayoutY(pivotY);
     }
-
-    public double setRotate(){
-      return velocity().angle();
-    }
-
 }

@@ -25,9 +25,12 @@ public class FileManager {
 
     public static Level defaultLevelPvc() {
         Mapp map = defaultMapPvc();
-        return new Level(map, "pvp");
+        try {
+            return new Level(map, "pvp");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
-
     public static Mapp defaultMapPvc() {
         Mapp map = new Mapp("earth");
         //map.addObstacle(new SmokeScreen(40,500,600));
@@ -39,7 +42,11 @@ public class FileManager {
 
     public static Level defaultLevelPvp() {
         Mapp map = defaultMapPvp();
-        return new Level(map, "pvp");
+        try {
+            return new Level(map, "pvp");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static Mapp defaultMapPvp() {
@@ -53,7 +60,12 @@ public class FileManager {
 
     public static Level defaultLevelPve() {
         Mapp map = defaultMapPve();
-        Level level = new Level(map, "pve");
+        Level level = null;
+        try {
+            level = new Level(map, "pve");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return level;
     }
 
@@ -64,7 +76,7 @@ public class FileManager {
         map.addObstacle(new SpaceShip(20, 900, 600));
         map.addObstacle(new SpaceShip(-30, 1300, 800));
         map.addObstacle(new SpaceShip(25, 400, 100));
-        map.addObstacle(new SpaceShip(0, 200, 500));
+        map.addObstacle(new SpaceShip(-5, 200, 500));
         return map;
     }
 
