@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane fx:id="container" prefHeight="994.0" prefWidth="1403.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bulletbattleground.game.Level">
+    <Pane fx:id="headsUpDisplay" layoutY="888.0" prefHeight="108.0" prefWidth="1403.0" style="-fx-background-color: #76827a;">
+        <Label fx:id="activeProjectileLabel" layoutX="14.0" layoutY="6.0" text="active proj" />
+        <Label fx:id="angleLabel" layoutX="88.0" layoutY="6.0" text="angle" />
+        <Label fx:id="KELabel" layoutX="136.0" layoutY="6.0" text="KE" />
+        <Label fx:id="blankLabel" layoutX="197.0" layoutY="6.0" text="blank" />
+        <ProgressBar fx:id="healthProgressbar" layoutX="1.0" layoutY="69.0" prefWidth="200.0" progress="0.0" />
+        <Label fx:id="healthLabel" layoutX="87.0" layoutY="52.0" text="health" />
+    </Pane>
+    <MenuBar fx:id="topMenu" style="-fx-background-color: #76827a;">
+      <menus>
+          <Menu fx:id="exitButton" mnemonicParsing="false" text="Exit">
+              <items>
+                  <MenuItem mnemonicParsing="false" text="Close" />
+              </items>
+          </Menu>
+          <Menu fx:id="settingsButton" mnemonicParsing="false" text="Settings">
+              <items>
+                  <MenuItem mnemonicParsing="false" text="Delete" />
+              </items>
+          </Menu>
+          <Menu fx:id="pauseButton" mnemonicParsing="false" text="pause">
+              <items>
+                  <MenuItem mnemonicParsing="false" text="About" />
+              </items>
+          </Menu>
+      </menus>
+        <rotationAxis>
+          <Point3D />
+        </rotationAxis>
+    </MenuBar>
+</AnchorPane>

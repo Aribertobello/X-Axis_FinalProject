@@ -20,4 +20,6 @@ module com.example.bulletbattleground {
     opens com.example.bulletbattleground.gameObjects.obstacles to javafx.fxml;
     exports com.example.bulletbattleground.gameObjects.Loot;
     opens com.example.bulletbattleground.gameObjects.Loot to javafx.fxml;
+    exports com.example.bulletbattleground.controllers;
+    opens com.example.bulletbattleground.controllers to javafx.fxml;
 }
