@@ -66,11 +66,8 @@ public class Level extends AnchorPane {
     @Setter
     protected boolean dragging = false;
 
-    protected Mapp map;
-
-
-    // Label angleLabel = new Label("Angle: " + AngleCalculation);
-
+    public Mapp map;
+    
     protected Line trajectoryLine = new Line();//TODO
 
     protected Coordinate origin;

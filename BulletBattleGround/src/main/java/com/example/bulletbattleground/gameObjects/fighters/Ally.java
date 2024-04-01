@@ -71,5 +71,6 @@ public class Ally extends Fighter {
         System.out.println(projectile.netForce().magnitude());
         System.out.println(projectile.netForce().angle());
 
+
     }
 }
