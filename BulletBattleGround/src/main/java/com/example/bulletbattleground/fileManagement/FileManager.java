@@ -115,11 +115,7 @@ public class FileManager {
             try {
                 if (line.startsWith("Username: ")) {
                     String storedUsername = line.substring("Username: ".length());
-                    if (storedUsername.equals(username)) {
-                        matchingUserName = true;
-                    } else {
-                        matchingUserName = false;
-                    }
+                    matchingUserName = storedUsername.equals(username);
                 } else if (line.startsWith("Password: ") && matchingUserName) { //Makes sure that the password matches with the correct username
                     String storedPassword = line.substring("Password: ".length());
                     if (storedPassword.equals(Password)) {
