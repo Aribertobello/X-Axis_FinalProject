@@ -11,7 +11,7 @@
 
 <AnchorPane fx:id="container" prefHeight="994.0" prefWidth="1403.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bulletbattleground.game.Level">
     <Pane fx:id="headsUpDisplay" layoutY="888.0" prefHeight="108.0" prefWidth="1403.0" style="-fx-background-color: #76827a;">
-        <Label fx:id="activeProjectileLabel" layoutX="14.0" layoutY="6.0" text="active proj" />
+            <Label fx:id="activeProjectileLabel" layoutX="14.0" layoutY="6.0" text="active proj" />
         <Label fx:id="angleLabel" layoutX="88.0" layoutY="6.0" text="angle" />
         <Label fx:id="KELabel" layoutX="136.0" layoutY="6.0" text="KE" />
         <Label fx:id="blankLabel" layoutX="197.0" layoutY="6.0" text="blank" />

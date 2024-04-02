@@ -66,7 +66,7 @@ public class MainMenuController {
     public void player_player_btn_clicked(ActionEvent event){
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         try{
-            BattleGround.activeGame = new Game(FileManager.defaultLevelPve());
+            BattleGround.activeGame = new Game(FileManager.defaultLevelPvp());
         }catch(IOException e){
             e.printStackTrace();
         }

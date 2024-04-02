@@ -5,14 +5,11 @@ import com.example.bulletbattleground.gameObjects.Loot.Loot;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
 import com.example.bulletbattleground.utility.Coordinate;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.stage.Screen;
@@ -74,34 +71,47 @@ public class Level extends AnchorPane {
 
     protected Ally selectedFighter;
 
-    protected String type;
+    protected int type;
 
     static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
 
 
-
-
-
-    protected void update(double dt) {
+    protected boolean[] update(double dt) {
         map.setPrefWidth(((Stage) this.getScene().getWindow()).getWidth());
         headsUpDisplay.setPrefWidth(((Stage) this.getScene().getWindow()).getWidth());
-        map.update(dt);
+        if(map.update(dt)){
+            switch(type) {
+                case 0:
+                    if(map.loot==null) return new boolean[]{true, true};
+                    if(map.people.isEmpty()){
+                        return new boolean[]{true, false};
+                    }
+                    break;
+                case 1:
+                    if(map.people.size()==1){
+                        return new boolean[]{true, false};
+                    }
+                    //TODO gameWon or !GameWon
+                    break;
+                case 2:
+                    if(map.people.size()==1){
+                        return new boolean[]{true, false};
+                    }
+                    break;
+            }
+        }
+        return new boolean[]{false,false};
     }
-    public Level(){
-
-    }
-    public Level(Mapp map, String type) throws IOException {
+    public Level(){}
+    public Level(Mapp map, int type) throws IOException {
 
         container = BattleGround.gameLoader().load();
         this.getChildren().add(container);
         headsUpDisplay = (Pane) (container.getChildren().get(0));
         this.type = type;
-        if (this.type.equalsIgnoreCase("pve")) {
+        if (this.type == 0) {
             map.loot = new Loot(screenWidth - 341, 410);
             map.getChildren().add(map.loot);
-        }
-        if (this.type.equalsIgnoreCase("pvp")) {
-            //TODO
         }
         this.map = map;
         container.getChildren().add(this.map);

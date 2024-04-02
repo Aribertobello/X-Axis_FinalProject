@@ -19,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.util.Duration;
@@ -29,7 +30,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Game extends Scene {
 
-    protected Boolean gameOver;
+
+    private double TURN_TIMER_LIMIT = 150;
+    private double PROJ_TIMER_LIMIT = 300;
+
+    protected Boolean gameOver = false;
 
     protected Level level;
 
@@ -41,11 +46,14 @@ public class Game extends Scene {
 
     protected Timeline timeline;
 
-    private double dragStartX, dragStartY;
-
     private boolean dragging = false;
 
     private boolean isTicking;
+    private int turn = 0;
+    private boolean activeTurn = true;
+    private boolean player1turn = true;
+    private double activeTurnTimer = 0;
+    private double projectileTimer = 0;
 
     private boolean printCoordinate = false;
     Label mouseCoordinatesLabel = new Label();
@@ -55,16 +63,15 @@ public class Game extends Scene {
     public Game(Level level) throws IOException {
         super(level);
         this.level = level;
+
         Button pausebtn = new Button("Pause");
         pausebtn.setOnAction(new pauseEvent());
         pausebtn.setPrefWidth(250);
         pausebtn.setPrefHeight(20);
         pausebtn.setLayoutX(900);
-        ((AnchorPane)level.getChildren().get(0)).getChildren().add(pausebtn);
-
+        ((AnchorPane) level.getChildren().get(0)).getChildren().add(pausebtn);
         //TODO add this to fxml and handle click
-
-        isTicking=true;
+        isTicking = true;
     }
 
     public void run() {
@@ -73,16 +80,52 @@ public class Game extends Scene {
 
         timeline = new Timeline(new KeyFrame(Duration.millis(1), e
                 -> {
-            time += (1.0 / tickRate);
-            tick(1.0 / tickRate);
+            double dt = (1.0 / tickRate);
+            time += dt;
+            tick(dt);
+            updateTurns(dt);
+
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
     }
 
-    protected void tick(double dt) {
+    private void updateTurns(double dt) {
+        if(level.map.activeProjectile==null){
+            activeTurn = !activeTurn;
+        }
+        if (activeTurn) {
+            level.map.removeActiveProjectile();
+            projectileTimer = 0;
+            activeTurnTimer += dt;
+            if( activeTurnTimer > TURN_TIMER_LIMIT){
+                player1turn = !player1turn;
+                activeTurn = !activeTurn;
+            }
+        }
+        if (!activeTurn) {
+            activeTurnTimer = 0;
+            projectileTimer += dt;
+            if (projectileTimer > PROJ_TIMER_LIMIT) {
+                activeTurn = !activeTurn;
+            }
+        }
+    }
 
-        level.update(dt);
+    protected void tick(double dt) {
+        updateTurns(dt);
+        boolean[] gameStatus = level.update(dt);
+        gameOver = gameStatus[0];
+        gameWon = gameStatus[1];
+        if(gameOver){
+            timeline.stop();
+            exitGame();
+        }
+    }
+
+    private void exitGame() {
+        //TODO
+        this.setRoot(new Pane(new Label("GAMEOVER")));
     }
 
     protected void handleClick() {
@@ -100,11 +143,10 @@ public class Game extends Scene {
             level.dragging = true;
 
             if (event.getButton() == MouseButton.PRIMARY) {
-                level.trajectoryLine.setStroke(Color.GOLD);
+                level.trajectoryLine.setStroke(Color.GOLD);//TODO ARROW
             }
-
             if (event.getButton() == MouseButton.SECONDARY) {
-                level.trajectoryLine.setStroke(Color.DARKGRAY);
+                level.trajectoryLine.setStroke(Color.DARKGRAY);//TODO ARROW
             }
         });
 
@@ -142,20 +184,24 @@ public class Game extends Scene {
             level.trajectoryLine.setEndX(0);
             level.trajectoryLine.setEndY(0);
 
-            if (event.getButton() == MouseButton.PRIMARY && clickNb.get() > 0) {
-                level.selectedFighter.launchProjectile(level.selectedFighter.loadout.mainWeapon, new Vector(-event.getSceneX() + dragStartX[0], -event.getSceneY() + dragStartY[0]), level.origin);
-                clickNb.set(0);
-            }// TODO -LAUNCH MAIN PROJECTILE
+            if(activeTurn==true){
+                if (event.getButton() == MouseButton.PRIMARY && clickNb.get() > 0 ) {
+                    level.selectedFighter.launchProjectile(
+                            level.selectedFighter.loadout.mainWeapon, new Vector(velocityX, velocityY), level.origin);
+                    clickNb.set(0);
+                }// TODO -LAUNCH MAIN PROJECTILE
 
-            if (event.getButton() == MouseButton.SECONDARY && clickNb.get() > 0) {
-                level.selectedFighter.launchProjectile(level.selectedFighter.loadout.grenades.get(0), new Vector(-event.getSceneX() + dragStartX[0], -event.getSceneY() + dragStartY[0]), level.origin);
-                level.selectedFighter.loadout.grenades.remove(level.selectedFighter.loadout.grenades.get(0));
-                clickNb.set(0);
-            }// TODO -LAUNCH GRENADE
-
+                if (event.getButton() == MouseButton.SECONDARY && clickNb.get() > 0) {
+                    level.selectedFighter.launchProjectile(
+                            level.selectedFighter.loadout.grenades.get(0), new Vector(velocityX, velocityY), level.origin);
+                    level.selectedFighter.loadout.grenades.remove(level.selectedFighter.loadout.grenades.get(0));
+                    clickNb.set(0);
+                }
+                activeTurn=false;
+            }
+            // TODO -LAUNCH GRENADE
             level.dragging = false;
         });
-
         for (Fighter fighter : level.map.people) {
             if (fighter instanceof Ally) {
                 fighter.setOnMousePressed(event -> {
@@ -172,6 +218,8 @@ public class Game extends Scene {
         }
         this.setOnKeyPressed(new pauseEvent());
     }
+
+
     private class pauseEvent implements EventHandler {
         @Override
         public void handle(Event t) {
@@ -184,7 +232,6 @@ public class Game extends Scene {
                 //----------------
                 timeline.pause();
                 isTicking = false;
-
             }
         }
     }

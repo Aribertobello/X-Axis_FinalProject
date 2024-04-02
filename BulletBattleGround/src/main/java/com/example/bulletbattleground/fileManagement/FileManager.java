@@ -26,7 +26,7 @@ public class FileManager {
     public static Level defaultLevelPvc() {
         Mapp map = defaultMapPvc();
         try {
-            return new Level(map, "pvp");
+            return new Level(map, 1);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -43,7 +43,7 @@ public class FileManager {
     public static Level defaultLevelPvp() {
         Mapp map = defaultMapPvp();
         try {
-            return new Level(map, "pvp");
+            return new Level(map, 2);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -62,7 +62,7 @@ public class FileManager {
         Mapp map = defaultMapPve();
         Level level = null;
         try {
-            level = new Level(map, "pve");
+            level = new Level(map, 0);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

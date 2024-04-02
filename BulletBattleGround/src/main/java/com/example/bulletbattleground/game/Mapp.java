@@ -67,33 +67,29 @@ public class Mapp extends Pane {
 
     }
 
-    public void update(double dt) {
+    public boolean update(double dt) {
 
         for (Obstacle obstacle : obstacles) {
             obstacle.move(dt);
         }
-
         if (activeProjectile != null) {
             activeProjectile.move(dt);
             addForces(activeProjectile);
             buffer++;
-
             if (buffer > 50) {
 
                 if (activeProjectile instanceof Grenade) {
-                    checkCollision(activeProjectile);
+
                     if (((Grenade) activeProjectile).getFuseTimer() <= 0) {
                         explosion(activeProjectile.getCoordinate());
                     }
-
-                } else {
-                    checkCollision(activeProjectile);
                 }
+                return checkCollision(activeProjectile);
             }
         } else {
             buffer = 0;
         }
-
+        return false;
     }
 
     public void addFighter(Fighter fighter) {
@@ -123,7 +119,6 @@ public class Mapp extends Pane {
             hitBoxes.add(hitBox);
             getChildren().add(hitBox);
         }
-
 
     }
 
@@ -170,20 +165,18 @@ public class Mapp extends Pane {
 
             if (projectile.hitBox().overlaps(fighter.hitBox())) {
                 fighter.setHealth(fighter.getHealth() - projectile.getDamage());
-                this.getChildren().remove(activeProjectile);
-                activeProjectile = null;
+                removeActiveProjectile();
                 if (fighter.getHealth() <= 0) {
-                    people.remove(fighter);
-                    this.getChildren().remove(fighter);
+                    removeFighter(fighter);
                 }
                 return true;
             }
 
         }
-
         if (loot != null && projectile.hitBox().overlaps(loot.hitBox())) {
-            this.getChildren().remove(loot);
-            loot = null;
+            removeLoot();
+            removeActiveProjectile();
+            return true;
             //TODO Game Won
         }
         return false;
@@ -193,4 +186,18 @@ public class Mapp extends Pane {
         activeProjectile.setVelocity(new Vector(0, 0));
     }
 
+    public void removeActiveProjectile() {
+        if(activeProjectile!=null){
+            this.getChildren().remove(activeProjectile);
+            activeProjectile = null;
+        }
+    }
+    public void removeFighter(Fighter fighter){
+        people.remove(fighter);
+        this.getChildren().remove(fighter);
+    }
+    public void removeLoot(){
+        this.getChildren().remove(loot);
+        loot = null;
+    }
 }
