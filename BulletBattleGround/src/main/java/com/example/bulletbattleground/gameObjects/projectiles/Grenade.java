@@ -15,20 +15,25 @@ import javafx.util.Duration;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Grenade extends Projectile {
 
-    Image explosionEffect1 = new Image("file:1.PNG");
-    Image explosionEffect2 = new Image("file:2.PNG");
-    Image explosionEffect3 = new Image("file:3.PNG");
-    Image explosionEffect4 = new Image("file:4.PNG");
-    Image explosionEffect5 = new Image("file:5.PNG");
-    Image explosionEffect6 = new Image("file:6.PNG");
-    Image explosionEffect7 = new Image("file:7.PNG");
-    Image explosionEffect8 = new Image("file:8.PNG");
+    public Image explosionEffect1 = new Image("file:1.PNG");
+    public Image explosionEffect2 = new Image("file:2.PNG");
+    public Image explosionEffect3 = new Image("file:3.PNG");
+    public Image explosionEffect4 = new Image("file:4.PNG");
+    public Image explosionEffect5 = new Image("file:5.PNG");
+    public Image explosionEffect6 = new Image("file:6.PNG");
+    public Image explosionEffect7 = new Image("file:7.PNG");
+    public Image explosionEffect8 = new Image("file:8.PNG");
 
-    Circle grenade = new Circle(10, Color.PALEGREEN);
+    public Circle grenade = new Circle(10, Color.PALEGREEN);
 
-    Circle explosionCircle = new Circle(20, Color.PALEGREEN);
+    public Circle explosionCircle = new Circle(20, Color.PALEGREEN);
+
+    public boolean animationDone;
 
     public Grenade() {
         fuseTimer = 25.0;
@@ -56,13 +61,15 @@ public class Grenade extends Projectile {
     @Override
     public void move(double time) {
         super.move(time);
-        fuseTimer = fuseTimer - time;
+            fuseTimer = fuseTimer - time;
         explode();
-
     }
 
     public void explode() {
-        if (fuseTimer <= 0.0) {
+
+        if (fuseTimer <= 0.0 ) {
+          //  fuseTimer = Math.sqrt (-1);
+            System.out.println(fuseTimer);
             explosionCircle.setLayoutX(getChildren().get(0).getLayoutX());
             explosionCircle.setLayoutY(getChildren().get(0).getLayoutY());
             this.getChildren().remove(0);
@@ -73,7 +80,16 @@ public class Grenade extends Projectile {
 
     public void explosionAnimation() {
         //TODO create the animation for the explosion with the pictures
-        
+        Image [] explosionEffects = {explosionEffect1, explosionEffect2, explosionEffect3, explosionEffect4, explosionEffect5, explosionEffect6, explosionEffect7, explosionEffect8};
+
+        for (int index = 0; index <8; index++){
+            explosionCircle.setFill(new ImagePattern(explosionEffects[index]));
+
+            if(index > 8){ //TODO CHANGE THIS WHOLE THING
+                this.getChildren().remove(explosionCircle);
+            }
+        }
+
     }
 
 
