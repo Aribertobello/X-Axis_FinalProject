@@ -19,6 +19,9 @@ public class Coordinate {
         setX(x+ vector.getX());
         setY(y+ vector.getY());
     }
+    public Coordinate move(Vector vector){
+        return new Coordinate(x+ vector.getX(),y+ vector.getY());
+    }
     public double distance(Coordinate coordinate) {
         return distanceVector(coordinate).magnitude();
     }

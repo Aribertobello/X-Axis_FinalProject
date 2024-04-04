@@ -1,8 +1,10 @@
 package com.example.bulletbattleground.game;
 
 import com.example.bulletbattleground.game.Loadout;
+import com.example.bulletbattleground.gameObjects.projectiles.Rocket;
 import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.HitBox;
+import com.example.bulletbattleground.utility.Vector;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -45,6 +47,7 @@ public class Fighter extends Rectangle {
         hitBox();
     }
 
+
     public HitBox hitBox() { //This is a clone method????
         return new HitBox(this);
     }
@@ -52,4 +55,9 @@ public class Fighter extends Rectangle {
     public HBox headsUpDisplay() {
         return this.loadout.display();
     }
+
+    public void launchProjectile(Projectile projectile, Vector velocity, Coordinate coordinate) {
+    }
+
+
 }

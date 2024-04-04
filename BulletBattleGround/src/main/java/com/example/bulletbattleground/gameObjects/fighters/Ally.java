@@ -20,9 +20,9 @@ public class Ally extends Fighter {
         super(coordinateX, coordinateY, type);
         Image ally_Image = new Image("file:Light_Class_Img.png");
         this.setFill(new ImagePattern(ally_Image));
-        setHealth(2);
+        setHealth(20);
     }
-
+    @Override
     public void launchProjectile(Projectile projectile, Vector velocity, Coordinate coordinate) {
         projectile.release(velocity, new Coordinate(coordinate.getX(), coordinate.getY()));
         ((Mapp) getParent()).addForces(projectile);
