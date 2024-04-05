@@ -28,12 +28,8 @@ public class Bullet extends Projectile {
 
     @Override
     public void bounce(HitBox hitBox) {
-
-
         System.out.println(velocity().angle());
         System.out.println(velocity());
-
-
     }
 
     @Override
