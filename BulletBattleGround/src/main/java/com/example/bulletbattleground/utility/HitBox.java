@@ -76,19 +76,42 @@ public class HitBox extends Group {
             }
         }
         if (obstacle instanceof SpaceShip) {
-            double height = 80;
-            double thickness = 40;
-            for (int i = 1; i < thickness; i++) {
-                points.add(new Coordinate(center.getX() - thickness / 2 + i, center.getY() - height / 2));
-            }
-            for (int i = 0; i < height + 1; i++) {
-                points.add(new Coordinate(center.getX() + thickness / 2, center.getY() - height / 2 + i));
-            }
-            for (int i = 1; i < thickness; i++) {
-                points.add(new Coordinate(center.getX() + thickness / 2 - i, center.getY() + height / 2));
-            }
-            for (int i = 0; i < height + 1; i++) {
-                points.add(new Coordinate(center.getX() - thickness / 2, center.getY() + height / 2 - i));
+            int height = (int) SpaceShip.DEFAULT_HEIGHT;
+            int thickness = (int) SpaceShip.DEFAULT_WIDTH;
+
+            if(obstacle.getVelocityY()>0) {
+
+                for (int i = 1; i < thickness; i++) {
+                    points.add(new Coordinate(center.getX() + thickness / 2 - i, center.getY() + height / 2 + 25 - 25.0 * i / 40.0));
+                }
+                for (int i = 0; i < height - 10 + 1; i++) {
+                    points.add(new Coordinate(center.getX() - thickness / 2, center.getY() + height / 2 - i));
+                }
+                for (int i = height - 10; i < height; i++) {
+                    points.add(new Coordinate(center.getX() - thickness / 2 - i + height - 10, center.getY() + height / 2 - i));
+                }
+                for (int i = 1; i < thickness; i++) {
+                    points.add(new Coordinate(center.getX() - thickness / 2 + i, center.getY() - height / 2));
+                }
+                for (int i = 0; i < height + 1; i++) {
+                    points.add(new Coordinate(center.getX() + thickness / 2, center.getY() - height / 2 + i));
+                }
+            } else {
+                for (int i = 1; i < thickness; i++) {
+                    points.add(new Coordinate(center.getX() - thickness / 2 + i, center.getY() - height / 2 - 25 + 25.0 * i / 40.0));
+                }
+                for (int i = 0; i < height - 10 + 1; i++) {
+                    points.add(new Coordinate(center.getX() + thickness / 2, center.getY() - height / 2 + i));
+                }
+                for (int i = height - 10; i < height; i++) {
+                    points.add(new Coordinate(center.getX() + thickness / 2 + i - height + 10, center.getY() - height / 2 + i));
+                }
+                for (int i = 1; i < thickness; i++) {
+                    points.add(new Coordinate(center.getX() + thickness / 2 - i, center.getY() + height / 2));
+                }
+                for (int i = 0; i < height + 1; i++) {
+                    points.add(new Coordinate(center.getX() - thickness / 2, center.getY() + height / 2 - i));
+                }
             }
         }
         border = new Polygon();

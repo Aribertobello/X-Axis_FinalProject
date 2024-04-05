@@ -46,6 +46,10 @@ public abstract class MovingBody extends Group {
     public double momentum() {
         return mass * velocity().magnitude();
     }
+    public void setCoordinate(double x, double y){
+        coordinate.setX(x);
+        coordinate.setY(y);
+    }
 
     public abstract void move(double dt);
 
@@ -84,7 +88,7 @@ public abstract class MovingBody extends Group {
         double p2 = b.momentum();
         double eDissipated = 0;
         double eFinal = k1 + k2 - eDissipated;
-        double v1 = (-sqrt(2 * eFinal * pow(m1, 2) + 2 * eFinal * m2 * m1 - m1 * pow(p1, 2) - m1 * pow(p2, 2) - 2 * m1 * p1 * p2) / sqrt(m2) + (m1 * p1) / m2 + (m1 * p2) / m2) / (pow(m1, 2) / m2 + m1);
+        double v1 = (sqrt(2 * eFinal * pow(m1, 2) + 2 * eFinal * m2 * m1 - m1 * pow(p1, 2) - m1 * pow(p2, 2) - 2 * m1 * p1 * p2) / sqrt(m2) + (m1 * p1) / m2 + (m1 * p2) / m2) / (pow(m1, 2) / m2 + m1);
         double v2 = (p1+p2-m1*v1)/m1;
         a.getCoordinate().displace(aReflexion.unitVector());
         a.setVelocityX(aReflexion.scale(v1).getX());
@@ -94,6 +98,7 @@ public abstract class MovingBody extends Group {
         a.bounce(b.hitBox());
         b.bounce(a.hitBox());
     }
+
 }
 
 

@@ -14,13 +14,13 @@ import javafx.scene.paint.ImagePattern;
 
 import java.util.HashMap;
 
-public class Ally extends Fighter implements BattleGroundObject {
+public class Ally extends Fighter {
 
     public Ally(int coordinateX, int coordinateY, int type) {
         super(coordinateX, coordinateY, type);
         Image ally_Image = new Image("file:Light_Class_Img.png");
         this.setFill(new ImagePattern(ally_Image));
-        setHealth(20);
+        setHealth(20000);
     }
 
     public void launchProjectile(Projectile projectile, Vector velocity, Coordinate coordinate) {
@@ -70,6 +70,7 @@ public class Ally extends Fighter implements BattleGroundObject {
         System.out.println("added projectile to scene"); //TODO Remove in final code
         System.out.println(projectile.netForce().magnitude());
         System.out.println(projectile.netForce().angle());
+
 
     }
 }

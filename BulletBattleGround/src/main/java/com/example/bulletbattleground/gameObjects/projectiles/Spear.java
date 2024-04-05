@@ -56,16 +56,4 @@ public class Spear extends Projectile {
         //Rotate();
     }
 
-  /*  public void Rotate(){
-        double angle = velocity().angle();
-        double pivotX = getCoordinate().getX();
-        double pivotY = getCoordinate().getY();
-        System.out.println(pivotX+", "+pivotY+"   : "+(-angle));
-        spear.getTransforms().add(new Rotate(angle,pivotX,pivotY));
-    }
-*/
-    public double setRotate(){
-      return velocity().angle();
-    }
-
 }

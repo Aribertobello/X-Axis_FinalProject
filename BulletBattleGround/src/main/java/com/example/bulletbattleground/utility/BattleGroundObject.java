@@ -1,5 +1,6 @@
 package com.example.bulletbattleground.utility;
 
 public interface BattleGroundObject {
-    public HitBox hitBox();
+    HitBox hitBox();
+    void allign();//TODO implement allign in all objects;
 }

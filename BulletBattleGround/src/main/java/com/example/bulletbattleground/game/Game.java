@@ -1,5 +1,6 @@
 package com.example.bulletbattleground.game;
 
+import com.example.bulletbattleground.BattleGround;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
 import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.Vector;
@@ -9,17 +10,21 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.util.Duration;
 
 
+import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Game extends Scene {
@@ -47,24 +52,20 @@ public class Game extends Scene {
     private ProgressBar healthBar = new ProgressBar();
 
 
-
-
-    public Game(Level level) {
+    public Game(Level level) throws IOException {
         super(level);
-
-
+        this.level = level;
         Button pausebtn = new Button("Pause");
         pausebtn.setOnAction(new pauseEvent());
         pausebtn.setPrefWidth(250);
         pausebtn.setPrefHeight(20);
-        level.getChildren().add(pausebtn);
+        pausebtn.setLayoutX(900);
+        ((AnchorPane)level.getChildren().get(0)).getChildren().add(pausebtn);
 
         //TODO add this to fxml and handle click
 
-        this.level = level;
         isTicking=true;
     }
-
 
     public void run() {
         handleClick();
@@ -72,7 +73,7 @@ public class Game extends Scene {
 
         timeline = new Timeline(new KeyFrame(Duration.millis(1), e
                 -> {
-            time = time + (1.0 / tickRate);
+            time += (1.0 / tickRate);
             tick(1.0 / tickRate);
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);
@@ -131,9 +132,9 @@ public class Game extends Scene {
             Vector direction = new Vector(level.trajectoryLine.getEndX() - level.trajectoryLine.getStartX(), level.trajectoryLine.getEndY() - level.trajectoryLine.getStartY());
             System.out.println("Mouse coordinates:" + (-direction.angle()));
             double angle = 180 -  direction.angle() ;
-            level.headsUpDisplay.getChildren().add(mouseCoordinatesLabel);
+            //level.getHeadsUpDisplay().getChildren().add(mouseCoordinatesLabel);
             mouseCoordinatesLabel.setText(" Mouse coordinates: " + angle + "  Degrees  ");
-            level.headsUpDisplay.getChildren().add(healthBar);
+            //level.getHeadsUpDisplay().getChildren().add(healthBar);
             healthBar.setMaxSize(100,100);
 
             level.trajectoryLine.setStartX(0);
@@ -161,29 +162,29 @@ public class Game extends Scene {
                     clickNb.getAndIncrement();
                     System.out.println(clickNb);
                     System.out.println("Fighter selected"); //TODO remove this in final code
-                    level.headsUpDisplay.getChildren().clear();
                     level.selectedFighter = (Ally) fighter;
                     level.origin = new Coordinate(
                             level.selectedFighter.getCoordinate().getX() + level.selectedFighter.getWidth() / 2
                             , level.selectedFighter.getCoordinate().getY() - level.selectedFighter.getHeight() / 2);
                     level.selectedFighter.setStroke(Color.CYAN);
-                    level.headsUpDisplay.getChildren().add(fighter.headsUpDisplay());
                 });
             }
         }
         this.setOnKeyPressed(new pauseEvent());
-
     }
     private class pauseEvent implements EventHandler {
-
         @Override
         public void handle(Event t) {
             if(timeline.getStatus() == Animation.Status.PAUSED){
                 isTicking = true;
                 timeline.play();
             }else{
+                //Debug
+                Object variableOfInterest = level.map.activeProjectile;
+                //----------------
                 timeline.pause();
                 isTicking = false;
+
             }
         }
     }
