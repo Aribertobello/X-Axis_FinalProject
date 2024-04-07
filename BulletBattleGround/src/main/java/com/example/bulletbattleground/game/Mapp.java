@@ -47,6 +47,10 @@ public class Mapp extends Pane {
 
     public Vector[] environmentForces = {new Vector(0, 9.8), new Vector(-1, 0)};
 
+    /**
+     *
+     * @param type
+     */
     public Mapp(String type) {
 
         if (type.equalsIgnoreCase("earth")) {
@@ -64,10 +68,15 @@ public class Mapp extends Pane {
             this.getChildren().add(earth);
             this.type = 1;
         }
+        this.getChildren().add(new Circle(2000, 1200, 1));
 
     }
 
-    public void update(double dt) {
+    /**
+     *
+     * @param dt
+     */
+    protected void update(double dt) {
 
         for (Obstacle obstacle : obstacles) {
             obstacle.move(dt);
@@ -96,12 +105,20 @@ public class Mapp extends Pane {
 
     }
 
+    /**
+     *
+     * @param fighter
+     */
     public void addFighter(Fighter fighter) {
         people.add(fighter);
         hitBoxes.add(fighter.hitBox());
         getChildren().add(fighter);
     }
 
+    /**
+     *
+     * @param obstacle
+     */
     public void addObstacle(Obstacle obstacle) {
         obstacles.add(obstacle);
         getChildren().add(obstacle);
@@ -127,6 +144,10 @@ public class Mapp extends Pane {
 
     }
 
+    /**
+     *
+     * @param projectile
+     */
     public void addForces(Projectile projectile) {
 
         if (type == 0) {
@@ -154,6 +175,11 @@ public class Mapp extends Pane {
         }
     }
 
+    /**
+     *
+     * @param projectile
+     * @return
+     */
     public Boolean checkCollision(Projectile projectile) {
 
         for (Obstacle obstacle : obstacles) {
@@ -189,8 +215,11 @@ public class Mapp extends Pane {
         return false;
     }
 
-    public void explosion(Coordinate coordinate) {
+    /**
+     *
+     * @param coordinate
+     */
+    protected void explosion(Coordinate coordinate) {
         activeProjectile.setVelocity(new Vector(0, 0));
     }
-
 }

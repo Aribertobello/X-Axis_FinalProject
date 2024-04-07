@@ -9,6 +9,10 @@ public abstract class Obstacle extends MovingBody implements BattleGroundObject 
 
     protected boolean ispenetrable;
 
+    /**
+     *
+     * @param dt
+     */
     public void move(double dt) {
         setCoordinate(getVelocityX() * dt + getCoordinate().getX(),getVelocityY() * dt + getCoordinate().getY());
     }
