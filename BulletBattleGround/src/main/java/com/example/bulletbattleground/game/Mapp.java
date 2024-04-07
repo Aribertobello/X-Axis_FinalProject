@@ -68,6 +68,7 @@ public class Mapp extends Pane {
             this.getChildren().add(earth);
             this.type = 1;
         }
+        this.getChildren().add(new Circle(2000, 1200, 1));
 
     }
 

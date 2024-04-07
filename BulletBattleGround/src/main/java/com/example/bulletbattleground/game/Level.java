@@ -1,9 +1,15 @@
 package com.example.bulletbattleground.game;
 
 import com.example.bulletbattleground.BattleGround;
+import com.example.bulletbattleground.controllers.GameSceneController;
 import com.example.bulletbattleground.gameObjects.Loot.Loot;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
+import com.example.bulletbattleground.gameObjects.projectiles.Bullet;
 import com.example.bulletbattleground.utility.Coordinate;
+import com.example.bulletbattleground.utility.Vector;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,6 +23,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,8 +42,6 @@ public class Level extends AnchorPane {
     @FXML
     private Label activeProjectileLabel;
 
-    @FXML
-    private Label angleLabel;
 
     @FXML
     private Label KELabel;
@@ -47,27 +52,40 @@ public class Level extends AnchorPane {
     @FXML
     private ProgressBar healthProgressbar;
 
+
     @FXML
     private Label healthLabel;
 
     @FXML
     private MenuBar topMenu;
+    @FXML
+    private Label angleLabel;
+
+
+    @FXML
+    private Menu newGameButton;
 
     @FXML
     private Menu exitButton;
-
+    @FXML
+    private void handleExit(){
+        Platform.exit();
+    }
     @FXML
     private Menu settingsButton;
 
     @FXML
     private Menu pauseButton;
+    @FXML
+    private void handlePause() {
+
+    }
 
     @Getter
     @Setter
     protected boolean dragging = false;
 
     public Mapp map;
-
     protected Line trajectoryLine = new Line();//TODO
 
     protected Coordinate origin;
@@ -84,10 +102,12 @@ public class Level extends AnchorPane {
      */
     protected void update(double dt) {
         map.setPrefWidth(((Stage) this.getScene().getWindow()).getWidth());
-        headsUpDisplay.setPrefWidth(((Stage) this.getScene().getWindow()).getWidth());
         map.update(dt);
+            updateHUD();
+
     }
     public Level(){
+
 
     }
     /**
@@ -96,9 +116,7 @@ public class Level extends AnchorPane {
      * @param type
      */
     public Level(Mapp map, String type) throws IOException {
-        container = BattleGround.gameLoader().load();
-        this.getChildren().add(container);
-        headsUpDisplay = (Pane) (container.getChildren().get(0));
+        LinkElements();
         this.type = type;
         if (this.type.equalsIgnoreCase("pve")) {
             map.loot = new Loot(screenWidth - 341, 410);
@@ -111,9 +129,18 @@ public class Level extends AnchorPane {
         container.getChildren().add(this.map);
         map.toBack();
         this.getChildren().add(trajectoryLine);// TODO arrow
-        headsUpDisplay.setMaxHeight(200);
-        headsUpDisplay.setPrefHeight(200);
-        headsUpDisplay.setMaxWidth(screenWidth);
+    }
+    public void LinkElements() throws IOException {
+        FXMLLoader loader = new FXMLLoader(BattleGround.class.getResource("GameScene.fxml"));
+        this.getChildren().add(loader.load());
+        GameSceneController controller = loader.getController();
+        container = controller.getContainer();
+        headsUpDisplay = controller.getHeadsUpDisplay();
+        angleLabel = controller.getAngleLabel();
+        KELabel = controller.getKELabel();
+        healthLabel = controller.getHealthLabel();
+        healthProgressbar = controller.getHealthProgressbar();
+        activeProjectileLabel = controller.getActiveProjectileLabel();
     }
 
     /**
@@ -122,5 +149,22 @@ public class Level extends AnchorPane {
      */
     protected void displayLoadout(Fighter selectedFighter) {
         //TODO
+    }
+
+    public void updateHUD(){
+        if(trajectoryLine != null && angleLabel != null) {
+            Vector direction = new Vector(trajectoryLine.getEndX() - trajectoryLine.getStartX(), trajectoryLine.getEndY() - trajectoryLine.getStartY());
+            double angle = 180 - direction.angle();
+            angleLabel.setText("Angle: " + angle);
+            System.out.println(angleLabel);
+        }
+        if(map != null && map.activeProjectile != null){
+            KELabel.setText("Kinetic energy: "+ map.getActiveProjectile().kE());
+            System.out.println(KELabel);
+        }
+        if(healthProgressbar != null){
+            healthProgressbar.setProgress(20);
+            healthProgressbar.setStyle("-fx-accent: red; -fx-progress-bar-indeterminate-fill: red;");
+        }
     }
 }

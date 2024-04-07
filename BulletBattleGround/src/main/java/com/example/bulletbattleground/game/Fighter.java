@@ -58,12 +58,4 @@ public class Fighter extends Rectangle {
     public HitBox hitBox() { //This is a clone method????
         return new HitBox(this);
     }
-
-    /**
-     *
-     * @return
-     */
-    public HBox headsUpDisplay() {
-        return this.loadout.display();
-    }
 }

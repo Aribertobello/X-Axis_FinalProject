@@ -42,7 +42,7 @@ public class Loadout {
         }
 
     }
-
+    
     /**
      *
      * @return
