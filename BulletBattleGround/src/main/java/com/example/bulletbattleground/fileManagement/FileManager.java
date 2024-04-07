@@ -19,10 +19,21 @@ public class FileManager {
 
     static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
 
+    /**
+     * Constructs a new FileManager instance with the specified file path.
+     *
+     * @param filePath The path to the file managed by this FileManager.
+     * @throws FileNotFoundException If the file specified by the filePath does not exist.
+     */
     public FileManager(String filePath) throws FileNotFoundException {
         managerFile = new File(filePath);
     }
 
+    /**
+     *Generates the default level for the player vs computer mode
+     * calls the defaultMapPvc to generate the map of the level
+     * @return applications default level for PVC
+     */
     public static Level defaultLevelPvc() {
         Mapp map = defaultMapPvc();
         try {
@@ -31,6 +42,14 @@ public class FileManager {
             throw new RuntimeException(e);
         }
     }
+    /**
+     *generates the default map for player vs computer game mode
+     * map is of type earth
+     * map includes a 12x160 wall at 900,480
+     * map has a player at 200,600 of type 3
+     * map has an opponent at screenWidth - 200,600 of type
+     * @return applications default map for PVC
+     */
     public static Mapp defaultMapPvc() {
         Mapp map = new Mapp("earth");
         //map.addObstacle(new SmokeScreen(40,500,600));
@@ -40,6 +59,11 @@ public class FileManager {
         return map;
     }
 
+    /**
+     *Generates the default level for the player vs player mode
+     * calls the defaultMapPvp to generate the map of the level
+     * @return applications default level for PVP
+     */
     public static Level defaultLevelPvp() {
         Mapp map = defaultMapPvp();
         try {
@@ -49,6 +73,14 @@ public class FileManager {
         }
     }
 
+    /**
+     *generates the default map for player vs computer game mode
+     * map is of type earth
+     * map includes a 12x160 wall at 900,480
+     * map has a player at 200,600 of type 3
+     * map has a player at screenWidth - 200,600 of type 2
+     * @return applications default map for PVC
+     */
     public static Mapp defaultMapPvp() {
         Mapp map = new Mapp("space");
         //map.addObstacle(new SmokeScreen(40,500,600));
@@ -58,6 +90,11 @@ public class FileManager {
         return map;
     }
 
+    /**
+     *Generates the default level for the player vs environment mode
+     * calls the defaultMapPve to generate the map of the level
+     * @return applications default level for PVE
+     */
     public static Level defaultLevelPve() {
         Mapp map = defaultMapPve();
         Level level = null;
@@ -69,6 +106,13 @@ public class FileManager {
         return level;
     }
 
+    /**
+     *generates the default map for player vs environnement game mode
+     * map is of type space
+     * map includes 4 moving spaceships
+     * map has a player at 200,600 of type 1
+     * @return applications default map for PVE
+     */
     public static Mapp defaultMapPve() {
         Mapp map = new Mapp("space");
         //map.addObstacle(new SpaceShip(0, 200, 500));
@@ -86,6 +130,12 @@ public class FileManager {
     public static void createPvCLevel(String file) { //TODO
     }
 
+    /**
+     * Saves user data (username and password) to the file managed by this FileManager.
+     *
+     * @param username The username to be saved.
+     * @param password The password associated with the username.
+     */
     public static void saveUserdata(String username, String password) {
         try {
             FileWriter fileWriter = new FileWriter(managerFile, true); // true for append mode. (means you can add stuff to the text file without overwriting the current data)
@@ -104,6 +154,14 @@ public class FileManager {
         }
     }
 
+    /**
+     * Loads user data from the file managed by this FileManager and checks if the provided username and password match the stored credentials from the player.
+     *
+     * @param username The username to be verified.
+     * @param Password The password to be verified with the correct username.
+     * @return true if the provided username and password match the player's stored credentials, false otherwise.
+     * @throws FileNotFoundException If the file managed by this FileManager is not found.
+     */
     public static boolean loadUserData(String username, String Password) throws FileNotFoundException {
         boolean matchingUserName = false;
         boolean matchingPassWord = false;

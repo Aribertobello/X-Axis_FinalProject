@@ -16,6 +16,12 @@ import java.util.HashMap;
 
 public class Ally extends Fighter {
 
+    /**
+     *
+     * @param coordinateX
+     * @param coordinateY
+     * @param type
+     */
     public Ally(int coordinateX, int coordinateY, int type) {
         super(coordinateX, coordinateY, type);
         Image ally_Image = new Image("file:Light_Class_Img.png");
@@ -23,6 +29,12 @@ public class Ally extends Fighter {
         setHealth(20000);
     }
 
+    /**
+     *
+     * @param projectile
+     * @param velocity
+     * @param coordinate
+     */
     public void launchProjectile(Projectile projectile, Vector velocity, Coordinate coordinate) {
         projectile.release(velocity, new Coordinate(coordinate.getX(), coordinate.getY()));
         ((Mapp) getParent()).addForces(projectile);
