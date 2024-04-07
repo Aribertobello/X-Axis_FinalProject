@@ -48,9 +48,6 @@ public class Game extends Scene {
     private boolean isTicking;
 
     private boolean printCoordinate = false;
-    Label mouseCoordinatesLabel = new Label();
-    private ProgressBar healthBar = new ProgressBar();
-
 
     public Game(Level level) throws IOException {
         super(level);
@@ -60,7 +57,7 @@ public class Game extends Scene {
         pausebtn.setPrefWidth(250);
         pausebtn.setPrefHeight(20);
         pausebtn.setLayoutX(900);
-        ((AnchorPane)level.getChildren().get(0)).getChildren().add(pausebtn);
+        level.getChildren().add(pausebtn);
 
         //TODO add this to fxml and handle click
 
@@ -128,14 +125,6 @@ public class Game extends Scene {
             double velocityX = -event.getSceneX() + dragStartX[0];
 
             double velocityY = -event.getSceneY() + dragStartY[0];
-
-            Vector direction = new Vector(level.trajectoryLine.getEndX() - level.trajectoryLine.getStartX(), level.trajectoryLine.getEndY() - level.trajectoryLine.getStartY());
-            System.out.println("Mouse coordinates:" + (-direction.angle()));
-            double angle = 180 -  direction.angle() ;
-            //level.getHeadsUpDisplay().getChildren().add(mouseCoordinatesLabel);
-            mouseCoordinatesLabel.setText(" Mouse coordinates: " + angle + "  Degrees  ");
-            //level.getHeadsUpDisplay().getChildren().add(healthBar);
-            healthBar.setMaxSize(100,100);
 
             level.trajectoryLine.setStartX(0);
             level.trajectoryLine.setStartY(0);

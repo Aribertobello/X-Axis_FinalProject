@@ -49,7 +49,4 @@ public class Fighter extends Rectangle {
         return new HitBox(this);
     }
 
-    public HBox headsUpDisplay() {
-        return this.loadout.display();
-    }
 }
