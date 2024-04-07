@@ -23,6 +23,12 @@ public class Fighter extends Rectangle {
     @Setter
     protected Coordinate coordinate = new Coordinate(0, 0);
 
+    /**
+     *
+     * @param coordinateX
+     * @param coordinateY
+     * @param type
+     */
     public Fighter(int coordinateX, int coordinateY, int type) {
         super(40, 40);
 
@@ -45,10 +51,18 @@ public class Fighter extends Rectangle {
         hitBox();
     }
 
+    /**
+     *
+     * @return
+     */
     public HitBox hitBox() { //This is a clone method????
         return new HitBox(this);
     }
 
+    /**
+     *
+     * @return
+     */
     public HBox headsUpDisplay() {
         return this.loadout.display();
     }

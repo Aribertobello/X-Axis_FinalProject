@@ -42,6 +42,11 @@ public class User {
 
     private FileManager fileManager;
 
+    /**
+     * Constructor for the User class. Initializes a new instance of FileManager.
+     *
+     * @throws FileNotFoundException If the specified file path is not found.
+     */
     public User() {
         try {
             fileManager = new FileManager("C:\\Users\\aribe\\IdeaProjects\\X-Axis_FinalProject\\Data.txt");
@@ -50,13 +55,19 @@ public class User {
         }
     }
 
+    /**
+     * Handles the login functionality.
+     *
+     * @param event The ActionEvent that triggered the login attempt.
+     * @throws IOException If an error occurs while loading the main menu scene.
+     */
     @FXML
     void Login(ActionEvent event) throws IOException {
 
         username = UserNameTextField.getText();
         password = PassWordTextField.getText();
 
-        if (true/*FileManager.loadUserData(username,password)*/) {
+        if (true/*FileManager.loadUserData(username,password)*/) { //<---TODO remove true from if statement and remove brackets to make login work
             loggedin = true;
         }
 
@@ -75,6 +86,12 @@ public class User {
 
     }
 
+    /**
+     * Handles the sign-up functionality.
+     *
+     * @param event The ActionEvent that triggered the sign-up attempt.
+     * @throws IOException If an error occurs while loading the main menu scene.
+     */
     @FXML
     void SignUp(ActionEvent event) throws IOException {
 

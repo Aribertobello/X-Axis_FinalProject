@@ -46,12 +46,14 @@ public class Game extends Scene {
     private boolean dragging = false;
 
     private boolean isTicking;
-
     private boolean printCoordinate = false;
     Label mouseCoordinatesLabel = new Label();
     private ProgressBar healthBar = new ProgressBar();
 
-
+    /**
+     *
+     * @param level
+     */
     public Game(Level level) throws IOException {
         super(level);
         this.level = level;
@@ -67,6 +69,9 @@ public class Game extends Scene {
         isTicking=true;
     }
 
+    /**
+     *
+     */
     public void run() {
         handleClick();
         System.out.println("wow");
@@ -80,11 +85,18 @@ public class Game extends Scene {
         timeline.play();
     }
 
+    /**
+     *
+     * @param dt
+     */
     protected void tick(double dt) {
 
         level.update(dt);
     }
 
+    /**
+     *
+     */
     protected void handleClick() {
 
         final double[] dragStartX = {0.0};

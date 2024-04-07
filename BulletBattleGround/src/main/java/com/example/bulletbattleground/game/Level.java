@@ -78,10 +78,10 @@ public class Level extends AnchorPane {
 
     static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
 
-
-
-
-
+    /**
+     *
+     * @param dt
+     */
     protected void update(double dt) {
         map.setPrefWidth(((Stage) this.getScene().getWindow()).getWidth());
         headsUpDisplay.setPrefWidth(((Stage) this.getScene().getWindow()).getWidth());
@@ -90,8 +90,12 @@ public class Level extends AnchorPane {
     public Level(){
 
     }
+    /**
+     *
+     * @param map
+     * @param type
+     */
     public Level(Mapp map, String type) throws IOException {
-
         container = BattleGround.gameLoader().load();
         this.getChildren().add(container);
         headsUpDisplay = (Pane) (container.getChildren().get(0));
@@ -112,6 +116,10 @@ public class Level extends AnchorPane {
         headsUpDisplay.setMaxWidth(screenWidth);
     }
 
+    /**
+     *
+     * @param selectedFighter
+     */
     protected void displayLoadout(Fighter selectedFighter) {
         //TODO
     }
