@@ -96,9 +96,10 @@ public class Level extends AnchorPane {
 
     static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
 
-
-
-
+    /**
+     *
+     * @param dt
+     */
     protected void update(double dt) {
         map.setPrefWidth(((Stage) this.getScene().getWindow()).getWidth());
         map.update(dt);
@@ -109,9 +110,13 @@ public class Level extends AnchorPane {
 
 
     }
+    /**
+     *
+     * @param map
+     * @param type
+     */
     public Level(Mapp map, String type) throws IOException {
         LinkElements();
-
         this.type = type;
         if (this.type.equalsIgnoreCase("pve")) {
             map.loot = new Loot(screenWidth - 341, 410);
@@ -138,11 +143,13 @@ public class Level extends AnchorPane {
         activeProjectileLabel = controller.getActiveProjectileLabel();
     }
 
-
+    /**
+     *
+     * @param selectedFighter
+     */
     protected void displayLoadout(Fighter selectedFighter) {
         //TODO
     }
-
 
     public void updateHUD(){
         if(trajectoryLine != null && angleLabel != null) {
@@ -159,9 +166,5 @@ public class Level extends AnchorPane {
             healthProgressbar.setProgress(20);
             healthProgressbar.setStyle("-fx-accent: red; -fx-progress-bar-indeterminate-fill: red;");
         }
-
-
     }
-
-
 }

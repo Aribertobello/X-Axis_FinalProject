@@ -35,6 +35,13 @@ public class BattleGround extends Application {
 
     static protected User user = new User();
 
+    /**
+     * The entry point for the JavaFX application. Initializes the primary stage
+     * and loads the sign-in page scene.
+     *
+     * @param stage The primary stage of the application.
+     * @throws IOException If an error occurs while loading the sign-in page scene.
+     */
     @Override
     public void start(Stage stage) throws IOException {
         Scene MainMenuscene = new Scene(signInPageLoader().load());
@@ -43,6 +50,10 @@ public class BattleGround extends Application {
         stage.show();
     }
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         launch();
     }
