@@ -33,15 +33,7 @@ public class Bullet extends Projectile {
 
     @Override
     public void bounce(HitBox hitBox) {
-
-        double energyDissipated = this.getMass();
-
         System.out.println(velocity().angle());
-        System.out.println(velocity());
-
-        setVelocityX(-getVelocityX());
-
-        System.out.println("new " + velocity().angle());
         System.out.println(velocity());
     }
 
@@ -52,14 +44,8 @@ public class Bullet extends Projectile {
     }
 
     @Override
-    public HitBox hitBox() {
-        return new HitBox(this);
+    public String toString() {
+        return "bullet : "+getCoordinate()+velocity().magnitude();
     }
 
-    @Override
-    public void setCoordinate(Coordinate coordinate) {
-        this.getChildren().get(0).setLayoutX(coordinate.getX());
-        this.getChildren().get(0).setLayoutY(coordinate.getY());
-        super.setCoordinate(coordinate);
-    }
 }

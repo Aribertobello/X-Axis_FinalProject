@@ -19,6 +19,10 @@ public class Coordinate {
         this.x = x;
         this.y = y;
     }
+    public void displace(Vector vector){
+        setX(x+ vector.getX());
+        setY(y+ vector.getY());
+    }
 
     /**
      *

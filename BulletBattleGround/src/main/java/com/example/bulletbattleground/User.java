@@ -3,7 +3,6 @@ package com.example.bulletbattleground;
 import com.example.bulletbattleground.fileManagement.FileManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -78,9 +77,8 @@ public class User {
 
         if (true)/*<---TODO change back to normal login*/ {
             {
-                FXMLLoader fxmlLoader = new FXMLLoader(BattleGround.class.getResource("mainMenuScene.fxml"));
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                Scene mainMenuScene = new Scene(fxmlLoader.load());
+                Scene mainMenuScene = new Scene(BattleGround.mainMenuLoader().load());
                 stage.setScene(mainMenuScene);
                 stage.show();
             }
@@ -106,14 +104,12 @@ public class User {
 
             if (isSignedIn = true) {
                 FileManager.saveUserdata(username, password);
-                FXMLLoader fxmlLoader = new FXMLLoader(BattleGround.class.getResource("mainMenuScene.fxml"));
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                Scene mainMenuScene = new Scene(fxmlLoader.load());
+                Scene mainMenuScene = new Scene(BattleGround.mainMenuLoader().load());
                 stage.setScene(mainMenuScene);
                 stage.show();
             }
 
         }
     }
-
 }

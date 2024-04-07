@@ -1,8 +1,9 @@
 package com.example.bulletbattleground.utility;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-
+@AllArgsConstructor
 public class Vector {
     @Getter
     @Setter
@@ -11,15 +12,6 @@ public class Vector {
     @Setter
     protected double y;
 
-    /**
-     * creates a 2-dimensional vector with coordiantes x and y
-     * @param x the fisrt coordinate of the vector
-     * @param y the second coordinate of the vector
-     */
-    public Vector(double x, double y) {
-        this.x = x;
-        this.y = y;
-    }
 
     /**
      * calculates the magnitude of this Vector object
@@ -58,8 +50,10 @@ public class Vector {
      * @param vector2 vector to be dotted
      * @return dot product of the vectors
      */
-    public static double dotProduct(Vector vector1,Vector vector2) {
-        return vector1.getX() * vector2.getX() + vector1.getY() * vector2.getY();
+    public static double dotProduct(Vector vector1, Vector vector2) {
+        double x = vector1.getX()*vector2.getX();
+        double y = vector1.getY()* vector2.getY();
+        return x+y;
     }
 
     /**
@@ -114,7 +108,7 @@ public class Vector {
      */
     public Vector scale(double magnitude) {
         double scale = magnitude / this.magnitude();
-        return new Vector(x * scale, y * scale);
+        return this.multiply(Math.abs(scale));
     }
 
     /**
@@ -125,6 +119,11 @@ public class Vector {
      */
     public Vector multiply(double scalar) {
         return new Vector(x * scalar, y * scalar);
+    }
+
+    public Vector projectOver(Vector vector){
+        Vector Reflexion = vector.unitVector().multiply(dotProduct(this,vector.unitVector()));
+        return Reflexion;
     }
 
     /**
@@ -152,7 +151,7 @@ public class Vector {
         return '<' +
                 " " + x +
                 ", " + y +
-                '>';
+                " >" ;
     }
 
 }

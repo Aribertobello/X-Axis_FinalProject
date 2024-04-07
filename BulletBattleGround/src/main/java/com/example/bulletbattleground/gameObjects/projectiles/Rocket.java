@@ -30,25 +30,16 @@ public class Rocket extends Projectile {
         this.setMass(9.0);
     }
 
-    @Override
-    public HitBox hitBox() {
-        return new HitBox(this);
-    }
 
     @Override
     public void move(double time) {
-
         forces.clear();
-
         if (getCoordinate().getY() < -20) {
             setCoordinate(new Coordinate(dropZone, 1));
             setVelocity(new Vector(0, 50));
-            forces.clear();
         } else if (getCoordinate().getX() != dropZone) {
             setVelocity(new Vector(0, -50));
-            forces.clear();
         }
-
         align();
         super.move(time);
     }
@@ -56,13 +47,6 @@ public class Rocket extends Projectile {
     @Override
     public void bounce(HitBox hitBox) {
         //TODO
-    }
-
-    @Override
-    public void setCoordinate(Coordinate coordinate) {
-        this.getChildren().get(0).setLayoutX(coordinate.getX());
-        this.getChildren().get(0).setLayoutY(coordinate.getY());
-        super.setCoordinate(coordinate);
     }
 
     public void align() {

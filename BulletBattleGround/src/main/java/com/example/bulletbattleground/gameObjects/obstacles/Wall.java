@@ -19,7 +19,7 @@ public class Wall extends Obstacle {
     @Setter
     int height;
 
-    public Wall(int height, int thickness, int coordinateX, int coordinateY) {
+    public Wall(int height, int thickness, int coordinateX, int coordinateY,int mass) {
         setHeight(height);
         setThickness(thickness);
         Rectangle rectangle = new Rectangle(coordinateX - (double) thickness / 2, coordinateY - (double) height / 2, thickness, height);
@@ -29,11 +29,7 @@ public class Wall extends Obstacle {
         label.setLayoutY(coordinateY);
         this.getChildren().addAll(rectangle, label);
         this.setCoordinate(new Coordinate(coordinateX, coordinateY));
-    }
-
-    @Override
-    public HitBox hitBox() {
-        return new HitBox(this);
+        setMass(mass);
     }
 
     @Override
@@ -47,14 +43,8 @@ public class Wall extends Obstacle {
     }
 
     @Override
-    protected void setX(double x) {
-        ((Rectangle) this.getChildren().get(0)).setX(x - (double) thickness / 2);
-        this.getCoordinate().setX(x);
-    }
-
-    @Override
-    protected void setY(double y) {
-        ((Rectangle) this.getChildren().get(0)).setY(y - (double) height / 2);
-        this.getCoordinate().setY(y);
+    public void allign() {
+        ((Rectangle) this.getChildren().get(0)).setX(getCoordinate().getX() - (double) thickness / 2);
+        ((Rectangle) this.getChildren().get(0)).setY(getCoordinate().getY() - (double) height / 2);
     }
 }

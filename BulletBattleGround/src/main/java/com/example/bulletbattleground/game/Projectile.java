@@ -19,19 +19,17 @@ public abstract class Projectile extends MovingBody {
     @Getter
     protected Vector lift;
 
-    public abstract HitBox hitBox();
 
     /**
      *
      * @param time
      */
     public void move(double time) {
-        getCoordinate().setX((acceleration().getX() / 2) * time * time + getVelocityX() * time + getCoordinate().getX());
-        getCoordinate().setY((acceleration().getY() / 2) * time * time + getVelocityY() * time + getCoordinate().getY());
-        this.setVelocityX((acceleration().getX() * time + getVelocityX()));
-        this.setVelocityY((acceleration().getY() * time + getVelocityY()));
-        this.getChildren().get(0).setLayoutX(getCoordinate().getX());
-        this.getChildren().get(0).setLayoutY(getCoordinate().getY());
+        double x = ((acceleration().getX() / 2) * time * time + getVelocityX() * time + getCoordinate().getX());
+        double y  = ((acceleration().getY() / 2) * time * time + getVelocityY() * time + getCoordinate().getY());
+        this.setVelocityX(acceleration().getX() * time + getVelocityX());
+        this.setVelocityY(acceleration().getY() * time + getVelocityY());
+        setCoordinate(new Coordinate(x,y));
     }
 
     /**
@@ -56,4 +54,15 @@ public abstract class Projectile extends MovingBody {
         setVelocityX(vector.getX());
         setVelocityY(vector.getY());
     }
+    @Override
+    public void setCoordinate(Coordinate coordinate) {
+        this.getChildren().get(0).setLayoutX(coordinate.getX());
+        this.getChildren().get(0).setLayoutY(coordinate.getY());
+        super.setCoordinate(coordinate);
+    }
+    public HitBox hitBox(){
+        hitBox = new HitBox(this);
+        return hitBox;
+    }
+
 }

@@ -1,8 +1,11 @@
 package com.example.bulletbattleground.game;
 
 import com.example.bulletbattleground.gameObjects.Loot.Loot;
+import com.example.bulletbattleground.gameObjects.projectiles.Bullet;
 import com.example.bulletbattleground.gameObjects.projectiles.Grenade;
 import com.example.bulletbattleground.utility.Coordinate;
+import com.example.bulletbattleground.utility.HitBox;
+import com.example.bulletbattleground.utility.MovingBody;
 import com.example.bulletbattleground.utility.Vector;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
@@ -21,15 +24,18 @@ public class Mapp extends Pane {
 
     private int type;
 
-    protected ArrayList<Fighter> people = new ArrayList<Fighter>();
+    protected ArrayList<Fighter> people = new ArrayList<>();
 
-    protected ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
+    protected ArrayList<Obstacle> obstacles = new ArrayList<>();
+    private ArrayList<HitBox> hitBoxes = new ArrayList<>();
+    private Pane hitBoxPane = new Pane();
+
 
     protected int scale;
 
     @Getter
     @Setter
-    protected Projectile activeProjectile;
+    public Projectile activeProjectile;
 
     @Getter
     @Setter
@@ -83,10 +89,9 @@ public class Mapp extends Pane {
             if (buffer > 50) {
 
                 if (activeProjectile instanceof Grenade) {
-
+                    checkCollision(activeProjectile);
                     if (((Grenade) activeProjectile).getFuseTimer() <= 0) {
                         explosion(activeProjectile.getCoordinate());
-                        checkCollision(activeProjectile);
                     }
 
                 } else {
@@ -105,6 +110,7 @@ public class Mapp extends Pane {
      */
     public void addFighter(Fighter fighter) {
         people.add(fighter);
+        hitBoxes.add(fighter.hitBox());
         getChildren().add(fighter);
     }
 
@@ -116,6 +122,26 @@ public class Mapp extends Pane {
         obstacles.add(obstacle);
         getChildren().add(obstacle);
     }
+    public void addHitBox(HitBox hitBox) {
+        boolean exists = false;
+        int i = 0;
+        for (; i < hitBoxes.size() ; i++) {
+            if(hitBox.belongsTo()==hitBoxes.get(i).belongsTo()){
+                exists = true;
+                break;
+            }
+        }
+        if(exists){
+            getChildren().remove(hitBoxes.get(i));
+            hitBoxes.set(i,hitBox);
+            getChildren().add(hitBox);
+        } else {
+            hitBoxes.add(hitBox);
+            getChildren().add(hitBox);
+        }
+
+
+    }
 
     /**
      *
@@ -124,8 +150,8 @@ public class Mapp extends Pane {
     public void addForces(Projectile projectile) {
 
         if (type == 0) {
-            environmentForces[0] = environmentForces[0].multiply(projectile.getMass());
-            environmentForces[1] = environmentForces[1].multiply(projectile.getMass());
+           // environmentForces[0] = environmentForces[0].multiply(projectile.getMass());
+            //environmentForces[1] = environmentForces[1].multiply(projectile.getMass());
         } else {
             projectile.setMass(2000);
             Coordinate earthCenterOfGravity = new Coordinate(earth.getCenterX(), earth.getCenterY());
@@ -146,7 +172,6 @@ public class Mapp extends Pane {
             projectile.forces.add(environmentForces[0]);
             projectile.forces.add(environmentForces[1]);
         }
-
     }
 
     /**
@@ -157,24 +182,12 @@ public class Mapp extends Pane {
     public Boolean checkCollision(Projectile projectile) {
 
         for (Obstacle obstacle : obstacles) {
-
             if (projectile.hitBox().overlaps(obstacle.hitBox())) {
 
-                double m1 = projectile.getMass();
-                double m2 = obstacle.getMass();
-                double k1 = projectile.kE();
-                double k2 = obstacle.kE();
-                double p1 = projectile.momentum();
-                double p2 = obstacle.momentum();
-                double eDisspated = 0;
-                double eFinal = k1 + k2 - eDisspated;
-                double v1 = (-sqrt(2 * eFinal * pow(m1, 2) + 2 * eFinal * m2 * m1 - m1 * pow(p1, 2) - m1 * pow(p2, 2) - 2 * m1 * p1 * p2) / sqrt(m2) + (m1 * p1) / m2 + (m1 * p2) / m2) / (pow(m1, 2) / m2 + m1);
-
-                projectile.setVelocityX(projectile.velocity().scale(v1).getX());
-                projectile.setVelocityY(projectile.velocity().scale(v1).getY());
-                projectile.bounce(obstacle.hitBox());
-                obstacle.bounce(projectile.hitBox());
-
+                MovingBody.collision(projectile,obstacle);
+                HitBox collidedObstacleHitBox = obstacle.hitBox();
+                collidedObstacleHitBox.setDisplayed(true);
+                addHitBox(collidedObstacleHitBox);
                 return true;
             }
         }
