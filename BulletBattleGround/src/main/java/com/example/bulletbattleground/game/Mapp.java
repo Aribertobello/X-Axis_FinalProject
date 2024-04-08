@@ -25,27 +25,22 @@ public class Mapp extends Pane {
     private int type;
 
     protected ArrayList<Fighter> people = new ArrayList<>();
-
     protected ArrayList<Obstacle> obstacles = new ArrayList<>();
     private ArrayList<HitBox> hitBoxes = new ArrayList<>();
     private Pane hitBoxPane = new Pane();
-
-
+    private Vector gravity;
+    private Vector airResistance;
     protected int scale;
 
     @Getter
     @Setter
     public Projectile activeProjectile;
-
     @Getter
     @Setter
     protected int buffer = 0;
-
     protected Loot loot;
-
     protected Circle earth;
-
-    public Vector[] environmentForces = {new Vector(0, 9.8), new Vector(-1, 0)};
+    public Vector[] environmentForces = {gravity,airResistance};
 
     /**
      *
@@ -76,33 +71,34 @@ public class Mapp extends Pane {
      *
      * @param dt
      */
-    protected void update(double dt) {
+    protected boolean update(double dt) {
 
         for (Obstacle obstacle : obstacles) {
             obstacle.move(dt);
-        }
 
+        }
         if (activeProjectile != null) {
+            if(isInBounds(activeProjectile)){
+                removeActiveProjectile();
+                return false;
+            }
             activeProjectile.move(dt);
             addForces(activeProjectile);
             buffer++;
-
             if (buffer > 50) {
 
                 if (activeProjectile instanceof Grenade) {
-                    checkCollision(activeProjectile);
+
                     if (((Grenade) activeProjectile).getFuseTimer() <= 0) {
                         explosion(activeProjectile.getCoordinate());
                     }
-
-                } else {
-                    checkCollision(activeProjectile);
                 }
+                return checkCollision(activeProjectile);
             }
         } else {
             buffer = 0;
         }
-
+        return false;
     }
 
     /**
@@ -110,9 +106,11 @@ public class Mapp extends Pane {
      * @param fighter
      */
     public void addFighter(Fighter fighter) {
+
         people.add(fighter);
         hitBoxes.add(fighter.hitBox());
         getChildren().add(fighter);
+
     }
 
     /**
@@ -123,6 +121,7 @@ public class Mapp extends Pane {
         obstacles.add(obstacle);
         getChildren().add(obstacle);
     }
+
     public void addHitBox(HitBox hitBox) {
         boolean exists = false;
         int i = 0;
@@ -141,7 +140,6 @@ public class Mapp extends Pane {
             getChildren().add(hitBox);
         }
 
-
     }
 
     /**
@@ -151,8 +149,8 @@ public class Mapp extends Pane {
     public void addForces(Projectile projectile) {
 
         if (type == 0) {
-           // environmentForces[0] = environmentForces[0].multiply(projectile.getMass());
-            //environmentForces[1] = environmentForces[1].multiply(projectile.getMass());
+            environmentForces[0] = new Vector(0,9.8).multiply(projectile.getMass());
+            environmentForces[1] = projectile.velocity().unitVector().multiply(2);
         } else {
             projectile.setMass(2000);
             Coordinate earthCenterOfGravity = new Coordinate(earth.getCenterX(), earth.getCenterY());
@@ -165,14 +163,9 @@ public class Mapp extends Pane {
             environmentForces[1] = new Vector(-0.00, 0);
             projectile.setLift(new Vector(0, 0));
         }
-
-        if (projectile.forces.size() >= 3) {
-            projectile.forces.set(1, environmentForces[0]);
-            projectile.forces.set(2, environmentForces[1]);
-        } else {
+            projectile.forces.clear();
             projectile.forces.add(environmentForces[0]);
             projectile.forces.add(environmentForces[1]);
-        }
     }
 
     /**
@@ -186,9 +179,9 @@ public class Mapp extends Pane {
             if (projectile.hitBox().overlaps(obstacle.hitBox())) {
 
                 MovingBody.collision(projectile,obstacle);
-                HitBox collidedObstacleHitBox = obstacle.hitBox();
-                collidedObstacleHitBox.setDisplayed(true);
-                addHitBox(collidedObstacleHitBox);
+                //HitBox collidedObstacleHitBox = obstacle.hitBox();
+                //collidedObstacleHitBox.setDisplayed(true);
+                //addHitBox(collidedObstacleHitBox);
                 return true;
             }
         }
@@ -196,20 +189,18 @@ public class Mapp extends Pane {
 
             if (projectile.hitBox().overlaps(fighter.hitBox())) {
                 fighter.setHealth(fighter.getHealth() - projectile.getDamage());
-                this.getChildren().remove(activeProjectile);
-                activeProjectile = null;
+                removeActiveProjectile();
                 if (fighter.getHealth() <= 0) {
-                    people.remove(fighter);
-                    this.getChildren().remove(fighter);
+                    removeFighter(fighter);
                 }
                 return true;
             }
 
         }
-
         if (loot != null && projectile.hitBox().overlaps(loot.hitBox())) {
-            this.getChildren().remove(loot);
-            loot = null;
+            removeLoot();
+            removeActiveProjectile();
+            return true;
             //TODO Game Won
         }
         return false;
@@ -221,5 +212,24 @@ public class Mapp extends Pane {
      */
     protected void explosion(Coordinate coordinate) {
         activeProjectile.setVelocity(new Vector(0, 0));
+    }
+    private boolean isInBounds(MovingBody body) {
+        double x = body.getCoordinate().getX();
+        double y = body.getCoordinate().getY();
+        return x < -50 || x > 2000 || y < -50 || y > 900;
+    }
+    public void removeActiveProjectile() {
+        if(activeProjectile!=null){
+            this.getChildren().remove(activeProjectile);
+            activeProjectile = null;
+        }
+    }
+    public void removeFighter(Fighter fighter){
+        people.remove(fighter);
+        this.getChildren().remove(fighter);
+    }
+    public void removeLoot(){
+        this.getChildren().remove(loot);
+        loot = null;
     }
 }

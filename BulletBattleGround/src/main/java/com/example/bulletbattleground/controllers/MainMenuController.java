@@ -15,29 +15,17 @@ import java.io.IOException;
 public class MainMenuController {
 
     @FXML
-    private Button player_computer_btn;
-
-    @FXML
-    private Button player_environ_btn;
-
-    @FXML
-    private Button player_player_btn;
-
     private Button educationModebtn;
-
     @FXML
     private Button freeplayBtn;
-
+    @FXML
     private Button playbtn;
-
     private Button EXITBTN;
-
     private Button MAINMENUBTN;
 
     /**
      * @param event Action event for a button to create new scene for player vs computer Game mode.
      */
-
     public void player_computer_btn_clicked(ActionEvent event)  {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         try{
@@ -50,6 +38,7 @@ public class MainMenuController {
         stage.show();
         BattleGround.activeGame.run();
     }
+
     /**
      * @param event Action event for a button to create new scene for player vs environment game mode.
      */
@@ -67,7 +56,7 @@ public class MainMenuController {
     }
 
     /**
-     *@param e Action handler for a button to create new scene for player vs player game mode.
+     *@param event Action handler for a button to create new scene for player vs player game mode.
      */
     public void player_player_btn_clicked(ActionEvent event){
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -129,8 +118,5 @@ public class MainMenuController {
         stage.setMaximized(true);
         stage.show();
         BattleGround.activeGame.run();
-    }
-
-    public void launchLevelOne(ActionEvent event) {
     }
 }

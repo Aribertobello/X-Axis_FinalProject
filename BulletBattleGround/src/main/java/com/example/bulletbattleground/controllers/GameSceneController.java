@@ -68,9 +68,9 @@ public class GameSceneController {
     @Setter
     @FXML
     private Menu pauseButton;
+
     @FXML
     private void handlePause() {
-
     }
     @FXML
     public void initialize(){

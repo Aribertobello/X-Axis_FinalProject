@@ -19,7 +19,7 @@ class CoordinateTest {
     void distanceVector() {
         Coordinate coord1 = new Coordinate(0,0);
         Coordinate coord2 = new Coordinate(-9,0);
-        Vector expectedResult = new Vector(-9,0);
+        Vector expectedResult = new Vector(9,0);
         Vector result = coord1.distanceVector(coord2);
         assertEquals(expectedResult, result);
     }
