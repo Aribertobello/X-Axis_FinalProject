@@ -14,8 +14,6 @@ public class Computer extends Fighter {
 
     public Computer(int coordinateX, int coordinateY, int type) {
         super(coordinateX, coordinateY, type);
-        //Image Image = new Image("C:\\Users\\aribe\\IdeaProjects\\X-Axis_FinalProject\\BulletBattleGround\\build\\classes\\EnemyImage.png");
-        //this.setFill(new ImagePattern(Image));
     }
 
     protected Vector calculateLaunchAngle() {
@@ -24,6 +22,7 @@ public class Computer extends Fighter {
 
     @Override
     public void launchProjectile(Projectile projectile, Vector velocity, Coordinate coordinate) {
+        //TODO MAKE COMPUTER LAUNCH PROJECTILE ON ITS OWN
         projectile.release(velocity, new Coordinate(coordinate.getX(), coordinate.getY()));
         ((Mapp) getParent()).addForces(projectile);
 
@@ -49,14 +48,6 @@ public class Computer extends Fighter {
             double dropZone = 220+(2*vx*vx*tan*(ax*tan-ay)/(ay*ay));
             ((Rocket)projectile).setDropZone(dropZone);
 
-            /*((Rocket) projectile).setDropZone(
-                    projectile.getCoordinate().getX()
-                            + 2 * Math.pow(projectile.getVelocityX(), 2)
-                            * Math.tan(Math.PI / 180 * projectile.velocity().angle())
-                            * (projectile.acceleration().getX() * Math.tan(Math.PI / 180 * projectile.velocity().angle())
-                            - projectile.acceleration().getY())
-                            / Math.pow(projectile.acceleration().getY(), 2));*/
-
             if (((Rocket) projectile).getDropZone() >= 1915) {
                 ((Rocket) projectile).setDropZone(1915);
             }
@@ -64,13 +55,10 @@ public class Computer extends Fighter {
             if (((Rocket) projectile).getDropZone() <= 5) {
                 ((Rocket) projectile).setDropZone(5);
             }
-
         }
 
         System.out.println("added projectile to scene"); //TODO Remove in final code
         System.out.println(projectile.netForce().magnitude());
         System.out.println(projectile.netForce().angle());
-
-
     }
 }

@@ -35,22 +35,14 @@ public class Game extends Scene {
 
     private double TURN_TIMER_LIMIT = 150;
     private double PROJ_TIMER_LIMIT = 150;
-
     protected Boolean gameOver = false;
-
     protected Level level;
-
     protected Boolean gameWon;
-
     protected Integer tickRate = 100;
-
     protected double time = 0;
-
     protected Timeline timeline;
-
     private boolean dragging = false;
     private boolean activeprojpreviousState = false;
-
     private boolean isTicking;
     private int turn = 0;
     boolean gameStart = false;
@@ -59,11 +51,13 @@ public class Game extends Scene {
     private double activeTurnTimer = 0;
     private double projectileTimer = 0;
 
-    private boolean printCoordinate = false;
-    Label mouseCoordinatesLabel = new Label();
-    private ProgressBar healthBar = new ProgressBar();
 
-
+    /**
+     * creates a game object
+     * since the game class is a child of the Scene Class it inculdes its constructor, where the root must be specified
+     * the root in this case is the level which it will run
+     * @param level the level this game object will run
+     */
     public Game(Level level) throws IOException {
         super(level);
         this.level = level;
@@ -73,11 +67,16 @@ public class Game extends Scene {
         pausebtn.setPrefWidth(250);
         pausebtn.setPrefHeight(20);
         pausebtn.setLayoutX(900);
-        ((AnchorPane) level.getChildren().get(0)).getChildren().add(pausebtn);
+        level.getChildren().add(pausebtn);
+
         //TODO add this to fxml and handle click
         isTicking = true;
     }
 
+    /**
+     * initiates the Game
+     *
+     */
     public void run() {
         handleDragAndShoot();
         timeline = new Timeline(new KeyFrame(Duration.millis(1), e
@@ -90,21 +89,27 @@ public class Game extends Scene {
         timeline.play();
     }
 
+    /**
+     * updates the turns of the players playing the game
+     *
+     * @param dt time increment of the game being ran
+     * @return
+     */
     private boolean updateTurns(double dt) {
-            if((level.map.activeProjectile==null)&&activeprojpreviousState){
-                activeTurn = true;
-                player1turn = !player1turn;
-            }
-
-        if (activeTurn) {
+        if((level.map.activeProjectile==null)&&activeprojpreviousState){
+            activeTurn = true;
+            player1turn = !player1turn;
+        }
+        if(activeTurn) {
             level.map.removeActiveProjectile();
             projectileTimer = 0;
             activeTurnTimer += dt;
-            if( activeTurnTimer > TURN_TIMER_LIMIT){
+            if (activeTurnTimer > TURN_TIMER_LIMIT) {
                 player1turn = !player1turn;
                 activeTurn = false;
             }
         }
+
         if (!activeTurn) {
             activeTurnTimer = 0;
             projectileTimer += dt;
@@ -133,6 +138,10 @@ public class Game extends Scene {
         return player1turn;
     }
 
+    /**
+    *
+    * @param dt
+    */
     protected void tick(double dt) {
         if(gameStart){
             updateTurns(dt);
@@ -201,11 +210,6 @@ public class Game extends Scene {
             double velocityX = -event.getSceneX() + dragStartX[0];
             double velocityY = -event.getSceneY() + dragStartY[0];
 
-            //level.getHeadsUpDisplay().getChildren().add(mouseCoordinatesLabel);
-            //mouseCoordinatesLabel.setText(" Mouse coordinates: " + angle + "  Degrees  ");
-            //level.getHeadsUpDisplay().getChildren().add(healthBar);
-            //healthBar.setMaxSize(100,100);
-
             level.resetTrajectoryLine();
             shoot(event,level.selectedFighter,velocityX,velocityY);
             // TODO -LAUNCH GRENADE
@@ -265,10 +269,6 @@ public class Game extends Scene {
                 });
             }
         }
-    }
-
-    public void storeProjStatus(){
-        //if(activep)
     }
 
     private class pauseEvent implements EventHandler {

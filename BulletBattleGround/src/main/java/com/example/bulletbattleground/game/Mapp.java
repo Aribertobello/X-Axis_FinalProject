@@ -28,27 +28,24 @@ public class Mapp extends Pane {
     protected ArrayList<Obstacle> obstacles = new ArrayList<>();
     private ArrayList<HitBox> hitBoxes = new ArrayList<>();
     private Pane hitBoxPane = new Pane();
-
     private Vector gravity;
     private Vector airResistance;
-
-
     protected int scale;
 
     @Getter
     @Setter
     public Projectile activeProjectile;
-
     @Getter
     @Setter
     protected int buffer = 0;
-
     protected Loot loot;
-
     protected Circle earth;
-
     public Vector[] environmentForces = {gravity,airResistance};
 
+    /**
+     *
+     * @param type
+     */
     public Mapp(String type) {
 
         if (type.equalsIgnoreCase("earth")) {
@@ -66,10 +63,15 @@ public class Mapp extends Pane {
             this.getChildren().add(earth);
             this.type = 1;
         }
+        this.getChildren().add(new Circle(2000, 1200, 1));
 
     }
 
-    public boolean update(double dt) {
+    /**
+     *
+     * @param dt
+     */
+    protected boolean update(double dt) {
 
         for (Obstacle obstacle : obstacles) {
             obstacle.move(dt);
@@ -99,8 +101,10 @@ public class Mapp extends Pane {
         return false;
     }
 
-
-
+    /**
+     *
+     * @param fighter
+     */
     public void addFighter(Fighter fighter) {
 
         people.add(fighter);
@@ -109,10 +113,15 @@ public class Mapp extends Pane {
 
     }
 
+    /**
+     *
+     * @param obstacle
+     */
     public void addObstacle(Obstacle obstacle) {
         obstacles.add(obstacle);
         getChildren().add(obstacle);
     }
+
     public void addHitBox(HitBox hitBox) {
         boolean exists = false;
         int i = 0;
@@ -133,6 +142,10 @@ public class Mapp extends Pane {
 
     }
 
+    /**
+     *
+     * @param projectile
+     */
     public void addForces(Projectile projectile) {
 
         if (type == 0) {
@@ -155,6 +168,11 @@ public class Mapp extends Pane {
             projectile.forces.add(environmentForces[1]);
     }
 
+    /**
+     *
+     * @param projectile
+     * @return
+     */
     public Boolean checkCollision(Projectile projectile) {
 
         for (Obstacle obstacle : obstacles) {
@@ -188,7 +206,11 @@ public class Mapp extends Pane {
         return false;
     }
 
-    public void explosion(Coordinate coordinate) {
+    /**
+     *
+     * @param coordinate
+     */
+    protected void explosion(Coordinate coordinate) {
         activeProjectile.setVelocity(new Vector(0, 0));
     }
     private boolean isInBounds(MovingBody body) {

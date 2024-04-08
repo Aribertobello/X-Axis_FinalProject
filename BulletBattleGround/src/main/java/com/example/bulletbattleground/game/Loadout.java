@@ -9,11 +9,13 @@ import java.util.ArrayList;
 public class Loadout {
 
     protected Projectile mainWeapon;
-
     protected String type;
-
     protected ArrayList<Grenade> grenades = new ArrayList<Grenade>();
 
+    /**
+     *
+     * @param type
+     */
     public Loadout(String type) {
         this.type = type;
 
@@ -38,7 +40,11 @@ public class Loadout {
         }
 
     }
-
+    
+    /**
+     *
+     * @return
+     */
     public HBox display() {
         Label typeLabel = new Label(type + " class   ");
         Label remaining = new Label("remaining Grenades:   " + grenades.size());
@@ -47,7 +53,6 @@ public class Loadout {
         for (Grenade grenade : grenades) {
             LoadoutBox.getChildren().add(new Label(grenade.toString()));
         }
-
         return LoadoutBox;
     }
 

@@ -25,6 +25,12 @@ public class Fighter extends Rectangle {
     @Setter
     protected Coordinate coordinate = new Coordinate(0, 0);
 
+    /**
+     * Creates a Fighter  instance, this is what can shoot bullets in the game
+     * @param coordinateX coordinate x of the center of the fighter in the map
+     * @param coordinateY coordinate y of the center of the fighter in the map
+     * @param type type of loadout the fighter will have : 1=light 2=medium 3=heavy
+     */
     public Fighter(int coordinateX, int coordinateY, int type) {
         super(40, 40);
 
@@ -39,7 +45,6 @@ public class Fighter extends Rectangle {
         if (type == 3) {
             loadout = new Loadout("heavy");
         }
-
         coordinate.setX(coordinateX);
         coordinate.setY(coordinateY);
         this.setLayoutX(coordinateX - 20);
@@ -47,14 +52,20 @@ public class Fighter extends Rectangle {
         hitBox();
     }
 
+    /**
+     * updates the hitbox of the fighter
+     * @return a new hitbox object based on the current location of the fighter
+     */
     public HitBox hitBox() { //This is a clone method????
         return new HitBox(this);
     }
 
-    public HBox headsUpDisplay() {
-        return this.loadout.display();
-    }
-
+    /**
+     * Launches Projectile according to parameters
+     * @param projectile the projectile which will be fired
+     * @param velocity the velocity vector of the launch for this projecile
+     * @param coordinate the coordinates from which to begin the launch
+     */
     public void launchProjectile(Projectile projectile, Vector velocity, Coordinate coordinate) {
     }
 }

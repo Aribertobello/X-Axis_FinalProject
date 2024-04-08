@@ -1,10 +1,17 @@
 package com.example.bulletbattleground.game;
 
 import com.example.bulletbattleground.BattleGround;
+import com.example.bulletbattleground.controllers.GameSceneController;
 import com.example.bulletbattleground.gameObjects.Loot.Loot;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
+import com.example.bulletbattleground.gameObjects.projectiles.Bullet;
 import com.example.bulletbattleground.utility.Coordinate;
+import com.example.bulletbattleground.utility.Vector;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -19,6 +26,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,43 +39,34 @@ public class Level extends AnchorPane {
     @Getter
     @Setter
     private Pane headsUpDisplay;
-
     @FXML
     private AnchorPane container;
-
     @FXML
     private Label activeProjectileLabel;
-
-    @FXML
-    private Label angleLabel;
-
     @FXML
     private Label KELabel;
-
     @FXML
     private Label blankLabel;
-
     @FXML
     private ProgressBar healthProgressbar;
-
     @FXML
     private Label healthLabel;
-
     @FXML
     private MenuBar topMenu;
-
+    @FXML
+    private Label angleLabel;
+    @FXML
+    private Menu newGameButton;
     @FXML
     private Menu exitButton;
-
+    @FXML
+    private void handleExit(){
+        Platform.exit();
+    }
     @FXML
     private Menu settingsButton;
-
     @FXML
     private Menu pauseButton;
-
-
-
-
 
     Rectangle playerturnSquare;
     Label activeProjectileTimer;
@@ -75,11 +74,6 @@ public class Level extends AnchorPane {
     Label activeTurn;
     Label player1Turn;
 
-
-
-
-    @Getter
-    @Setter
     protected boolean dragging = false;
     public Mapp map;
     protected Line trajectoryLine = new Line();//TODO
@@ -92,38 +86,13 @@ public class Level extends AnchorPane {
     static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
 
 
-    protected boolean[] update(double dt) {
-        map.setPrefWidth(((Stage) this.getScene().getWindow()).getWidth());
-        headsUpDisplay.setPrefWidth(((Stage) this.getScene().getWindow()).getWidth());
-        if(map.update(dt)){
-            switch(type) {
-                case 0:
-                    if(map.loot==null) return new boolean[]{true, true};
-                    if(map.people.isEmpty()){
-                        return new boolean[]{true, false};
-                    }
-                    break;
-                case 1:
-                    if(map.people.size()==1){
-                        return new boolean[]{true, false};
-                    }
-                    //TODO gameWon or !GameWon
-                    break;
-                case 2:
-                    if(map.people.size()==1){
-                        return new boolean[]{true, false};
-                    }
-                    break;
-            }
-        }
-        return new boolean[]{false,false};
-    }
-    public Level(){}
+    /**
+     *
+     * @param map
+     * @param type
+     */
     public Level(Mapp map, int type) throws IOException {
-
-        container = BattleGround.gameLoader().load();
-        this.getChildren().add(container);
-        headsUpDisplay = (Pane) (container.getChildren().get(0));
+        LinkElements();
         this.type = type;
         this.map = map;
         if (this.type == 0) {
@@ -148,15 +117,52 @@ public class Level extends AnchorPane {
         container.getChildren().add(this.map);
         map.toBack();
         this.getChildren().add(trajectoryLine);// TODO arrow
-        headsUpDisplay.setMaxHeight(200);
-        headsUpDisplay.setPrefHeight(200);
-        headsUpDisplay.setMaxWidth(screenWidth);
+    }
+
+    protected boolean[] update(double dt) {
+        updateHUD();
+        if(map.update(dt)){
+            switch(type) {
+                case 0:
+                    if(map.loot==null) return new boolean[]{true, true};
+                    if(map.people.isEmpty()){
+                        return new boolean[]{true, false};
+                    }
+                    break;
+                case 1:
+                    if(map.people.size()==1){
+                        return new boolean[]{true, false};
+                    }
+                    //TODO gameWon or !GameWon
+                    break;
+                case 2:
+                    if(map.people.size()==1){
+                        return new boolean[]{true, false};
+                    }
+                    break;
+            }
+        }
+        return new boolean[]{false,false};
+    }
+
+    public void LinkElements() throws IOException {
+        FXMLLoader loader = new FXMLLoader(BattleGround.class.getResource("GameScene.fxml"));
+        this.getChildren().add(loader.load());
+        GameSceneController controller = loader.getController();
+        container = controller.getContainer();
+        headsUpDisplay = controller.getHeadsUpDisplay();
+        angleLabel = controller.getAngleLabel();
+        KELabel = controller.getKELabel();
+        healthLabel = controller.getHealthLabel();
+        healthProgressbar = controller.getHealthProgressbar();
+        activeProjectileLabel = controller.getActiveProjectileLabel();
     }
 
     public void addLoot() {
         map.loot = new Loot(screenWidth - 341, 410);
         map.getChildren().add(map.loot);
     }
+
     public void addFighter(Fighter fighter, int teamNb){
         map.addFighter(fighter);
         if(teamNb==1){
@@ -164,10 +170,12 @@ public class Level extends AnchorPane {
         } else {
             team2.add(fighter);
         }
-
     }
 
-
+    /**
+     *
+     * @param selectedFighter
+     */
     protected void displayLoadout(Fighter selectedFighter) {
         //TODO
     }
@@ -186,4 +194,21 @@ public class Level extends AnchorPane {
         trajectoryLine.setEndX(endX);
         trajectoryLine.setEndY(endY);
     }
+
+    public void updateHUD () {
+        if (trajectoryLine != null && angleLabel != null) {
+            Vector direction = new Vector(trajectoryLine.getEndX() - trajectoryLine.getStartX(), trajectoryLine.getEndY() - trajectoryLine.getStartY());
+            double angle = 180 - direction.angle();
+            angleLabel.setText("Angle: " + angle);
+            System.out.println(angleLabel);
+            }
+        if (map != null && map.activeProjectile != null) {
+            KELabel.setText("Kinetic energy: " + map.getActiveProjectile().kE());
+            System.out.println(KELabel);
+            }
+        if (healthProgressbar != null) {
+            healthProgressbar.setProgress(20);
+            healthProgressbar.setStyle("-fx-accent: red; -fx-progress-bar-indeterminate-fill: red;");
+            }
+        }
 }
