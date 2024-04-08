@@ -16,7 +16,6 @@ import java.util.Scanner;
 public class FileManager {
 
     private static File managerFile;
-
     static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
 
     public FileManager(String filePath) throws FileNotFoundException {

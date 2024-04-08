@@ -81,20 +81,14 @@ public class Level extends AnchorPane {
     @Getter
     @Setter
     protected boolean dragging = false;
-
     public Mapp map;
-
     protected Line trajectoryLine = new Line();//TODO
     protected ArrayList<Fighter> team1 = new ArrayList<>();
     protected ArrayList<Fighter> team2 = new ArrayList<>();
-
     protected Coordinate origin;
-
     protected Ally selectedFighter;
     protected int difficulty;
-
     protected int type;
-
     static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
 
 

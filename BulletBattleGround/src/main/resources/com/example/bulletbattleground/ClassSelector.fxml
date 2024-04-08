@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.bulletbattleground.controllers.MainMenuController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bulletbattleground.controllers.ClassSelectorController">
+   <children>
+      <Button fx:id="lightClassBtn" layoutX="14.0" layoutY="27.0" mnemonicParsing="false" onAction="#lightClassSelected" prefHeight="355.0" prefWidth="176.0" text="light" />
+      <Button fx:id="mediumClassBtn" layoutX="212.0" layoutY="27.0" mnemonicParsing="false" onAction="#mediumClassSelected" prefHeight="355.0" prefWidth="176.0" text="Medium" />
+      <Button fx:id="heavyClassBtn" layoutX="409.0" layoutY="26.0" mnemonicParsing="false" onAction="#heavyClassSelected" prefHeight="355.0" prefWidth="176.0" text="Heavy" />
+      <Label layoutX="266.0" layoutY="6.0" text="Select a class" />
+   </children>
 </AnchorPane>

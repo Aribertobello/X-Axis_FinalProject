@@ -47,7 +47,6 @@ public class Fighter extends Rectangle {
         hitBox();
     }
 
-
     public HitBox hitBox() { //This is a clone method????
         return new HitBox(this);
     }
@@ -58,6 +57,4 @@ public class Fighter extends Rectangle {
 
     public void launchProjectile(Projectile projectile, Vector velocity, Coordinate coordinate) {
     }
-
-
 }

@@ -139,7 +139,8 @@ public class Game extends Scene {
         }
         if(level.type == 1 && !player1turn && activeTurn){
             Fighter computer = level.team2.get(0);
-               computer.launchProjectile(computer.getLoadout().mainWeapon, new Vector(-180,-63),computer.getCoordinate().move(new Vector(-20,-20)));
+               computer.launchProjectile(
+                       computer.getLoadout().mainWeapon, new Vector(-97.8,-57.00),computer.getCoordinate().move(new Vector(-20,-20)));
                activeTurn = false;
         }
 

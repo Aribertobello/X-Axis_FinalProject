@@ -17,86 +17,19 @@ import java.io.IOException;
 public class MainMenuController {
 
     @FXML
-    private Button player_computer_btn;
-
-    @FXML
-    private Button player_environ_btn;
-
-    @FXML
-    private Button player_player_btn;
-
     private Button educationModebtn;
 
     @FXML
     private Button freeplayBtn;
 
+    @FXML
     private Button playbtn;
-
-    private Button EXITBTN;
-
-    private Button MAINMENUBTN;
-
-
-    public void player_computer_btn_clicked(ActionEvent event)  {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        try{
-            BattleGround.activeGame = new Game(FileManager.defaultLevelPvc());
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-        stage.setScene(BattleGround.activeGame);
-        stage.setMaximized(true);
-        stage.show();
-        BattleGround.activeGame.run();
-    }
-
-    public void player_environ_btn_clicked(ActionEvent event){
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        try{
-            BattleGround.activeGame = new Game(FileManager.defaultLevelPve());
-        }catch(IOException e){
-         e.printStackTrace();
-        }
-        stage.setScene(BattleGround.activeGame);
-        stage.setMaximized(true);
-        stage.show();
-        BattleGround.activeGame.run();
-    }
-
-    public void player_player_btn_clicked(ActionEvent event){
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        try{
-            BattleGround.activeGame = new Game(FileManager.defaultLevelPvp());
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-        //double screenWidth = Screen.getPrimary().getBounds().getWidth();
-        //System.out.println("Screen width: " + screenWidth + " pixels");
-        stage.setScene(BattleGround.activeGame);
-        stage.setMaximized(true);
-        stage.setFullScreen(true);
-        stage.show();
-        BattleGround.activeGame.run();
-    }
 
     public void switchToSubmenu(ActionEvent event) throws IOException {
         Scene submenuScene = new Scene(BattleGround.subMenuLoader().load());
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(submenuScene);
         stage.show();
-    }
-
-    public void switchToMainMenu(ActionEvent event) throws IOException {
-         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-         Scene mainMenuScene = new Scene(BattleGround.mainMenuLoader().load());
-         stage.setScene(mainMenuScene);
-         stage.show();
-    }
-
-    @FXML
-    void ExitGame(ActionEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
     }
 
     @FXML
@@ -111,8 +44,5 @@ public class MainMenuController {
         stage.setMaximized(true);
         stage.show();
         BattleGround.activeGame.run();
-    }
-
-    public void launchLevelOne(ActionEvent event) {
     }
 }
