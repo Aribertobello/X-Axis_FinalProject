@@ -13,6 +13,7 @@ public class Loadout {
     protected String type;
 
     protected ArrayList<Grenade> grenades = new ArrayList<Grenade>();
+    protected ArrayList<SmokeGrenade> smokeGrenades = new ArrayList<SmokeGrenade>();
 
     /**
      *
@@ -25,20 +26,20 @@ public class Loadout {
             mainWeapon = new Bullet();
             grenades.add(new Grenade());
             grenades.add(new Grenade());
-            grenades.add(new SmokeGrenade());
+            smokeGrenades.add(new SmokeGrenade());
         }
 
         if (type.equalsIgnoreCase("medium")) {
             mainWeapon = new Spear();
             grenades.add(new Grenade());
-            grenades.add(new SmokeGrenade());
+            smokeGrenades.add(new SmokeGrenade());
         }
 
         if (type.equalsIgnoreCase("heavy")) {
             mainWeapon = new Rocket();
             grenades.add(new Grenade());
-            grenades.add(new SmokeGrenade());
-            grenades.add(new SmokeGrenade());
+            smokeGrenades.add(new SmokeGrenade());
+            smokeGrenades.add(new SmokeGrenade());
         }
 
     }
