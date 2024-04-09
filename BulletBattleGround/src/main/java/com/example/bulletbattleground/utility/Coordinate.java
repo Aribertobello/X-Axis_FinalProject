@@ -3,6 +3,8 @@ package com.example.bulletbattleground.utility;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Setter
 @Getter
 public class Coordinate {
@@ -22,6 +24,9 @@ public class Coordinate {
     public void displace(Vector vector){
         setX(x+ vector.getX());
         setY(y+ vector.getY());
+    }
+    public Coordinate move(Vector vector){
+        return new Coordinate(x+ vector.getX(),y+ vector.getY());
     }
 
     /**
@@ -50,4 +55,13 @@ public class Coordinate {
     public String toString() {
         return '(' + " " + x + ", " + y + ')';
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        Coordinate that = (Coordinate) object;
+        return Double.compare(x, that.x) == 0 && Double.compare(y, that.y) == 0;
+    }
+
 }

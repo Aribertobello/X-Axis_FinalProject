@@ -16,7 +16,6 @@ import java.util.Scanner;
 public class FileManager {
 
     private static File managerFile;
-
     static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
 
     /**
@@ -37,7 +36,11 @@ public class FileManager {
     public static Level defaultLevelPvc() {
         Mapp map = defaultMapPvc();
         try {
-            return new Level(map, "pvp");
+            Level level = new Level(map, 1);
+            level.addFighter(new Ally(200, 600, 1),1);
+            level.addFighter(new Computer(screenWidth - 200, 600, 1),2);
+            return level;
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -54,8 +57,6 @@ public class FileManager {
         Mapp map = new Mapp("earth");
         //map.addObstacle(new SmokeScreen(40,500,600));
         map.addObstacle(new Wall(160, 12, 900, 480,90));
-        map.addFighter(new Ally(200, 600, 3));
-        map.addFighter(new Computer(screenWidth - 200, 600, 1));
         return map;
     }
 
@@ -67,7 +68,10 @@ public class FileManager {
     public static Level defaultLevelPvp() {
         Mapp map = defaultMapPvp();
         try {
-            return new Level(map, "pvp");
+            Level level = new Level(map, 2);
+            level.addFighter(new Ally(200, 600, 1),1);
+            level.addFighter(new Ally(screenWidth - 200, 600, 2),2);
+            return level;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -85,8 +89,6 @@ public class FileManager {
         Mapp map = new Mapp("space");
         //map.addObstacle(new SmokeScreen(40,500,600));
         map.addObstacle(new Wall(160, 12, 900, 480,300));
-        map.addFighter(new Ally(200, 600, 3));
-        map.addFighter(new Ally(screenWidth - 200, 600, 2));
         return map;
     }
 
@@ -97,13 +99,13 @@ public class FileManager {
      */
     public static Level defaultLevelPve() {
         Mapp map = defaultMapPve();
-        Level level = null;
         try {
-            level = new Level(map, "pve");
+            Level level = new Level(map, 0);
+            level.addFighter(new Ally(200, 600, 2),1);
+            return level;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return level;
     }
 
     /**
@@ -116,7 +118,6 @@ public class FileManager {
     public static Mapp defaultMapPve() {
         Mapp map = new Mapp("space");
         //map.addObstacle(new SpaceShip(0, 200, 500));
-        map.addFighter(new Ally(200, 600, 1));
         map.addObstacle(new SpaceShip(20, 900, 600));
         map.addObstacle(new SpaceShip(-30, 1300, 800));
         map.addObstacle(new SpaceShip(25, 400, 100));

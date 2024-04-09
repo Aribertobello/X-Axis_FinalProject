@@ -14,11 +14,9 @@ public abstract class Projectile extends MovingBody {
     @Setter
     @Getter
     protected int damage;
-
     @Setter
     @Getter
     protected Vector lift;
-
 
     /**
      *
@@ -54,15 +52,16 @@ public abstract class Projectile extends MovingBody {
         setVelocityX(vector.getX());
         setVelocityY(vector.getY());
     }
+
     @Override
     public void setCoordinate(Coordinate coordinate) {
         this.getChildren().get(0).setLayoutX(coordinate.getX());
         this.getChildren().get(0).setLayoutY(coordinate.getY());
         super.setCoordinate(coordinate);
     }
+
     public HitBox hitBox(){
         hitBox = new HitBox(this);
         return hitBox;
     }
-
 }
