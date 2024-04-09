@@ -94,7 +94,13 @@ public class Level extends AnchorPane {
 
     protected String type;
 
+    protected String pvp = "pvp";
+
+    protected String pve = "pve";
+
     static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
+
+    static int screenHeight = (int) Screen.getPrimary().getBounds().getHeight();
 
     /**
      *
@@ -102,6 +108,7 @@ public class Level extends AnchorPane {
      */
     protected void update(double dt) {
         map.setPrefWidth(((Stage) this.getScene().getWindow()).getWidth());
+        map.setPrefHeight(((Stage) this.getScene().getWindow()).getHeight());
         map.update(dt);
             updateHUD();
 
@@ -118,11 +125,11 @@ public class Level extends AnchorPane {
     public Level(Mapp map, String type) throws IOException {
         LinkElements();
         this.type = type;
-        if (this.type.equalsIgnoreCase("pve")) {
+        if (this.type.equalsIgnoreCase(pve)) {
             map.loot = new Loot(screenWidth - 341, 410);
             map.getChildren().add(map.loot);
         }
-        if (this.type.equalsIgnoreCase("pvp")) {
+        if (this.type.equalsIgnoreCase(pvp)) {
             //TODO
         }
         this.map = map;
@@ -136,6 +143,7 @@ public class Level extends AnchorPane {
         GameSceneController controller = loader.getController();
         container = controller.getContainer();
         headsUpDisplay = controller.getHeadsUpDisplay();
+        headsUpDisplay.setLayoutY(screenHeight-125);
         angleLabel = controller.getAngleLabel();
         KELabel = controller.getKELabel();
         healthLabel = controller.getHealthLabel();
