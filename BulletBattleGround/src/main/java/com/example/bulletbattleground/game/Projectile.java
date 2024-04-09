@@ -23,10 +23,10 @@ public abstract class Projectile extends MovingBody {
      * @param time
      */
     public void move(double time) {
-        double x = ((acceleration().getX() / 2) * time * time + getVelocityX() * time + getCoordinate().getX());
-        double y  = ((acceleration().getY() / 2) * time * time + getVelocityY() * time + getCoordinate().getY());
-        this.setVelocityX(acceleration().getX() * time + getVelocityX());
-        this.setVelocityY(acceleration().getY() * time + getVelocityY());
+        double x = ((acceleration().getX() / 2) * time * time*100 + getVelocityX() * time*10 + getCoordinate().getX());
+        double y  = ((acceleration().getY() / 2) * time * time*100 + getVelocityY() * time*10 + getCoordinate().getY());
+        this.setVelocityX(acceleration().getX() * time*10 + getVelocityX());
+        this.setVelocityY(acceleration().getY() * time*10 + getVelocityY());
         setCoordinate(new Coordinate(x,y));
     }
 

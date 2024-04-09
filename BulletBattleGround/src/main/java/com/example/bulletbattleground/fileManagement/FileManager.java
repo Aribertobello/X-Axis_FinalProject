@@ -36,7 +36,7 @@ public class FileManager {
     public static Level defaultLevelPvc() {
         Mapp map = defaultMapPvc();
         try {
-            Level level = new Level(map, 1);
+            Level level = new Level(map, 1,1);
             level.addFighter(new Ally(200, 600, 1),1);
             level.addFighter(new Computer(screenWidth - 200, 600, 1),2);
             return level;
@@ -68,7 +68,7 @@ public class FileManager {
     public static Level defaultLevelPvp() {
         Mapp map = defaultMapPvp();
         try {
-            Level level = new Level(map, 2);
+            Level level = new Level(map, 2,1);
             level.addFighter(new Ally(200, 600, 1),1);
             level.addFighter(new Ally(screenWidth - 200, 600, 2),2);
             return level;
@@ -100,7 +100,7 @@ public class FileManager {
     public static Level defaultLevelPve() {
         Mapp map = defaultMapPve();
         try {
-            Level level = new Level(map, 0);
+            Level level = new Level(map, 0,1);
             level.addFighter(new Ally(200, 600, 2),1);
             return level;
         } catch (IOException e) {
@@ -124,6 +124,23 @@ public class FileManager {
         map.addObstacle(new SpaceShip(-5, 200, 500));
         return map;
     }
+    public static Mapp defaultEduMap() {
+        Mapp map = new Mapp("space");
+        //map.addObstacle(new SmokeScreen(40,500,600));
+        map.addObstacle(new Wall(160, 12, 900, 480,90));
+        return map;
+    }
+    public static Level defaultEduLevel() {
+        Mapp map = defaultEduMap();
+        try {
+            Level level = new Level(map, 0,-1);
+            level.addFighter(new Ally(200, 600, 2),1);
+            return level;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     public static void createPveLevel(String file) { //TODO
     }

@@ -79,7 +79,7 @@ public class Game extends Scene {
      */
     public void run() {
         handleDragAndShoot();
-        timeline = new Timeline(new KeyFrame(Duration.millis(1), e
+        timeline = new Timeline(new KeyFrame(Duration.millis(10), e
                 -> {
             double dt = (1.0 / tickRate);
             time += dt;
@@ -153,7 +153,7 @@ public class Game extends Scene {
                activeTurn = false;
         }
 
-        boolean[] gameStatus = level.update(dt);
+        boolean[] gameStatus = level.update(dt, time);
         gameOver = gameStatus[0];
         gameWon = gameStatus[1];
         if(gameOver){
@@ -282,6 +282,7 @@ public class Game extends Scene {
                 Object variableOfInterest = level.map.activeProjectile;
                 //----------------
                 timeline.pause();
+                //tickRate = -tickRate;
                 isTicking = false;
             }
         }

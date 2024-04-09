@@ -19,18 +19,25 @@ public class subMenuController {
     public Button player_player_btn;
     public Button player_computer_btn;
 
+    /**
+     * @param event Action event for a button to create new scene for player vs computer Game mode.
+     */
     public void player_computer_btn_clicked(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(BattleGround.pvcLevelSelectorLoader().load()));
         stage.show();
     }
-
+    /**
+     * @param event Action event for a button to create new scene for player vs environment game mode.
+     */
     public void player_environ_btn_clicked(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(BattleGround.pveLevelSelectorLoader().load()));
         stage.show();
     }
-
+    /**
+     *@param event Action handler for a button to create new scene for player vs player game mode.
+     */
     public void player_player_btn_clicked(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(BattleGround.pvpLevelSelectorLoader().load()));

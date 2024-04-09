@@ -1,6 +1,7 @@
 package com.example.bulletbattleground.game;
 
 import com.example.bulletbattleground.BattleGround;
+import com.example.bulletbattleground.controllers.EducationGameController;
 import com.example.bulletbattleground.controllers.GameSceneController;
 import com.example.bulletbattleground.gameObjects.Loot.Loot;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
@@ -12,6 +13,8 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -35,44 +38,39 @@ import java.util.ArrayList;
 
 public class Level extends AnchorPane {
 
-    @FXML
-    @Getter
-    @Setter
+    // Level controllers
     private Pane headsUpDisplay;
-    @FXML
     private AnchorPane container;
-    @FXML
     private Label activeProjectileLabel;
-    @FXML
     private Label KELabel;
-    @FXML
     private Label blankLabel;
-    @FXML
     private ProgressBar healthProgressbar;
-    @FXML
     private Label healthLabel;
-    @FXML
     private MenuBar topMenu;
-    @FXML
     private Label angleLabel;
-    @FXML
     private Menu newGameButton;
-    @FXML
     private Menu exitButton;
-    @FXML
-    private void handleExit(){
-        Platform.exit();
-    }
-    @FXML
     private Menu settingsButton;
-    @FXML
     private Menu pauseButton;
+
+    //Edu Controllers
+    public LineChart xVTChart;
+    public LineChart yVTChart;
+    public LineChart aVTChart;
+    public LineChart rVTChart;
+    public LineChart vxVTChart;
+    public LineChart vyVTChart;
+
+    // series
+    private XYChart.Series rseries = new XYChart.Series();
+
 
     Rectangle playerturnSquare;
     Label activeProjectileTimer;
     Label turnTimer;
     Label activeTurn;
     Label player1Turn;
+
 
     protected boolean dragging = false;
     public Mapp map;
@@ -91,13 +89,24 @@ public class Level extends AnchorPane {
      * @param map
      * @param type
      */
-    public Level(Mapp map, int type) throws IOException {
-        LinkElements();
+    public Level(Mapp map, int type, int gameType) throws IOException {
+        switch(gameType){
+            case -1:
+                educationGame();
+                break;
+            case 0:
+                freePlayGame();
+                break;
+            case 1:
+                regularGame();
+                break;
+        }
         this.type = type;
         this.map = map;
         if (this.type == 0) {
             addLoot();
         }
+
         //------------------TODO in fxml
         playerturnSquare = new Rectangle(50,50, Color.WHITE);
         activeProjectileTimer = new Label("");
@@ -112,15 +121,18 @@ public class Level extends AnchorPane {
         turnVariables.setLayoutX(screenWidth-60);
         turnVariables.setLayoutY(90);
         container.getChildren().add(turnVariables);
-        //
+        //----------------------------------------------------------
+
 
         container.getChildren().add(this.map);
         map.toBack();
+        this.headsUpDisplay.setPrefWidth(screenWidth);
         this.getChildren().add(trajectoryLine);// TODO arrow
     }
 
-    protected boolean[] update(double dt) {
+    protected boolean[] update(double dt,double time) {
         updateHUD();
+        updateCharts(dt);
         if(map.update(dt)){
             switch(type) {
                 case 0:
@@ -137,6 +149,7 @@ public class Level extends AnchorPane {
                     break;
                 case 2:
                     if(map.people.size()==1){
+                        int i = 0;//TODO PVP
                         return new boolean[]{true, false};
                     }
                     break;
@@ -145,7 +158,42 @@ public class Level extends AnchorPane {
         return new boolean[]{false,false};
     }
 
-    public void LinkElements() throws IOException {
+    public void regularGame() throws IOException {
+        FXMLLoader loader = new FXMLLoader(BattleGround.class.getResource("GameScene.fxml"));
+        this.getChildren().add(loader.load());
+        GameSceneController controller = loader.getController();
+        container = controller.getContainer();
+        headsUpDisplay = controller.getHeadsUpDisplay();
+        angleLabel = controller.getAngleLabel();
+        KELabel = controller.getKELabel();
+        healthLabel = controller.getHealthLabel();
+        healthProgressbar = controller.getHealthProgressbar();
+        activeProjectileLabel = controller.getActiveProjectileLabel();
+    }
+    public void educationGame() throws IOException {
+        FXMLLoader loader = new FXMLLoader(BattleGround.class.getResource("EducationModeScene.fxml"));
+        this.getChildren().add(loader.load());
+        EducationGameController controller = loader.getController();
+        container = controller.getContainer();
+        headsUpDisplay = controller.getHeadsUpDisplay();
+        angleLabel = controller.getAngleLabel();
+        KELabel = controller.getKELabel();
+        healthLabel = controller.getHealthLabel();
+        healthProgressbar = controller.getHealthProgressbar();
+        activeProjectileLabel = controller.getActiveProjectileLabel();
+        rVTChart = controller.getRVTChart();
+        //rseries.getData().add(new XYChart.Data(5, 10));
+        //rseries.getData().add(new XYChart.Data(6, 10));
+        //rseries.getData().add(new XYChart.Data(8, 10));
+        //rseries.getData().add(new XYChart.Data(9, 10));
+        rVTChart.getData().add(rseries);
+        xVTChart = controller.getXVTChart();
+        yVTChart = controller.getYVTChart();
+        aVTChart = controller.getAVTChart();
+        vxVTChart = controller.getRVTChart();
+        vyVTChart = controller.getVyVTChart();
+    }
+    public void freePlayGame() throws IOException {
         FXMLLoader loader = new FXMLLoader(BattleGround.class.getResource("GameScene.fxml"));
         this.getChildren().add(loader.load());
         GameSceneController controller = loader.getController();
@@ -201,14 +249,30 @@ public class Level extends AnchorPane {
             double angle = 180 - direction.angle();
             angleLabel.setText("Angle: " + angle);
             System.out.println(angleLabel);
-            }
+        }
         if (map != null && map.activeProjectile != null) {
             KELabel.setText("Kinetic energy: " + map.getActiveProjectile().kE());
             System.out.println(KELabel);
-            }
+        }
         if (healthProgressbar != null) {
             healthProgressbar.setProgress(20);
             healthProgressbar.setStyle("-fx-accent: red; -fx-progress-bar-indeterminate-fill: red;");
-            }
         }
+    }
+    public void updateCharts(double time){
+        //rVTChart.getData().add();
+        if(map.activeProjectile!=null){
+            Projectile proj = map.activeProjectile;
+            Vector distance = proj.getCoordinate().distanceVector(new Coordinate(map.earth.getCenterX(),map.earth.getCenterY()));
+            double r = distance.magnitude();
+            double x = distance.getX();
+            double y = distance.getY();
+            double a = proj.acceleration().magnitude();
+            double vx = proj.getVelocityX();
+            double vy = proj.getVelocityY();
+
+            //rseries.getData().add(new XYChart.Data(time, r));
+            //rVTChart.setData();
+        }
+    }
 }
