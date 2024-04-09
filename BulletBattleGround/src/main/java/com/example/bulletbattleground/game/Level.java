@@ -81,33 +81,11 @@ public class Level extends AnchorPane {
     protected ArrayList<Fighter> team2 = new ArrayList<>();
     protected Coordinate origin;
     protected Ally selectedFighter;
-<<<<<<< HEAD
-
-    protected String type;
-
-    protected String pvp = "pvp";
-
-    protected String pve = "pve";
-
-    static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
-
-    static int screenHeight = (int) Screen.getPrimary().getBounds().getHeight();
-
-    /**
-     *
-     * @param dt
-     */
-    protected void update(double dt) {
-        map.setPrefWidth(((Stage) this.getScene().getWindow()).getWidth());
-        map.setPrefHeight(((Stage) this.getScene().getWindow()).getHeight());
-        map.update(dt);
-            updateHUD();
-=======
     protected int difficulty;
     protected int type;
     static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
 
->>>>>>> main
+    static int screenHeight = (int) Screen.getPrimary().getBounds().getHeight();
 
     /**
      *
@@ -117,16 +95,6 @@ public class Level extends AnchorPane {
     public Level(Mapp map, int type) throws IOException {
         LinkElements();
         this.type = type;
-<<<<<<< HEAD
-        if (this.type.equalsIgnoreCase(pve)) {
-            map.loot = new Loot(screenWidth - 341, 410);
-            map.getChildren().add(map.loot);
-        }
-        if (this.type.equalsIgnoreCase(pvp)) {
-            //TODO
-        }
-=======
->>>>>>> main
         this.map = map;
         if (this.type == 0) {
             addLoot();
@@ -235,14 +203,14 @@ public class Level extends AnchorPane {
             double angle = 180 - direction.angle();
             angleLabel.setText("Angle: " + angle);
             System.out.println(angleLabel);
-            }
+        }
         if (map != null && map.activeProjectile != null) {
             KELabel.setText("Kinetic energy: " + map.getActiveProjectile().kE());
             System.out.println(KELabel);
-            }
+        }
         if (healthProgressbar != null) {
             healthProgressbar.setProgress(20);
             healthProgressbar.setStyle("-fx-accent: red; -fx-progress-bar-indeterminate-fill: red;");
-            }
         }
+    }
 }
