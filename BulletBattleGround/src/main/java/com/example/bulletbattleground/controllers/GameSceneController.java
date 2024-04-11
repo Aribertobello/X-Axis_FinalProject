@@ -10,62 +10,40 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import lombok.Getter;
 import lombok.Setter;
-
+@Getter
+@Setter
 public class GameSceneController {
     @FXML
-    @Getter
-    @Setter
     private Pane headsUpDisplay;
-    @Getter
-    @Setter
     @FXML
     private AnchorPane container;
-    @Getter
-    @Setter
     @FXML
     private Label activeProjectileLabel;
-    @Getter
-    @Setter
     @FXML
     private Label KELabel;
-    @Getter
-    @Setter
     @FXML
     private Label blankLabel;
-    @Getter
-    @Setter
     @FXML
     private ProgressBar healthProgressbar;
-    @Getter
-    @Setter
     @FXML
     private Label healthLabel;
-    @Getter
-    @Setter
     @FXML
     private MenuBar topMenu;
-    @Getter
-    @Setter
     @FXML
     private Label angleLabel;
-    @Getter
-    @Setter
     @FXML
     private Menu newGameButton;
-    @Getter
-    @Setter
     @FXML
     private Menu exitButton;
+    @FXML
+    private Label GrenadeLabel;
+    private Label SmokeLabel;
     @FXML
     private void handleExit(){
         Platform.exit();
     }
-    @Getter
-    @Setter
     @FXML
     private Menu settingsButton;
-    @Getter
-    @Setter
     @FXML
     private Menu pauseButton;
 

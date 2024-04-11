@@ -26,7 +26,7 @@ public class Ally extends Fighter {
         super(coordinateX, coordinateY, type);
         Image ally_Image = new Image("file:Light_Class_Img.png");
         this.setFill(new ImagePattern(ally_Image));
-        setHealth(20);
+        setHealth(15);
     }
 
     /**
