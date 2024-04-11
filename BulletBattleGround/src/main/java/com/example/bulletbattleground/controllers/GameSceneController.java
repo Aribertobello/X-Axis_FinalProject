@@ -52,6 +52,8 @@ public class GameSceneController {
     @FXML
     private Menu pauseButton;
     @FXML
+    private Label MomLabel;
+    @FXML
     private void handlePause() {
 
     }

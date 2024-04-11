@@ -66,8 +66,10 @@ public class Level extends AnchorPane {
     private MenuBar topMenu;
     @FXML
     private Label angleLabel;
-
-
+    @FXML
+    private Label MomLabel;
+    @FXML
+    private Label MagLabel;
     @FXML
     private Menu newGameButton;
 
@@ -99,7 +101,7 @@ public class Level extends AnchorPane {
     protected Ally selectedFighter;
 
     protected String type;
-
+    private double LastAngel = 0.0;
     static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
 
     /**
@@ -150,6 +152,7 @@ public class Level extends AnchorPane {
         GrenadeLabel = controller.getGrenadeLabel();
         VeloLabel = controller.getVeloLabel();
         AccLabel = controller.getAccLabel();
+        MomLabel = controller.getMomLabel();
 
     }
 
@@ -162,25 +165,43 @@ public class Level extends AnchorPane {
     }
 
     public void updateHUD(){
-        if(trajectoryLine != null && angleLabel != null) {
+        if(trajectoryLine != null && angleLabel != null && selectedFighter != null) {
             Vector direction = new Vector(trajectoryLine.getEndX() - trajectoryLine.getStartX(), trajectoryLine.getEndY() - trajectoryLine.getStartY());
             double angle = 180 - direction.angle();
-            angleLabel.setText("Angle: " + angle);
+            if(!Double.isNaN(angle)) {
+                if (angle != LastAngel) {
+                    angleLabel.setText("Angle: " + Math.round(angle));
+                    LastAngel = angle;
+                } else if(angleLabel!=null){
+                    angleLabel.setText("Angle: " + Math.round(LastAngel));
+                }
+                }
             GrenadeLabel.setText("Number of Grenades left: " + selectedFighter.loadout.grenades.size());
         }
+
         if(map != null && map.activeProjectile != null){
             KELabel.setText("Kinetic energy: "+ Math.round(map.getActiveProjectile().kE()));
         }
         if(healthProgressbar != null && selectedFighter != null){
-            healthLabel.setText("Player Health: " + selectedFighter.getHealth());
-            healthProgressbar.setProgress(selectedFighter.getHealth());
+            int previousHealth = (int) (healthProgressbar.getProgress() * 15); // Assuming the progress bar is based on a scale of 0 to 1
+            int currentHealth = selectedFighter.getHealth();
+            if (currentHealth < previousHealth) {
+                double healthChange = (previousHealth - currentHealth) / 100.0; // Convert to decimal
+                double newProgress = Math.max(0, healthProgressbar.getProgress() - healthChange); // Ensure progress doesn't go below 0
+                healthProgressbar.setProgress(newProgress);
+            } else if (currentHealth > previousHealth) {
+                double healthChange = (currentHealth - previousHealth) / 100.0; // Convert to decimal
+                double newProgress = Math.min(1, healthProgressbar.getProgress() + healthChange); // Ensure progress doesn't go above 1
+                healthProgressbar.setProgress(newProgress);
+            }
+            healthLabel.setText("Player Health: " + currentHealth);
             healthProgressbar.setStyle("-fx-accent: red; -fx-progress-bar-indeterminate-fill: red;");
         }
         if(map.activeProjectile != null){
-            activeProjectileLabel.setText("Projectile: "+ map.getActiveProjectile().getCoordinate());
+            activeProjectileLabel.setText("Projectile Coordinates: "+ map.getActiveProjectile().getCoordinate());
             VeloLabel.setText("Velocity X and Y: "+ map.getActiveProjectile().velocity());
             AccLabel.setText("Acceleration: "+ map.getActiveProjectile().acceleration());
-
+            MomLabel.setText("Momentum: " + Math.round(map.getActiveProjectile().momentum()));
         }
 
 

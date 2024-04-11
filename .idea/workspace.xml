@@ -5,12 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3d752c20-d9fb-4b1c-8717-33dbd1ec407f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/cody_history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cody_history.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/game/Level.class" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/game/Level.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/utility/MovingBody.class" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/utility/MovingBody.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/module-info.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/libs/BulletBattleGround-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/libs/BulletBattleGround-1.0-SNAPSHOT.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/controllers/GameSceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/controllers/GameSceneController.java" afterDir="false" />
@@ -92,18 +94,6 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;
   }
 }</component>
-  <component name="QodanaHighlightedReportService">
-    <option name="localRunNotPublishedPersistedInfo">
-      <LocalReportPersistedInfo>
-        <option name="path" value="C:\Users\Miche\AppData\Local\Temp\qodana_output\qodana.sarif.json" />
-        <option name="reportGuid" value="e82fbd4f-43a2-49b7-b835-b6f84ef9bc93" />
-        <option name="reportName" value="BulletBattleGround/qodana/2024-04-06" />
-      </LocalReportPersistedInfo>
-    </option>
-  </component>
-  <component name="QodanaIsSelectedPersistenceService">
-    <option name="selectedOrLoading" value="true" />
-  </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -148,7 +138,7 @@
       <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <ForceTestExec>false</ForceTestExec>
+      <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
     <recent_temporary>

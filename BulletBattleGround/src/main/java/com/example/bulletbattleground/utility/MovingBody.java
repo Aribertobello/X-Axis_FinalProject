@@ -4,6 +4,7 @@ import javafx.scene.Group;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import static java.lang.Math.pow;
@@ -42,7 +43,10 @@ public abstract class MovingBody extends Group {
      */
     public Vector acceleration() {
         forces.toArray(new Vector[2]);
-        return new Vector(Math.round(netForce().getX() / mass), Math.round(netForce().getY() / mass));
+        double accelX = netForce().getX() / mass;
+        double accelY = netForce().getY() / mass;
+        DecimalFormat df = new DecimalFormat("#.##");
+        return new Vector(Double.parseDouble(df.format(accelX)),Double.parseDouble(df.format(accelY)));
     }
 
     /**
