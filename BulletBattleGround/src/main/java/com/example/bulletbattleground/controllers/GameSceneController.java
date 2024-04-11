@@ -37,7 +37,12 @@ public class GameSceneController {
     private Menu exitButton;
     @FXML
     private Label GrenadeLabel;
+    @FXML
     private Label SmokeLabel;
+    @FXML
+    private Label VeloLabel;
+    @FXML
+    private Label AccLabel;
     @FXML
     private void handleExit(){
         Platform.exit();

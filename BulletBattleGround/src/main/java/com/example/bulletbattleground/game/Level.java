@@ -53,6 +53,10 @@ public class Level extends AnchorPane {
 
     @FXML
     private ProgressBar healthProgressbar;
+    @FXML
+    private Label VeloLabel;
+    @FXML
+    private Label AccLabel;
 
 
     @FXML
@@ -144,6 +148,8 @@ public class Level extends AnchorPane {
         healthProgressbar = controller.getHealthProgressbar();
         activeProjectileLabel = controller.getActiveProjectileLabel();
         GrenadeLabel = controller.getGrenadeLabel();
+        VeloLabel = controller.getVeloLabel();
+        AccLabel = controller.getAccLabel();
 
     }
 
@@ -172,6 +178,9 @@ public class Level extends AnchorPane {
         }
         if(map.activeProjectile != null){
             activeProjectileLabel.setText("Projectile: "+ map.getActiveProjectile().getCoordinate());
+            VeloLabel.setText("Velocity X and Y: "+ map.getActiveProjectile().velocity());
+            AccLabel.setText("Acceleration: "+ map.getActiveProjectile().acceleration());
+
         }
 
 

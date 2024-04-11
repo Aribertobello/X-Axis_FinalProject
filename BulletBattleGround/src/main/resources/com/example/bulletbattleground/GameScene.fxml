@@ -18,6 +18,8 @@
         <Label fx:id="healthLabel" layoutX="46.0" layoutY="6.0" text="health" />
       <Label fx:id="angleLabel" layoutX="14.0" layoutY="71.0" text="Angle Preview:" />
       <Label fx:id="SmokeLabel" layoutX="153.0" layoutY="46.0" text="Smoke grenades:" />
+      <Label fx:id="VeloLabel" layoutX="320.0" layoutY="71.0" text="Velocity:" />
+      <Label fx:id="AccLabel" layoutX="423.0" layoutY="24.0" text="Acceleration: " />
     </Pane>
     <MenuBar fx:id="topMenu" style="-fx-background-color: #76827a;">
       <menus>

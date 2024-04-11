@@ -42,7 +42,7 @@ public abstract class MovingBody extends Group {
      */
     public Vector acceleration() {
         forces.toArray(new Vector[2]);
-        return new Vector(netForce().getX() / mass, netForce().getY() / mass);
+        return new Vector(Math.round(netForce().getX() / mass), Math.round(netForce().getY() / mass));
     }
 
     /**
@@ -50,7 +50,7 @@ public abstract class MovingBody extends Group {
      * @return
      */
     public Vector velocity() {
-        return new Vector(velocityX, velocityY);
+        return new Vector(Math.round(velocityX), Math.round(velocityY));
     }
 
     /**
