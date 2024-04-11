@@ -1,5 +1,6 @@
 package com.example.bulletbattleground.controllers;
 
+import javafx.scene.Group;
 import javafx.scene.chart.LineChart;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +9,9 @@ import lombok.Setter;
 @Setter
 public class EducationGameController extends GameSceneController{
 
-
+    @Getter
+    @Setter
+    public Group charts;
     @Getter
     @Setter
     public LineChart xVTChart;

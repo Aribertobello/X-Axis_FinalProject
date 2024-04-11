@@ -22,7 +22,6 @@ public class Fighter extends Rectangle {
     protected int health;
 
     @Getter
-    @Setter
     protected Coordinate coordinate = new Coordinate(0, 0);
 
     /**
@@ -52,6 +51,11 @@ public class Fighter extends Rectangle {
         hitBox();
     }
 
+    public void setCoordinate(Coordinate coordinate){
+        this.coordinate = coordinate;
+        this.setLayoutX(coordinate.getX());
+        this.setLayoutY(coordinate.getY());
+    }
     /**
      * updates the hitbox of the fighter
      * @return a new hitbox object based on the current location of the fighter

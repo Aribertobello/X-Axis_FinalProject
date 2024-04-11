@@ -1,14 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.bulletbattleground.FreePlayScene"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<Pane fx:id="freePlayUI" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="839.0" prefWidth="246.0" style="-fx-border-color: #367355;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bulletbattleground.controllers.FreePlayController">
+   <children>
+      <Label alignment="CENTER" layoutX="20.0" layoutY="14.0" prefHeight="17.0" prefWidth="207.0" text="Drag and Drop items onto the map">
+         <textFill>
+            <LinearGradient endX="0.45497630331753547" endY="0.8436018957345972" startY="0.33649289099526064">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill></Label>
+      <ImageView fx:id="allyImageView" fitHeight="74.0" fitWidth="84.0" layoutX="82.0" layoutY="69.0" onMouseDragged="#dragging" onMousePressed="#allyDragStart" onMouseReleased="#dragEnd" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="computerImageView" fitHeight="74.0" fitWidth="84.0" layoutX="82.0" layoutY="239.0" onMouseDragged="#dragging" onMousePressed="#compDragStart" onMouseReleased="#dragEnd" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="wallImageView" fitHeight="74.0" fitWidth="84.0" layoutX="82.0" layoutY="383.0" onMouseDragged="#dragging" onMousePressed="#wallDragStart" onMouseReleased="#dragEnd" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="spaceShipImageView" fitHeight="74.0" fitWidth="84.0" layoutX="81.0" layoutY="554.0" onMouseDragged="#dragging" onMousePressed="#spaceShipDragStart" onMouseReleased="#dragEnd" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="smokeScreenImageView" fitHeight="74.0" fitWidth="84.0" layoutX="81.0" layoutY="703.0" onMouseDragged="#dragging" onMousePressed="#smokeScreenDragStart" onMouseReleased="#dragEnd" pickOnBounds="true" preserveRatio="true" />
+      <Label alignment="CENTER" layoutX="21.0" layoutY="143.0" prefHeight="17.0" prefWidth="207.0" text="Ally" />
+      <Label alignment="CENTER" layoutX="21.0" layoutY="313.0" prefHeight="17.0" prefWidth="207.0" text="Computer" />
+      <Label alignment="CENTER" layoutX="20.0" layoutY="457.0" prefHeight="17.0" prefWidth="207.0" text="Wall" />
+      <Label alignment="CENTER" layoutX="21.0" layoutY="628.0" prefHeight="17.0" prefWidth="207.0" text="SpaceShip" />
+      <Label alignment="CENTER" layoutX="21.0" layoutY="777.0" prefHeight="17.0" prefWidth="207.0" text="SmokeScreen" />
+   </children>
+</Pane>

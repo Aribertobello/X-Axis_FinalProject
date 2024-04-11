@@ -39,6 +39,8 @@ public class Mapp extends Pane {
     @Setter
     protected int buffer = 0;
     protected Loot loot;
+    @Getter
+    @Setter
     protected Circle earth;
     public Vector[] environmentForces = {gravity,airResistance};
 
@@ -64,28 +66,27 @@ public class Mapp extends Pane {
             this.type = 1;
         }
         this.getChildren().add(new Circle(2000, 1200, 1));
-
     }
 
     /**
      *
      * @param dt
      */
-    protected boolean update(double dt) {
+    public boolean update(double dt) {
 
         for (Obstacle obstacle : obstacles) {
             obstacle.move(dt);
 
         }
         if (activeProjectile != null) {
-            if(isInBounds(activeProjectile)){
+            if(!isInBounds(activeProjectile)){
                 removeActiveProjectile();
                 return false;
             }
             activeProjectile.move(dt);
             addForces(activeProjectile);
             buffer++;
-            if (buffer > 50) {
+            if (buffer > 10) {
 
                 if (activeProjectile instanceof Grenade) {
 
@@ -110,7 +111,6 @@ public class Mapp extends Pane {
         people.add(fighter);
         hitBoxes.add(fighter.hitBox());
         getChildren().add(fighter);
-
     }
 
     /**
@@ -216,7 +216,8 @@ public class Mapp extends Pane {
     private boolean isInBounds(MovingBody body) {
         double x = body.getCoordinate().getX();
         double y = body.getCoordinate().getY();
-        return x < -50 || x > 2000 || y < -50 || y > 900;
+        //return !(x < -50 || x > 2000 || y < -50 || y > 1900);
+        return true;
     }
     public void removeActiveProjectile() {
         if(activeProjectile!=null){

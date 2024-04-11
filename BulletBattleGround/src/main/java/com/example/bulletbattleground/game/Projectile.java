@@ -11,12 +11,15 @@ import java.util.Arrays;
 
 public abstract class Projectile extends MovingBody {
 
+    public static final double TERMINAL_VELOCITY = 200000;
+
     @Setter
     @Getter
     protected int damage;
     @Setter
     @Getter
     protected Vector lift;
+
 
     /**
      *

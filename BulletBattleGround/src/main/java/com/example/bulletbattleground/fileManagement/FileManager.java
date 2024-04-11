@@ -1,11 +1,11 @@
 package com.example.bulletbattleground.fileManagement;
 
-import com.example.bulletbattleground.User;
-import com.example.bulletbattleground.game.Level;
+import com.example.bulletbattleground.game.StandardLevel;
 import com.example.bulletbattleground.game.Mapp;
+import com.example.bulletbattleground.game.levels.EduLevel;
+import com.example.bulletbattleground.game.levels.FreePlayLevel;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
 import com.example.bulletbattleground.gameObjects.fighters.Computer;
-import com.example.bulletbattleground.gameObjects.obstacles.SmokeScreen;
 import com.example.bulletbattleground.gameObjects.obstacles.SpaceShip;
 import com.example.bulletbattleground.gameObjects.obstacles.Wall;
 import javafx.stage.Screen;
@@ -33,10 +33,10 @@ public class FileManager {
      * calls the defaultMapPvc to generate the map of the level
      * @return applications default level for PVC
      */
-    public static Level defaultLevelPvc() {
+    public static StandardLevel defaultLevelPvc() {
         Mapp map = defaultMapPvc();
         try {
-            Level level = new Level(map, 1,1);
+            StandardLevel level = new StandardLevel(map, 2);
             level.addFighter(new Ally(200, 600, 1),1);
             level.addFighter(new Computer(screenWidth - 200, 600, 1),2);
             return level;
@@ -65,10 +65,10 @@ public class FileManager {
      * calls the defaultMapPvp to generate the map of the level
      * @return applications default level for PVP
      */
-    public static Level defaultLevelPvp() {
+    public static StandardLevel defaultLevelPvp() {
         Mapp map = defaultMapPvp();
         try {
-            Level level = new Level(map, 2,1);
+            StandardLevel level = new StandardLevel(map, 3);
             level.addFighter(new Ally(200, 600, 1),1);
             level.addFighter(new Ally(screenWidth - 200, 600, 2),2);
             return level;
@@ -97,10 +97,10 @@ public class FileManager {
      * calls the defaultMapPve to generate the map of the level
      * @return applications default level for PVE
      */
-    public static Level defaultLevelPve() {
+    public static StandardLevel defaultLevelPve() {
         Mapp map = defaultMapPve();
         try {
-            Level level = new Level(map, 0,1);
+            StandardLevel level = new StandardLevel(map, 1);
             level.addFighter(new Ally(200, 600, 2),1);
             return level;
         } catch (IOException e) {
@@ -127,13 +127,12 @@ public class FileManager {
     public static Mapp defaultEduMap() {
         Mapp map = new Mapp("space");
         //map.addObstacle(new SmokeScreen(40,500,600));
-        map.addObstacle(new Wall(160, 12, 900, 480,90));
         return map;
     }
-    public static Level defaultEduLevel() {
+    public static EduLevel defaultEduLevel() {
         Mapp map = defaultEduMap();
         try {
-            Level level = new Level(map, 0,-1);
+            EduLevel level = new EduLevel(map);
             level.addFighter(new Ally(200, 600, 2),1);
             return level;
         } catch (IOException e) {
@@ -141,7 +140,14 @@ public class FileManager {
         }
     }
 
-
+    public static FreePlayLevel freePlayLevel(){
+        Mapp map = new Mapp("space");
+        try {
+            return new FreePlayLevel(map);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public static void createPveLevel(String file) { //TODO
     }
 
