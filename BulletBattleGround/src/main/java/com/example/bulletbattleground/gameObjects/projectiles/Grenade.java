@@ -64,7 +64,7 @@ public class Grenade extends Projectile {
     protected Timeline animationTimeLine;
 
     public Grenade() {
-        fuseTimer = 25.0;
+        fuseTimer = 2.50;
         Image grenadeImg = new Image("file:grenade.png");
         grenade.setFill(new ImagePattern(grenadeImg));
         this.lift = new Vector(0, 0);

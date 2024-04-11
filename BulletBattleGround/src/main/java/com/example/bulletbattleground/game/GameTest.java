@@ -202,7 +202,6 @@ public class GameTest extends Scene {
                     selectedFighter.loadout.grenades.remove(level.selectedFighter.loadout.grenades.get(0));
                 }
             }
-            //activeTurn = false;
             gameStart = true;
         }
     }
