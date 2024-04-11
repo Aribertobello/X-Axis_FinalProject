@@ -53,8 +53,8 @@ public class Fighter extends Rectangle {
 
     public void setCoordinate(Coordinate coordinate){
         this.coordinate = coordinate;
-        this.setLayoutX(coordinate.getX());
-        this.setLayoutY(coordinate.getY());
+        this.setLayoutX(coordinate.getX()-20);
+        this.setLayoutY(coordinate.getY()-20);
     }
     /**
      * updates the hitbox of the fighter

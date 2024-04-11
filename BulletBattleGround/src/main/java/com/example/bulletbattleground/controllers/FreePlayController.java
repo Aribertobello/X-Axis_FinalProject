@@ -1,5 +1,6 @@
 package com.example.bulletbattleground.controllers;
 
+import com.example.bulletbattleground.BattleGround;
 import com.example.bulletbattleground.game.Fighter;
 import com.example.bulletbattleground.game.Level;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
@@ -82,10 +83,11 @@ public class FreePlayController {
     public void dragEnd(MouseEvent event) {
         fighter.setCoordinate(coordinate);
         Level level = ((Level)((Node)event.getSource()).getParent().getParent().getParent());
-        level.addFighter(fighter,1);
+        level.addFighter(fighter,0);
 
         imageView.setTranslateX(0);
         imageView.setTranslateY(0);
+        BattleGround.activeGameTest.handleFighterClick();
     }
 
     public void initialize(){

@@ -202,12 +202,12 @@ public class GameTest extends Scene {
                     selectedFighter.loadout.grenades.remove(level.selectedFighter.loadout.grenades.get(0));
                 }
             }
-            activeTurn = false;
+            //activeTurn = false;
             gameStart = true;
         }
     }
 
-    private void handleFighterClick() {
+    public void handleFighterClick() {
         for (Fighter fighter : level.map.people) {
             if (fighter instanceof Ally) {
                 fighter.setOnMousePressed(event -> {
@@ -232,7 +232,7 @@ public class GameTest extends Scene {
         }
     }
 
-    private class pauseEvent implements EventHandler {
+    public class pauseEvent implements EventHandler {
         @Override
         public void handle(Event t) {
             if (timeline.getStatus() == Animation.Status.PAUSED) {

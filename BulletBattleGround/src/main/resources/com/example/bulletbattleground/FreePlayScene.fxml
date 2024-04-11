@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 
-<Pane fx:id="freePlayUI" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="839.0" prefWidth="246.0" style="-fx-border-color: #367355;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bulletbattleground.controllers.FreePlayController">
+<Pane fx:id="freePlayUI" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="839.0" prefWidth="246.0" style="-fx-border-color: #367355;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bulletbattleground.controllers.FreePlayController">
    <children>
       <Label alignment="CENTER" layoutX="20.0" layoutY="14.0" prefHeight="17.0" prefWidth="207.0" text="Drag and Drop items onto the map">
          <textFill>
@@ -36,5 +38,12 @@
       <Label alignment="CENTER" layoutX="20.0" layoutY="457.0" prefHeight="17.0" prefWidth="207.0" text="Wall" />
       <Label alignment="CENTER" layoutX="21.0" layoutY="628.0" prefHeight="17.0" prefWidth="207.0" text="SpaceShip" />
       <Label alignment="CENTER" layoutX="21.0" layoutY="777.0" prefHeight="17.0" prefWidth="207.0" text="SmokeScreen" />
+      <RadioButton layoutX="184.0" layoutY="69.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="55.0" text="Light">
+         <toggleGroup>
+            <ToggleGroup fx:id="classGroup" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton layoutX="184.0" layoutY="98.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="55.0" text="Medium" toggleGroup="$classGroup" />
+      <RadioButton layoutX="184.0" layoutY="126.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="55.0" text="Heavy" toggleGroup="$classGroup" />
    </children>
 </Pane>

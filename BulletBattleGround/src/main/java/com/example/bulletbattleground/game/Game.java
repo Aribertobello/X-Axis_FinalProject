@@ -237,7 +237,7 @@ public class Game extends Scene {
             gameStart = true;
         }
     }
-    private void handleFighterClick() {
+    public void handleFighterClick() {
         for (Fighter fighter : level.map.people) {
             if (fighter instanceof Ally) {
                 fighter.setOnMousePressed(event -> {
