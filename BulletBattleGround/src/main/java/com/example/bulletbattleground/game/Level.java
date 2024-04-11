@@ -43,6 +43,11 @@ public class Level extends AnchorPane {
     private AnchorPane container;
     @FXML
     private Label activeProjectileLabel;
+
+    @FXML
+    private Label GrenadeLabel;
+    private Label SmokeLabel;
+
     @FXML
     private Label KELabel;
     @FXML
@@ -156,6 +161,8 @@ public class Level extends AnchorPane {
         healthLabel = controller.getHealthLabel();
         healthProgressbar = controller.getHealthProgressbar();
         activeProjectileLabel = controller.getActiveProjectileLabel();
+        GrenadeLabel = controller.getGrenadeLabel();
+
     }
 
     public void addLoot() {
@@ -200,15 +207,19 @@ public class Level extends AnchorPane {
             Vector direction = new Vector(trajectoryLine.getEndX() - trajectoryLine.getStartX(), trajectoryLine.getEndY() - trajectoryLine.getStartY());
             double angle = 180 - direction.angle();
             angleLabel.setText("Angle: " + angle);
-            System.out.println(angleLabel);
-            }
-        if (map != null && map.activeProjectile != null) {
-            KELabel.setText("Kinetic energy: " + map.getActiveProjectile().kE());
-            System.out.println(KELabel);
-            }
-        if (healthProgressbar != null) {
-            healthProgressbar.setProgress(20);
-            healthProgressbar.setStyle("-fx-accent: red; -fx-progress-bar-indeterminate-fill: red;");
-            }
+
+            GrenadeLabel.setText("Number of Grenades left: " + selectedFighter.loadout.grenades.size());
         }
+        if(map != null && map.activeProjectile != null){
+            KELabel.setText("Kinetic energy: "+ Math.round(map.getActiveProjectile().kE()));
+        }
+        if(healthProgressbar != null && selectedFighter != null) {
+            healthLabel.setText("Player Health: " + selectedFighter.getHealth());
+            healthProgressbar.setProgress(selectedFighter.getHealth());
+            healthProgressbar.setStyle("-fx-accent: red; -fx-progress-bar-indeterminate-fill: red;");
+        }
+        if(map.activeProjectile != null){
+            activeProjectileLabel.setText("Projectile: "+ map.getActiveProjectile().getCoordinate());
+        }
+    }
 }
