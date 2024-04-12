@@ -1,5 +1,6 @@
 package com.example.bulletbattleground.game;
 
+import com.example.bulletbattleground.game.levels.StandardLevel;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
 import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.Vector;
@@ -20,27 +21,22 @@ import javafx.util.Duration;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Game extends Scene {
 
-    private double TURN_TIMER_LIMIT = 5;
-    private double PROJ_TIMER_LIMIT = 150;
     protected Boolean gameOver = false;
-    protected StandardLevel level;
+
+    protected Level level;
     protected Boolean gameWon;
     protected Integer tickRate = 100;
+
     protected double time = 0;
     protected Timeline timeline;
-    private boolean dragging = false;
-    private boolean activeprojpreviousState = false;
     private boolean isTicking;
-    private int turn = 0;
     boolean gameStart = false;
-    private boolean activeTurn = true;
-    private boolean player1turn = true;
-    private double activeTurnTimer = 0;
-    private double projectileTimer = 0;
+    TurnManager turnManager ;
 
 
     /**
@@ -49,7 +45,7 @@ public class Game extends Scene {
      * the root in this case is the level which it will run
      * @param level the level this game object will run
      */
-    public Game(StandardLevel level) throws IOException {
+    public Game(Level level) throws IOException {
         super(level);
         this.level = level;
 
@@ -76,57 +72,9 @@ public class Game extends Scene {
             time += dt;
             tick(dt);
         }));
+        turnManager = new TurnManager(level);
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-    }
-
-    /**
-     * updates the turns of the players playing the game
-     *
-     * @param dt time increment of the game being ran
-     * @return
-     */
-    private boolean updateTurns(double dt) {
-        if((level.map.activeProjectile==null)&&activeprojpreviousState){
-            activeTurn = true;
-            player1turn = !player1turn;
-        }
-        if(activeTurn) {
-            level.map.removeActiveProjectile();
-            projectileTimer = 0;
-            activeTurnTimer += dt;
-            if (activeTurnTimer > TURN_TIMER_LIMIT) {
-                player1turn = !player1turn;
-                activeTurn = false;
-            }
-        }
-
-        if (!activeTurn) {
-            activeTurnTimer = 0;
-            projectileTimer += dt;
-            if (projectileTimer > PROJ_TIMER_LIMIT) {
-                player1turn = !player1turn;
-                activeTurn = true;
-            }
-        }
-        if(player1turn){
-            level.playerturnSquare.setStroke(Color.CYAN);
-        } else {
-            level.playerturnSquare.setStroke(Color.DARKRED);
-        }
-        if(!activeTurn){
-            level.playerturnSquare.setFill(Color.BEIGE);
-        } else {
-            level.playerturnSquare.setFill(Color.WHITE);
-        }
-        level.player1Turn.setText(String.valueOf(player1turn));
-        level.activeTurn.setText(String.valueOf(activeTurn));
-        level.turnTimer.setText(String.valueOf(activeTurnTimer));
-        level.activeProjectileTimer.setText(String.valueOf(projectileTimer));
-
-        activeprojpreviousState = level.map.activeProjectile != null;
-
-        return player1turn;
     }
 
     /**
@@ -134,19 +82,21 @@ public class Game extends Scene {
     * @param dt
     */
     protected void tick(double dt) {
-        if(gameStart){
-            updateTurns(dt);
+        if(level instanceof StandardLevel) {
+            StandardLevel level = (StandardLevel) this.level;
+            if (gameStart) {
+                turnManager.updateTurn(dt);
+            }
+            if (level.type == 2 && turnManager.isPlayer2Turn()) {
+                Fighter computer = level.team2.get(0);
+                computer.launchProjectile(
+                        computer.getLoadout().mainWeapon, new Vector(-97.8, -57.00), computer.getCoordinate().move(new Vector(-20, -20)));
+                turnManager.projectileShot();
+            }
         }
-        if(level.type == 1 && !player1turn && activeTurn){
-            Fighter computer = level.team2.get(0);
-               computer.launchProjectile(
-                       computer.getLoadout().mainWeapon, new Vector(-97.8,-57.00),computer.getCoordinate().move(new Vector(-20,-20)));
-               activeTurn = false;
-        }
-
         boolean[] gameStatus = level.update(dt, time);
         gameOver = gameStatus[0];
-        gameWon = gameStatus[1];
+        //gameWon = gameStatus[1];
         if(gameOver){
             timeline.stop();
             exitGame();
@@ -187,7 +137,7 @@ public class Game extends Scene {
                 } else {
                     double dragX = event.getSceneX() - dragStartX[0];
                     double dragY = event.getSceneY() - dragStartY[0];
-                    level.changeTrajectoryLine(
+                    level.displaceTrajectoryLine(
                             level.origin.getX(),
                             level.origin.getY(),
                             level.origin.getX() + dragX,
@@ -211,8 +161,9 @@ public class Game extends Scene {
 
     private void shoot(MouseEvent event, Ally selectedFighter, double velocityX, double velocityY) {
 
-        if (activeTurn) {
-            if(player1turn&&level.team1.contains(selectedFighter)) {
+        if(level instanceof StandardLevel){
+            StandardLevel level = (StandardLevel) this.level;
+            if(turnManager.isPlayer1Turn() && level.team1.contains(selectedFighter)) {
                 if (event.getButton() == MouseButton.PRIMARY) {
                     selectedFighter.launchProjectile(
                             selectedFighter.loadout.mainWeapon, new Vector(velocityX, velocityY), level.origin);
@@ -222,7 +173,7 @@ public class Game extends Scene {
                             selectedFighter.loadout.grenades.get(0), new Vector(velocityX, velocityY), level.origin);
                     selectedFighter.loadout.grenades.remove(level.selectedFighter.loadout.grenades.get(0));
                 }
-            } else if(!player1turn&&level.team2.contains(selectedFighter)){
+            } else if(turnManager.isPlayer2Turn() && level.team2.contains(selectedFighter)){
                 if (event.getButton() == MouseButton.PRIMARY) {
                     selectedFighter.launchProjectile(
                             selectedFighter.loadout.mainWeapon, new Vector(velocityX, velocityY), level.origin);
@@ -233,20 +184,36 @@ public class Game extends Scene {
                     selectedFighter.loadout.grenades.remove(level.selectedFighter.loadout.grenades.get(0));
                 }
             }
-            activeTurn = false;
-            gameStart = true;
+        } else {
+            if (event.getButton() == MouseButton.PRIMARY) {
+                selectedFighter.launchProjectile(
+                        selectedFighter.loadout.mainWeapon, new Vector(velocityX, velocityY), level.origin);
+            }// TODO -LAUNCH MAIN PROJECTILE
+            if (event.getButton() == MouseButton.SECONDARY) {
+                selectedFighter.launchProjectile(
+                        selectedFighter.loadout.grenades.get(0), new Vector(velocityX, velocityY), level.origin);
+                selectedFighter.loadout.grenades.remove(level.selectedFighter.loadout.grenades.get(0));
+            }
         }
+        gameStart = true;
     }
+
     public void handleFighterClick() {
+        ArrayList team2;
+        if(level instanceof StandardLevel){
+            team2 = ((StandardLevel)level).team2;
+        } else {
+            team2 = null;
+        }
         for (Fighter fighter : level.map.people) {
             if (fighter instanceof Ally) {
-                fighter.setOnMousePressed(event -> {
+                fighter.setOnMouseReleased(event -> {
                     System.out.println("Fighter selected"); //TODO remove this in final code
                     if (level.selectedFighter != null) {
                         level.selectedFighter.setStroke(Color.TRANSPARENT);
                     }
                     level.selectedFighter = (Ally) fighter;
-                    if (level.team2.contains(fighter)) {
+                    if (level instanceof StandardLevel && team2.contains(fighter)) {
                         level.origin = new Coordinate(
                                 level.selectedFighter.getCoordinate().getX() - level.selectedFighter.getWidth() / 2
                                 , level.selectedFighter.getCoordinate().getY() - level.selectedFighter.getHeight() / 2);

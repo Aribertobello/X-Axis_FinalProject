@@ -2,7 +2,6 @@ package com.example.bulletbattleground;
 
 import com.example.bulletbattleground.fileManagement.FileManager;
 import com.example.bulletbattleground.game.Game;
-import com.example.bulletbattleground.game.GameTest;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,7 +18,6 @@ public class BattleGround extends Application {
     static protected ArrayList<String> mapsArrayList = new ArrayList<>();
     static protected String userDataLocation = "";//TODO Put User Data File Here
     static public Game activeGame;
-    static public GameTest activeGameTest;
 
 
     static {

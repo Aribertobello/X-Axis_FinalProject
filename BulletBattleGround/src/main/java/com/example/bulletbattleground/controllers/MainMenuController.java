@@ -3,7 +3,6 @@ package com.example.bulletbattleground.controllers;
 import com.example.bulletbattleground.BattleGround;
 import com.example.bulletbattleground.fileManagement.FileManager;
 import com.example.bulletbattleground.game.Game;
-import com.example.bulletbattleground.game.GameTest;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -61,26 +60,26 @@ public class MainMenuController {
     public void freePlayButton(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         try{
-            BattleGround.activeGameTest = new GameTest(FileManager.freePlayLevel());
+            BattleGround.activeGame = new Game(FileManager.freePlayLevel());
         }catch(IOException e){
             e.printStackTrace();
         }
-        stage.setScene(BattleGround.activeGameTest);
+        stage.setScene(BattleGround.activeGame);
         stage.setMaximized(true);
         stage.show();
-        BattleGround.activeGameTest.run();
+        BattleGround.activeGame.run();
     }
     @FXML
     public void selectEduMap(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         try{
-            BattleGround.activeGameTest = new GameTest(FileManager.defaultEduLevel());
+            BattleGround.activeGame = new Game(FileManager.defaultEduLevel());
         }catch(IOException e){
             e.printStackTrace();
         }
-        stage.setScene(BattleGround.activeGameTest);
+        stage.setScene(BattleGround.activeGame);
         stage.setMaximized(true);
         stage.show();
-        BattleGround.activeGameTest.run();
+        BattleGround.activeGame.run();
     }
 }

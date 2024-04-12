@@ -16,15 +16,21 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
 public class Mapp extends Pane {
 
+    @Getter
     private int type;
 
+    @Getter
+    @Setter
     protected ArrayList<Fighter> people = new ArrayList<>();
+    @Getter
+    @Setter
     protected ArrayList<Obstacle> obstacles = new ArrayList<>();
     private ArrayList<HitBox> hitBoxes = new ArrayList<>();
     private Pane hitBoxPane = new Pane();
@@ -38,7 +44,8 @@ public class Mapp extends Pane {
     @Getter
     @Setter
     protected int buffer = 0;
-    protected Loot loot;
+    @Getter
+    public Loot loot;
     @Getter
     @Setter
     protected Circle earth;

@@ -87,7 +87,7 @@ public class FreePlayController {
 
         imageView.setTranslateX(0);
         imageView.setTranslateY(0);
-        BattleGround.activeGameTest.handleFighterClick();
+        BattleGround.activeGame.handleFighterClick();
     }
 
     public void initialize(){
