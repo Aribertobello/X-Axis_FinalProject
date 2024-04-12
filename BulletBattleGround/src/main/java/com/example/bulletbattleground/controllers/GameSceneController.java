@@ -59,6 +59,8 @@ public class GameSceneController {
     @FXML
     private Line AngleDisp;
     @FXML
+    private ProgressBar VeloBar;
+    @FXML
     private void handlePause() {
 
     }

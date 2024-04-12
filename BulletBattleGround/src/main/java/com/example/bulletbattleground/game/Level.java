@@ -81,6 +81,8 @@ public class Level extends AnchorPane {
     }
     @FXML
     private Menu settingsButton;
+    @FXML
+    private ProgressBar VeloBar;
 
     @FXML
     private Menu pauseButton;
@@ -155,6 +157,7 @@ public class Level extends AnchorPane {
         MomLabel = controller.getMomLabel();
         Xaxis = controller.getXaxis();
         AngleDisp = controller.getAngleDisp();
+        VeloBar = controller.getVeloBar();
 
     }
 
@@ -203,6 +206,13 @@ public class Level extends AnchorPane {
         if(map.activeProjectile != null){
             activeProjectileLabel.setText("Projectile Coordinates: "+ map.getActiveProjectile().getCoordinate());
             VeloLabel.setText("Velocity X and Y: "+ map.getActiveProjectile().velocity());
+            Vector velocity = map.getActiveProjectile().velocity();
+            double MaxVelocity = 150;
+            double progress = velocity.magnitude() / MaxVelocity;
+            double red = 255 * (1-progress);
+            String barStyle = "-fx-accent: rgb(255," + (int)red + ", " + (int)red + ");";
+            VeloBar.setStyle(barStyle);
+            VeloBar.setProgress(progress);
             AccLabel.setText("Acceleration: "+ map.getActiveProjectile().acceleration());
             MomLabel.setText("Momentum: " + Math.round(map.getActiveProjectile().momentum()));
         }

@@ -19,11 +19,12 @@
         <Label fx:id="healthLabel" layoutX="46.0" layoutY="6.0" text="health" />
       <Label fx:id="angleLabel" layoutX="1003.0" layoutY="6.0" text="Angle Preview:" />
       <Label fx:id="SmokeLabel" layoutX="153.0" layoutY="46.0" text="Smoke grenades:" />
-      <Label fx:id="VeloLabel" layoutX="324.0" layoutY="71.0" text="Velocity:" />
+      <Label fx:id="VeloLabel" layoutX="735.0" layoutY="16.0" text="Velocity:" />
       <Label fx:id="AccLabel" layoutX="423.0" layoutY="24.0" text="Acceleration: " />
-      <Label fx:id="MomLabel" layoutX="531.0" layoutY="71.0" text="Momentum:" />
+      <Label fx:id="MomLabel" layoutX="343.0" layoutY="71.0" text="Momentum:" />
       <Line fx:id="Xaxis" endX="7.7071533203125" endY="-1.79290771484375" layoutX="1187.0" layoutY="74.0" startX="-133.0" startY="-1.79290771484375" />
       <Line fx:id="AngleDisp" endX="-8.0" endY="2.70709228515625" layoutX="1182.0" layoutY="69.0" startX="-113.0" startY="2.70709228515625" />
+      <ProgressBar fx:id="VeloBar" layoutX="714.0" layoutY="45.0" prefWidth="200.0" progress="0.0" />
     </Pane>
     <MenuBar fx:id="topMenu" style="-fx-background-color: #76827a;">
       <menus>
