@@ -8,6 +8,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Line;
 import lombok.Getter;
 import lombok.Setter;
 @Getter
@@ -53,6 +54,10 @@ public class GameSceneController {
     private Menu pauseButton;
     @FXML
     private Label MomLabel;
+    @FXML
+    private Line Xaxis;
+    @FXML
+    private Line AngleDisp;
     @FXML
     private void handlePause() {
 

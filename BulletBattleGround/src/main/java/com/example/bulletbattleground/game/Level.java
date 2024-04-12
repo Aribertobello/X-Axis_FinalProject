@@ -85,9 +85,9 @@ public class Level extends AnchorPane {
     @FXML
     private Menu pauseButton;
     @FXML
-    private void handlePause() {
-
-    }
+    private Line Xaxis;
+    @FXML
+    private Line AngleDisp;
 
     @Getter
     @Setter
@@ -153,6 +153,8 @@ public class Level extends AnchorPane {
         VeloLabel = controller.getVeloLabel();
         AccLabel = controller.getAccLabel();
         MomLabel = controller.getMomLabel();
+        Xaxis = controller.getXaxis();
+        AngleDisp = controller.getAngleDisp();
 
     }
 
@@ -172,6 +174,7 @@ public class Level extends AnchorPane {
                 if (angle != LastAngel) {
                     angleLabel.setText("Angle: " + Math.round(angle));
                     LastAngel = angle;
+                    AngleDisp.setRotate(-angle);
                 } else if(angleLabel!=null){
                     angleLabel.setText("Angle: " + Math.round(LastAngel));
                 }
