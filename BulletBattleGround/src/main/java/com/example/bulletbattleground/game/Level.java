@@ -3,11 +3,13 @@ package com.example.bulletbattleground.game;
 import com.example.bulletbattleground.BattleGround;
 import com.example.bulletbattleground.controllers.EducationGameController;
 import com.example.bulletbattleground.controllers.GameSceneController;
+import com.example.bulletbattleground.controllers.TurnVariablesController;
 import com.example.bulletbattleground.gameObjects.Loot.Loot;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
 import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.GameUI;
 import com.example.bulletbattleground.utility.Vector;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
@@ -22,6 +24,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -51,6 +55,10 @@ public abstract class Level extends AnchorPane implements GameUI {
     private Menu exitButton;
     private Menu settingsButton;
     private Menu pauseButton;
+    private Label turnStatusLabel;
+    private Label timeLeftLabel;
+    private ProgressBar timerBar;
+    public Pane turnStatusBox;
     //-----------------------
 
 
@@ -80,9 +88,12 @@ public abstract class Level extends AnchorPane implements GameUI {
 
     public void createHUD() throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(BattleGround.class.getResource("GameScene.fxml"));
-        this.getChildren().add(loader.load());
-        GameSceneController controller = loader.getController();
+        FXMLLoader hudLoader = new FXMLLoader(BattleGround.class.getResource("GameScene.fxml"));
+        FXMLLoader turnLoader = new FXMLLoader(BattleGround.class.getResource("TurnVariables.fxml"));
+        this.getChildren().add(hudLoader.load());
+        turnLoader.load();
+        GameSceneController controller = hudLoader.getController();
+        TurnVariablesController controller1 = turnLoader.getController();
         container = controller.getContainer();
         headsUpDisplay = controller.getHeadsUpDisplay();
         angleLabel = controller.getAngleLabel();
@@ -90,6 +101,12 @@ public abstract class Level extends AnchorPane implements GameUI {
         healthLabel = controller.getHealthLabel();
         healthProgressbar = controller.getHealthProgressbar();
         activeProjectileLabel = controller.getActiveProjectileLabel();
+        turnStatusLabel = controller1.getTurnStatusLabel();
+        timeLeftLabel = controller1.getTimeLeftLabel();
+        timerBar = controller1.getTimerBar();
+        turnStatusBox = controller1.getTurnStatusBox();
+        turnStatusBox.setLayoutX(screenWidth-140);
+        container.getChildren().add(turnStatusBox);
     }
 
     /**
@@ -140,5 +157,14 @@ public abstract class Level extends AnchorPane implements GameUI {
             healthProgressbar.setProgress(20);
             healthProgressbar.setStyle("-fx-accent: red; -fx-progress-bar-indeterminate-fill: red;");
         }
+    }
+
+    public void updateTurnBox(double timeLeft, double timeLimit, int playerTurn) {
+        switch(playerTurn){
+                case 1  -> timerBar.setStyle("-fx-accent: cyan;");
+                case 2 -> timerBar.setStyle("-fx-accent: red;");
+                default -> timerBar.setStyle("-fx-accent: gray;");
+        }
+        timerBar.setProgress(1-(timeLeft/timeLimit));
     }
 }

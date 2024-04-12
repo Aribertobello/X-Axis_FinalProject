@@ -177,22 +177,26 @@ public class Game extends Scene {
                 if (event.getButton() == MouseButton.PRIMARY) {
                     selectedFighter.launchProjectile(
                             selectedFighter.loadout.mainWeapon, new Vector(velocityX, velocityY), level.origin);
+                    turnManager.projectileShot();
                 }// TODO -LAUNCH MAIN PROJECTILE
                 if (event.getButton() == MouseButton.SECONDARY) {
                     selectedFighter.launchProjectile(
                             selectedFighter.loadout.grenades.get(0), new Vector(velocityX, velocityY), level.origin);
                     selectedFighter.loadout.grenades.remove(level.selectedFighter.loadout.grenades.get(0));
+                    turnManager.projectileShot();
                 }
             }
         } else {
             if (event.getButton() == MouseButton.PRIMARY) {
                 selectedFighter.launchProjectile(
                         selectedFighter.loadout.mainWeapon, new Vector(velocityX, velocityY), level.origin);
+                turnManager.projectileShot();
             }// TODO -LAUNCH MAIN PROJECTILE
             if (event.getButton() == MouseButton.SECONDARY) {
                 selectedFighter.launchProjectile(
                         selectedFighter.loadout.grenades.get(0), new Vector(velocityX, velocityY), level.origin);
                 selectedFighter.loadout.grenades.remove(level.selectedFighter.loadout.grenades.get(0));
+                turnManager.projectileShot();
             }
         }
         gameStart = true;

@@ -5,28 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3d752c20-d9fb-4b1c-8717-33dbd1ec407f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/TurnManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/controllers/TurnVariablesController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/resources/com/example/bulletbattleground/TurnVariables.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/BattleGround.class" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/BattleGround.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/fileManagement/FileManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/fileManagement/FileManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/game/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/game/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/game/Mapp.class" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/game/Mapp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/gameObjects/projectiles/Spear.class" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/gameObjects/projectiles/Spear.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/game/Level.class" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/game/Level.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/libs/BulletBattleGround-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/libs/BulletBattleGround-1.0-SNAPSHOT.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/BattleGround.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/BattleGround.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/controllers/FreePlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/controllers/FreePlayController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/controllers/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/controllers/MainMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/fileManagement/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/fileManagement/FileManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/controllers/GameSceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/controllers/GameSceneController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/GameTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/Mapp.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/Mapp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/StandardLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/levels/StandardLevel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/gameObjects/projectiles/Spear.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/gameObjects/projectiles/Spear.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/Level.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/TurnManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/TurnManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/levels/StandardLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/levels/StandardLevel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,13 +186,18 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/Game.java</url>
-          <line>239</line>
+          <line>243</line>
           <option name="timeStamp" value="48" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/Game.java</url>
-          <line>210</line>
+          <line>214</line>
           <option name="timeStamp" value="69" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/Level.java</url>
+          <line>90</line>
+          <option name="timeStamp" value="70" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.ClassCastException" package="java.lang" />

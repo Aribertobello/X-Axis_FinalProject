@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class GameSceneController {
+
     @FXML
     @Getter
     @Setter

@@ -31,11 +31,6 @@ import java.util.ArrayList;
 
 public class StandardLevel extends Level {
 
-    public Rectangle playerturnSquare;
-    public Label activeProjectileTimer;
-    public Label turnTimer;
-    public Label activeTurn;
-    public Label player1Turn;
     public ArrayList<Fighter> team1 = new ArrayList<>();
     public ArrayList<Fighter> team2 = new ArrayList<>();
     public int type;
@@ -56,21 +51,6 @@ public class StandardLevel extends Level {
             case 2,3:
                 break;
         }
-        //------------------TODO in fxml
-        playerturnSquare = new Rectangle(50,50, Color.WHITE);
-        activeProjectileTimer = new Label("");
-        activeProjectileTimer.setTextFill(Color.WHITE);
-        turnTimer = new Label("");
-        turnTimer.setTextFill(Color.WHITE);
-        activeTurn = new Label("WOW");
-        activeTurn.setTextFill(Color.WHITE);
-        player1Turn = new Label("");
-        player1Turn.setTextFill(Color.WHITE);
-        VBox turnVariables = new VBox(10,playerturnSquare,turnTimer,activeProjectileTimer,activeTurn,player1Turn);
-        turnVariables.setLayoutX(screenWidth-60);
-        turnVariables.setLayoutY(90);
-        container.getChildren().add(turnVariables);
-        //----------------------------------------------------------
     }
     @Override
     public boolean[] update(double dt, double time) {

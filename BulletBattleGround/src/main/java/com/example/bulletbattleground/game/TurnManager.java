@@ -59,6 +59,7 @@ public class TurnManager {
                 activeTurn = true;
             }
         }
+         level.updateTurnBox(turnTimer,MAX_TURN_TIMER,currentPlayer);
     }
 
     private void endTurn() {
@@ -80,6 +81,7 @@ public class TurnManager {
 
     public void projectileShot() {
         System.out.println("Player " + currentPlayer + " shot projectile");
+        turnTimer = 15;
         activeTurn = false;
     }
     public boolean isPlayer1Turn(){
