@@ -1,94 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Group?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="container" prefHeight="996.0" prefWidth="1773.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bulletbattleground.controllers.EducationGameController">
-   <Group fx:id="charts">
-      <children>
-          <LineChart fx:id="vyVTChart" layoutY="674.0" prefHeight="214.0" prefWidth="364.0" title="Vy vs T">
+<HBox fx:id="chartBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="309.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bulletbattleground.controllers.EducationGameController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="309.0" prefWidth="270.0">
+         <children>
+            <LineChart fx:id="chart1" prefHeight="198.0" prefWidth="240.0">
               <xAxis>
                   <NumberAxis side="BOTTOM" />
               </xAxis>
               <yAxis>
-                  <NumberAxis side="LEFT" />
+                <NumberAxis side="LEFT" />
               </yAxis>
-          </LineChart>
-          <LineChart fx:id="vxVTChart" layoutX="364.0" layoutY="674.0" prefHeight="214.0" prefWidth="364.0" title="Vx vs T">
-              <xAxis>
+            </LineChart>
+            <Label text="Select Value of Interest" />
+            <ChoiceBox fx:id="chart1ChoiceBox" prefHeight="25.0" prefWidth="205.0" />
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="309.0" prefWidth="270.0">
+         <children>
+            <LineChart fx:id="chart2" prefHeight="198.0" prefWidth="270.0">
+               <xAxis>
                   <NumberAxis side="BOTTOM" />
-              </xAxis>
-              <yAxis>
+               </xAxis>
+               <yAxis>
                   <NumberAxis side="LEFT" />
-              </yAxis>
-          </LineChart>
-          <LineChart fx:id="aVTChart" layoutX="728.0" layoutY="674.0" prefHeight="214.0" prefWidth="364.0" title=" A vs T">
-              <xAxis>
+               </yAxis>
+            </LineChart>
+            <Label text="Select Value of Interest" />
+            <ChoiceBox fx:id="chart2ChoiceBox" prefHeight="25.0" prefWidth="205.0" />
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="309.0" prefWidth="270.0">
+         <children>
+            <LineChart fx:id="chart3" prefHeight="198.0" prefWidth="270.0">
+               <xAxis>
                   <NumberAxis side="BOTTOM" />
-              </xAxis>
-              <yAxis>
+               </xAxis>
+               <yAxis>
                   <NumberAxis side="LEFT" />
-              </yAxis>
-          </LineChart>
-          <LineChart fx:id="yVTChart" layoutX="1092.0" layoutY="674.0" prefHeight="214.0" prefWidth="364.0" title="Y vs T">
-              <xAxis>
-                  <NumberAxis side="BOTTOM" />
-              </xAxis>
-              <yAxis>
-                  <NumberAxis side="LEFT" />
-              </yAxis>
-          </LineChart>
-          <LineChart layoutX="1456.0" layoutY="674.0" prefHeight="214.0" prefWidth="364.0" title="X vs T" fx:id="xVTChart">
-              <xAxis>
-                  <NumberAxis side="BOTTOM" />
-              </xAxis>
-              <yAxis>
-                  <NumberAxis side="LEFT" />
-              </yAxis>
-          </LineChart>
-          <LineChart fx:id="rVTChart" alternativeColumnFillVisible="true" animated="false" layoutX="1356.0" prefHeight="214.0" prefWidth="459.0" title="R vs T">
-              <xAxis>
-                  <NumberAxis label="T" prefHeight="20.0" prefWidth="402.0" side="BOTTOM" />
-              </xAxis>
-              <yAxis>
-                  <NumberAxis label="R" side="LEFT" />
-              </yAxis>
-          </LineChart>
-      </children>
-   </Group>
-    <Pane fx:id="headsUpDisplay" layoutX="-6.0" layoutY="888.0" prefHeight="108.0" prefWidth="1820.0" style="-fx-background-color: #76827a;">
-        <Label fx:id="activeProjectileLabel" layoutX="258.0" layoutY="15.0" prefHeight="17.0" prefWidth="65.0" text="active proj" />
-        <Label fx:id="KELabel" layoutX="269.0" layoutY="44.0" text="KE" />
-        <Label fx:id="blankLabel" layoutX="381.0" layoutY="15.0" text="blank" />
-        <ProgressBar fx:id="healthProgressbar" layoutX="1.0" layoutY="69.0" prefWidth="200.0" progress="0.0" />
-        <Label fx:id="healthLabel" layoutX="87.0" layoutY="52.0" text="health" />
-        <Label fx:id="angleLabel" layoutX="367.0" layoutY="46.0" text="angle" />
-    </Pane>
-    <MenuBar fx:id="topMenu" style="-fx-background-color: #76827a;">
-        <menus>
-            <Menu fx:id="exitButton" mnemonicParsing="false" text="Exit">
-                <items>
-                    <MenuItem mnemonicParsing="false" text="Close" />
-                </items>
-            </Menu>
-            <Menu fx:id="settingsButton" mnemonicParsing="false" text="Settings">
-                <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
-                </items>
-            </Menu>
-            <Menu fx:id="pauseButton" mnemonicParsing="false" text="pause">
-                <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
-                </items>
-            </Menu>
-        </menus>
-    </MenuBar>
-</AnchorPane>
+               </yAxis>
+            </LineChart>
+            <Label text="Select Value of Interest" />
+            <ChoiceBox fx:id="chart3ChoiceBox" prefHeight="25.0" prefWidth="205.0" />
+         </children>
+      </VBox>
+   </children>
+</HBox>

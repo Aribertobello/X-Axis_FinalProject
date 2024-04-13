@@ -76,6 +76,7 @@ public class TurnManager {
     public void startAnimation() {
         previousPlayer = currentPlayer;
         currentPlayer = 0;
+        if(((StandardLevel)level).type == 1) currentPlayer = 1; previousPlayer = 2;
         isAnimationPlaying = true;
     }
 

@@ -52,13 +52,6 @@ public class Game extends Scene {
         super(level);
         this.level = level;
 
-        Button pausebtn = new Button("Pause");
-        pausebtn.setOnAction(new pauseEvent());
-        pausebtn.setPrefWidth(250);
-        pausebtn.setPrefHeight(20);
-        pausebtn.setLayoutX(900);
-        level.getChildren().add(pausebtn);
-
         //TODO add this to fxml and handle click
         isTicking = true;
     }

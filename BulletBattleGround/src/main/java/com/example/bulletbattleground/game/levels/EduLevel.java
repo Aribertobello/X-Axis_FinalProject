@@ -9,27 +9,45 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.layout.HBox;
+
 import java.io.IOException;
 
-public class EduLevel extends Level {
+public class EduLevel extends FreePlayLevel {
+
+    //Edu properties------------------------------------
+    public double dataIncrement = 0;
+    public static double INCREMENT_TIME = 0.25;
+    public double chartsTime = 0;
+    //---------------------------------------
+
 
 
     //Edu Controllers--------------------------------------
-    public Group charts;
-    public LineChart xVTChart;
-    public LineChart yVTChart;
-    public LineChart aVTChart;
-    public LineChart rVTChart;
-    public LineChart vxVTChart;
-    public LineChart vyVTChart;
+    public LineChart chart1;
+    public ChoiceBox<XYChart.Series> chart1ChoiceBox;
+    public LineChart chart2;
+    public ChoiceBox<XYChart.Series> chart2ChoiceBox;
+    public LineChart chart3;
+    public ChoiceBox<XYChart.Series> chart3ChoiceBox;
+    public HBox chartBox;
 
     // series
-    private XYChart.Series rSeries = new XYChart.Series();
+    private XYChart.Series rSeries = new XYChart.Series<>();
     private XYChart.Series xSeries = new XYChart.Series();
     private XYChart.Series ySeries = new XYChart.Series();
-    private XYChart.Series aSeries = new XYChart.Series();
+    private XYChart.Series vSeries = new XYChart.Series();
     private XYChart.Series vxSeries = new XYChart.Series();
     private XYChart.Series vySeries = new XYChart.Series();
+    private XYChart.Series aSeries = new XYChart.Series();
+    private XYChart.Series axSeries = new XYChart.Series();
+    private XYChart.Series aySeries = new XYChart.Series();
+    private XYChart.Series kESeries = new XYChart.Series();
+    private XYChart.Series pESeries = new XYChart.Series();
+    private XYChart.Series tESeries = new XYChart.Series();
+    private XYChart.Series vAngleSeries = new XYChart.Series();
+    private XYChart.Series aAngleSeries = new XYChart.Series();
     //--------------------------------------------------------------
 
     /**
@@ -38,12 +56,31 @@ public class EduLevel extends Level {
     public EduLevel(Mapp map) throws IOException {
         super(map);
         createEducationUI();
+        initializeSeries();
     }
 
     public boolean[] update(double dt,double time) {
         boolean[] result = super.update(dt,time);
-        updateCharts(time);
+        updateCharts(dt,time);
         return result;
+    }
+
+    public void initializeSeries(){
+
+        rSeries.setName("distance R vs Time");
+        xSeries.setName("Coordinate X vs Time");
+        ySeries.setName("Coordinate Y vs Time");
+        vSeries.setName("Velocity vs Time");
+        vxSeries.setName("Velocity X vs Time");
+        vySeries.setName("Velocity Y vs Time");
+        aSeries.setName("Acceleration vs Time");
+        axSeries.setName("Acceleration X vs Time");
+        aySeries.setName("Acceleration Y vs Time");
+        kESeries.setName("Kinetic Energy vs Time");
+        pESeries.setName("Potential Energy vs Time");
+        tESeries.setName("Total Energy vs Time");
+        vAngleSeries.setName("Angle of velocity vs Time");
+        aAngleSeries.setName("Angle of Acceleration vs Time");
     }
 
 
@@ -51,41 +88,89 @@ public class EduLevel extends Level {
         FXMLLoader loader = new FXMLLoader(BattleGround.class.getResource("EducationModeScene.fxml"));
         loader.load();
         EducationGameController controller = loader.getController();
-        charts = controller.getCharts();
-        container.getChildren().add(charts);
-        rVTChart = controller.getRVTChart();
-        rVTChart.getData().add(rSeries);
-        xVTChart = controller.getXVTChart();
-        xVTChart.getData().add(xSeries);
-        yVTChart = controller.getYVTChart();
-        yVTChart.getData().add(ySeries);
-        aVTChart = controller.getAVTChart();
-        aVTChart.getData().add(aSeries);
-        vxVTChart = controller.getVxVTChart();
-        vxVTChart.getData().add(vxSeries);
-        vyVTChart = controller.getVyVTChart();
-        vyVTChart.getData().add(vySeries);
+        chartBox = controller.getChartBox();
+        chartBox.setLayoutY(40);
+        container.getChildren().add(chartBox);
+        chart1ChoiceBox = controller.getChart1ChoiceBox();
+        chart2ChoiceBox = controller.getChart2ChoiceBox();
+        chart3ChoiceBox = controller.getChart3ChoiceBox();
+        for(ChoiceBox choiceBox : controller.getChoiceBoxes()) {
+            choiceBox.getItems().add(rSeries);
+            choiceBox.getItems().add(xSeries);
+            choiceBox.getItems().add(ySeries);
+            choiceBox.getItems().add(vSeries);
+            choiceBox.getItems().add(vxSeries);
+            choiceBox.getItems().add(vySeries);
+            choiceBox.getItems().add(aSeries);
+            choiceBox.getItems().add(axSeries);
+            choiceBox.getItems().add(aySeries);
+            choiceBox.getItems().add(kESeries);
+            choiceBox.getItems().add(pESeries);
+            choiceBox.getItems().add(tESeries);
+            choiceBox.getItems().add(vAngleSeries);
+            choiceBox.getItems().add(aAngleSeries);
+        }
+
     }
 
-    public void updateCharts(double time){
+    public void updateCharts(double dt, double time){
+
+        dataIncrement += dt;
+        chartsTime += dt;
         //TODO Add increment
-        if(map.activeProjectile!=null){
+        if(map.getActiveProjectile()!=null) {
+            if (dataIncrement >= INCREMENT_TIME) {
+                Projectile proj = map.activeProjectile;
+                Vector distance = proj.getCoordinate().distanceVector(new Coordinate(map.getEarth().getCenterX(), map.getEarth().getCenterY()));
+                double r = distance.magnitude();
+                double x = distance.getX();
+                double y = distance.getY();
+                double a = proj.acceleration().magnitude();
+                double ax = proj.acceleration().getX();
+                double ay = proj.acceleration().getY();
+                double v = proj.velocity().magnitude();
+                double vx = proj.getVelocityX();
+                double vy = proj.getVelocityY();
+                double kE = proj.kE();
+                double pE = proj.getMass() * a * r;
+                double tE = pE + kE;
+                double vAngle = proj.velocity().angle();
+                double aAngle = proj.acceleration().angle();
 
-            Projectile proj = map.activeProjectile;
-            Vector distance = proj.getCoordinate().distanceVector(new Coordinate(map.getEarth().getCenterX(),map.getEarth().getCenterY()));
-            double r = distance.magnitude();
-            double x = distance.getX();
-            double y = distance.getY();
-            double a = proj.acceleration().magnitude();
-            double vx = proj.getVelocityX();
-            double vy = proj.getVelocityY();
+                rSeries.getData().add(new XYChart.Data(chartsTime, r));
+                xSeries.getData().add(new XYChart.Data(chartsTime, x));
+                ySeries.getData().add(new XYChart.Data(chartsTime, y));
+                vSeries.getData().add(new XYChart.Data(chartsTime, v));
+                vxSeries.getData().add(new XYChart.Data(chartsTime, vx));
+                vySeries.getData().add(new XYChart.Data(chartsTime, vy));
+                aSeries.getData().add(new XYChart.Data(chartsTime, a));
+                axSeries.getData().add(new XYChart.Data(chartsTime, ax));
+                aySeries.getData().add(new XYChart.Data(chartsTime, ay));
+                kESeries.getData().add(new XYChart.Data(chartsTime, kE));
+                pESeries.getData().add(new XYChart.Data(chartsTime, pE));
+                tESeries.getData().add(new XYChart.Data(chartsTime, tE));
+                vAngleSeries.getData().add(new XYChart.Data(chartsTime, vAngle));
+                aAngleSeries.getData().add(new XYChart.Data(chartsTime, aAngle));
 
-            rSeries.getData().add(new XYChart.Data(time, r));
-            xSeries.getData().add(new XYChart.Data(time, x));
-            ySeries.getData().add(new XYChart.Data(time, y));
-            aSeries.getData().add(new XYChart.Data(time, a));
-            vxSeries.getData().add(new XYChart.Data(time, vx));
-            vySeries.getData().add(new XYChart.Data(time, vy));
+                dataIncrement = 0;
+            }
+        } else {
+            chartsTime = 0;
+            rSeries.getData().clear();
+            xSeries.getData().clear();
+            ySeries.getData().clear();
+            vSeries.getData().clear();
+            vxSeries.getData().clear();
+            vySeries.getData().clear();
+            aSeries.getData().clear();
+            axSeries.getData().clear();
+            aySeries.getData().clear();
+            kESeries.getData().clear();
+            pESeries.getData().clear();
+            tESeries.getData().clear();
+            vAngleSeries.getData().clear();
+            aAngleSeries.getData().clear();
+
 
         }
     }
