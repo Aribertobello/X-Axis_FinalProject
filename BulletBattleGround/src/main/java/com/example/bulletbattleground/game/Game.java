@@ -18,6 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import lombok.Getter;
 
 
 import java.io.IOException;
@@ -26,8 +27,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Game extends Scene {
 
+    private static final double MIN_LAUNCH_VELOCITY = 10.0;
     protected Boolean gameOver = false;
 
+    @Getter
     protected Level level;
     protected Boolean gameWon;
     protected Integer tickRate = 100;
@@ -84,7 +87,7 @@ public class Game extends Scene {
     protected void tick(double dt) {
         if(level instanceof StandardLevel) {
             StandardLevel level = (StandardLevel) this.level;
-            if (gameStart) {
+            if (/*gameStart*/true) {
                 turnManager.updateTurn(dt);
             }
             if (level.type == 2 && turnManager.isPlayer2Turn()) {
@@ -111,10 +114,7 @@ public class Game extends Scene {
     protected void handleDragAndShoot() {
 
         final double[] dragStartX = {0.0};
-
         final double[] dragStartY = {0.0};
-
-        AtomicInteger clickNb = new AtomicInteger();
         level.trajectoryLine.setStroke(Color.GOLD);
 
         this.setOnMousePressed(event -> {
@@ -152,26 +152,33 @@ public class Game extends Scene {
             double velocityY = -event.getSceneY() + dragStartY[0];
 
             level.resetTrajectoryLine();
-            shoot(event,level.selectedFighter,velocityX,velocityY);
+            if(level.selectedFighter!=null && level.selectedFighter instanceof Ally && level.selectedFighter.isHighlighted() && checkvelocity(velocityX,velocityY) ){
+                shoot(event, (Ally) level.selectedFighter,velocityX,velocityY);
+            }
             // TODO -LAUNCH GRENADE
         });
-        handleFighterClick();
         this.setOnKeyPressed(new pauseEvent());
+    }
+
+    private boolean checkvelocity(double velocityX, double velocityY) {
+        return (new Vector(velocityX,velocityY)).magnitude() > MIN_LAUNCH_VELOCITY;
     }
 
     private void shoot(MouseEvent event, Ally selectedFighter, double velocityX, double velocityY) {
 
-        if(level instanceof StandardLevel){
+        if(level instanceof StandardLevel && level.origin!=null){
             StandardLevel level = (StandardLevel) this.level;
             if(turnManager.isPlayer1Turn() && level.team1.contains(selectedFighter)) {
                 if (event.getButton() == MouseButton.PRIMARY) {
                     selectedFighter.launchProjectile(
                             selectedFighter.loadout.mainWeapon, new Vector(velocityX, velocityY), level.origin);
+                    turnManager.projectileShot();
                 }// TODO -LAUNCH MAIN PROJECTILE
                 if (event.getButton() == MouseButton.SECONDARY) {
                     selectedFighter.launchProjectile(
                             selectedFighter.loadout.grenades.get(0), new Vector(velocityX, velocityY), level.origin);
                     selectedFighter.loadout.grenades.remove(level.selectedFighter.loadout.grenades.get(0));
+                    turnManager.projectileShot();
                 }
             } else if(turnManager.isPlayer2Turn() && level.team2.contains(selectedFighter)){
                 if (event.getButton() == MouseButton.PRIMARY) {
@@ -199,10 +206,9 @@ public class Game extends Scene {
                 turnManager.projectileShot();
             }
         }
-        gameStart = true;
     }
 
-    public void handleFighterClick() {
+    /*public void handleFighterClick() {
         ArrayList team2;
         if(level instanceof StandardLevel){
             team2 = ((StandardLevel)level).team2;
@@ -231,7 +237,7 @@ public class Game extends Scene {
                 });
             }
         }
-    }
+    }*/
 
     private class pauseEvent implements EventHandler {
         @Override
@@ -241,7 +247,7 @@ public class Game extends Scene {
                 timeline.play();
             }else{
                 //Debug
-                Object variableOfInterest = level.map.activeProjectile;
+                Object variableOfInterest = turnManager;
                 //----------------
                 timeline.pause();
                 //tickRate = -tickRate;

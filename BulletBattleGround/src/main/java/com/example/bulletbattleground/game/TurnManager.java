@@ -22,6 +22,7 @@ public class TurnManager {
     public TurnManager(Level level) {
         this.level = level;
         currentPlayer = 1;
+        previousPlayer = 1;
         isAnimationPlaying = false;
         turnTimer = 0;
         animationTimer = 0;
@@ -29,6 +30,7 @@ public class TurnManager {
 
     public void startTurn() {
         activeTurn = true;
+        turnTimer = 0;
         if (!isAnimationPlaying) {
         } else {
             System.out.println("Projectile animation is still playing. Player cannot shoot.");//TODO UI
@@ -47,10 +49,10 @@ public class TurnManager {
                 turnTimer+=dt;
             } else {
                 turnTimer = 0;
-                startAnimation();
+                endTurn();
                 activeTurn = false;
             }
-        } else {
+         } else {
             if (animationTimer < MAX_PROJ_ANIMATION_TIMER) {
                 animationTimer+=dt;
             } else {
@@ -58,8 +60,12 @@ public class TurnManager {
                 endAnimation();
                 activeTurn = true;
             }
-        }
-         level.updateTurnBox(turnTimer,MAX_TURN_TIMER,currentPlayer);
+         }
+         if(currentPlayer ==0){
+             level.updateTurnBox(animationTimer, MAX_PROJ_ANIMATION_TIMER, currentPlayer);
+         } else {
+             level.updateTurnBox(turnTimer, MAX_TURN_TIMER, currentPlayer);
+         }
     }
 
     private void endTurn() {
@@ -81,8 +87,8 @@ public class TurnManager {
 
     public void projectileShot() {
         System.out.println("Player " + currentPlayer + " shot projectile");
-        turnTimer = 15;
         activeTurn = false;
+        startAnimation();
     }
     public boolean isPlayer1Turn(){
         return currentPlayer == 1;

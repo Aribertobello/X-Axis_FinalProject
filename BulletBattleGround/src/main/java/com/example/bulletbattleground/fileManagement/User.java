@@ -1,5 +1,6 @@
-package com.example.bulletbattleground;
+package com.example.bulletbattleground.fileManagement;
 
+import com.example.bulletbattleground.BattleGround;
 import com.example.bulletbattleground.fileManagement.FileManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

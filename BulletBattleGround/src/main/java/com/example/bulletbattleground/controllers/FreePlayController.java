@@ -4,6 +4,7 @@ import com.example.bulletbattleground.BattleGround;
 import com.example.bulletbattleground.game.Fighter;
 import com.example.bulletbattleground.game.Level;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
+import com.example.bulletbattleground.gameObjects.fighters.Computer;
 import com.example.bulletbattleground.utility.Coordinate;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -38,6 +39,7 @@ public class FreePlayController {
         translateY = imageView.getTranslateY();
     }
     public void compDragStart(MouseEvent event) {
+        fighter = new Computer(0,0,1);
         imageView = (ImageView) event.getSource();
         returnCoordinate = new Coordinate(event.getSceneX(),event.getSceneY());
         coordinate = new Coordinate(event.getSceneX(),event.getSceneY());
@@ -80,17 +82,44 @@ public class FreePlayController {
         imageView.setTranslateY(newTranslateY);
     }
 
-    public void dragEnd(MouseEvent event) {
+    public void dragEndFighter(MouseEvent event) {
         fighter.setCoordinate(coordinate);
         Level level = ((Level)((Node)event.getSource()).getParent().getParent().getParent());
         level.addFighter(fighter,0);
 
         imageView.setTranslateX(0);
         imageView.setTranslateY(0);
-        BattleGround.activeGame.handleFighterClick();
+        level.setSelectedFighter(fighter);
+    }
+
+    public void dragEndWall(MouseEvent event) {
+        fighter.setCoordinate(coordinate);
+        Level level = ((Level) ((Node) event.getSource()).getParent().getParent().getParent());
+        level.addFighter(fighter, 0);
+
+        imageView.setTranslateX(0);
+        imageView.setTranslateY(0);
+        level.setSelectedFighter(fighter);
+    }
+
+    public void dragEndSpaceShip(MouseEvent event) {
+        fighter.setCoordinate(coordinate);
+        Level level = ((Level)((Node)event.getSource()).getParent().getParent().getParent());
+        level.addFighter(fighter,0);
+
+        imageView.setTranslateX(0);
+        imageView.setTranslateY(0);
+        level.setSelectedFighter(fighter);
+    }
+
+    public void dragEndSmokeScreen(MouseEvent mouseEvent) {
     }
 
     public void initialize(){
+
         allyImageView.setImage(new Image("file:Light_Class_Img.png"));
+        computerImageView.setImage(new Image("file:Light_Class_Img.png"));
+        wallImageView.setImage(new Image("file:WallTemporary.jpg"));
+        spaceShipImageView.setImage(new Image("file:SpaceShip.png"));
     }
 }

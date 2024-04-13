@@ -92,5 +92,14 @@ public class StandardLevel extends Level {
         } else {
             team2.add(fighter);
         }
+        fighter.setTeamNb(teamNb);
+    }
+    @Override
+    public void removeFighter(Fighter fighter){
+        if(fighter.getTeamNb()==1){
+            team1.remove(fighter);
+        } else {
+            team2.remove(fighter);
+        }
     }
 }

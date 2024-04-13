@@ -1,5 +1,6 @@
 package com.example.bulletbattleground.game;
 
+import com.example.bulletbattleground.BattleGround;
 import com.example.bulletbattleground.gameObjects.Loot.Loot;
 import com.example.bulletbattleground.gameObjects.projectiles.Bullet;
 import com.example.bulletbattleground.gameObjects.projectiles.Grenade;
@@ -37,6 +38,8 @@ public class Mapp extends Pane {
     private Vector gravity;
     private Vector airResistance;
     protected int scale;
+    @Setter
+    private double[] bounds  = {BattleGround.screenWidth,BattleGround.screenHeight};
 
     @Getter
     @Setter
@@ -198,7 +201,7 @@ public class Mapp extends Pane {
                 fighter.setHealth(fighter.getHealth() - projectile.getDamage());
                 removeActiveProjectile();
                 if (fighter.getHealth() <= 0) {
-                    removeFighter(fighter);
+                    ((Level)getParent().getParent()).removeFighter(fighter);
                 }
                 return true;
             }
@@ -220,16 +223,17 @@ public class Mapp extends Pane {
     protected void explosion(Coordinate coordinate) {
         activeProjectile.setVelocity(new Vector(0, 0));
     }
+
     private boolean isInBounds(MovingBody body) {
         double x = body.getCoordinate().getX();
         double y = body.getCoordinate().getY();
-        //return !(x < -50 || x > 2000 || y < -50 || y > 1900);
-        return true;
+        return !(x < -50 || x > bounds[0]+50 || y < -50 || y > bounds[1]+50);
     }
     public void removeActiveProjectile() {
         if(activeProjectile!=null){
             this.getChildren().remove(activeProjectile);
             activeProjectile = null;
+            ((Game)getScene()).turnManager.endAnimation();
         }
     }
     public void removeFighter(Fighter fighter){

@@ -1,6 +1,8 @@
 package com.example.bulletbattleground.gameObjects.fighters;
 
+import com.example.bulletbattleground.BattleGround;
 import com.example.bulletbattleground.game.Fighter;
+import com.example.bulletbattleground.game.Level;
 import com.example.bulletbattleground.game.Mapp;
 import com.example.bulletbattleground.game.Projectile;
 import com.example.bulletbattleground.gameObjects.projectiles.Rocket;
@@ -26,7 +28,7 @@ public class Ally extends Fighter {
         super(coordinateX, coordinateY, type);
         Image ally_Image = new Image("file:Light_Class_Img.png");
         this.setFill(new ImagePattern(ally_Image));
-        setHealth(20);
+        setHealth(15);
     }
 
     /**
@@ -70,9 +72,5 @@ public class Ally extends Fighter {
                 ((Rocket) projectile).setDropZone(5);
             }
         }
-
-        System.out.println("added projectile to scene"); //TODO Remove in final code
-        System.out.println(projectile.netForce().magnitude());
-        System.out.println(projectile.netForce().angle());
     }
 }
