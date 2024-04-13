@@ -64,29 +64,41 @@ public abstract class Level extends AnchorPane implements GameUI {
     @FXML
     private ProgressBar healthProgressbar;
     @FXML
+    private Label VeloLabel;
+    @FXML
+    private Label AccLabel;
+
+    @FXML
     private Label healthLabel;
     @FXML
     private MenuBar topMenu;
     @FXML
     private Label angleLabel;
     @FXML
+    private Label MomLabel;
+    @FXML
+    private Label MagLabel;
+    @FXML
     private Menu newGameButton;
     @FXML
     private Menu exitButton;
-    @FXML
-    private void handleExit(){
-        Platform.exit();
-    }
+
     @FXML
     private Menu settingsButton;
-    @FXML
-    private Menu pauseButton;
     private Label turnStatusLabel;
     private Label timeLeftLabel;
     private ProgressBar timerBar;
     public Pane turnStatusBox;
+    @FXML
+    private ProgressBar VeloBar;
+    @FXML
+    private Menu pauseButton;
+    @FXML
+    private Line Xaxis;
+    @FXML
+    private Line AngleDisp;
     //-----------------------
-
+    private double LastAngel = 0.0;
 
     //constructor---------------------------------
     /**
@@ -108,6 +120,11 @@ public abstract class Level extends AnchorPane implements GameUI {
 
         updateHUD();
         return new boolean[]{map.update(dt)};
+    }
+
+    @FXML
+    private void handleExit(){
+        Platform.exit();
     }
 
     public void createHUD() throws IOException {
@@ -133,6 +150,13 @@ public abstract class Level extends AnchorPane implements GameUI {
         turnStatusBox.setLayoutY(40);
         container.getChildren().add(turnStatusBox);
         GrenadeLabel = controller.getGrenadeLabel();
+        VeloLabel = controller.getVeloLabel();
+        AccLabel = controller.getAccLabel();
+        MomLabel = controller.getMomLabel();
+        Xaxis = controller.getXaxis();
+        AngleDisp = controller.getAngleDisp();
+        VeloBar = controller.getVeloBar();
+
     }
 
     /**
@@ -164,25 +188,51 @@ public abstract class Level extends AnchorPane implements GameUI {
         trajectoryLine.setEndY(endY);
     }
 
-    public void updateHUD () {
-
-        if (trajectoryLine != null && angleLabel != null) {
-
+    public void updateHUD(){
+        if(trajectoryLine != null && angleLabel != null && selectedFighter != null) {
             Vector direction = new Vector(trajectoryLine.getEndX() - trajectoryLine.getStartX(), trajectoryLine.getEndY() - trajectoryLine.getStartY());
             double angle = 180 - direction.angle();
-            angleLabel.setText("Angle: " + angle);
+            if(!Double.isNaN(angle)) {
+                if (angle != LastAngel) {
+                    angleLabel.setText("Angle: " + Math.round(angle));
+                    LastAngel = angle;
+                    AngleDisp.setRotate(-angle);
+                } else if(angleLabel!=null){
+                    angleLabel.setText("Angle: " + Math.round(LastAngel));
+                }
+                }
+            GrenadeLabel.setText("Number of Grenades left: " + selectedFighter.loadout.grenades.size());
         }
         if(map != null && map.activeProjectile != null){
             KELabel.setText("Kinetic energy: "+ Math.round(map.getActiveProjectile().kE()));
         }
-        if(healthProgressbar != null && selectedFighter != null) {
-            GrenadeLabel.setText("Number of Grenades left: " + selectedFighter.loadout.grenades.size());
-            healthLabel.setText("Player Health: " + selectedFighter.getHealth());
-            healthProgressbar.setProgress(selectedFighter.getHealth());
+        if(healthProgressbar != null && selectedFighter != null){
+            int previousHealth = (int) (healthProgressbar.getProgress() * 15); // Assuming the progress bar is based on a scale of 0 to 1
+            int currentHealth = selectedFighter.getHealth();
+            if (currentHealth < previousHealth) {
+                double healthChange = (previousHealth - currentHealth) / 100.0; // Convert to decimal
+                double newProgress = Math.max(0, healthProgressbar.getProgress() - healthChange); // Ensure progress doesn't go below 0
+                healthProgressbar.setProgress(newProgress);
+            } else if (currentHealth > previousHealth) {
+                double healthChange = (currentHealth - previousHealth) / 100.0; // Convert to decimal
+                double newProgress = Math.min(1, healthProgressbar.getProgress() + healthChange); // Ensure progress doesn't go above 1
+                healthProgressbar.setProgress(newProgress);
+            }
+            healthLabel.setText("Player Health: " + currentHealth);
             healthProgressbar.setStyle("-fx-accent: red; -fx-progress-bar-indeterminate-fill: red;");
         }
         if(map.activeProjectile != null){
-            activeProjectileLabel.setText("Projectile: "+ map.getActiveProjectile().getCoordinate());
+            activeProjectileLabel.setText("Projectile Coordinates: "+ map.getActiveProjectile().getCoordinate());
+            VeloLabel.setText("Velocity X and Y: "+ map.getActiveProjectile().velocity());
+            Vector velocity = map.getActiveProjectile().velocity();
+            double MaxVelocity = 150;
+            double progress = velocity.magnitude() / MaxVelocity;
+            double red = 255 * (1-progress);
+            String barStyle = "-fx-accent: rgb(255," + (int)red + ", " + (int)red + ");";
+            VeloBar.setStyle(barStyle);
+            VeloBar.setProgress(progress);
+            AccLabel.setText("Acceleration: "+ map.getActiveProjectile().acceleration());
+            MomLabel.setText("Momentum: " + Math.round(map.getActiveProjectile().momentum()));
         }
         if (map != null && map.activeProjectile != null) {
 
