@@ -128,7 +128,6 @@ public abstract class Level extends AnchorPane implements GameUI {
     }
 
     public void createHUD() throws IOException {
-
         FXMLLoader hudLoader = new FXMLLoader(BattleGround.class.getResource("GameScene.fxml"));
         FXMLLoader turnLoader = new FXMLLoader(BattleGround.class.getResource("TurnVariables.fxml"));
         this.getChildren().add(hudLoader.load());
@@ -137,6 +136,7 @@ public abstract class Level extends AnchorPane implements GameUI {
         TurnVariablesController controller1 = turnLoader.getController();
         container = controller.getContainer();
         headsUpDisplay = controller.getHeadsUpDisplay();
+        headsUpDisplay.setLayoutY(BattleGround.screenHeight-125);
         angleLabel = controller.getAngleLabel();
         KELabel = controller.getKELabel();
         healthLabel = controller.getHealthLabel();
@@ -156,7 +156,6 @@ public abstract class Level extends AnchorPane implements GameUI {
         Xaxis = controller.getXaxis();
         AngleDisp = controller.getAngleDisp();
         VeloBar = controller.getVeloBar();
-
     }
 
     /**
@@ -200,7 +199,7 @@ public abstract class Level extends AnchorPane implements GameUI {
                 } else if(angleLabel!=null){
                     angleLabel.setText("Angle: " + Math.round(LastAngel));
                 }
-                }
+            }
             GrenadeLabel.setText("Number of Grenades left: " + selectedFighter.loadout.grenades.size());
         }
         if(map != null && map.activeProjectile != null){
