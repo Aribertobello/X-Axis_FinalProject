@@ -259,6 +259,8 @@ public abstract class Level extends AnchorPane implements GameUI {
     }
 
     public void removeFighter(Fighter fighter) {
+        selectedFighter.unhiglight();
+        selectedFighter = null;
         map.removeFighter(fighter);
         setOrigin(null);
     }
