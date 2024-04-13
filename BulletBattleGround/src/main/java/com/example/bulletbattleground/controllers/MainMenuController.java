@@ -23,56 +23,6 @@ public class MainMenuController {
     private Button EXITBTN;
     private Button MAINMENUBTN;
 
-    /**
-     * @param event Action event for a button to create new scene for player vs computer Game mode.
-     */
-    public void player_computer_btn_clicked(ActionEvent event)  {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        try{
-            BattleGround.activeGame = new Game(FileManager.defaultLevelPvc());
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-        stage.setScene(BattleGround.activeGame);
-        stage.setMaximized(true);
-        stage.show();
-        BattleGround.activeGame.run();
-    }
-
-    /**
-     * @param event Action event for a button to create new scene for player vs environment game mode.
-     */
-    public void player_environ_btn_clicked(ActionEvent event){
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        try{
-            BattleGround.activeGame = new Game(FileManager.defaultLevelPve());
-        }catch(IOException e){
-         e.printStackTrace();
-        }
-        stage.setScene(BattleGround.activeGame);
-        stage.setMaximized(true);
-        stage.show();
-        BattleGround.activeGame.run();
-    }
-
-    /**
-     *@param event Action handler for a button to create new scene for player vs player game mode.
-     */
-    public void player_player_btn_clicked(ActionEvent event){
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        try{
-            BattleGround.activeGame = new Game(FileManager.defaultLevelPvp());
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-        //double screenWidth = Screen.getPrimary().getBounds().getWidth();
-        //System.out.println("Screen width: " + screenWidth + " pixels");
-        stage.setScene(BattleGround.activeGame);
-        stage.setMaximized(true);
-        stage.setFullScreen(true);
-        stage.show();
-        BattleGround.activeGame.run();
-    }
 
     /**
      *@param event Action event for a button to create new scene called submenuScene where a player chooses his game mode.
@@ -110,7 +60,20 @@ public class MainMenuController {
     public void freePlayButton(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         try{
-            BattleGround.activeGame = new Game(FileManager.defaultLevelPve());
+            BattleGround.activeGame = new Game(FileManager.freePlayLevel());
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        stage.setScene(BattleGround.activeGame);
+        stage.setMaximized(true);
+        stage.show();
+        BattleGround.activeGame.run();
+    }
+    @FXML
+    public void selectEduMap(ActionEvent actionEvent) {
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        try{
+            BattleGround.activeGame = new Game(FileManager.defaultEduLevel());
         }catch(IOException e){
             e.printStackTrace();
         }

@@ -13,6 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class GameSceneController {
+
     @FXML
     private Pane headsUpDisplay;
     @FXML

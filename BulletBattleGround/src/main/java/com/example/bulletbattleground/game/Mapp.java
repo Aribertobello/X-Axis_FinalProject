@@ -1,5 +1,6 @@
 package com.example.bulletbattleground.game;
 
+import com.example.bulletbattleground.BattleGround;
 import com.example.bulletbattleground.gameObjects.Loot.Loot;
 import com.example.bulletbattleground.gameObjects.projectiles.Bullet;
 import com.example.bulletbattleground.gameObjects.projectiles.Grenade;
@@ -16,21 +17,29 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
 public class Mapp extends Pane {
 
+    @Getter
     private int type;
 
+    @Getter
+    @Setter
     protected ArrayList<Fighter> people = new ArrayList<>();
+    @Getter
+    @Setter
     protected ArrayList<Obstacle> obstacles = new ArrayList<>();
     private ArrayList<HitBox> hitBoxes = new ArrayList<>();
     private Pane hitBoxPane = new Pane();
     private Vector gravity;
     private Vector airResistance;
     protected int scale;
+    @Setter
+    private double[] bounds  = {BattleGround.screenWidth,BattleGround.screenHeight};
 
     @Getter
     @Setter
@@ -38,7 +47,10 @@ public class Mapp extends Pane {
     @Getter
     @Setter
     protected int buffer = 0;
-    protected Loot loot;
+    @Getter
+    public Loot loot;
+    @Getter
+    @Setter
     protected Circle earth;
     public Vector[] environmentForces = {gravity,airResistance};
 
@@ -64,28 +76,27 @@ public class Mapp extends Pane {
             this.type = 1;
         }
         this.getChildren().add(new Circle(2000, 1200, 1));
-
     }
 
     /**
      *
      * @param dt
      */
-    protected boolean update(double dt) {
+    public boolean update(double dt) {
 
         for (Obstacle obstacle : obstacles) {
             obstacle.move(dt);
 
         }
         if (activeProjectile != null) {
-            if(isInBounds(activeProjectile)){
+            if(!isInBounds(activeProjectile)){
                 removeActiveProjectile();
                 return false;
             }
             activeProjectile.move(dt);
             addForces(activeProjectile);
             buffer++;
-            if (buffer > 50) {
+            if (buffer > 10) {
 
                 if (activeProjectile instanceof Grenade) {
 
@@ -110,7 +121,6 @@ public class Mapp extends Pane {
         people.add(fighter);
         hitBoxes.add(fighter.hitBox());
         getChildren().add(fighter);
-
     }
 
     /**
@@ -191,7 +201,7 @@ public class Mapp extends Pane {
                 fighter.setHealth(fighter.getHealth() - projectile.getDamage());
                 removeActiveProjectile();
                 if (fighter.getHealth() <= 0) {
-                    removeFighter(fighter);
+                    ((Level)getParent().getParent()).removeFighter(fighter);
                 }
                 return true;
             }
@@ -213,15 +223,17 @@ public class Mapp extends Pane {
     protected void explosion(Coordinate coordinate) {
         activeProjectile.setVelocity(new Vector(0, 0));
     }
+
     private boolean isInBounds(MovingBody body) {
         double x = body.getCoordinate().getX();
         double y = body.getCoordinate().getY();
-        return x < -50 || x > 2000 || y < -50 || y > 900;
+        return !(x < -50 || x > bounds[0]+50 || y < -50 || y > bounds[1]+50);
     }
     public void removeActiveProjectile() {
         if(activeProjectile!=null){
             this.getChildren().remove(activeProjectile);
             activeProjectile = null;
+            ((Game)getScene()).turnManager.endAnimation();
         }
     }
     public void removeFighter(Fighter fighter){
