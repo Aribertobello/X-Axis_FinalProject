@@ -8,6 +8,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Line;
 import lombok.Getter;
 import lombok.Setter;
 @Getter
@@ -38,7 +39,12 @@ public class GameSceneController {
     private Menu exitButton;
     @FXML
     private Label GrenadeLabel;
+    @FXML
     private Label SmokeLabel;
+    @FXML
+    private Label VeloLabel;
+    @FXML
+    private Label AccLabel;
     @FXML
     private void handleExit(){
         Platform.exit();
@@ -48,6 +54,14 @@ public class GameSceneController {
     @FXML
     private Menu pauseButton;
 
+    @FXML
+    private Label MomLabel;
+    @FXML
+    private Line Xaxis;
+    @FXML
+    private Line AngleDisp;
+    @FXML
+    private ProgressBar VeloBar;
     @FXML
     private void handlePause() {
     }
