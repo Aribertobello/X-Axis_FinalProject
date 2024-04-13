@@ -40,11 +40,9 @@
       <Slider layoutX="212.0" layoutY="392.0" orientation="VERTICAL" prefHeight="82.0" prefWidth="14.0" />
       <Slider layoutX="212.0" layoutY="552.0" orientation="VERTICAL" prefHeight="93.0" prefWidth="14.0" />
       <Slider layoutX="212.0" layoutY="717.0" orientation="VERTICAL" prefHeight="93.0" prefWidth="14.0" />
-      <Slider layoutX="66.0" layoutY="552.0" orientation="VERTICAL" prefHeight="93.0" prefWidth="14.0" />
       <Button layoutX="14.0" layoutY="255.0" mnemonicParsing="false" text="Shoot" />
       <Label layoutX="182.0" layoutY="366.0" prefHeight="17.0" prefWidth="61.0" text="Rotation" />
-      <Label layoutX="181.0" layoutY="535.0" prefHeight="17.0" prefWidth="61.0" text="Rotation" />
-      <Label layoutX="36.0" layoutY="535.0" prefHeight="17.0" prefWidth="61.0" text="Speed" />
+      <Label layoutX="181.0" layoutY="535.0" prefHeight="17.0" prefWidth="61.0" text="Speed" />
       <Label layoutX="196.0" layoutY="695.0" prefHeight="17.0" prefWidth="61.0" text="Radius" />
    </children>
 </Pane>
