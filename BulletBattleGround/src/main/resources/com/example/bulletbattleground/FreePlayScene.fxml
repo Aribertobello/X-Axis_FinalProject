@@ -7,6 +7,8 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
 <Pane fx:id="freePlayUI" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="839.0" prefWidth="246.0" style="-fx-border-color: black; -fx-border-width: 12; -fx-border-radius: 0; -fx-background-color: #76827a;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bulletbattleground.controllers.FreePlayController">
    <children>
@@ -21,28 +23,52 @@
       <Label alignment="CENTER" layoutX="20.0" layoutY="457.0" prefHeight="17.0" prefWidth="207.0" text="Wall" />
       <Label alignment="CENTER" layoutX="21.0" layoutY="628.0" prefHeight="17.0" prefWidth="207.0" text="SpaceShip" />
       <Label alignment="CENTER" layoutX="21.0" layoutY="777.0" prefHeight="17.0" prefWidth="207.0" text="SmokeScreen" />
-      <RadioButton layoutX="184.0" layoutY="69.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="55.0" text="Light">
+      <RadioButton fx:id="allyLightbtn" layoutX="184.0" layoutY="69.0" mnemonicParsing="false" onAction="#allyLightClassChosen" prefHeight="17.0" prefWidth="55.0" text="Light">
          <toggleGroup>
-            <ToggleGroup fx:id="classGroup" />
+            <ToggleGroup fx:id="allyClassGroup" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton layoutX="184.0" layoutY="98.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="55.0" text="Medium" toggleGroup="$classGroup" />
-      <RadioButton layoutX="184.0" layoutY="126.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="55.0" text="Heavy" toggleGroup="$classGroup" />
+      <RadioButton fx:id="allyMedbtn" layoutX="184.0" layoutY="98.0" mnemonicParsing="false" onAction="#allyMedClassChosen" prefHeight="17.0" prefWidth="55.0" text="Medium" toggleGroup="$allyClassGroup" />
+      <RadioButton fx:id="allyHeavybtn" layoutX="184.0" layoutY="126.0" mnemonicParsing="false" onAction="#allyHeavyClassChosen" prefHeight="17.0" prefWidth="55.0" text="Heavy" toggleGroup="$allyClassGroup" />
       <Button layoutX="14.0" layoutY="122.0" mnemonicParsing="false" text="Reflect" />
       <RadioButton layoutX="177.0" layoutY="231.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="55.0" text="Light">
          <toggleGroup>
-            <ToggleGroup fx:id="classGroupComp" />
+            <ToggleGroup fx:id="compClassGroup" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton layoutX="177.0" layoutY="259.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="55.0" text="Medium" toggleGroup="$classGroupComp" />
-      <RadioButton layoutX="177.0" layoutY="285.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="55.0" text="Heavy" toggleGroup="$classGroupComp" />
+      <RadioButton layoutX="177.0" layoutY="259.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="55.0" text="Medium" toggleGroup="$compClassGroup" />
+      <RadioButton layoutX="177.0" layoutY="285.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="55.0" text="Heavy" toggleGroup="$compClassGroup" />
       <Button layoutX="14.0" layoutY="281.0" mnemonicParsing="false" text="Reflect" />
-      <Slider layoutX="212.0" layoutY="392.0" orientation="VERTICAL" prefHeight="82.0" prefWidth="14.0" />
-      <Slider layoutX="212.0" layoutY="552.0" orientation="VERTICAL" prefHeight="93.0" prefWidth="14.0" />
+      <Slider fx:id="wallMassSlider" layoutX="212.0" layoutY="392.0" orientation="VERTICAL" prefHeight="82.0" prefWidth="14.0" />
+      <Slider fx:id="spaceShipSpeedslider" layoutX="212.0" layoutY="552.0" orientation="VERTICAL" prefHeight="93.0" prefWidth="14.0" />
       <Slider layoutX="212.0" layoutY="717.0" orientation="VERTICAL" prefHeight="93.0" prefWidth="14.0" />
-      <Button layoutX="14.0" layoutY="255.0" mnemonicParsing="false" text="Shoot" />
-      <Label layoutX="182.0" layoutY="366.0" prefHeight="17.0" prefWidth="61.0" text="Rotation" />
-      <Label layoutX="181.0" layoutY="535.0" prefHeight="17.0" prefWidth="61.0" text="Speed" />
+      <Button layoutX="14.0" layoutY="247.0" mnemonicParsing="false" text="Shoot" />
+      <Label alignment="CENTER" layoutX="157.0" layoutY="375.0" prefHeight="17.0" prefWidth="40.0" text="Rotation">
+         <font>
+            <Font size="9.0" />
+         </font></Label>
+      <Label alignment="TOP_CENTER" layoutX="195.0" layoutY="535.0" prefHeight="17.0" prefWidth="47.0" text="Speed">
+         <font>
+            <Font size="10.0" />
+         </font></Label>
       <Label layoutX="196.0" layoutY="695.0" prefHeight="17.0" prefWidth="61.0" text="Radius" />
+      <Slider fx:id="wallRotationSlider" layoutX="170.0" layoutY="392.0" max="360.0" orientation="VERTICAL" prefHeight="82.0" prefWidth="14.0" />
+      <Line endX="100.0" layoutX="123.0" layoutY="366.0" startX="-100.0" />
+      <Line endX="100.0" layoutX="123.0" layoutY="211.0" startX="-100.0" />
+      <Line endX="100.0" layoutX="123.0" layoutY="524.0" startX="-100.0" />
+      <Line endX="100.0" layoutX="123.0" layoutY="684.0" startX="-100.0" />
+      <Label layoutX="205.0" layoutY="375.0" text="Mass" />
+      <Slider fx:id="wallWidthSlider" layoutX="59.0" layoutY="392.0" min="1.0" orientation="VERTICAL" prefHeight="82.0" prefWidth="14.0" />
+      <Slider fx:id="wallHeightSlider" layoutX="24.0" layoutY="392.0" max="500.0" min="1.0" orientation="VERTICAL" prefHeight="82.0" prefWidth="14.0" />
+      <Label layoutX="52.0" layoutY="375.0" text="Width">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <Label layoutX="17.0" layoutY="375.0" text="Height">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

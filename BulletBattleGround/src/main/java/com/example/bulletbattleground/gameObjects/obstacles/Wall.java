@@ -32,6 +32,7 @@ public class Wall extends Obstacle {
         setMass(mass);
     }
 
+
     @Override
     public void move(double dt) {
         super.move(dt);
