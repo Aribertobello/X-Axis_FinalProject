@@ -55,6 +55,7 @@ public class EduLevel extends FreePlayLevel {
      */
     public EduLevel(Mapp map) throws IOException {
         super(map);
+        getMap().setBounds(new double[]{4000,2000});
         createEducationUI();
         initializeSeries();
     }

@@ -2,7 +2,7 @@ package com.example.bulletbattleground.game;
 
 import com.example.bulletbattleground.game.levels.StandardLevel;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
-import com.example.bulletbattleground.utility.Coordinate;
+import com.example.bulletbattleground.utility.TurnManager;
 import com.example.bulletbattleground.utility.Vector;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -12,7 +12,6 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 
 import javafx.scene.control.Label;
-import javafx.scene.control.Button;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -22,8 +21,6 @@ import lombok.Getter;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Game extends Scene {
 

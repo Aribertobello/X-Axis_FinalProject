@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Loadout {
 
     protected Projectile mainWeapon;
-    protected String type;
+    protected int type;
     protected ArrayList<Grenade> grenades = new ArrayList<Grenade>();
     protected ArrayList<SmokeGrenade> smokeGrenades = new ArrayList<SmokeGrenade>();
 
@@ -17,23 +17,23 @@ public class Loadout {
      *
      * @param type
      */
-    public Loadout(String type) {
+    public Loadout(int type) {
         this.type = type;
 
-        if (type.equalsIgnoreCase("light")) {
+        if (type==1) {
             mainWeapon = new Bullet();
             grenades.add(new Grenade());
             grenades.add(new Grenade());
             smokeGrenades.add(new SmokeGrenade());
         }
 
-        if (type.equalsIgnoreCase("medium")) {
+        if (type==2) {
             mainWeapon = new Spear();
             grenades.add(new Grenade());
             smokeGrenades.add(new SmokeGrenade());
         }
 
-        if (type.equalsIgnoreCase("heavy")) {
+        if (type==3) {
             mainWeapon = new Rocket();
             grenades.add(new Grenade());
             smokeGrenades.add(new SmokeGrenade());

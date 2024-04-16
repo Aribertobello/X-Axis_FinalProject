@@ -46,6 +46,8 @@ public abstract class Level extends AnchorPane implements GameUI {
 
     //Level properties-----------------
     protected boolean dragging = false;
+    @Getter
+    @Setter
     public Mapp map;
     protected Line trajectoryLine = new Line();//TODO
     @Getter

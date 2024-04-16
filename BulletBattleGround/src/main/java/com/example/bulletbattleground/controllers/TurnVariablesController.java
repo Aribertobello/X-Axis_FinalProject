@@ -7,21 +7,15 @@ import javafx.scene.layout.Pane;
 import lombok.Getter;
 import lombok.Setter;
 
+@Setter
+@Getter
 public class TurnVariablesController {
     @FXML
-    @Getter
-    @Setter
     public Label turnStatusLabel;
     @FXML
-    @Getter
-    @Setter
     public Label timeLeftLabel;
     @FXML
-    @Getter
-    @Setter
     public ProgressBar timerBar;
     @FXML
-    @Getter
-    @Setter
     public Pane turnStatusBox;
 }

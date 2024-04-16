@@ -1,14 +1,15 @@
-package com.example.bulletbattleground.game;
+package com.example.bulletbattleground.utility;
 
+import com.example.bulletbattleground.game.Level;
 import com.example.bulletbattleground.game.levels.StandardLevel;
 import javafx.animation.Animation;
 import javafx.scene.paint.Color;
 import lombok.Getter;
+import lombok.Setter;
 
 public class TurnManager {
 
-
-    public static final double MAX_PROJ_ANIMATION_TIMER = 15.0;
+    public static double MAX_PROJ_ANIMATION_TIMER = 15.0;
     public static final double MAX_TURN_TIMER = 15.0;
     @Getter
     private int currentPlayer;
@@ -26,6 +27,7 @@ public class TurnManager {
         isAnimationPlaying = false;
         turnTimer = 0;
         animationTimer = 0;
+        if(!(level instanceof StandardLevel)) MAX_PROJ_ANIMATION_TIMER = 100000;
     }
 
     public void startTurn() {
