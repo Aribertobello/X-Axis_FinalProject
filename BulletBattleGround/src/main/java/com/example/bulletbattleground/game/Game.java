@@ -2,6 +2,7 @@ package com.example.bulletbattleground.game;
 
 import com.example.bulletbattleground.game.levels.StandardLevel;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
+import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.TurnManager;
 import com.example.bulletbattleground.utility.Vector;
 import javafx.animation.Animation;
@@ -21,6 +22,7 @@ import lombok.Getter;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Game extends Scene {
 
@@ -198,7 +200,7 @@ public class Game extends Scene {
         }
     }
 
-    /*public void handleFighterClick() {
+    public void handleFighterClick() {
         ArrayList team2;
         if(level instanceof StandardLevel){
             team2 = ((StandardLevel)level).team2;
@@ -227,22 +229,26 @@ public class Game extends Scene {
                 });
             }
         }
-    }*/
+        this.setOnKeyPressed(new pauseEvent());
+    }
 
-    private class pauseEvent implements EventHandler {
+    public void pauseGame(){
+        if (timeline.getStatus() == Animation.Status.PAUSED){
+            isTicking = true;
+            timeline.play();
+        } else {
+            //Debug
+            Object variableOfInterest = level.map.activeProjectile;
+            //----------------
+            timeline.pause();
+            isTicking = false;
+        }
+    }
+
+    public class pauseEvent implements EventHandler {
         @Override
         public void handle(Event t) {
-            if(timeline.getStatus() == Animation.Status.PAUSED){
-                isTicking = true;
-                timeline.play();
-            }else{
-                //Debug
-                Object variableOfInterest = turnManager;
-                //----------------
-                timeline.pause();
-                //tickRate = -tickRate;
-                isTicking = false;
-            }
+            pauseGame();
         }
     }
 }

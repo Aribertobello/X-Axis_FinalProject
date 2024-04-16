@@ -20,6 +20,7 @@ public class Bullet extends Projectile {
      * The bullet has a default damage value of 3, upward lift force, and a set mass.
      */
     public Bullet() {
+
         Circle small_bullet = new Circle(10);
         small_bullet.setRotate(90);
         Image smallBulletImg = new Image("file:smallBullet.png");
