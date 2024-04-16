@@ -1,11 +1,11 @@
 package com.example.bulletbattleground.controllers;
 
+import com.example.bulletbattleground.game.Game;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.ProgressBar;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
@@ -60,6 +60,14 @@ public class GameSceneController {
     private Line AngleDisp;
     @FXML
     private ProgressBar VeloBar;
+    @FXML
+    private Line ArrLinee;
+    @FXML
+    private Line ArrLine;
+    @FXML
+    private Label BltAmount;
+    @FXML
+    private Label GTimer;
     @FXML
     private void handlePause() {
 

@@ -5,6 +5,7 @@ import com.example.bulletbattleground.controllers.GameSceneController;
 import com.example.bulletbattleground.gameObjects.Loot.Loot;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
 import com.example.bulletbattleground.gameObjects.projectiles.Bullet;
+import com.example.bulletbattleground.gameObjects.projectiles.Grenade;
 import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.Vector;
 import javafx.application.Platform;
@@ -13,13 +14,13 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Arc;
 import javafx.scene.shape.Line;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -105,6 +106,15 @@ public class Level extends AnchorPane {
     protected String type;
     private double LastAngel = 0.0;
     static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
+    @FXML
+    private Line ArrLinee;
+    @FXML
+    private Line ArrLine;
+    @FXML
+    private Label BltAmount;
+    @FXML
+    private Label GTimer;
+    private Arc angleArc;
 
     /**
      *
@@ -116,8 +126,8 @@ public class Level extends AnchorPane {
             updateHUD();
 
     }
-    public Level(){
 
+    public Level(){
 
     }
     /**
@@ -139,6 +149,12 @@ public class Level extends AnchorPane {
         container.getChildren().add(this.map);
         map.toBack();
         this.getChildren().add(trajectoryLine);// TODO arrow
+
+        angleArc = new Arc();
+        angleArc.setStroke(Color.RED);
+        angleArc.setFill(Color.TRANSPARENT);
+        angleArc.setStrokeWidth(2);
+        container.getChildren().add(angleArc);
     }
     public void LinkElements() throws IOException {
         FXMLLoader loader = new FXMLLoader(BattleGround.class.getResource("GameScene.fxml"));
@@ -158,6 +174,11 @@ public class Level extends AnchorPane {
         Xaxis = controller.getXaxis();
         AngleDisp = controller.getAngleDisp();
         VeloBar = controller.getVeloBar();
+        ArrLinee = controller.getArrLinee();
+        ArrLine = controller.getArrLine();
+        BltAmount = controller.getBltAmount();
+        pauseButton = controller.getPauseButton();
+        GTimer = controller.getGTimer();
 
     }
 
@@ -178,11 +199,29 @@ public class Level extends AnchorPane {
                     angleLabel.setText("Angle: " + Math.round(angle));
                     LastAngel = angle;
                     AngleDisp.setRotate(-angle);
+                    double centerX = (AngleDisp.getStartX() + AngleDisp.getEndX()) / 2;
+                    double centerY = (AngleDisp.getStartY() + AngleDisp.getEndY()) / 2;
+
+                    // Calculate the radius of the arc
+                    double radius = Math.sqrt(Math.pow(AngleDisp.getEndX() - AngleDisp.getStartX(), 2) +
+                            Math.pow(AngleDisp.getEndY() - AngleDisp.getStartY(), 2)) / 2;
+
+                    // Update the angle arc
+                    angleArc.setCenterX(1200);
+                    angleArc.setCenterY(675);
+                    angleArc.setRadiusX(radius);
+                    angleArc.setRadiusY(radius);
+                    angleArc.setStartAngle(angle); // Adjust start angle based on your requirements
+                    angleArc.setLength(-angle);
                 } else if(angleLabel!=null){
                     angleLabel.setText("Angle: " + Math.round(LastAngel));
                 }
                 }
             GrenadeLabel.setText("Number of Grenades left: " + selectedFighter.loadout.grenades.size());
+            if(GTimer != null) {
+                GTimer.setText("Grenade Timer: ");
+            }
+            BltAmount.setText("Number of Bullets left:  ∞");
         }
 
         if(map != null && map.activeProjectile != null){
@@ -216,7 +255,5 @@ public class Level extends AnchorPane {
             AccLabel.setText("Acceleration: "+ map.getActiveProjectile().acceleration());
             MomLabel.setText("Momentum: " + Math.round(map.getActiveProjectile().momentum()));
         }
-
-
     }
 }
