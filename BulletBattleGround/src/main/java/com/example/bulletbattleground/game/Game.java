@@ -130,7 +130,6 @@ public class Game extends Scene {
                 } else {
                     double dragX = event.getSceneX() - dragStartX[0];
                     double dragY = event.getSceneY() - dragStartY[0];
-                    level.getArrow().update(level.selectedFighter.loadout.mainWeapon,level.origin, new Vector(-event.getSceneX() + dragStartX[0],-event.getSceneY() + dragStartY[0]));
                     level.displaceTrajectoryLine(
                             level.origin.getX(),
                             level.origin.getY(),
@@ -144,7 +143,6 @@ public class Game extends Scene {
 
             double velocityX = -event.getSceneX() + dragStartX[0];
             double velocityY = -event.getSceneY() + dragStartY[0];
-            level.arrow.test();
 
             level.resetTrajectoryLine();
             if(level.selectedFighter!=null && level.selectedFighter instanceof Ally && level.selectedFighter.isHighlighted() && checkvelocity(velocityX,velocityY) ){
