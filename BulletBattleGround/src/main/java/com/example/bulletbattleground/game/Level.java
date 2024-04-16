@@ -31,93 +31,48 @@ import lombok.Setter;
 import java.io.IOException;
 
 public class Level extends AnchorPane {
-
-    @FXML
     @Getter
     @Setter
     private Pane headsUpDisplay;
-
-    @FXML
     private AnchorPane container;
-
-    @FXML
     private Label activeProjectileLabel;
-
-    @FXML
     private Label GrenadeLabel;
     private Label SmokeLabel;
-    @FXML
     private Label KELabel;
-
-    @FXML
-    private Label blankLabel;
-
-    @FXML
     private ProgressBar healthProgressbar;
-    @FXML
     private Label VeloLabel;
-    @FXML
     private Label AccLabel;
-
-
-    @FXML
     private Label healthLabel;
-
-    @FXML
     private MenuBar topMenu;
-    @FXML
     private Label angleLabel;
-    @FXML
     private Label MomLabel;
-    @FXML
     private Label MagLabel;
-    @FXML
     private Menu newGameButton;
-
-    @FXML
     private Menu exitButton;
-    @FXML
     private void handleExit(){
         Platform.exit();
     }
-    @FXML
     private Menu settingsButton;
-    @FXML
     private ProgressBar VeloBar;
-
-    @FXML
     private Menu pauseButton;
-    @FXML
     private Line Xaxis;
-    @FXML
     private Line AngleDisp;
-
     @Getter
     @Setter
     protected boolean dragging = false;
-
     public Mapp map;
     protected Line trajectoryLine = new Line();//TODO
-
     protected Coordinate origin;
-
     protected Ally selectedFighter;
-
     protected String type;
     private double LastAngel = 0.0;
     static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
-    @FXML
     private Line ArrLinee;
-    @FXML
     private Line ArrLine;
-    @FXML
     private Label BltAmount;
-    @FXML
     private Label GTimer;
-    @FXML
-    private ImageView GImg;
-    @FXML
-    private ImageView BImg;
+    public ImageView GImg;
+    public ImageView BImg;
    /* @FXML
     private Button SImg;*/
     private Arc angleArc;

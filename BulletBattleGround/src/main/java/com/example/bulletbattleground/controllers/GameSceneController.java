@@ -82,5 +82,9 @@ public class GameSceneController {
     public void initialize(){
         exitButton.setOnAction(e -> handleExit());
         pauseButton.setOnAction(e -> handlePause());
+        if(GImg != null && BImg != null) {
+        GImg.setImage(new Image("file:grenade.png"));
+        BImg.setImage(new Image("file:smallBullet.png"));
+    }
     }
 }
