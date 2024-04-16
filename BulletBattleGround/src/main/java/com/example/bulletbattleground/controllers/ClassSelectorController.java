@@ -18,6 +18,7 @@ public class ClassSelectorController {
     public Button heavyClassBtn;
 
     public void lightClassSelected(ActionEvent event) {
+
     }
 
     public void mediumClassSelected(ActionEvent event) {

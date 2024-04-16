@@ -1,8 +1,10 @@
 package com.example.bulletbattleground.gameObjects.fighters;
 
+import com.example.bulletbattleground.BattleGround;
 import com.example.bulletbattleground.game.Fighter;
 import com.example.bulletbattleground.game.Mapp;
 import com.example.bulletbattleground.game.Projectile;
+import com.example.bulletbattleground.game.levels.StandardLevel;
 import com.example.bulletbattleground.gameObjects.projectiles.Rocket;
 import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.Vector;
@@ -23,6 +25,24 @@ public class Computer extends Fighter {
     @Override
     public void launchProjectile(Projectile projectile, Vector velocity, Coordinate coordinate) {
         //TODO MAKE COMPUTER LAUNCH PROJECTILE ON ITS OWN
+
+
+        Coordinate target = ((StandardLevel)BattleGround.activeGame.getLevel()).team1.get(0).getCoordinate();
+        double uncertainty = 0.025;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         projectile.release(velocity, new Coordinate(coordinate.getX(), coordinate.getY()));
         ((Mapp) getParent()).addForces(projectile);
 
