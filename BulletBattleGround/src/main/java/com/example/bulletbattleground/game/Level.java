@@ -6,6 +6,7 @@ import com.example.bulletbattleground.controllers.GameSceneController;
 import com.example.bulletbattleground.controllers.TurnVariablesController;
 import com.example.bulletbattleground.gameObjects.Loot.Loot;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
+import com.example.bulletbattleground.gameObjects.projectiles.Grenade;
 import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.GameUI;
 import com.example.bulletbattleground.utility.Vector;
@@ -23,6 +24,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 import lombok.Getter;
@@ -43,6 +45,9 @@ public abstract class Level extends AnchorPane implements GameUI {
     @Getter
     @Setter
     protected Fighter selectedFighter;
+    @Getter
+    @Setter
+    protected Arrow arrow;
     //------------------------------------------------------------------------
 
     // Level controllers--------
@@ -101,8 +106,8 @@ public abstract class Level extends AnchorPane implements GameUI {
     private double LastAngel = 0.0;
 
     //constructor---------------------------------
+
     /**
-     *
      * @param map
      */
     public Level(Mapp map) throws IOException {
@@ -113,17 +118,19 @@ public abstract class Level extends AnchorPane implements GameUI {
         map.toBack();
         this.headsUpDisplay.setPrefWidth(BattleGround.screenWidth);
         this.getChildren().add(trajectoryLine);// TODO arrow
+        arrow = new Arrow(new Coordinate(0,0));
+        this.getChildren().add(arrow);
     }
     //------------------------------------------------
 
-    public boolean[] update(double dt,double time) {
-
+    public boolean[] update(double dt, double time) {
         updateHUD();
         return new boolean[]{map.update(dt)};
+
     }
 
     @FXML
-    private void handleExit(){
+    private void handleExit() {
         Platform.exit();
     }
 
@@ -136,7 +143,7 @@ public abstract class Level extends AnchorPane implements GameUI {
         TurnVariablesController controller1 = turnLoader.getController();
         container = controller.getContainer();
         headsUpDisplay = controller.getHeadsUpDisplay();
-        headsUpDisplay.setLayoutY(BattleGround.screenHeight-125);
+        headsUpDisplay.setLayoutY(BattleGround.screenHeight - 125);
         angleLabel = controller.getAngleLabel();
         KELabel = controller.getKELabel();
         healthLabel = controller.getHealthLabel();
@@ -159,7 +166,6 @@ public abstract class Level extends AnchorPane implements GameUI {
     }
 
     /**
-     *
      * @param selectedFighter
      */
     protected void displayLoadout(Fighter selectedFighter) {
@@ -175,7 +181,7 @@ public abstract class Level extends AnchorPane implements GameUI {
         dragging = false;
     }
 
-    public void addFighter(Fighter fighter, int teamNb){
+    public void addFighter(Fighter fighter, int teamNb) {
         map.addFighter(fighter);
     }
 
@@ -187,25 +193,25 @@ public abstract class Level extends AnchorPane implements GameUI {
         trajectoryLine.setEndY(endY);
     }
 
-    public void updateHUD(){
-        if(trajectoryLine != null && angleLabel != null && selectedFighter != null) {
+    public void updateHUD() {
+        if (trajectoryLine != null && angleLabel != null && selectedFighter != null) {
             Vector direction = new Vector(trajectoryLine.getEndX() - trajectoryLine.getStartX(), trajectoryLine.getEndY() - trajectoryLine.getStartY());
             double angle = 180 - direction.angle();
-            if(!Double.isNaN(angle)) {
+            if (!Double.isNaN(angle)) {
                 if (angle != LastAngel) {
                     angleLabel.setText("Angle: " + Math.round(angle));
                     LastAngel = angle;
                     AngleDisp.setRotate(-angle);
-                } else if(angleLabel!=null){
+                } else if (angleLabel != null) {
                     angleLabel.setText("Angle: " + Math.round(LastAngel));
                 }
             }
             GrenadeLabel.setText("Number of Grenades left: " + selectedFighter.loadout.grenades.size());
         }
-        if(map != null && map.activeProjectile != null){
-            KELabel.setText("Kinetic energy: "+ Math.round(map.getActiveProjectile().kE()));
+        if (map != null && map.activeProjectile != null) {
+            KELabel.setText("Kinetic energy: " + Math.round(map.getActiveProjectile().kE()));
         }
-        if(healthProgressbar != null && selectedFighter != null){
+        if (healthProgressbar != null && selectedFighter != null) {
             int previousHealth = (int) (healthProgressbar.getProgress() * 15); // Assuming the progress bar is based on a scale of 0 to 1
             int currentHealth = selectedFighter.getHealth();
             if (currentHealth < previousHealth) {
@@ -220,17 +226,17 @@ public abstract class Level extends AnchorPane implements GameUI {
             healthLabel.setText("Player Health: " + currentHealth);
             healthProgressbar.setStyle("-fx-accent: red; -fx-progress-bar-indeterminate-fill: red;");
         }
-        if(map.activeProjectile != null){
-            activeProjectileLabel.setText("Projectile Coordinates: "+ map.getActiveProjectile().getCoordinate());
-            VeloLabel.setText("Velocity X and Y: "+ map.getActiveProjectile().velocity());
+        if (map.activeProjectile != null) {
+            activeProjectileLabel.setText("Projectile Coordinates: " + map.getActiveProjectile().getCoordinate());
+            VeloLabel.setText("Velocity X and Y: " + map.getActiveProjectile().velocity());
             Vector velocity = map.getActiveProjectile().velocity();
             double MaxVelocity = 150;
             double progress = velocity.magnitude() / MaxVelocity;
-            double red = 255 * (1-progress);
-            String barStyle = "-fx-accent: rgb(255," + (int)red + ", " + (int)red + ");";
+            double red = 255 * (1 - progress);
+            String barStyle = "-fx-accent: rgb(255," + (int) red + ", " + (int) red + ");";
             VeloBar.setStyle(barStyle);
             VeloBar.setProgress(progress);
-            AccLabel.setText("Acceleration: "+ map.getActiveProjectile().acceleration());
+            AccLabel.setText("Acceleration: " + map.getActiveProjectile().acceleration());
             MomLabel.setText("Momentum: " + Math.round(map.getActiveProjectile().momentum()));
         }
         if (map != null && map.activeProjectile != null) {
@@ -246,16 +252,22 @@ public abstract class Level extends AnchorPane implements GameUI {
     }
 
     public void updateTurnBox(double time, double timeLimit, int playerTurn) {
-        switch(playerTurn){
-                case 1  -> {timerBar.setStyle("-fx-accent: cyan;");
-                    turnStatusLabel.setText("It is Player 1's Turn");}
-                case 2 -> {timerBar.setStyle("-fx-accent: red;");
-                    turnStatusLabel.setText("It is Player 2's Turn");}
-                default -> {timerBar.setStyle("-fx-accent: gray;");
-                    turnStatusLabel.setText("Projectile Moving");}
+        switch (playerTurn) {
+            case 1 -> {
+                timerBar.setStyle("-fx-accent: cyan;");
+                turnStatusLabel.setText("It is Player 1's Turn");
+            }
+            case 2 -> {
+                timerBar.setStyle("-fx-accent: red;");
+                turnStatusLabel.setText("It is Player 2's Turn");
+            }
+            default -> {
+                timerBar.setStyle("-fx-accent: gray;");
+                turnStatusLabel.setText("Projectile Moving");
+            }
         }
-        timeLeftLabel.setText(String.valueOf(Math.round(10*(timeLimit-time))/10.0));
-        timerBar.setProgress(1-(time/timeLimit));
+        timeLeftLabel.setText(String.valueOf(Math.round(10 * (timeLimit - time)) / 10.0));
+        timerBar.setProgress(1 - (time / timeLimit));
     }
 
     public void removeFighter(Fighter fighter) {
@@ -263,5 +275,49 @@ public abstract class Level extends AnchorPane implements GameUI {
         selectedFighter = null;
         map.removeFighter(fighter);
         setOrigin(null);
+    }
+}
+class Arrow extends Polyline {
+
+    Coordinate origin;
+    protected Vector direction;
+    protected Coordinate startCoordinate;
+    protected Coordinate endCoordinate;
+    public Arrow(Coordinate coordinate){
+        super();
+        this.setStroke(Color.WHITE);
+        origin = coordinate;
+        this.getPoints().addAll(origin.getX(), origin.getY());
+    }
+
+    public void update(Projectile projectile, Coordinate origin ,Vector direction){
+        this.origin = origin;
+        this.getPoints().clear();
+        this.getPoints().addAll(origin.getX(), origin.getY());
+        double dt  = 1/direction.magnitude();
+        Coordinate coordinate = new Coordinate(origin.getX(),origin.getY());
+        Vector velocity = new Vector(projectile.getVelocityX(),projectile.getVelocityY());
+        Vector acceleration  = new Vector(projectile.acceleration().getX(),projectile.acceleration().getY());
+        for (double t = dt ; t < 0.5; t += dt){
+            coordinate.setX((acceleration.getX() / 2) * dt * dt*100 + velocity.getY() * dt*10 + coordinate.getX());
+            coordinate.setY((acceleration.getY() / 2) * dt * dt*100 + velocity.getY() * dt*10 + coordinate.getY());
+            velocity.setX(acceleration.getX() * dt*10 + velocity.getX());
+            velocity.setY(acceleration.getX() * dt*10 + velocity.getY());
+            this.getPoints().addAll(coordinate.getX(),coordinate.getY());
+        }
+    }
+    public void test(){
+        this.getPoints().clear();
+        Coordinate coordinate = new Coordinate(400,400);
+        Vector velocity = new Vector(20,20);
+        double dt  = 0.01;
+        Vector acceleration  = new Vector(0,-9.8);
+        for (double t = dt ; t < 0.5; t += dt){
+            coordinate.setX((acceleration.getX() / 2) * dt * dt*100 + velocity.getY() * dt*10 + coordinate.getX());
+            coordinate.setY((acceleration.getY() / 2) * dt * dt*100 + velocity.getY() * dt*10 + coordinate.getY());
+            velocity.setX(acceleration.getX() * dt*10 + velocity.getX());
+            velocity.setY(acceleration.getX() * dt*10 + velocity.getY());
+            this.getPoints().addAll(coordinate.getX(),coordinate.getY());
+        }
     }
 }
