@@ -3,6 +3,9 @@ package com.example.bulletbattleground.utility;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Objects;
+
 @AllArgsConstructor
 public class Vector {
     @Getter
@@ -154,4 +157,11 @@ public class Vector {
                 " >" ;
     }
 
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        Vector vector = (Vector) object;
+        return Double.compare(x, vector.x) == 0 && Double.compare(y, vector.y) == 0;
+    }
 }

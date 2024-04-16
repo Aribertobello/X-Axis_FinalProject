@@ -9,9 +9,7 @@ import java.util.ArrayList;
 public class Loadout {
 
     protected Projectile mainWeapon;
-
     protected String type;
-
     protected ArrayList<Grenade> grenades = new ArrayList<Grenade>();
     protected ArrayList<SmokeGrenade> smokeGrenades = new ArrayList<SmokeGrenade>();
 
@@ -56,7 +54,6 @@ public class Loadout {
         for (Grenade grenade : grenades) {
             LoadoutBox.getChildren().add(new Label(grenade.toString()));
         }
-
         return LoadoutBox;
     }
 

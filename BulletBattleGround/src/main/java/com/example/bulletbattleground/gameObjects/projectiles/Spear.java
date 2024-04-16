@@ -18,6 +18,7 @@ public class Spear extends Projectile {
     public Spear() {
         Image spearImg = new Image("file:spear.png");
         spearHitBox = new Circle(2, Color.DARKGRAY);
+        spearHitBox.setFill(Color.TRANSPARENT);
         spear = new Circle(30 ,Color.BLUE);
         spear.setFill(new ImagePattern((spearImg)));
         this.getChildren().add(spearHitBox);
@@ -47,7 +48,7 @@ public class Spear extends Projectile {
     }
 
     public void allign() {
-        double offset = 2; // Adjust as needed
+        double offset = 20; // Adjust as needed
         double offsetX = offset * Math.cos(Math.toRadians(velocity().angle()));
         double offsetY = offset * Math.sin(Math.toRadians(velocity().angle()));
         spear.setCenterX(getChildren().get(0).getLayoutX() - offsetX);

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane fx:id="turnStatusBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="282.0" prefWidth="144.0" style="-fx-background-color: #76827a;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bulletbattleground.controllers.TurnVariablesController">
+   <children>
+      <ProgressBar fx:id="timerBar" layoutX="-28.0" layoutY="122.0" prefWidth="200.0" progress="0.0" rotate="-90.0" />
+      <Label fx:id="turnStatusLabel" alignment="CENTER" layoutX="-9.0" layoutY="6.0" prefHeight="17.0" prefWidth="163.0" text="It is player 1's turn" />
+      <Label fx:id="timeLeftLabel" alignment="CENTER" layoutX="32.0" layoutY="251.0" prefHeight="17.0" prefWidth="81.0" text="Time Left : " />
+   </children>
+</Pane>

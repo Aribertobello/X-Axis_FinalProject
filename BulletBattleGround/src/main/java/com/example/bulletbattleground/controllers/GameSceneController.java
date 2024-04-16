@@ -15,6 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class GameSceneController {
+
     @FXML
     private Pane headsUpDisplay;
     @FXML
@@ -46,13 +47,10 @@ public class GameSceneController {
     @FXML
     private Label AccLabel;
     @FXML
-    private void handleExit(){
-        Platform.exit();
-    }
-    @FXML
     private Menu settingsButton;
     @FXML
     private Menu pauseButton;
+
     @FXML
     private Label MomLabel;
     @FXML
@@ -76,15 +74,21 @@ public class GameSceneController {
 
     @FXML
     private void handlePause() {
-   BattleGround.activeGame.pauseGame();
+        BattleGround.activeGame.pauseGame();
     }
+
+    @FXML
+    private void handleExit(){
+        Platform.exit();
+    }
+
     @FXML
     public void initialize(){
         exitButton.setOnAction(e -> handleExit());
         pauseButton.setOnAction(e -> handlePause());
         if(GImg != null && BImg != null) {
-        GImg.setImage(new Image("file:grenade.png"));
-        BImg.setImage(new Image("file:smallBullet.png"));
-    }
+            GImg.setImage(new Image("file:grenade.png"));
+            BImg.setImage(new Image("file:smallBullet.png"));
+        }
     }
 }
