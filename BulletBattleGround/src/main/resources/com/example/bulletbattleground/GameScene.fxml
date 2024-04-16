@@ -31,12 +31,12 @@
       <Line fx:id="ArrLine" endX="-107.0" endY="-4.0" layoutX="1319.0" layoutY="62.0" startX="-93.5" startY="9.70709228515625" />
       <Line fx:id="ArrLine" endX="96.5" endY="11.70709228515625" layoutX="1129.0" layoutY="61.0" startX="86.0" startY="25.0" />
       <Label fx:id="GTimer" layoutX="488.0" layoutY="25.0" text="Label" />
-      <ImageView fitHeight="35.0" fitWidth="65.0" layoutX="450.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="GImg" fitHeight="35.0" fitWidth="65.0" layoutX="450.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../../grenade.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="454.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="BImg" fitHeight="25.0" fitWidth="28.0" layoutX="454.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../../smallBullet.png" />
          </image>
