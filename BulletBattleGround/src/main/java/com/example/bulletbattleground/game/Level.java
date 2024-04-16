@@ -114,6 +114,12 @@ public class Level extends AnchorPane {
     private Label BltAmount;
     @FXML
     private Label GTimer;
+    @FXML
+    private ImageView GImg;
+    @FXML
+    private ImageView BImg;
+   /* @FXML
+    private Button SImg;*/
     private Arc angleArc;
 
     /**
@@ -153,7 +159,7 @@ public class Level extends AnchorPane {
         angleArc = new Arc();
         angleArc.setStroke(Color.RED);
         angleArc.setFill(Color.TRANSPARENT);
-        angleArc.setStrokeWidth(2);
+        angleArc.setStrokeWidth(1.5);
         container.getChildren().add(angleArc);
     }
     public void LinkElements() throws IOException {
@@ -179,6 +185,8 @@ public class Level extends AnchorPane {
         BltAmount = controller.getBltAmount();
         pauseButton = controller.getPauseButton();
         GTimer = controller.getGTimer();
+        GImg = controller.getGImg();
+        BImg = controller.getBImg();
 
     }
 
@@ -199,28 +207,33 @@ public class Level extends AnchorPane {
                     angleLabel.setText("Angle: " + Math.round(angle));
                     LastAngel = angle;
                     AngleDisp.setRotate(-angle);
-                    double centerX = (AngleDisp.getStartX() + AngleDisp.getEndX()) / 2;
-                    double centerY = (AngleDisp.getStartY() + AngleDisp.getEndY()) / 2;
+                    AngleDisp.setStroke(Color.WHITE);
+
 
                     // Calculate the radius of the arc
                     double radius = Math.sqrt(Math.pow(AngleDisp.getEndX() - AngleDisp.getStartX(), 2) +
                             Math.pow(AngleDisp.getEndY() - AngleDisp.getStartY(), 2)) / 2;
 
                     // Update the angle arc
-                    angleArc.setCenterX(1200);
-                    angleArc.setCenterY(675);
+                    angleArc.setCenterX(1065);
+                    angleArc.setCenterY(960);
                     angleArc.setRadiusX(radius);
                     angleArc.setRadiusY(radius);
-                    angleArc.setStartAngle(angle); // Adjust start angle based on your requirements
-                    angleArc.setLength(-angle);
+                    angleArc.setStartAngle(0.00); // Adjust start angle based on your requirements
+                    angleArc.setLength(angle);
+                    angleArc.toFront();
                 } else if(angleLabel!=null){
                     angleLabel.setText("Angle: " + Math.round(LastAngel));
                 }
                 }
             GrenadeLabel.setText("Number of Grenades left: " + selectedFighter.loadout.grenades.size());
-            if(GTimer != null) {
-                GTimer.setText("Grenade Timer: ");
+            if( map.activeProjectile instanceof Grenade){
+                GTimer.setText("Grenade Timer: " + ((Grenade)map.activeProjectile).getFuseTimer());
+
+            } else {
+                GTimer.setText("Grenade Timer: No Grenades shot!");
             }
+
             BltAmount.setText("Number of Bullets left:  ∞");
         }
 

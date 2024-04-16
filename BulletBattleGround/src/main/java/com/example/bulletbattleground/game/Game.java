@@ -174,20 +174,23 @@ public class Game extends Scene {
         }
         this.setOnKeyPressed(new pauseEvent());
     }
-    private class pauseEvent implements EventHandler {
+    public void pauseGame(){
+        if(timeline.getStatus() == Animation.Status.PAUSED){
+            isTicking = true;
+            timeline.play();
+        }else{
+            //Debug
+            Object variableOfInterest = level.map.activeProjectile;
+            //----------------
+            timeline.pause();
+            isTicking = false;
+    }
+    }
+    public class pauseEvent implements EventHandler {
         @Override
         public void handle(Event t) {
-            if(timeline.getStatus() == Animation.Status.PAUSED){
-                isTicking = true;
-                timeline.play();
-            }else{
-                //Debug
-                Object variableOfInterest = level.map.activeProjectile;
-                //----------------
-                timeline.pause();
-                isTicking = false;
+            pauseGame();
 
-            }
         }
     }
 }

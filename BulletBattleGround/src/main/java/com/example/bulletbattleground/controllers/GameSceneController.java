@@ -1,5 +1,6 @@
 package com.example.bulletbattleground.controllers;
 
+import com.example.bulletbattleground.BattleGround;
 import com.example.bulletbattleground.game.Game;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -69,8 +70,13 @@ public class GameSceneController {
     @FXML
     private Label GTimer;
     @FXML
-    private void handlePause() {
+    private ImageView GImg;
+    @FXML
+    private ImageView BImg;
 
+    @FXML
+    private void handlePause() {
+   BattleGround.activeGame.pauseGame();
     }
     @FXML
     public void initialize(){
