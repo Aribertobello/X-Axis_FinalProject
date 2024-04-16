@@ -2,6 +2,7 @@ package com.example.bulletbattleground.game;
 
 import com.example.bulletbattleground.game.levels.StandardLevel;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
+import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.TurnManager;
 import com.example.bulletbattleground.utility.Vector;
 import javafx.animation.Animation;
@@ -21,6 +22,7 @@ import lombok.Getter;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Game extends Scene {
 
