@@ -34,6 +34,7 @@ public class Mapp extends Pane {
     @Setter
     protected ArrayList<Obstacle> obstacles = new ArrayList<>();
     private ArrayList<HitBox> hitBoxes = new ArrayList<>();
+    double terminalVelocity;
     private Pane hitBoxPane = new Pane();
     private Vector gravity;
     private Vector airResistance;
@@ -65,6 +66,7 @@ public class Mapp extends Pane {
             earth = new Circle(540, 673100640, 673100000, Color.SEAGREEN);
             this.getChildren().add(earth);
             this.type = 0;
+            terminalVelocity = 60;
         }
 
         if (type.equalsIgnoreCase("space")) {

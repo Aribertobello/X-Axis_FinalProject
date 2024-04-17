@@ -123,7 +123,7 @@ public class Game extends Scene {
         });
 
         this.setOnMouseDragged(event -> {
-            if (level.dragging) {
+            if (level.dragging && isWithinPlayerBounds(dragStartX[0],dragStartY[0])) {
                 if (level.origin == null) {
                     /*TODO  -notify user to select a fighter   */
                 } else {
@@ -134,6 +134,7 @@ public class Game extends Scene {
                             level.origin.getY(),
                             level.origin.getX() + dragX,
                             level.origin.getY() + dragY);
+                    level.arrow.update(level.selectedFighter,(1.0 / tickRate),level.getOrigin(),new Vector(-event.getSceneX() + dragStartX[0],-event.getSceneY() + dragStartY[0]));
                 }
             }
         });
@@ -144,12 +145,18 @@ public class Game extends Scene {
             double velocityY = -event.getSceneY() + dragStartY[0];
 
             level.resetTrajectoryLine();
-            if(level.selectedFighter!=null && level.selectedFighter instanceof Ally && level.selectedFighter.isHighlighted() && checkvelocity(velocityX,velocityY) ){
+            if(level.selectedFighter!=null && level.selectedFighter instanceof Ally && level.selectedFighter.isHighlighted() && checkvelocity(velocityX,velocityY) && isWithinPlayerBounds(dragStartX[0],dragStartY[0])){
                 shoot(event, (Ally) level.selectedFighter,velocityX,velocityY);
             }
             // TODO -LAUNCH GRENADE
         });
         this.setOnKeyPressed(new pauseEvent());
+    }
+
+    private boolean isWithinPlayerBounds(double x,double y) {
+        double boundX = level.selectedFighter.getCoordinate().getX();
+        double boundY = level.selectedFighter.getCoordinate().getY();
+        return x < boundX + 20 && x > boundX - 20 && y < boundY + 20 && y > boundY - 20;
     }
 
     private boolean checkvelocity(double velocityX, double velocityY) {

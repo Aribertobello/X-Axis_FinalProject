@@ -8,6 +8,8 @@ import com.example.bulletbattleground.gameObjects.Loot.Loot;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
 import com.example.bulletbattleground.gameObjects.projectiles.Bullet;
 import com.example.bulletbattleground.gameObjects.projectiles.Grenade;
+import com.example.bulletbattleground.gameObjects.projectiles.Rocket;
+import com.example.bulletbattleground.gameObjects.projectiles.Spear;
 import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.GameUI;
 import com.example.bulletbattleground.utility.Vector;
@@ -33,6 +35,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -44,6 +47,7 @@ import java.util.ArrayList;
 
 public abstract class Level extends AnchorPane implements GameUI {
 
+    public Arrow arrow;
     //Level properties-----------------
     protected boolean dragging = false;
     @Getter
@@ -129,7 +133,7 @@ public abstract class Level extends AnchorPane implements GameUI {
         map.toBack();
         this.headsUpDisplay.setPrefWidth(BattleGround.screenWidth);
         this.getChildren().add(trajectoryLine);// TODO arrow
-
+        arrow = new Arrow();
         angleArc = new Arc();
         angleArc.setStroke(Color.RED);
         angleArc.setFill(Color.TRANSPARENT);
@@ -317,4 +321,37 @@ public abstract class Level extends AnchorPane implements GameUI {
         map.removeFighter(fighter);
         setOrigin(null);
     }
+
+    public class Arrow extends Polyline {
+        public Arrow(){
+            super();
+            this.setStroke(Color.WHITE);
+        }
+        public void update(Fighter fighter, double dt, Coordinate coordinate, Vector direction){
+
+            Projectile projectile;
+            this.getPoints().clear();
+            this.getPoints().addAll(coordinate.getX(),coordinate.getY());
+            map.getChildren().remove(this);
+            switch(fighter.loadout.type){
+                case 1 -> projectile = new Bullet();
+                case 2 -> projectile = new Spear();
+                default -> projectile = new Rocket();
+            }
+            projectile.setVelocity(direction);
+            projectile.setCoordinate(coordinate);
+            if(direction.magnitude()>=40){
+                System.out.println();
+            }
+
+            for(double t = 0 ; t < 0.5; t += dt){
+
+                projectile.move(dt);
+                this.getPoints().addAll(projectile.getCoordinate().getX(),projectile.getCoordinate().getY());
+                map.addForces(projectile);
+            }
+            map.getChildren().add(this);
+        }
+    }
 }
+
