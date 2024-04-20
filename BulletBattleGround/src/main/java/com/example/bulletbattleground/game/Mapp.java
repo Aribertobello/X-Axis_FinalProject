@@ -93,8 +93,8 @@ public class Mapp extends Pane {
                 removeActiveProjectile();
                 return false;
             }
-            activeProjectile.move(dt);
             addForces(activeProjectile);
+            activeProjectile.move(dt);
             buffer++;
             if (buffer > 10) {
 
@@ -117,7 +117,6 @@ public class Mapp extends Pane {
      * @param fighter
      */
     public void addFighter(Fighter fighter) {
-
         people.add(fighter);
         hitBoxes.add(fighter.hitBox());
         getChildren().add(fighter);
@@ -149,7 +148,6 @@ public class Mapp extends Pane {
             hitBoxes.add(hitBox);
             getChildren().add(hitBox);
         }
-
     }
 
     /**

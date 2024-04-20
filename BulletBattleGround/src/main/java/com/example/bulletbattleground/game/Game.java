@@ -13,10 +13,13 @@ import javafx.scene.Scene;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import lombok.Getter;
 
@@ -150,7 +153,21 @@ public class Game extends Scene {
             }
             // TODO -LAUNCH GRENADE
         });
-        this.setOnKeyPressed(new pauseEvent());
+
+        this.setOnKeyPressed(event -> {//Pauses the game when hitting key P
+
+            if (event.getCode() == KeyCode.P) {
+                new pauseEvent().handle(event);
+            }
+
+            if (event.getCode() == KeyCode.S) {
+                   level.selectedFighter.launchProjectile(
+                          level.selectedFighter.loadout.smokeGrenades.get(0), new Vector(15, 0.0), level.origin);
+                level.selectedFighter.loadout.smokeGrenades.remove(level.selectedFighter.loadout.smokeGrenades.get(0));
+                    turnManager.projectileShot();
+                    System.out.println("Smoke grenade deployed");
+                    }
+        });
     }
 
     private boolean checkvelocity(double velocityX, double velocityY) {
@@ -158,7 +175,6 @@ public class Game extends Scene {
     }
 
     private void shoot(MouseEvent event, Ally selectedFighter, double velocityX, double velocityY) {
-
         if(level instanceof StandardLevel && level.origin!=null){
             StandardLevel level = (StandardLevel) this.level;
             if(turnManager.isPlayer1Turn() && level.team1.contains(selectedFighter)) {
@@ -173,6 +189,7 @@ public class Game extends Scene {
                     selectedFighter.loadout.grenades.remove(level.selectedFighter.loadout.grenades.get(0));
                     turnManager.projectileShot();
                 }
+
             } else if(turnManager.isPlayer2Turn() && level.team2.contains(selectedFighter)){
                 if (event.getButton() == MouseButton.PRIMARY) {
                     selectedFighter.launchProjectile(
@@ -240,7 +257,7 @@ public class Game extends Scene {
                 timeline.play();
             }else{
                 //Debug
-                Object variableOfInterest = turnManager;
+                Object variableOfInterest = level.map.activeProjectile;
                 //----------------
                 timeline.pause();
                 //tickRate = -tickRate;

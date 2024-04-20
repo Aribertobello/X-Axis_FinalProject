@@ -1,5 +1,7 @@
 package com.example.bulletbattleground.fileManagement;
 
+import com.example.bulletbattleground.BattleGround;
+import com.example.bulletbattleground.controllers.ClassSelectorController;
 import com.example.bulletbattleground.game.levels.StandardLevel;
 import com.example.bulletbattleground.game.Mapp;
 import com.example.bulletbattleground.game.levels.EduLevel;
@@ -13,9 +15,12 @@ import javafx.stage.Screen;
 import java.io.*;
 import java.util.Scanner;
 
-public class FileManager {
+public class FileManager extends ClassSelectorController {
 
     private static File managerFile;
+
+    public static int loadoutType;
+
     static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
 
     /**
@@ -37,7 +42,7 @@ public class FileManager {
         Mapp map = defaultMapPvc();
         try {
             StandardLevel level = new StandardLevel(map, 2);
-            level.addFighter(new Ally(200, 600, 1),1);
+            level.addFighter(new Ally(200, 600, loadoutType),1);
             level.addFighter(new Computer(screenWidth - 200, 600, 1),2);
             return level;
 
@@ -69,7 +74,7 @@ public class FileManager {
         Mapp map = defaultMapPvp();
         try {
             StandardLevel level = new StandardLevel(map, 3);
-            level.addFighter(new Ally(200, 600, 1),1);
+            level.addFighter(new Ally(200, 600, loadoutType),1);
             level.addFighter(new Ally(screenWidth - 200, 600, 2),2);
             return level;
         } catch (IOException e) {
@@ -101,7 +106,7 @@ public class FileManager {
         Mapp map = defaultMapPve();
         try {
             StandardLevel level = new StandardLevel(map, 1);
-            level.addFighter(new Ally(200, 600, 2),1);
+            level.addFighter(new Ally(200, 600, loadoutType),1);
             return level;
         } catch (IOException e) {
             throw new RuntimeException(e);
