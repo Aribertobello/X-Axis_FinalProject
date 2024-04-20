@@ -52,6 +52,7 @@ public class Grenade extends Projectile {
 
     private final int explosionDamage = 5;
 
+    @Getter
     private double fuseTimer;
 
     private int index = 0;

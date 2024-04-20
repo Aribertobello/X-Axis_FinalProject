@@ -1,11 +1,12 @@
 package com.example.bulletbattleground.controllers;
 
+import com.example.bulletbattleground.BattleGround;
+import com.example.bulletbattleground.game.Game;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.ProgressBar;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
@@ -46,10 +47,6 @@ public class GameSceneController {
     @FXML
     private Label AccLabel;
     @FXML
-    private void handleExit(){
-        Platform.exit();
-    }
-    @FXML
     private Menu settingsButton;
     @FXML
     private Menu pauseButton;
@@ -63,11 +60,35 @@ public class GameSceneController {
     @FXML
     private ProgressBar VeloBar;
     @FXML
+    private Line ArrLinee;
+    @FXML
+    private Line ArrLine;
+    @FXML
+    private Label BltAmount;
+    @FXML
+    private Label GTimer;
+    @FXML
+    private ImageView GImg;
+    @FXML
+    private ImageView BImg;
+
+    @FXML
     private void handlePause() {
+        BattleGround.activeGame.pauseGame();
     }
+
+    @FXML
+    private void handleExit(){
+        Platform.exit();
+    }
+
     @FXML
     public void initialize(){
         exitButton.setOnAction(e -> handleExit());
         pauseButton.setOnAction(e -> handlePause());
+        if(GImg != null && BImg != null) {
+            GImg.setImage(new Image("file:grenade.png"));
+            BImg.setImage(new Image("file:smallBullet.png"));
+        }
     }
 }

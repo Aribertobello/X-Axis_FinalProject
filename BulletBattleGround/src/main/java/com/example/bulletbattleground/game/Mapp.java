@@ -187,9 +187,9 @@ public class Mapp extends Pane {
             if (projectile.hitBox().overlaps(obstacle.hitBox())) {
 
                 MovingBody.collision(projectile,obstacle);
-                //HitBox collidedObstacleHitBox = obstacle.hitBox();
-                //collidedObstacleHitBox.setDisplayed(true);
-                //addHitBox(collidedObstacleHitBox);
+                HitBox collidedObstacleHitBox = obstacle.hitBox();
+                collidedObstacleHitBox.setDisplayed(true);
+                addHitBox(collidedObstacleHitBox);
                 return true;
             }
         }
@@ -225,7 +225,7 @@ public class Mapp extends Pane {
     private boolean isInBounds(MovingBody body) {
         double x = body.getCoordinate().getX();
         double y = body.getCoordinate().getY();
-        return !(x < -50 || x > bounds[0]+50 || y < -50 || y > bounds[1]+50);
+        return !(x < BattleGround.screenWidth-bounds[0]-50 || x > bounds[0]+50 || y <  BattleGround.screenHeight-bounds[0]-50 || y > bounds[1]+50);
     }
     public void removeActiveProjectile() {
         if(activeProjectile!=null){

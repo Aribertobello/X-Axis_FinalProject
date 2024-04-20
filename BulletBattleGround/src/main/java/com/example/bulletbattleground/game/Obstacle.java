@@ -8,6 +8,9 @@ import lombok.Setter;
 public abstract class Obstacle extends MovingBody implements BattleGroundObject {
 
     protected boolean ispenetrable;
+    @Getter
+    @Setter
+    protected double rotationAngle;
 
     /**
      *
@@ -29,5 +32,9 @@ public abstract class Obstacle extends MovingBody implements BattleGroundObject 
     public HitBox hitBox(){
         hitBox = new HitBox(this);
         return hitBox;
+    }
+    public void rotate(double angle){
+        this.setRotationAngle(angle);
+        this.getChildren().get(0).setRotate(angle);
     }
 }

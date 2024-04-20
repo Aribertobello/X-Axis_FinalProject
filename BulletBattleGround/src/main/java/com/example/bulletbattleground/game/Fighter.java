@@ -47,16 +47,18 @@ public class Fighter extends Rectangle {
         super(40, 40);
 
         if (type == 1) {
-            loadout= new Loadout("light");
+            loadout= new Loadout(1);
         }
 
         if (type == 2) {
-            loadout = new Loadout("medium");
+            loadout = new Loadout(2);
         }
 
         if (type == 3) {
-            loadout = new Loadout("heavy");
+            loadout = new Loadout(3);
         }
+
+
         coordinate.setX(coordinateX);
         coordinate.setY(coordinateY);
         this.teamNb = 1;

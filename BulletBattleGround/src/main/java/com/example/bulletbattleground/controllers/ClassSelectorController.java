@@ -30,7 +30,6 @@ public class ClassSelectorController extends subMenuController {
     public static boolean pveClicked;
     public static boolean pvcClicked;
 
-
     public void lightClassSelected(ActionEvent event) throws IOException {
         FileManager.loadoutType = light;
     }
