@@ -1,6 +1,7 @@
 package com.example.bulletbattleground.game;
 
 import com.example.bulletbattleground.BattleGround;
+import com.example.bulletbattleground.controllers.ClassSelectorController;
 import com.example.bulletbattleground.game.Loadout;
 import com.example.bulletbattleground.game.levels.StandardLevel;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
@@ -35,6 +36,7 @@ public class Fighter extends Rectangle {
     @Getter
     boolean highlighted;
 
+
     /**
      * Creates a Fighter  instance, this is what can shoot bullets in the game
      * @param coordinateX coordinate x of the center of the fighter in the map
@@ -43,7 +45,20 @@ public class Fighter extends Rectangle {
      */
     public Fighter(int coordinateX, int coordinateY, int type) {
         super(40, 40);
-        loadout = new Loadout(type);
+
+        if (type == 1) {
+            loadout= new Loadout(1);
+        }
+
+        if (type == 2) {
+            loadout = new Loadout(2);
+        }
+
+        if (type == 3) {
+            loadout = new Loadout(3);
+        }
+
+
         coordinate.setX(coordinateX);
         coordinate.setY(coordinateY);
         this.teamNb = 1;

@@ -1,5 +1,6 @@
 package com.example.bulletbattleground.gameObjects.projectiles;
 
+import com.example.bulletbattleground.BattleGround;
 import com.example.bulletbattleground.game.Fighter;
 import com.example.bulletbattleground.game.Game;
 import com.example.bulletbattleground.game.Projectile;
@@ -104,7 +105,6 @@ public class Grenade extends Projectile {
             animationTimeLine = new Timeline(new KeyFrame(Duration.seconds(0.06), event -> explosionAnimation()));
             animationTimeLine.setCycleCount(Timeline.INDEFINITE);
             animationTimeLine.play();
-
         }
     }
 
@@ -116,6 +116,7 @@ public class Grenade extends Projectile {
         } else {
             animationTimeLine.stop();
             getChildren().remove(explosionCircle);
+            BattleGround.activeGame.getLevel().map.removeActiveProjectile();
         }
 
     }

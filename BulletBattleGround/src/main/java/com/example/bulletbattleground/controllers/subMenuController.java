@@ -11,7 +11,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-public class subMenuController {
+public class subMenuController{
 
     public  Button exitBtn ;
     public  Button mainMenuBtn ;
@@ -23,26 +23,44 @@ public class subMenuController {
      * @param event Action event for a button to create new scene for player vs computer Game mode.
      */
     public void player_computer_btn_clicked(ActionEvent event) throws IOException {
+        ClassSelectorController.pvcClicked = true;
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(BattleGround.pvcLevelSelectorLoader().load()));
+        stage.setScene(new Scene(BattleGround.classSelectorLoader().load()));
         stage.show();
+
+//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//        stage.setScene(new Scene(BattleGround.pvcLevelSelectorLoader().load()));
+//        stage.show();
     }
     /**
      * @param event Action event for a button to create new scene for player vs environment game mode.
      */
     public void player_environ_btn_clicked(ActionEvent event) throws IOException {
+        ClassSelectorController.pveClicked = true;
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(BattleGround.pveLevelSelectorLoader().load()));
+        stage.setScene(new Scene(BattleGround.classSelectorLoader().load()));
         stage.show();
+
+//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//        stage.setScene(new Scene(BattleGround.pveLevelSelectorLoader().load()));
+//        stage.show();
     }
     /**
      *@param event Action handler for a button to create new scene for player vs player game mode.
      */
     public void player_player_btn_clicked(ActionEvent event) throws IOException {
+        ClassSelectorController.pvpClicked = true;
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(BattleGround.pvpLevelSelectorLoader().load()));
+        stage.setScene(new Scene(BattleGround.classSelectorLoader().load()));
         stage.show();
+
+
+        //Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        //stage.setScene(new Scene(BattleGround.pvpLevelSelectorLoader().load()));
+        //stage.show();
     }
+
+
 
     @FXML
     public void switchToMainMenu(ActionEvent event) throws IOException {
