@@ -235,7 +235,7 @@ public abstract class Level extends AnchorPane implements GameUI {
 
                     // Update the angle arc
                     angleArc.setCenterX(1065);
-                    angleArc.setCenterY(960);
+                    angleArc.setCenterY(945);
                     angleArc.setRadiusX(radius);
                     angleArc.setRadiusY(radius);
                     angleArc.setStartAngle(0.00); // Adjust start angle based on your requirements
@@ -285,16 +285,6 @@ public abstract class Level extends AnchorPane implements GameUI {
             VeloBar.setProgress(progress);
             AccLabel.setText("Acceleration: "+ map.getActiveProjectile().acceleration());
             MomLabel.setText("Momentum: " + Math.round(map.getActiveProjectile().momentum()));
-        }
-        if (map != null && map.activeProjectile != null) {
-
-            KELabel.setText("Kinetic energy: " + map.getActiveProjectile().kE());
-            System.out.println(KELabel);
-        }
-        if (healthProgressbar != null) {
-
-            healthProgressbar.setProgress(20);
-            healthProgressbar.setStyle("-fx-accent: red; -fx-progress-bar-indeterminate-fill: red;");
         }
     }
 
