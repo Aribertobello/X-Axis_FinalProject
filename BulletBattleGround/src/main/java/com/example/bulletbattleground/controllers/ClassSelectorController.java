@@ -30,39 +30,45 @@ public class ClassSelectorController extends subMenuController {
     public static boolean pveClicked;
     public static boolean pvcClicked;
 
+    public boolean loadoutSelected;
+
     public void lightClassSelected(ActionEvent event) throws IOException {
         FileManager.loadoutType = light;
+        loadoutSelected = true;
+
     }
 
     public void mediumClassSelected(ActionEvent event) throws IOException {
         FileManager.loadoutType = medium;
+        loadoutSelected = true;
     }
 
     public void heavyClassSelected(ActionEvent event) throws IOException {
         FileManager.loadoutType = heavy;
+        loadoutSelected = true;
     }
 
     @FXML
     void switchScenes(ActionEvent event) throws IOException {
+        if(loadoutSelected) {
+            if (pvpClicked) {
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(BattleGround.pvpLevelSelectorLoader().load()));
+                stage.show();
+            }
 
-        if (pvpClicked) {
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(BattleGround.pvpLevelSelectorLoader().load()));
-            stage.show();
+            if (pveClicked) {
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(BattleGround.pveLevelSelectorLoader().load()));
+                stage.show();
+            }
+
+            if (pvcClicked) {
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(BattleGround.pvcLevelSelectorLoader().load()));
+                stage.show();
+            }
         }
-
-        if (pveClicked) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(BattleGround.pveLevelSelectorLoader().load()));
-        stage.show();
-    }
-
-        if (pvcClicked){
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(BattleGround.pvcLevelSelectorLoader().load()));
-        stage.show();
-    }
-
      }
 
 }
