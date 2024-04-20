@@ -12,7 +12,13 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
+import javax.sound.sampled.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+
 public class Bullet extends Projectile {
+    private boolean hasPlayedSound = false;
 
     /**
      * Constructs a new Bullet object.
@@ -20,7 +26,6 @@ public class Bullet extends Projectile {
      * The bullet has a default damage value of 3, upward lift force, and a set mass.
      */
     public Bullet() {
-
         Circle small_bullet = new Circle(10);
         small_bullet.setRotate(90);
         Image smallBulletImg = new Image("file:smallBullet.png");
@@ -30,6 +35,20 @@ public class Bullet extends Projectile {
         this.lift = new Vector(0, -2.0);
         this.forces.add(lift);
         setMass(0.5);
+
+    }
+    private void playGunshotSound() {
+        if(!hasPlayedSound) {
+          try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("GunShot.wav"));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
+            e.printStackTrace();
+        }
+          hasPlayedSound = true;
+    }
     }
 
     @Override
@@ -40,6 +59,10 @@ public class Bullet extends Projectile {
 
     @Override
     public void move(double time) {
+        if(!hasPlayedSound) {
+            playGunshotSound();
+            hasPlayedSound = true;
+        }
         super.move(time);
         this.getChildren().get(0).setRotate(velocity().angle());
     }
