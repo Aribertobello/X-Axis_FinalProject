@@ -1,3 +1,4 @@
+index : 2
 type : 2
 map : Files/txt/PVC.map.lvl.2.txt
 fighters :

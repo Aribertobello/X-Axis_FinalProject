@@ -1,6 +1,7 @@
 package com.example.bulletbattleground.game;
 
 import com.example.bulletbattleground.BattleGround;
+import com.example.bulletbattleground.controllers.ClassSelectorController;
 import com.example.bulletbattleground.game.Loadout;
 import com.example.bulletbattleground.game.levels.StandardLevel;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
@@ -34,6 +35,7 @@ public class Fighter extends Rectangle {
     protected int teamNb;
     @Getter
     boolean highlighted;
+
 
     /**
      * Creates a Fighter  instance, this is what can shoot bullets in the game

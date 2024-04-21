@@ -64,6 +64,9 @@ public abstract class Level extends AnchorPane implements GameUI {
     @Getter
     @Setter
     protected int type;
+    @Getter
+    @Setter
+    protected int index;
     //------------------------------------------------------------------------
 
     // Level controllers--------
@@ -72,6 +75,7 @@ public abstract class Level extends AnchorPane implements GameUI {
     @Setter
     protected Pane headsUpDisplay;
     @FXML
+    @Getter
     protected AnchorPane container;
     @FXML
     private Label activeProjectileLabel;
@@ -153,7 +157,14 @@ public abstract class Level extends AnchorPane implements GameUI {
     public boolean[] update(double dt,double time) {
         map.setPrefWidth(((Stage) this.getScene().getWindow()).getWidth());
         updateHUD();
-        return new boolean[]{map.update(dt)};
+        if(map.update(dt)){
+            return levelStatus(map);
+        }
+        return new boolean[]{false,false};
+    }
+
+    public boolean[] levelStatus(Mapp map) {
+        return new boolean[]{false,false};
     }
 
     @FXML
@@ -247,7 +258,7 @@ public abstract class Level extends AnchorPane implements GameUI {
 
                     // Update the angle arc
                     angleArc.setCenterX(1065);
-                    angleArc.setCenterY(960);
+                    angleArc.setCenterY(945);
                     angleArc.setRadiusX(radius);
                     angleArc.setRadiusY(radius);
                     angleArc.setStartAngle(0.00); // Adjust start angle based on your requirements
@@ -298,16 +309,6 @@ public abstract class Level extends AnchorPane implements GameUI {
             AccLabel.setText("Acceleration: "+ map.getActiveProjectile().acceleration());
             MomLabel.setText("Momentum: " + Math.round(map.getActiveProjectile().momentum()));
         }
-        if (map != null && map.activeProjectile != null) {
-
-            KELabel.setText("Kinetic energy: " + map.getActiveProjectile().kE());
-            System.out.println(KELabel);
-        }
-        if (healthProgressbar != null) {
-
-            healthProgressbar.setProgress(20);
-            healthProgressbar.setStyle("-fx-accent: red; -fx-progress-bar-indeterminate-fill: red;");
-        }
     }
 
     public void updateTurnBox(double time, double timeLimit, int playerTurn) {
@@ -339,6 +340,7 @@ public abstract class Level extends AnchorPane implements GameUI {
     }
 
     public void displayDescription() {
+        container.setOpacity(0.25);
         this.getChildren().add(descriptionBox);
     }
 

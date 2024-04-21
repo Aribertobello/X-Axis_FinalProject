@@ -26,9 +26,8 @@ public class PVPLevelSelectorController {
                 Exception e){
             e.printStackTrace();
         }
-        stage.setScene(BattleGround.activeGame);
-        stage.setMaximized(true);
-        stage.show();
+        BattleGround.newScene(BattleGround.activeGame);
+        BattleGround.fullscreen();
         BattleGround.activeGame.run();
     }
 
@@ -40,9 +39,8 @@ public class PVPLevelSelectorController {
                 Exception e){
             e.printStackTrace();
         }
-        stage.setScene(BattleGround.activeGame);
-        stage.setMaximized(true);
-        stage.show();
+        BattleGround.newScene(BattleGround.activeGame);
+        BattleGround.fullscreen();
         BattleGround.activeGame.run();
     }
 
@@ -54,9 +52,8 @@ public class PVPLevelSelectorController {
                 Exception e){
             e.printStackTrace();
         }
-        stage.setScene(BattleGround.activeGame);
-        stage.setMaximized(true);
-        stage.show();
+        BattleGround.newScene(BattleGround.activeGame);
+        BattleGround.fullscreen();
         BattleGround.activeGame.run();
     }
 
@@ -68,9 +65,8 @@ public class PVPLevelSelectorController {
                 Exception e){
             e.printStackTrace();
         }
-        stage.setScene(BattleGround.activeGame);
-        stage.setMaximized(true);
-        stage.show();
+        BattleGround.newScene(BattleGround.activeGame);
+        BattleGround.fullscreen();
         BattleGround.activeGame.run();
     }
 
@@ -82,9 +78,8 @@ public class PVPLevelSelectorController {
                 Exception e){
             e.printStackTrace();
         }
-        stage.setScene(BattleGround.activeGame);
-        stage.setMaximized(true);
-        stage.show();
+        BattleGround.newScene(BattleGround.activeGame);
+        BattleGround.fullscreen();
         BattleGround.activeGame.run();
     }
 
@@ -96,9 +91,8 @@ public class PVPLevelSelectorController {
                 Exception e){
             e.printStackTrace();
         }
-        stage.setScene(BattleGround.activeGame);
-        stage.setMaximized(true);
-        stage.show();
+        BattleGround.newScene(BattleGround.activeGame);
+        BattleGround.fullscreen();
         BattleGround.activeGame.run();
     }
 
@@ -110,9 +104,8 @@ public class PVPLevelSelectorController {
                 Exception e){
             e.printStackTrace();
         }
-        stage.setScene(BattleGround.activeGame);
-        stage.setMaximized(true);
-        stage.show();
+        BattleGround.newScene(BattleGround.activeGame);
+        BattleGround.fullscreen();
         BattleGround.activeGame.run();
     }
 
@@ -124,9 +117,8 @@ public class PVPLevelSelectorController {
                 Exception e){
             e.printStackTrace();
         }
-        stage.setScene(BattleGround.activeGame);
-        stage.setMaximized(true);
-        stage.show();
+        BattleGround.newScene(BattleGround.activeGame);
+        BattleGround.fullscreen();
         BattleGround.activeGame.run();
     }
 
@@ -138,9 +130,8 @@ public class PVPLevelSelectorController {
                 Exception e){
             e.printStackTrace();
         }
-        stage.setScene(BattleGround.activeGame);
-        stage.setMaximized(true);
-        stage.show();
+        BattleGround.newScene(BattleGround.activeGame);
+        BattleGround.fullscreen();
         BattleGround.activeGame.run();
     }
 
@@ -152,9 +143,8 @@ public class PVPLevelSelectorController {
                 Exception e){
             e.printStackTrace();
         }
-        stage.setScene(BattleGround.activeGame);
-        stage.setMaximized(true);
-        stage.show();
+        BattleGround.newScene(BattleGround.activeGame);
+        BattleGround.fullscreen();
         BattleGround.activeGame.run();
     }
 }

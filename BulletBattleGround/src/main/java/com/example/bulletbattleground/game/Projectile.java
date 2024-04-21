@@ -4,12 +4,13 @@ import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.HitBox;
 import com.example.bulletbattleground.utility.MovingBody;
 import com.example.bulletbattleground.utility.Vector;
+import javafx.scene.shape.Circle;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Arrays;
 
-public abstract class Projectile extends MovingBody {
+public abstract class  Projectile extends MovingBody {
 
     public static final double TERMINAL_VELOCITY = 100;
     public static final double MIN_LAUNCH_VELOCITY = 10.0;

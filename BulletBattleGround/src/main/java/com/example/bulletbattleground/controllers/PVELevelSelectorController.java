@@ -20,9 +20,8 @@ public class PVELevelSelectorController {
         }catch(Exception e){
             throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
         }
-        stage.setScene(BattleGround.activeGame);
-        stage.setMaximized(true);
-        stage.show();
+        BattleGround.newScene(BattleGround.activeGame);
+        BattleGround.fullscreen();
         BattleGround.activeGame.run();
     }
 
@@ -33,9 +32,8 @@ public class PVELevelSelectorController {
         }catch(Exception e){
             throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
         }
-        stage.setScene(BattleGround.activeGame);
-        stage.setMaximized(true);
-        stage.show();
+        BattleGround.newScene(BattleGround.activeGame);
+        BattleGround.fullscreen();
         BattleGround.activeGame.run();
     }
 
@@ -46,9 +44,8 @@ public class PVELevelSelectorController {
         }catch(Exception e){
             throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
         }
-        stage.setScene(BattleGround.activeGame);
-        stage.setMaximized(true);
-        stage.show();
+        BattleGround.newScene(BattleGround.activeGame);
+        BattleGround.fullscreen();
         BattleGround.activeGame.run();
     }
 
@@ -59,9 +56,8 @@ public class PVELevelSelectorController {
         }catch(Exception e){
             throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
         }
-        stage.setScene(BattleGround.activeGame);
-        stage.setMaximized(true);
-        stage.show();
+        BattleGround.newScene(BattleGround.activeGame);
+        BattleGround.fullscreen();
         BattleGround.activeGame.run();
     }
 
@@ -72,9 +68,8 @@ public class PVELevelSelectorController {
         }catch(Exception e){
             throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
         }
-        stage.setScene(BattleGround.activeGame);
-        stage.setMaximized(true);
-        stage.show();
+        BattleGround.newScene(BattleGround.activeGame);
+        BattleGround.fullscreen();
         BattleGround.activeGame.run();
     }
 
@@ -85,9 +80,8 @@ public class PVELevelSelectorController {
         }catch(Exception e){
             throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
         }
-        stage.setScene(BattleGround.activeGame);
-        stage.setMaximized(true);
-        stage.show();
+        BattleGround.newScene(BattleGround.activeGame);
+        BattleGround.fullscreen();
         BattleGround.activeGame.run();
     }
 
@@ -98,9 +92,8 @@ public class PVELevelSelectorController {
         }catch(Exception e){
             throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
         }
-        stage.setScene(BattleGround.activeGame);
-        stage.setMaximized(true);
-        stage.show();
+        BattleGround.newScene(BattleGround.activeGame);
+        BattleGround.fullscreen();
         BattleGround.activeGame.run();
     }
 
@@ -111,9 +104,8 @@ public class PVELevelSelectorController {
         }catch(Exception e){
             throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
         }
-        stage.setScene(BattleGround.activeGame);
-        stage.setMaximized(true);
-        stage.show();
+        BattleGround.newScene(BattleGround.activeGame);
+        BattleGround.fullscreen();
         BattleGround.activeGame.run();
     }
 
@@ -124,9 +116,8 @@ public class PVELevelSelectorController {
         }catch(Exception e){
             throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
         }
-        stage.setScene(BattleGround.activeGame);
-        stage.setMaximized(true);
-        stage.show();
+        BattleGround.newScene(BattleGround.activeGame);
+        BattleGround.fullscreen();
         BattleGround.activeGame.run();
     }
 
@@ -137,10 +128,8 @@ public class PVELevelSelectorController {
         }catch(Exception e){
             throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
         }
-        stage.setScene(BattleGround.activeGame);
-        stage.setMaximized(true);
-        stage.show();
+        BattleGround.newScene(BattleGround.activeGame);
+        BattleGround.fullscreen();
         BattleGround.activeGame.run();
-
     }
 }

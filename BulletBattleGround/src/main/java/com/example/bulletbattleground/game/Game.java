@@ -1,5 +1,8 @@
 package com.example.bulletbattleground.game;
 
+import com.example.bulletbattleground.BattleGround;
+import com.example.bulletbattleground.controllers.DescriptionBoxController;
+import com.example.bulletbattleground.controllers.GameOverBoxController;
 import com.example.bulletbattleground.game.levels.StandardLevel;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
 import com.example.bulletbattleground.utility.Coordinate;
@@ -10,13 +13,18 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-
 import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import lombok.Getter;
 
@@ -30,7 +38,7 @@ public class Game extends Scene {
 
     @Getter
     protected Level level;
-    protected Boolean gameWon;
+    protected Boolean gameWon = false;
     protected Integer tickRate = 100;
 
     protected double time = 0;
@@ -38,6 +46,11 @@ public class Game extends Scene {
     private boolean isTicking;
     boolean gameStart = false;
     TurnManager turnManager ;
+
+
+    public Label congratulationsLabel;
+    public Button exitBtn;
+    public VBox gameOverBox;
 
 
     /**
@@ -68,7 +81,11 @@ public class Game extends Scene {
         }));
         turnManager = new TurnManager(level);
         timeline.setCycleCount(Timeline.INDEFINITE);
-        getLevel().displayDescription();
+        if (BattleGround.user.isUnlocked(getLevel())) getLevel().displayDescription();
+        else {
+            endGame();
+            congratulationsLabel.setText("Level Not Unlocked Yet");
+        }
     }
 
     /**
@@ -90,16 +107,36 @@ public class Game extends Scene {
         }
         boolean[] gameStatus = level.update(dt, time);
         gameOver = gameStatus[0];
-        //gameWon = gameStatus[1];
+        gameWon = gameStatus[1];
         if(gameOver){
             timeline.stop();
-            exitGame();
+            endGame();
         }
     }
 
-    private void exitGame() {
-        //TODO
-        this.setRoot(new Pane(new Label("GAMEOVER")));
+    private void endGame() {
+        FXMLLoader gameOverBoxLoader = new FXMLLoader(BattleGround.class.getResource("GameOverBox.fxml"));
+        try {
+            gameOverBox = gameOverBoxLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        GameOverBoxController controller = gameOverBoxLoader.getController();
+        exitBtn = controller.exitBtn;
+        congratulationsLabel = controller.congratulationsLabel;
+        if(gameWon){
+            congratulationsLabel.setText("CONGRATULATIONS YOU HAVE WON!");
+        } else {
+            congratulationsLabel.setText("BETTER LUCK NEXT TIME");
+        }
+        gameOverBox.setLayoutX(BattleGround.screenWidth/3);
+        gameOverBox.setLayoutY(BattleGround.screenHeight/4);
+        level.container.setOpacity(0.25);
+        level.getChildren().add(gameOverBox);
+    }
+
+    public void exitGame() {
+        BattleGround.prevScene();
     }
 
     protected void handleDragAndShoot() {
@@ -149,7 +186,21 @@ public class Game extends Scene {
             }
             // TODO -LAUNCH GRENADE
         });
-        this.setOnKeyPressed(new pauseEvent());
+
+        this.setOnKeyPressed(event -> {//Pauses the game when hitting key P
+
+            if (event.getCode() == KeyCode.P) {
+                new pauseEvent().handle(event);
+            }
+
+            if (event.getCode() == KeyCode.S) {
+                   level.selectedFighter.launchProjectile(
+                          level.selectedFighter.loadout.smokeGrenades.get(0), new Vector(15, 0.0), level.origin);
+                level.selectedFighter.loadout.smokeGrenades.remove(level.selectedFighter.loadout.smokeGrenades.get(0));
+                    turnManager.projectileShot();
+                    System.out.println("Smoke grenade deployed");
+                    }
+        });
     }
 
     private boolean isWithinPlayerBounds(double x,double y) {
@@ -163,7 +214,6 @@ public class Game extends Scene {
     }
 
     private void shoot(MouseEvent event, Ally selectedFighter, double velocityX, double velocityY) {
-
         if(level instanceof StandardLevel && level.origin!=null){
             StandardLevel level = (StandardLevel) this.level;
             if(turnManager.isPlayer1Turn() && level.team1.contains(selectedFighter)) {
@@ -178,6 +228,7 @@ public class Game extends Scene {
                     selectedFighter.loadout.grenades.remove(level.selectedFighter.loadout.grenades.get(0));
                     turnManager.projectileShot();
                 }
+
             } else if(turnManager.isPlayer2Turn() && level.team2.contains(selectedFighter)){
                 if (event.getButton() == MouseButton.PRIMARY) {
                     selectedFighter.launchProjectile(
@@ -258,7 +309,17 @@ public class Game extends Scene {
     public class pauseEvent implements EventHandler {
         @Override
         public void handle(Event t) {
-            pauseGame();
+            if(timeline.getStatus() == Animation.Status.PAUSED){
+                isTicking = true;
+                timeline.play();
+            }else{
+                //Debug
+                Object variableOfInterest = level.map.activeProjectile;
+                //----------------
+                timeline.pause();
+                //tickRate = -tickRate;
+                isTicking = false;
+            }
         }
     }
 }

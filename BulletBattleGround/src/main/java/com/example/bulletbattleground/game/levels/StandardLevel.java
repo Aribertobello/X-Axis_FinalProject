@@ -53,36 +53,41 @@ public class StandardLevel extends Level {
         }
     }
     @Override
-    public boolean[] update(double dt, double time) {
-        updateHUD();
-        if(map.update(dt)){
-            switch(type) {
-                case 1:
-                    if(map.getLoot() ==null) return new boolean[]{true, true};
-                    if(map.getPeople().isEmpty()){
-                        return new boolean[]{true, false};
-                    }
-                    break;
-                case 2:
-                    if(map.getPeople().size()==1){
-                        return new boolean[]{true, false};
-                    }
-                    //TODO gameWon or !GameWon
-                    break;
-                case 3:
-                    if(map.getPeople().size()==1){
-                        int i = 0;//TODO PVP
-                        return new boolean[]{true, false};
-                    }
-                    break;
+    public boolean[] levelStatus(Mapp map) {
+        boolean gameWon = false;
+        boolean gameEnd = false;
+        switch (type){
+            case 1 -> {
+                if(!map.isHasLoot()){
+                    gameEnd = true;
+                    gameWon = true;
+                } else if(team1.isEmpty()){
+                    gameEnd = true;
+                }
+            }
+            case 2 -> {
+                if(team1.isEmpty()){
+                    gameEnd = true;
+                    gameWon = false;
+                } else if (team2.isEmpty()){
+                    gameEnd = true;
+                    gameWon = true;
+                }
+            }
+            case 3 -> {
+                if(team1.isEmpty() || team2.isEmpty()){
+                    gameEnd = true;
+                    gameWon = true;
+                }
             }
         }
-        return new boolean[]{false,false};
+        return new boolean[]{gameEnd,gameWon};
     }
 
     public void addLoot(Loot loot) {
         map.loot = loot;
         map.getChildren().add(map.getLoot());
+        map.setHasLoot(true);
     }
     @Override
     public void addFighter(Fighter fighter, int teamNb){

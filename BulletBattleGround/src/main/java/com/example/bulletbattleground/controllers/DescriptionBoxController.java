@@ -15,6 +15,7 @@ public class DescriptionBoxController {
     public void playGame(ActionEvent event) {
 
         ((Level)descriptionBox.getParent()).getChildren().remove(descriptionBox);
+        BattleGround.activeGame.getLevel().getContainer().setOpacity(1);
         BattleGround.activeGame.play();
     }
     public void initialize(){

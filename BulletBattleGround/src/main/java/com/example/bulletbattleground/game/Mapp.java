@@ -56,6 +56,9 @@ public class Mapp extends Pane {
     @Setter
     protected Shape earth;
     public Vector[] environmentForces = {gravity,airResistance,new Vector(0,0)};
+    @Getter
+    @Setter
+    private boolean hasLoot = false;
 
     /**
      *
@@ -98,8 +101,8 @@ public class Mapp extends Pane {
                 removeActiveProjectile();
                 return false;
             }
-            activeProjectile.move(dt);
             addForces(activeProjectile);
+            activeProjectile.move(dt);
             buffer++;
             if (buffer > 10) {
 
@@ -122,7 +125,6 @@ public class Mapp extends Pane {
      * @param fighter
      */
     public void addFighter(Fighter fighter) {
-
         people.add(fighter);
         hitBoxes.add(fighter.hitBox());
         getChildren().add(fighter);
@@ -154,7 +156,6 @@ public class Mapp extends Pane {
             hitBoxes.add(hitBox);
             getChildren().add(hitBox);
         }
-
     }
 
     /**
@@ -165,7 +166,7 @@ public class Mapp extends Pane {
 
         if (type == 0) {
             environmentForces[0] = gravity.multiply(projectile.getMass());
-            environmentForces[1] = projectile.velocity().unitVector().multiply(-2);
+            environmentForces[1] = projectile.velocity().unitVector().multiply(-0.5);
         } else {
             Circle earth = (Circle) this.earth;
             projectile.setMass(2000);
@@ -249,6 +250,7 @@ public class Mapp extends Pane {
     public void removeLoot(){
         this.getChildren().remove(loot);
         loot = null;
+        hasLoot = false;
     }
 
     public void setAirResistanceMagnitude(double magnitude){

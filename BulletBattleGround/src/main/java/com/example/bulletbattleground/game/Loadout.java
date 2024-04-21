@@ -1,8 +1,11 @@
 package com.example.bulletbattleground.game;
 
+import com.example.bulletbattleground.BattleGround;
+import com.example.bulletbattleground.controllers.ClassSelectorController;
 import com.example.bulletbattleground.gameObjects.projectiles.*;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import lombok.Getter;
 
 import java.util.ArrayList;
 
@@ -39,6 +42,5 @@ public class Loadout {
             smokeGrenades.add(new SmokeGrenade());
             smokeGrenades.add(new SmokeGrenade());
         }
-
     }
 }

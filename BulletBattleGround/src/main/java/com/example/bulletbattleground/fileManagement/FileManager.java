@@ -2,6 +2,7 @@ package com.example.bulletbattleground.fileManagement;
 
 import com.example.bulletbattleground.BattleGround;
 import com.example.bulletbattleground.game.Level;
+import com.example.bulletbattleground.controllers.ClassSelectorController;
 import com.example.bulletbattleground.game.levels.StandardLevel;
 import com.example.bulletbattleground.game.Mapp;
 import com.example.bulletbattleground.game.levels.EduLevel;
@@ -19,9 +20,12 @@ import java.io.*;
 import java.text.ParseException;
 import java.util.Scanner;
 
-public class FileManager {
+public class FileManager extends ClassSelectorController {
 
     private static File managerFile;
+
+    public static int loadoutType;
+
 
     /**
      * Constructs a new FileManager instance with the specified file path.
@@ -37,6 +41,7 @@ public class FileManager {
         Level level = null;
         String mapLocation = "";
         int type = 0;
+        int index = 0;
         Scanner scanner = null;
         try {
             scanner = new Scanner(new File(filePath));
@@ -45,6 +50,7 @@ public class FileManager {
         }
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
+            if (line.startsWith("index :")) index = Integer.valueOf(line.substring(8).trim());
             if (line.startsWith("type :")) type = Integer.valueOf(line.substring(7).trim());
             if (line.startsWith("map :")) mapLocation = line.substring(6).trim();
             if (line.startsWith("fighters :")) {
@@ -59,9 +65,9 @@ public class FileManager {
                 scanLoot(line,level);
             }
         }
+        level.setIndex(index);
         return level;
     }
-
 
     public static Mapp createMap(String filePath) throws ParseException {
         Mapp map = null;
@@ -81,6 +87,7 @@ public class FileManager {
         }
         return map;
     }
+
     private static void scanLoot(String line, Level level) throws ParseException {
         Coordinate coordinate = new Coordinate(0, 0);
             Scanner lineScanner = new Scanner(line);

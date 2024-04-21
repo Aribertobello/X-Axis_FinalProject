@@ -72,6 +72,7 @@ public class TurnManager {
 
     private void endTurn() {
         System.out.println("Player " + currentPlayer + "'s turn ended");
+        if((level).getType() == 1){ previousPlayer = 2;}
         currentPlayer = previousPlayer == 1 ? 2 : 1;
         startTurn();
     }

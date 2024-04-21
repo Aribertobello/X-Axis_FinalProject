@@ -10,7 +10,12 @@ import javafx.scene.shape.Polygon;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.sound.sampled.*;
+import java.io.File;
+import java.io.IOException;
+
 public class Rocket extends Projectile {
+    private boolean hasPlayedSound = false;
 
     @Getter
     @Setter
@@ -29,6 +34,19 @@ public class Rocket extends Projectile {
         this.forces.add(lift);
         this.setMass(9.0);
     }
+    private void playRocketSound() {
+        if(!hasPlayedSound) {
+            try {
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Rocket.wav"));
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                clip.start();
+            } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
+                e.printStackTrace();
+            }
+            hasPlayedSound = true;
+        }
+    }
 
 
     @Override
@@ -42,6 +60,10 @@ public class Rocket extends Projectile {
         }
         align();
         super.move(time);
+        if(!hasPlayedSound) {
+            playRocketSound();
+            hasPlayedSound = true;
+        }
     }
 
     @Override

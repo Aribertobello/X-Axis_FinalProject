@@ -1,4 +1,5 @@
-type : 1
+index : 5
+type : 2
  map : Files/txt/PVC.map.lvl.1.txt
  fighters :
  {
