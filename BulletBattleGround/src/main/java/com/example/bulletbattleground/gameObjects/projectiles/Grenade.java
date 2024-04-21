@@ -23,21 +23,21 @@ import java.io.InputStream;
 @Getter @Setter
 public class Grenade extends Projectile {
 
-    private final Image explosionEffect1 = new Image("file:1.PNG");
+    private final Image explosionEffect1 = new Image("file:Files/img/1.PNG");
 
-    private final Image explosionEffect2 = new Image("file:2.PNG");
+    private final Image explosionEffect2 = new Image("file:Files/img/2.PNG");
 
-    private final Image explosionEffect3 = new Image("file:3.PNG");
+    private final Image explosionEffect3 = new Image("file:Files/img/3.PNG");
 
-    private final Image explosionEffect4 = new Image("file:4.PNG");
+    private final Image explosionEffect4 = new Image("file:Files/img/4.PNG");
 
-    private final Image explosionEffect5 = new Image("file:5.PNG");
+    private final Image explosionEffect5 = new Image("file:Files/img/5.PNG");
 
-    private final Image explosionEffect6 = new Image("file:6.PNG");
+    private final Image explosionEffect6 = new Image("file:Files/img/6.PNG");
 
-    private final Image explosionEffect7 = new Image("file:7.PNG");
+    private final Image explosionEffect7 = new Image("file:Files/img/7.PNG");
 
-    private final Image explosionEffect8 = new Image("file:8.PNG");
+    private final Image explosionEffect8 = new Image("file:Files/img/8.PNG");
 
     private final double ExplosionRadius = 90;
 
@@ -61,7 +61,7 @@ public class Grenade extends Projectile {
 
     public Grenade(){
         fuseTimer = 2.50;
-        Image grenadeImg = new Image("file:grenade.png");
+        Image grenadeImg = new Image("file:Files/img/grenade.png");
         grenade.setFill(new ImagePattern(grenadeImg));
         this.lift = new Vector(0, 0);
         this.getChildren().add(grenade);

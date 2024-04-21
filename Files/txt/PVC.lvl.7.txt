@@ -1,0 +1,14 @@
+index : 7
+type : 2
+map : Files/txt/PVC.map.lvl.7.txt
+fighters :
+{
+ally : { loadout = 1 , health = 5 , coordinate = (200,600) }
+computer : { loadout = 1 , health = 5 , coordinate = (1200,700) }
+}
+GameRules : {
+MAX_TURN_TIMER :
+MAX_PROJ_ANIMATION_IMER
+tickspeed :
+}
+Description :

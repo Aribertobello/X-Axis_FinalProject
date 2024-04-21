@@ -1,18 +1,23 @@
 package com.example.bulletbattleground.fileManagement;
 
 import com.example.bulletbattleground.BattleGround;
+import com.example.bulletbattleground.game.Level;
 import com.example.bulletbattleground.controllers.ClassSelectorController;
 import com.example.bulletbattleground.game.levels.StandardLevel;
 import com.example.bulletbattleground.game.Mapp;
 import com.example.bulletbattleground.game.levels.EduLevel;
 import com.example.bulletbattleground.game.levels.FreePlayLevel;
+import com.example.bulletbattleground.gameObjects.Loot.Loot;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
 import com.example.bulletbattleground.gameObjects.fighters.Computer;
 import com.example.bulletbattleground.gameObjects.obstacles.SpaceShip;
 import com.example.bulletbattleground.gameObjects.obstacles.Wall;
+import com.example.bulletbattleground.utility.Coordinate;
+import com.example.bulletbattleground.utility.Vector;
 import javafx.stage.Screen;
 
 import java.io.*;
+import java.text.ParseException;
 import java.util.Scanner;
 
 public class FileManager extends ClassSelectorController {
@@ -21,7 +26,6 @@ public class FileManager extends ClassSelectorController {
 
     public static int loadoutType;
 
-    static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
 
     /**
      * Constructs a new FileManager instance with the specified file path.
@@ -33,130 +37,181 @@ public class FileManager extends ClassSelectorController {
         managerFile = new File(filePath);
     }
 
-    /**
-     *Generates the default level for the player vs computer mode
-     * calls the defaultMapPvc to generate the map of the level
-     * @return applications default level for PVC
-     */
-    public static StandardLevel defaultLevelPvc() {
-        Mapp map = defaultMapPvc();
+    public static Level createLevel(String filePath) throws ParseException, IOException {
+        Level level = null;
+        String mapLocation = "";
+        int type = 0;
+        int index = 0;
+        Scanner scanner = null;
         try {
-            StandardLevel level = new StandardLevel(map, 2);
-            level.addFighter(new Ally(200, 600, loadoutType),1);
-            level.addFighter(new Computer(screenWidth - 200, 600, 1),2);
-            return level;
-
-        } catch (IOException e) {
+            scanner = new Scanner(new File(filePath));
+        } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            if (line.startsWith("index :")) index = Integer.valueOf(line.substring(8).trim());
+            if (line.startsWith("type :")) type = Integer.valueOf(line.substring(7).trim());
+            if (line.startsWith("map :")) mapLocation = line.substring(6).trim();
+            if (line.startsWith("fighters :")) {
+                switch (type) {
+                    case 1,2,3 -> level = new StandardLevel(createMap(mapLocation), type);
+                    case 0 -> level = new FreePlayLevel(createMap(mapLocation));
+                    default -> level = new EduLevel(createMap(mapLocation));
+                }
+                readFighters(scanner, level);
+            }
+            if(line.startsWith("loot :")){
+                scanLoot(line,level);
+            }
+        }
+        level.setIndex(index);
+        return level;
     }
-    /**
-     *generates the default map for player vs computer game mode
-     * map is of type earth
-     * map includes a 12x160 wall at 900,480
-     * map has a player at 200,600 of type 3
-     * map has an opponent at screenWidth - 200,600 of type
-     * @return applications default map for PVC
-     */
-    public static Mapp defaultMapPvc() {
-        Mapp map = new Mapp("earth");
-        //map.addObstacle(new SmokeScreen(40,500,600));
-        map.addObstacle(new Wall(160, 12, 900, 480,90));
+
+    public static Mapp createMap(String filePath) throws ParseException {
+        Mapp map = null;
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(new File(filePath));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            if (line.startsWith("type : ")) map = new Mapp(line.substring(7, 12));
+            if (line.startsWith("Forces :"))  readForces(scanner,map);
+            if (line.startsWith("Obstacles :")) {
+                readObsctles(scanner, map);
+            }
+        }
         return map;
     }
 
-    /**
-     *Generates the default level for the player vs player mode
-     * calls the defaultMapPvp to generate the map of the level
-     * @return applications default level for PVP
-     */
-    public static StandardLevel defaultLevelPvp() {
-        Mapp map = defaultMapPvp();
-        try {
-            StandardLevel level = new StandardLevel(map, 3);
-            level.addFighter(new Ally(200, 600, loadoutType),1);
-            level.addFighter(new Ally(screenWidth - 200, 600, 2),2);
-            return level;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+    private static void scanLoot(String line, Level level) throws ParseException {
+        Coordinate coordinate = new Coordinate(0, 0);
+            Scanner lineScanner = new Scanner(line);
+            String str = "";
+            while (!str.startsWith("}")) {
+                str = lineScanner.next();
+                if (str.equalsIgnoreCase("coordinate")) {
+                    lineScanner.skip("...");
+                    coordinate = Coordinate.valueOf(lineScanner.next());
+                    ((StandardLevel)level).addLoot(new Loot((int)coordinate.getX(),(int)coordinate.getY()));
+                }
+            }
+    }
+
+    private static void readFighters(Scanner scanner, Level level) throws ParseException {
+
+        int loadoutType = 0;
+        int health = 0;
+        Coordinate coordinate = new Coordinate(0, 0);
+        String line = scanner.nextLine();
+        while (!line.startsWith("}")) {
+            Scanner lineScanner = new Scanner(line);
+            if (line.startsWith("ally") || line.startsWith("computer")) {
+                while (!lineScanner.next().startsWith("}")) {
+                    String str = lineScanner.next();
+                    if (str.equalsIgnoreCase("loadout")) {
+                        lineScanner.skip("...");
+                        loadoutType = lineScanner.nextInt();
+                    }
+                    if (str.equalsIgnoreCase("health")) {
+                        lineScanner.skip("...");
+                        health = lineScanner.nextInt();
+                    }
+                    if (str.equalsIgnoreCase("coordinate")) {
+                        lineScanner.skip("...");
+                        coordinate = Coordinate.valueOf(lineScanner.next());
+                    }
+                }
+                if (line.startsWith("ally"))
+                    level.addFighter(new Ally(loadoutType, health, (int) coordinate.getX(), (int) coordinate.getY()), 1);
+                if (line.startsWith("computer"))
+                    level.addFighter(new Computer(loadoutType, health, (int) coordinate.getX(), (int) coordinate.getY()), 2);
+            }
+            line = scanner.nextLine();
         }
     }
 
-    /**
-     *generates the default map for player vs computer game mode
-     * map is of type earth
-     * map includes a 12x160 wall at 900,480
-     * map has a player at 200,600 of type 3
-     * map has a player at screenWidth - 200,600 of type 2
-     * @return applications default map for PVC
-     */
-    public static Mapp defaultMapPvp() {
-        Mapp map = new Mapp("space");
-        //map.addObstacle(new SmokeScreen(40,500,600));
-        map.addObstacle(new Wall(160, 12, 900, 480,300));
-        return map;
-    }
-
-    /**
-     *Generates the default level for the player vs environment mode
-     * calls the defaultMapPve to generate the map of the level
-     * @return applications default level for PVE
-     */
-    public static StandardLevel defaultLevelPve() {
-        Mapp map = defaultMapPve();
-        try {
-            StandardLevel level = new StandardLevel(map, 1);
-            level.addFighter(new Ally(200, 600, loadoutType),1);
-            return level;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+    private static void readForces(Scanner scanner, Mapp map) throws ParseException {
+        double gMag = 0;
+        double aiResMag = 0;
+        Vector wind = new Vector(0, 0);
+        String str = scanner.next();
+        while (!str.startsWith("}")) {
+            if(str.startsWith("GMagnitude")){
+                scanner.skip("...");
+                gMag = scanner.nextDouble();
+            }
+            if(str.startsWith("AirResMagnitude")){
+                scanner.skip("...");
+                aiResMag = scanner.nextDouble();
+            }
+            if(str.startsWith("wind")){
+                scanner.skip("...");
+                wind = Vector.valueOf(scanner.next());
+            }
+            str = scanner.next();
         }
+        map.setGravityMagnitude(gMag);
+        map.setAirResistanceMagnitude(aiResMag);
+        map.environmentForces[2] = wind;
     }
 
-    /**
-     *generates the default map for player vs environnement game mode
-     * map is of type space
-     * map includes 4 moving spaceships
-     * map has a player at 200,600 of type 1
-     * @return applications default map for PVE
-     */
-    public static Mapp defaultMapPve() {
-        Mapp map = new Mapp("space");
-        //map.addObstacle(new SpaceShip(0, 200, 500));
-        map.addObstacle(new SpaceShip(20, 900, 600));
-        map.addObstacle(new SpaceShip(-30, 1300, 800));
-        map.addObstacle(new SpaceShip(25, 400, 100));
-        map.addObstacle(new SpaceShip(-5, 200, 500));
-        return map;
-    }
-    public static Mapp defaultEduMap() {
-        Mapp map = new Mapp("space");
-        //map.addObstacle(new SmokeScreen(40,500,600));
-        return map;
-    }
-    public static EduLevel defaultEduLevel() {
-        Mapp map = defaultEduMap();
-        try {
-            EduLevel level = new EduLevel(map);
-            level.addFighter(new Ally(200, 600, 2),1);
-            return level;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+    private static void readObsctles(Scanner scanner, Mapp map) throws ParseException {
+        int height = 0;
+        int width = 0;
+        Coordinate coordinate = new Coordinate(0, 0);
+        int rotation = 0;
+        int mass = 0;
+        int speed = 0;
+        String line = scanner.nextLine();
+        while (!line.startsWith("}")) {
+            Scanner lineScanner = new Scanner(line);
+            if (line.startsWith("wall")) {
+                while (!lineScanner.next().startsWith("}")) {
+                    String str = lineScanner.next();
+                    if (str.equalsIgnoreCase("height")) {
+                        lineScanner.skip("...");
+                        height = lineScanner.nextInt();
+                    }
+                    if (str.equalsIgnoreCase("width")) {
+                        lineScanner.skip("...");
+                        width = lineScanner.nextInt();
+                    }
+                    if (str.equalsIgnoreCase("coordinate")) {
+                        lineScanner.skip("...");
+                        coordinate = Coordinate.valueOf(lineScanner.next());
+                    }
+                    if (str.equalsIgnoreCase("rotation")) {
+                        lineScanner.skip("...");
+                        rotation = lineScanner.nextInt();
+                    }
+                    if (str.equalsIgnoreCase("mass")) {
+                        lineScanner.skip("...");
+                        mass = lineScanner.nextInt();
+                    }
+                }
+                map.addObstacle(new Wall(height, width, (int) coordinate.getX(), (int) coordinate.getY(), mass));
+            }
+            if (line.startsWith("spaceship")) {
+                while (!lineScanner.next().startsWith("}")) {
+                    String str = lineScanner.next();
+                    if (str.equalsIgnoreCase("speed")) {
+                        lineScanner.skip("...");
+                        speed = lineScanner.nextInt();
+                    }
+                    if (str.equalsIgnoreCase("coordinate")) {
+                        lineScanner.skip("...");
+                        coordinate = Coordinate.valueOf(lineScanner.next());
+                    }
+                }
+                map.addObstacle(new SpaceShip(speed, (int) coordinate.getX(), (int) coordinate.getY()));
+            }
+            line = scanner.nextLine();
         }
-    }
-
-    public static FreePlayLevel freePlayLevel(){
-        Mapp map = new Mapp("space");
-        try {
-            return new FreePlayLevel(map);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    public static void createPveLevel(String file) { //TODO
-    }
-
-    public static void createPvCLevel(String file) { //TODO
     }
 
     /**
@@ -209,9 +264,7 @@ public class FileManager extends ClassSelectorController {
                         matchingPassWord = true;
                         return true; //true means valid credentials for password and username
                     }
-
                 }
-
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 System.out.println("out of bounds.");
                 e.printStackTrace();
@@ -219,5 +272,72 @@ public class FileManager extends ClassSelectorController {
         }
         scanner.close();
         return false; //false means username and password are incorrect or not submitted.
+    }
+
+
+
+
+
+    /**
+     * Generates the default level for the player vs player mode
+     * calls the defaultMapPvp to generate the map of the level
+     *
+     * @return applications default level for PVP
+     */
+    public static StandardLevel defaultLevelPvp() {
+        Mapp map = defaultMapPvp();
+        try {
+            StandardLevel level = new StandardLevel(map, 3);
+            level.addFighter(new Ally(1, 15, 200, 600), 1);
+            level.addFighter(new Ally(2, 15, BattleGround.screenWidth - 200, 600), 2);
+            return level;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * generates the default map for player vs computer game mode
+     * map is of type earth
+     * map includes a 12x160 wall at 900,480
+     * map has a player at 200,600 of type 3
+     * map has a player at screenWidth - 200,600 of type 2
+     *
+     * @return applications default map for PVC
+     */
+    public static Mapp defaultMapPvp() {
+        Mapp map = new Mapp("space");
+        //map.addObstacle(new SmokeScreen(40,500,600));
+        map.addObstacle(new Wall(160, 12, 900, 480, 300));
+        return map;
+    }
+
+
+
+
+    public static Mapp defaultEduMap() {
+        Mapp map = new Mapp("space");
+        return map;
+    }
+
+    public static EduLevel defaultEduLevel() {
+        Mapp map = defaultEduMap();
+        try {
+            EduLevel level = new EduLevel(map);
+            level.addFighter(new Ally(2, 15, 200, 600), 1);
+            return level;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static FreePlayLevel freePlayLevel() {
+        Mapp map = new Mapp("space");
+        try {
+            return new FreePlayLevel(map);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+
+        }
     }
 }

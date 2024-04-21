@@ -3,6 +3,8 @@ package com.example.bulletbattleground.utility;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.text.ParseException;
+import java.util.IllegalFormatException;
 import java.util.Objects;
 
 @Setter
@@ -60,8 +62,25 @@ public class Coordinate {
     public boolean equals(Object object) {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
-        Coordinate that = (Coordinate) object;
-        return Double.compare(x, that.x) == 0 && Double.compare(y, that.y) == 0;
+        Coordinate otherCoord = (Coordinate) object;
+        return x - otherCoord.x == 0 && y -otherCoord.y == 0;
     }
 
+    public static Coordinate valueOf(String string) throws ParseException {
+        ParseException e = new ParseException("Coordinate String is incorrectly formatted, must be of type \"(x,y)\"",0);
+        if (string.startsWith("(") && string.endsWith(")") && string.contains(",")) {
+            string = string.substring(1, string.length() - 1);
+            String[] coordinates = string.split(",");
+            if (coordinates.length == 2) {
+                try {
+                    double x = Double.parseDouble(coordinates[0]);
+                    double y = Double.parseDouble(coordinates[1]);
+                    return new Coordinate(x, y);
+                } catch (NumberFormatException exception) {
+                    throw e;
+                }
+            }
+        }
+        throw e;
+    }
 }

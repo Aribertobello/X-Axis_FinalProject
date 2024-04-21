@@ -52,21 +52,15 @@ public class ClassSelectorController extends subMenuController {
     void switchScenes(ActionEvent event) throws IOException {
         if(loadoutSelected) {
             if (pvpClicked) {
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(new Scene(BattleGround.pvpLevelSelectorLoader().load()));
-                stage.show();
+                BattleGround.newScene(new Scene(BattleGround.pvpLevelSelectorLoader().load()));
             }
 
             if (pveClicked) {
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(new Scene(BattleGround.pveLevelSelectorLoader().load()));
-                stage.show();
+                BattleGround.newScene(new Scene(BattleGround.pveLevelSelectorLoader().load()));
             }
 
             if (pvcClicked) {
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(new Scene(BattleGround.pvcLevelSelectorLoader().load()));
-                stage.show();
+                BattleGround.newScene(new Scene(BattleGround.pvcLevelSelectorLoader().load()));
             }
         }
      }

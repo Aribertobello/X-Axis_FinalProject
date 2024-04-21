@@ -11,6 +11,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 
@@ -55,6 +56,7 @@ public class EduLevel extends FreePlayLevel {
      */
     public EduLevel(Mapp map) throws IOException {
         super(map);
+        type = -1;
         getMap().setBounds(new double[]{4000,2000});
         createEducationUI();
         initializeSeries();
@@ -111,7 +113,6 @@ public class EduLevel extends FreePlayLevel {
             choiceBox.getItems().add(vAngleSeries);
             choiceBox.getItems().add(aAngleSeries);
         }
-
     }
 
     public void updateCharts(double dt, double time){
@@ -122,7 +123,11 @@ public class EduLevel extends FreePlayLevel {
         if(map.getActiveProjectile()!=null) {
             if (dataIncrement >= INCREMENT_TIME) {
                 Projectile proj = map.activeProjectile;
-                Vector distance = proj.getCoordinate().distanceVector(new Coordinate(map.getEarth().getCenterX(), map.getEarth().getCenterY()));
+                Vector distance;
+                if(map.getType()==1){
+                    distance = proj.getCoordinate().distanceVector(new Coordinate(((Circle)map.getEarth()).getCenterX(), ((Circle)map.getEarth()).getCenterY()));
+                } else  distance = proj.getCoordinate().distanceVector(selectedFighter.getCoordinate());
+
                 double r = distance.magnitude();
                 double x = distance.getX();
                 double y = distance.getY();

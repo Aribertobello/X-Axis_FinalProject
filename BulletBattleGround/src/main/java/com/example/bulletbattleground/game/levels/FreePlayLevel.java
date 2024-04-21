@@ -45,6 +45,7 @@ public class FreePlayLevel extends Level {
 
     public FreePlayLevel(Mapp map) throws IOException {
         super(map);
+        type = 0;
         freePlayGame();
     }
 
