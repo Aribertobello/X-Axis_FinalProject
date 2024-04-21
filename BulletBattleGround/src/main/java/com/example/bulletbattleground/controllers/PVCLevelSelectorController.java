@@ -9,21 +9,18 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.text.ParseException;
+
+import static com.example.bulletbattleground.fileManagement.FileManager.createLevel;
 
 public class PVCLevelSelectorController {
 
-    public Button level1Btn;
-    public Button level2Btn;
-    public Button level3Btn;
-    public Button level4Btn;
-
-    public void launchLevelOne(ActionEvent event) {
+    public void launchPVCLevel1(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         try{
-            BattleGround.activeGame = new Game(FileManager.defaultLevelPvc());
-        }catch(
-                IOException e){
-            e.printStackTrace();
+            BattleGround.activeGame = new Game(FileManager.createLevel("Files/txt/PVC.lvl.1.txt"));
+        }catch(Exception e){
+            throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
         }
         stage.setScene(BattleGround.activeGame);
         stage.setMaximized(true);
@@ -31,13 +28,12 @@ public class PVCLevelSelectorController {
         BattleGround.activeGame.run();
     }
 
-    public void launchLevel2(ActionEvent event) {
+    public void launchPVCLevel2(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         try{
-            BattleGround.activeGame = new Game(FileManager.defaultLevelPvc());
-        }catch(
-                IOException e){
-            e.printStackTrace();
+            BattleGround.activeGame = new Game(FileManager.createLevel("Files/txt/PVC.lvl.2.txt"));
+        }catch(Exception e){
+            throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
         }
         stage.setScene(BattleGround.activeGame);
         stage.setMaximized(true);
@@ -45,13 +41,12 @@ public class PVCLevelSelectorController {
         BattleGround.activeGame.run();
     }
 
-    public void launchLevel3(ActionEvent event) {
+    public void launchPVCLevel3(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         try{
-            BattleGround.activeGame = new Game(FileManager.defaultLevelPvc());
-        }catch(
-                IOException e){
-            e.printStackTrace();
+            BattleGround.activeGame = new Game(FileManager.createLevel("Files/txt/PVC.lvl.3.txt"));
+        }catch(Exception e){
+            throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
         }
         stage.setScene(BattleGround.activeGame);
         stage.setMaximized(true);
@@ -59,13 +54,90 @@ public class PVCLevelSelectorController {
         BattleGround.activeGame.run();
     }
 
-    public void launchLevel4(ActionEvent event) {
+    public void launchPVCLevel4(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         try{
-            BattleGround.activeGame = new Game(FileManager.defaultLevelPvc());
-        }catch(
-                IOException e){
-            e.printStackTrace();
+            BattleGround.activeGame = new Game(FileManager.createLevel("Files/txt/PVC.lvl.4.txt"));
+        }catch(Exception e){
+            throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
+        }
+        stage.setScene(BattleGround.activeGame);
+        stage.setMaximized(true);
+        stage.show();
+        BattleGround.activeGame.run();
+    }
+
+    public void launchPVCLevel5(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        try{
+            BattleGround.activeGame = new Game(FileManager.createLevel("Files/txt/PVC.lvl.5.txt"));
+        }catch(Exception e){
+            throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
+        }
+        stage.setScene(BattleGround.activeGame);
+        stage.setMaximized(true);
+        stage.show();
+        BattleGround.activeGame.run();
+    }
+
+    public void launchPVCLevel6(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        try{
+            BattleGround.activeGame = new Game(FileManager.createLevel("Files/txt/PVC.lvl.6.txt"));
+        }catch(Exception e){
+            throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
+        }
+        stage.setScene(BattleGround.activeGame);
+        stage.setMaximized(true);
+        stage.show();
+        BattleGround.activeGame.run();
+    }
+
+    public void launchPVCLevel7(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        try{
+            BattleGround.activeGame = new Game(FileManager.createLevel("Files/txt/PVC.lvl.7.txt"));
+        }catch(Exception e){
+            throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
+        }
+        stage.setScene(BattleGround.activeGame);
+        stage.setMaximized(true);
+        stage.show();
+        BattleGround.activeGame.run();
+    }
+
+    public void launchPVCLevel8(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        try{
+            BattleGround.activeGame = new Game(FileManager.createLevel("Files/txt/PVC.lvl.8.txt"));
+        }catch(Exception e){
+            throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
+        }
+        stage.setScene(BattleGround.activeGame);
+        stage.setMaximized(true);
+        stage.show();
+        BattleGround.activeGame.run();
+    }
+
+    public void launchPVCLevel9(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        try{
+            BattleGround.activeGame = new Game(FileManager.createLevel("Files/txt/PVC.lvl.9.txt"));
+        }catch(Exception e){
+            throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
+        }
+        stage.setScene(BattleGround.activeGame);
+        stage.setMaximized(true);
+        stage.show();
+        BattleGround.activeGame.run();
+    }
+
+    public void launchPVCLevel10(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        try{
+            BattleGround.activeGame = new Game(FileManager.createLevel("Files/txt/PVC.lvl.10.txt"));
+        }catch(Exception e){
+            throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
         }
         stage.setScene(BattleGround.activeGame);
         stage.setMaximized(true);

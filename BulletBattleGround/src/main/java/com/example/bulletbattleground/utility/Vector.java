@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.text.ParseException;
 import java.util.Objects;
 
 @AllArgsConstructor
@@ -14,6 +15,25 @@ public class Vector {
     @Getter
     @Setter
     protected double y;
+
+    public static Vector valueOf(String string) throws ParseException {
+
+        ParseException e = new ParseException("Coordinate String is incorrectly formatted, must be of type \"<x,y>\"",0);
+        if (string.startsWith("<") && string.endsWith(">") && string.contains(",")) {
+            string = string.substring(1, string.length() - 1);
+            String[] coordinates = string.split(",");
+            if (coordinates.length == 2) {
+                try {
+                    double x = Double.parseDouble(coordinates[0]);
+                    double y = Double.parseDouble(coordinates[1]);
+                    return new Vector(x, y);
+                } catch (NumberFormatException exception) {
+                    throw e;
+                }
+            }
+        }
+        throw e;
+    }
 
 
     /**
@@ -106,11 +126,11 @@ public class Vector {
      * calculates a vector with same direction as this vector that has been scaled to a given magnitude
      * changes x and y components in order to fit new magnitude
      * follows formula scaledX = x*(given magnitude/object magnitude)   scaledY = y*(given magnitude/object magnitude)
-     * @param magnitude magnitude of the returned vector
+     * @param newMagnitude magnitude of the returned vector
      * @return scaled vector
      */
-    public Vector scale(double magnitude) {
-        double scale = magnitude / this.magnitude();
+    public Vector scale(double newMagnitude) {
+        double scale = newMagnitude / this.magnitude();
         return this.multiply(Math.abs(scale));
     }
 

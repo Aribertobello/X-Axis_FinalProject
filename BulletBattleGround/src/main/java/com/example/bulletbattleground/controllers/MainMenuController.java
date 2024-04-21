@@ -35,16 +35,6 @@ public class MainMenuController {
     }
 
     /**
-     *@param event Action Event for a button to go back to the Main menu from the submenu by loading the FXML file.
-     */
-    public void switchToMainMenu(ActionEvent event) throws IOException {
-         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-         Scene mainMenuScene = new Scene(BattleGround.mainMenuLoader().load());
-         stage.setScene(mainMenuScene);
-         stage.show();
-    }
-
-    /**
      *@param event Action Event to Exit the game by clicking a button from the sub menu.
      */
     @FXML

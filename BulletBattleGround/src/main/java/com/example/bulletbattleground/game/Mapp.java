@@ -13,6 +13,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -52,8 +54,8 @@ public class Mapp extends Pane {
     public Loot loot;
     @Getter
     @Setter
-    protected Circle earth;
-    public Vector[] environmentForces = {gravity,airResistance};
+    protected Shape earth;
+    public Vector[] environmentForces = {gravity,airResistance,new Vector(0,0)};
 
     /**
      *
@@ -63,16 +65,17 @@ public class Mapp extends Pane {
 
         if (type.equalsIgnoreCase("earth")) {
             this.setStyle("-fx-background-color: #bce1f5;");
-            earth = new Circle(540, 673100640, 673100000, Color.SEAGREEN);
+            earth = new Rectangle(0, BattleGround.screenHeight-300, 3000,250);
+            earth.setFill(Color.SEAGREEN);
             this.getChildren().add(earth);
+            gravity = new Vector(0,9.8);
             this.type = 0;
-            terminalVelocity = 60;
         }
 
         if (type.equalsIgnoreCase("space")) {
             this.setStyle("-fx-background-color: #150c26;");
-            earth = new Circle(900, 600, 120);
-            Image earth_image = new Image("file:earth_Image.png");
+            earth = new Circle(BattleGround.screenWidth/2.0, BattleGround.screenHeight/2.0, 120);
+            Image earth_image = new Image("file:Files/img/earth_Image.png");
             earth.setFill(new ImagePattern(earth_image));
             this.getChildren().add(earth);
             this.type = 1;
@@ -161,9 +164,10 @@ public class Mapp extends Pane {
     public void addForces(Projectile projectile) {
 
         if (type == 0) {
-            environmentForces[0] = new Vector(0,9.8).multiply(projectile.getMass());
-            environmentForces[1] = projectile.velocity().unitVector().multiply(2);
+            environmentForces[0] = gravity.multiply(projectile.getMass());
+            environmentForces[1] = projectile.velocity().unitVector().multiply(-2);
         } else {
+            Circle earth = (Circle) this.earth;
             projectile.setMass(2000);
             Coordinate earthCenterOfGravity = new Coordinate(earth.getCenterX(), earth.getCenterY());
             double bigG = 6.67 * pow(10, -11);
@@ -246,4 +250,13 @@ public class Mapp extends Pane {
         this.getChildren().remove(loot);
         loot = null;
     }
+
+    public void setAirResistanceMagnitude(double magnitude){
+        //airResistance = airResistance.scale(magnitude);
+    }
+    public void setGravityMagnitude(double magnitude){
+
+        //gravity = gravity.scale(magnitude);
+    }
+
 }

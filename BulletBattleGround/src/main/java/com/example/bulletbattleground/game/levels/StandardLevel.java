@@ -33,8 +33,9 @@ public class StandardLevel extends Level {
 
     public ArrayList<Fighter> team1 = new ArrayList<>();
     public ArrayList<Fighter> team2 = new ArrayList<>();
-    public int type;
     static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
+
+    private String description = "";
 
     /**
      *
@@ -46,7 +47,6 @@ public class StandardLevel extends Level {
         this.type = type;
         switch(type){
             case 1:
-                addLoot();
                 break;
             case 2,3:
                 break;
@@ -80,8 +80,8 @@ public class StandardLevel extends Level {
         return new boolean[]{false,false};
     }
 
-    public void addLoot() {
-        map.loot = new Loot(screenWidth - 341, 410);
+    public void addLoot(Loot loot) {
+        map.loot = loot;
         map.getChildren().add(map.getLoot());
     }
     @Override

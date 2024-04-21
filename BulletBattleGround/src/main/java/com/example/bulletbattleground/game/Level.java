@@ -1,6 +1,7 @@
 package com.example.bulletbattleground.game;
 
 import com.example.bulletbattleground.BattleGround;
+import com.example.bulletbattleground.controllers.DescriptionBoxController;
 import com.example.bulletbattleground.controllers.EducationGameController;
 import com.example.bulletbattleground.controllers.GameSceneController;
 import com.example.bulletbattleground.controllers.TurnVariablesController;
@@ -60,6 +61,9 @@ public abstract class Level extends AnchorPane implements GameUI {
     @Getter
     @Setter
     protected Fighter selectedFighter;
+    @Getter
+    @Setter
+    protected int type;
     //------------------------------------------------------------------------
 
     // Level controllers--------
@@ -114,6 +118,9 @@ public abstract class Level extends AnchorPane implements GameUI {
     public ImageView GImg;
     public ImageView BImg;
     private Arc angleArc;
+    private Label descriptionLabel;
+    private Button playBtn;
+    private VBox descriptionBox;
 
     /**
      *
@@ -132,8 +139,9 @@ public abstract class Level extends AnchorPane implements GameUI {
         container.getChildren().add(this.map);
         map.toBack();
         this.headsUpDisplay.setPrefWidth(BattleGround.screenWidth);
-        this.getChildren().add(trajectoryLine);// TODO arrow
+        this.getChildren().add(trajectoryLine);
         arrow = new Arrow();
+        descriptionBox();
         angleArc = new Arc();
         angleArc.setStroke(Color.RED);
         angleArc.setFill(Color.TRANSPARENT);
@@ -320,6 +328,18 @@ public abstract class Level extends AnchorPane implements GameUI {
         selectedFighter = null;
         map.removeFighter(fighter);
         setOrigin(null);
+    }
+
+    public void descriptionBox() throws IOException {
+        FXMLLoader descriptionBoxLoader = new FXMLLoader(BattleGround.class.getResource("DescriptionBox.fxml"));
+        descriptionBox = descriptionBoxLoader.load();
+        DescriptionBoxController controller = descriptionBoxLoader.getController();
+        playBtn = controller.playBtn;
+        descriptionLabel = controller.descriptionLabel;
+    }
+
+    public void displayDescription() {
+        this.getChildren().add(descriptionBox);
     }
 
     public class Arrow extends Polyline {

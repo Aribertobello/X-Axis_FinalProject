@@ -3,6 +3,7 @@ package com.example.bulletbattleground.controllers;
 import com.example.bulletbattleground.BattleGround;
 import com.example.bulletbattleground.fileManagement.FileManager;
 import com.example.bulletbattleground.game.Game;
+import com.example.bulletbattleground.game.levels.StandardLevel;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -16,12 +17,13 @@ public class PVPLevelSelectorController {
     public Button level3Btn;
     public Button level4Btn;
 
-    public void launchLevelOne(ActionEvent event) {
+
+    public void map1Selected(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         try{
-            BattleGround.activeGame = new Game(FileManager.defaultLevelPvp());
+            BattleGround.activeGame = new Game(new StandardLevel(FileManager.createMap("Files/txt/PVC.map.lvl.1.txt"),3));
         }catch(
-                IOException e){
+                Exception e){
             e.printStackTrace();
         }
         stage.setScene(BattleGround.activeGame);
@@ -30,12 +32,12 @@ public class PVPLevelSelectorController {
         BattleGround.activeGame.run();
     }
 
-    public void launchLevel2(ActionEvent event) {
+    public void map2Selected(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         try{
-            BattleGround.activeGame = new Game(FileManager.defaultLevelPvp());
+            BattleGround.activeGame = new Game(new StandardLevel(FileManager.createMap("Files/txt/PVC.map.lvl.1.txt"),3));
         }catch(
-                IOException e){
+                Exception e){
             e.printStackTrace();
         }
         stage.setScene(BattleGround.activeGame);
@@ -44,12 +46,12 @@ public class PVPLevelSelectorController {
         BattleGround.activeGame.run();
     }
 
-    public void launchLevel3(ActionEvent event) {
+    public void map3Selected(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         try{
-            BattleGround.activeGame = new Game(FileManager.defaultLevelPvp());
+            BattleGround.activeGame = new Game(new StandardLevel(FileManager.createMap("Files/txt/PVC.map.lvl.1.txt"),3));
         }catch(
-                IOException e){
+                Exception e){
             e.printStackTrace();
         }
         stage.setScene(BattleGround.activeGame);
@@ -58,12 +60,96 @@ public class PVPLevelSelectorController {
         BattleGround.activeGame.run();
     }
 
-    public void launchLevel4(ActionEvent event) {
+    public void map4Selected(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         try{
-            BattleGround.activeGame = new Game(FileManager.defaultLevelPvp());
+            BattleGround.activeGame = new Game(new StandardLevel(FileManager.createMap("Files/txt/PVC.map.lvl.1.txt"),3));
         }catch(
-                IOException e){
+                Exception e){
+            e.printStackTrace();
+        }
+        stage.setScene(BattleGround.activeGame);
+        stage.setMaximized(true);
+        stage.show();
+        BattleGround.activeGame.run();
+    }
+
+    public void map5Selected(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        try{
+            BattleGround.activeGame = new Game(new StandardLevel(FileManager.createMap("Files/txt/PVC.map.lvl.1.txt"),3));
+        }catch(
+                Exception e){
+            e.printStackTrace();
+        }
+        stage.setScene(BattleGround.activeGame);
+        stage.setMaximized(true);
+        stage.show();
+        BattleGround.activeGame.run();
+    }
+
+    public void map6Selected(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        try{
+            BattleGround.activeGame = new Game(new StandardLevel(FileManager.createMap("Files/txt/PVC.map.lvl.1.txt"),3));
+        }catch(
+                Exception e){
+            e.printStackTrace();
+        }
+        stage.setScene(BattleGround.activeGame);
+        stage.setMaximized(true);
+        stage.show();
+        BattleGround.activeGame.run();
+    }
+
+    public void map7Selected(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        try{
+            BattleGround.activeGame = new Game(new StandardLevel(FileManager.createMap("Files/txt/PVC.map.lvl.1.txt"),3));
+        }catch(
+                Exception e){
+            e.printStackTrace();
+        }
+        stage.setScene(BattleGround.activeGame);
+        stage.setMaximized(true);
+        stage.show();
+        BattleGround.activeGame.run();
+    }
+
+    public void map8Selected(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        try{
+            BattleGround.activeGame = new Game(new StandardLevel(FileManager.createMap("Files/txt/PVC.map.lvl.1.txt"),3));
+        }catch(
+                Exception e){
+            e.printStackTrace();
+        }
+        stage.setScene(BattleGround.activeGame);
+        stage.setMaximized(true);
+        stage.show();
+        BattleGround.activeGame.run();
+    }
+
+    public void map9Selected(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        try{
+            BattleGround.activeGame = new Game(new StandardLevel(FileManager.createMap("Files/txt/PVC.map.lvl.1.txt"),3));
+        }catch(
+                Exception e){
+            e.printStackTrace();
+        }
+        stage.setScene(BattleGround.activeGame);
+        stage.setMaximized(true);
+        stage.show();
+        BattleGround.activeGame.run();
+    }
+
+    public void map10Selected(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        try{
+            BattleGround.activeGame = new Game(new StandardLevel(FileManager.createMap("Files/txt/PVC.map.lvl.1.txt"),3));
+        }catch(
+                Exception e){
             e.printStackTrace();
         }
         stage.setScene(BattleGround.activeGame);

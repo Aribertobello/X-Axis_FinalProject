@@ -12,6 +12,7 @@ import java.util.Arrays;
 public abstract class Projectile extends MovingBody {
 
     public static final double TERMINAL_VELOCITY = 100;
+    public static final double MIN_LAUNCH_VELOCITY = 10.0;
 
     @Getter
     @Setter

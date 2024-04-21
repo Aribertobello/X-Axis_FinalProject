@@ -26,7 +26,6 @@ import java.util.ArrayList;
 
 public class Game extends Scene {
 
-    private static final double MIN_LAUNCH_VELOCITY = 10.0;
     protected Boolean gameOver = false;
 
     @Getter
@@ -69,7 +68,7 @@ public class Game extends Scene {
         }));
         turnManager = new TurnManager(level);
         timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
+        getLevel().displayDescription();
     }
 
     /**
@@ -160,7 +159,7 @@ public class Game extends Scene {
     }
 
     private boolean checkvelocity(double velocityX, double velocityY) {
-        return (new Vector(velocityX,velocityY)).magnitude() > MIN_LAUNCH_VELOCITY;
+        return (new Vector(velocityX,velocityY)).magnitude() > Projectile.MIN_LAUNCH_VELOCITY;
     }
 
     private void shoot(MouseEvent event, Ally selectedFighter, double velocityX, double velocityY) {
@@ -250,6 +249,10 @@ public class Game extends Scene {
             timeline.pause();
             isTicking = false;
         }
+    }
+
+    public void play() {
+        timeline.play();
     }
 
     public class pauseEvent implements EventHandler {

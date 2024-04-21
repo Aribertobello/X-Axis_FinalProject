@@ -23,7 +23,7 @@ public class Bullet extends Projectile {
 
         Circle small_bullet = new Circle(10);
         small_bullet.setRotate(90);
-        Image smallBulletImg = new Image("file:smallBullet.png");
+        Image smallBulletImg = new Image("file:Files/img/smallBullet.png");
         small_bullet.setFill(new ImagePattern(smallBulletImg));
         this.getChildren().add(small_bullet);
         this.damage = 3;

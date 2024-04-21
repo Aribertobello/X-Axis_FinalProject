@@ -48,6 +48,7 @@ public class subMenuController {
     public void switchToMainMenu(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene mainMenuScene = new Scene(BattleGround.mainMenuLoader().load());
+        stage.setScene(mainMenuScene);
         stage.show();
     }
 

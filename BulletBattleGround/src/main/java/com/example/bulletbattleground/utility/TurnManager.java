@@ -10,7 +10,7 @@ import lombok.Setter;
 public class TurnManager {
 
     public static double MAX_PROJ_ANIMATION_TIMER = 15.0;
-    public static final double MAX_TURN_TIMER = 15.0;
+    public static double MAX_TURN_TIMER = 15.0;
     @Getter
     private int currentPlayer;
     private boolean isAnimationPlaying;
@@ -78,7 +78,7 @@ public class TurnManager {
     public void startAnimation() {
         previousPlayer = currentPlayer;
         currentPlayer = 0;
-        if(((StandardLevel)level).type == 1) currentPlayer = 1; previousPlayer = 2;
+        if((level).getType() == 1){ currentPlayer = 1; previousPlayer = 2;}
         isAnimationPlaying = true;
     }
 

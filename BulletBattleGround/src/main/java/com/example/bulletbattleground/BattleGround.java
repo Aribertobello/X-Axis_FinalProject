@@ -3,6 +3,8 @@ package com.example.bulletbattleground;
 import com.example.bulletbattleground.fileManagement.FileManager;
 import com.example.bulletbattleground.fileManagement.User;
 import com.example.bulletbattleground.game.Game;
+import com.example.bulletbattleground.game.levels.FreePlayLevel;
+import com.example.bulletbattleground.game.levels.StandardLevel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -24,13 +26,7 @@ public class BattleGround extends Application {
     public static int screenHeight = (int) Screen.getPrimary().getBounds().getHeight();
 
 
-    static {
-        try {
-            activeGame = new Game(FileManager.defaultLevelPvc());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
 
     static protected User user = new User();
 
@@ -43,6 +39,7 @@ public class BattleGround extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
+        activeGame = null;
         Scene MainMenuscene = new Scene(signInPageLoader().load());
         stage.setTitle("Bullet BattleGround");
         stage.setScene(MainMenuscene);
@@ -54,6 +51,7 @@ public class BattleGround extends Application {
      * @param args
      */
     public static void main(String[] args) {
+
         launch();
     }
 
