@@ -38,17 +38,19 @@ public class Bullet extends Projectile {
 
     }
     private void playGunshotSound() {
-        if(!hasPlayedSound) {
           try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("GunShot.wav"));
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
+              clip.addLineListener(event -> {
+                  if (event.getType() == LineEvent.Type.STOP) {
+                      clip.close(); // Close the clip after it finishes playing
+                  }
+              });
         } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
             e.printStackTrace();
         }
-          hasPlayedSound = true;
-    }
     }
 
     @Override
@@ -59,9 +61,9 @@ public class Bullet extends Projectile {
 
     @Override
     public void move(double time) {
-        if(!hasPlayedSound) {
-            playGunshotSound();
-            hasPlayedSound = true;
+        if(!hasPlayedSound){
+        playGunshotSound();
+        hasPlayedSound = true;
         }
         super.move(time);
         this.getChildren().get(0).setRotate(velocity().angle());

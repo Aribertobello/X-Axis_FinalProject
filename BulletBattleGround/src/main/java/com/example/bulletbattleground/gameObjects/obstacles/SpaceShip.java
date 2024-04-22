@@ -44,7 +44,7 @@ public class SpaceShip extends Obstacle {
                 FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 
                 // Set the volume to -10.0f (lower volume by 10 decibels)
-                gainControl.setValue(-20.0f);
+                gainControl.setValue(-15.0f);
                 clip.loop(Clip.LOOP_CONTINUOUSLY);
 
                 // Start the sound

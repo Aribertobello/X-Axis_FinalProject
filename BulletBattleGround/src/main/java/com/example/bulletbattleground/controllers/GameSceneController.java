@@ -1,6 +1,7 @@
 package com.example.bulletbattleground.controllers;
 
 import com.example.bulletbattleground.BattleGround;
+import com.example.bulletbattleground.fileManagement.FileManager;
 import com.example.bulletbattleground.game.Game;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -50,7 +51,6 @@ public class GameSceneController {
     private Menu settingsButton;
     @FXML
     private Menu pauseButton;
-
     @FXML
     private Label MomLabel;
     @FXML
@@ -68,9 +68,14 @@ public class GameSceneController {
     @FXML
     private Label GTimer;
     @FXML
+    private Label STimer;
+    @FXML
     private ImageView GImg;
     @FXML
     private ImageView BImg;
+    public int light = 1;
+    public int medium = 2;
+    public int heavy = 3;
 
     @FXML
     private void handlePause() {
@@ -83,12 +88,18 @@ public class GameSceneController {
     }
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         exitButton.setOnAction(e -> handleExit());
         pauseButton.setOnAction(e -> handlePause());
-        if(GImg != null && BImg != null) {
+        if (GImg != null && BImg != null) {
             GImg.setImage(new Image("file:grenade.png"));
-            BImg.setImage(new Image("file:smallBullet.png"));
+            if (FileManager.loadoutType == light) {
+                BImg.setImage(new Image("file:smallBullet.png"));
+            } else if (FileManager.loadoutType == medium) {
+                BImg.setImage(new Image("file:spear.png"));
+            } else if (FileManager.loadoutType == heavy) {
+                BImg.setImage(new Image("file:rocket.png"));
+            }
         }
     }
 }

@@ -8,6 +8,9 @@ import javafx.scene.shape.Circle;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.sound.sampled.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 
 public abstract class Projectile extends MovingBody {
@@ -32,6 +35,7 @@ public abstract class Projectile extends MovingBody {
         this.setVelocityX(acceleration().getX() * time*10 + getVelocityX());
         this.setVelocityY(acceleration().getY() * time*10 + getVelocityY());
         setCoordinate(new Coordinate(x,y));
+
     }
 
     /**
