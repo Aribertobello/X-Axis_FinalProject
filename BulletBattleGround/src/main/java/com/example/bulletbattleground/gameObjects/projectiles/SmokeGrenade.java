@@ -18,12 +18,10 @@ public class SmokeGrenade extends Grenade{
     double fuseTimer;
     double lastPositionX;
     double lastPositionY;
-    protected final Image[] explosionEffects = {};
-
 
     public SmokeGrenade(){
          super();
-         fuseTimer = 0.8;
+         fuseTimer = 0.0;
          setDamage(0);
     }
 
@@ -39,7 +37,7 @@ public class SmokeGrenade extends Grenade{
             fuseTimer = Math.sqrt(-1); //Makes sure that the explode method is only called once, or else it gets called every 1ms
             lastPositionX = getChildren().get(0).getLayoutX();
             lastPositionY = getChildren().get(0).getLayoutY();
-            SmokeScreen s = new SmokeScreen(400, lastPositionX, lastPositionY);
+            SmokeScreen s = new SmokeScreen(1.0, lastPositionX, lastPositionY);
             s.createSmokeScreen();
             BattleGround.activeGame.getLevel().map.removeActiveProjectile();
             BattleGround.activeGame.getLevel().map.addObstacle(s);
