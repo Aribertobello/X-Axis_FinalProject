@@ -139,8 +139,6 @@ public class FreePlayController {
     public void dragEndSmokeScreen(MouseEvent event) {
         SmokeScreen s1 = new SmokeScreen((int)radiusSlider.getValue(), coordinate.getX(), coordinate.getY());
         s1.createSmokeScreen();
-       // BattleGround.activeGame.getLevel().map.addObstacle(s1);
-        //obstacle.setCoordinate(coordinate);
         Level level = ((Level) ((Node) event.getSource()).getParent().getParent().getParent());
         level.getMap().addObstacle(s1);
 
@@ -152,7 +150,7 @@ public class FreePlayController {
         allyImageView.setImage(new Image("file:Files/img/Light_Class_Img.png"));
         computerImageView.setImage(new Image("file:Files/img/Light_Class_Img.png"));
         wallImageView.setImage(new Image("file:Files/img/WallTemporary.jpg"));
-        spaceShipImageView.setImage(new Image("file:Files/img/SpaceShip.png"));
+        spaceShipImageView.setImage(new Image("file:rocket.png"));
         smokeScreenImageView.setImage(new Image("file:s4.png"));
     }
 
