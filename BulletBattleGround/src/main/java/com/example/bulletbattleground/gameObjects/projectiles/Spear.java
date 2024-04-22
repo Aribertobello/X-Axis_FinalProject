@@ -21,7 +21,7 @@ public class Spear extends Projectile {
     Circle spear;
 
     public Spear() {
-        Image spearImg = new Image("file:spear.png");
+        Image spearImg = new Image("file:Files/img/spear.png");
         spearHitBox = new Circle(2, Color.DARKGRAY);
         spearHitBox.setFill(Color.TRANSPARENT);
         spear = new Circle(30 ,Color.BLUE);
@@ -32,6 +32,7 @@ public class Spear extends Projectile {
         this.lift = new Vector(0, -0.5);
         this.forces.add(lift);
         this.setMass(3.0);
+        setTerminalVelocity(60);
     }
     private void playSpearSound() {
         if(!hasPlayedSound) {

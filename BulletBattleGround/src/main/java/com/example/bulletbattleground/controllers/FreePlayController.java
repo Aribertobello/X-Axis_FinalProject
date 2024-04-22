@@ -7,8 +7,11 @@ import com.example.bulletbattleground.game.Loadout;
 import com.example.bulletbattleground.game.Obstacle;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
 import com.example.bulletbattleground.gameObjects.fighters.Computer;
+import com.example.bulletbattleground.gameObjects.obstacles.SmokeScreen;
 import com.example.bulletbattleground.gameObjects.obstacles.SpaceShip;
 import com.example.bulletbattleground.gameObjects.obstacles.Wall;
+import com.example.bulletbattleground.gameObjects.projectiles.Grenade;
+import com.example.bulletbattleground.gameObjects.projectiles.SmokeGrenade;
 import com.example.bulletbattleground.utility.Coordinate;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
@@ -35,6 +38,7 @@ public class FreePlayController {
     public Slider wallRotationSlider;
     public Slider wallWidthSlider;
     public Slider wallHeightSlider;
+    public Slider radiusSlider;
     public ToggleGroup compClassGroup;
     public ToggleGroup allyClassGroup;
     public Slider spaceShipSpeedslider;
@@ -48,7 +52,7 @@ public class FreePlayController {
     private Coordinate returnCoordinate;
 
     public void allyDragStart(MouseEvent event) {
-        fighter = new Ally(0,0,allyLoadoutNb);
+        fighter = new Ally(allyLoadoutNb,25,0,0);
         imageView = (ImageView) event.getSource();
         returnCoordinate = new Coordinate(event.getSceneX(),event.getSceneY());
         coordinate = new Coordinate(event.getSceneX(),event.getSceneY());
@@ -56,7 +60,7 @@ public class FreePlayController {
         translateY = imageView.getTranslateY();
     }
     public void compDragStart(MouseEvent event) {
-        fighter = new Computer(0,0,compLoadoutNb);
+        fighter = new Computer(compLoadoutNb,15,0,0);
         imageView = (ImageView) event.getSource();
         returnCoordinate = new Coordinate(event.getSceneX(),event.getSceneY());
         coordinate = new Coordinate(event.getSceneX(),event.getSceneY());
@@ -89,6 +93,7 @@ public class FreePlayController {
     }
 
     public void dragging(MouseEvent event) {
+
         coordinate.setX(event.getSceneX());
         coordinate.setY(event.getSceneY());
         translateX = -returnCoordinate.getX() + coordinate.getX();
@@ -131,16 +136,22 @@ public class FreePlayController {
         level.setSelectedFighter(fighter);
     }
 
-    public void dragEndSmokeScreen(MouseEvent mouseEvent) {
+    public void dragEndSmokeScreen(MouseEvent event) {
+        SmokeScreen s1 = new SmokeScreen((int)radiusSlider.getValue(), coordinate.getX(), coordinate.getY());
+        s1.createSmokeScreen();
+        Level level = ((Level) ((Node) event.getSource()).getParent().getParent().getParent());
+        level.getMap().addObstacle(s1);
 
+        imageView.setTranslateX(0);
+        imageView.setTranslateY(0);
     }
 
     public void initialize(){
-
-        allyImageView.setImage(new Image("file:Light_Class_Img.png"));
-        computerImageView.setImage(new Image("file:Light_Class_Img.png"));
-        wallImageView.setImage(new Image("file:WallTemporary.jpg"));
-        spaceShipImageView.setImage(new Image("file:SpaceShip.png"));
+        allyImageView.setImage(new Image("file:Files/img/Light_Class_Img.png"));
+        computerImageView.setImage(new Image("file:Files/img/Light_Class_Img.png"));
+        wallImageView.setImage(new Image("file:Files/img/WallTemporary.jpg"));
+        spaceShipImageView.setImage(new Image("file:rocket.png"));
+        smokeScreenImageView.setImage(new Image("file:s4.png"));
     }
 
     public void allyLightClassChosen(ActionEvent event) {

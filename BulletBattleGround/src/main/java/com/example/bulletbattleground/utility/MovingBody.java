@@ -102,7 +102,7 @@ public abstract class MovingBody extends Group {
             point1 = b.hitBox.getPoints().get(index-1);
             point2 = b.hitBox.getPoints().get(0);
         } else if (index==0){
-            point1 = b.hitBox.getPoints().get(b.hitBox.getPoints().size());
+            point1 = b.hitBox.getPoints().get(b.hitBox.getPoints().size()-1);
             point2 = b.hitBox.getPoints().get(1);
         } else {
             point1 = b.hitBox.getPoints().get(index-1);

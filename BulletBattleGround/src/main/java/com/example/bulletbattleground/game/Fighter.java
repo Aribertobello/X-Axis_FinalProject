@@ -43,29 +43,16 @@ public class Fighter extends Rectangle {
      * @param coordinateY coordinate y of the center of the fighter in the map
      * @param type type of loadout the fighter will have : 1=light 2=medium 3=heavy
      */
-    public Fighter(int coordinateX, int coordinateY, int type) {
+    public Fighter( int type,int health, int coordinateX, int coordinateY) {
         super(40, 40);
-
-        if (type == 1) {
-            loadout= new Loadout(1);
-        }
-
-        if (type == 2) {
-            loadout = new Loadout(2);
-        }
-
-        if (type == 3) {
-            loadout = new Loadout(3);
-        }
-
-
+        loadout = new Loadout(type);
         coordinate.setX(coordinateX);
         coordinate.setY(coordinateY);
         this.teamNb = 1;
         this.setLayoutX(coordinateX - 20);
         this.setLayoutY(coordinateY - 20);
         highlighted = false;
-        setHealth(15);
+        setHealth(health);
         this.setOnMouseClicked(event -> highlight());
         hitBox();
     }

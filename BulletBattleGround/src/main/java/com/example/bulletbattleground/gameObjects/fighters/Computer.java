@@ -14,8 +14,8 @@ import javafx.scene.paint.ImagePattern;
 
 public class Computer extends Fighter {
 
-    public Computer(int coordinateX, int coordinateY, int type) {
-        super(coordinateX, coordinateY, type);
+    public Computer(int type, int health, int coordinateX, int coordinateY) {
+        super(type, health, coordinateX, coordinateY);
     }
 
     protected Vector calculateLaunchAngle() {

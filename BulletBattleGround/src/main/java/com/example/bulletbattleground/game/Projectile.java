@@ -13,10 +13,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
-public abstract class Projectile extends MovingBody {
+public abstract class  Projectile extends MovingBody {
 
-    public static final double TERMINAL_VELOCITY = 200000;
+    public static final double TERMINAL_VELOCITY = 100;
+    public static final double MIN_LAUNCH_VELOCITY = 10.0;
 
+    @Getter
+    @Setter
+    double terminalVelocity;
     @Setter
     @Getter
     protected int damage;
@@ -30,6 +34,9 @@ public abstract class Projectile extends MovingBody {
      * @param time
      */
     public void move(double time) {
+        if(this.velocity().magnitude()>TERMINAL_VELOCITY){
+            this.setVelocity( velocity().scale(TERMINAL_VELOCITY));
+        }
         double x = ((acceleration().getX() / 2) * time * time*100 + getVelocityX() * time*10 + getCoordinate().getX());
         double y  = ((acceleration().getY() / 2) * time * time*100 + getVelocityY() * time*10 + getCoordinate().getY());
         this.setVelocityX(acceleration().getX() * time*10 + getVelocityX());

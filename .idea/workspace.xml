@@ -7,7 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3d752c20-d9fb-4b1c-8717-33dbd1ec407f" name="Changes" comment="" />
+    <list default="true" id="3d752c20-d9fb-4b1c-8717-33dbd1ec407f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/controllers/FreePlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/controllers/FreePlayController.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,9 +47,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Kotlin File" />
         <option value="FxmlFile" />
         <option value="Class" />
-        <option value="Kotlin File" />
       </list>
     </option>
   </component>
@@ -79,15 +82,17 @@
     &quot;RunOnceActivity.CodyProjectSettingsMigration&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Michel#2&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;matt&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Miche/OneDrive/Documents/X-Axis_FinalProject&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/aribe/IdeaProjects/X-Axis_FinalProject/BulletBattleGround/src/main/resources/com/example/bulletbattleground&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Miche\OneDrive\Documents\X-Axis_FinalProject\Project Documents" />
+      <recent name="C:\Users\aribe\IdeaProjects\X-Axis_FinalProject\BulletBattleGround\src\main\resources\com\example\bulletbattleground" />
+      <recent name="C:\Users\aribe\IdeaProjects\X-Axis_FinalProject" />
+      <recent name="C:\Users\aribe\IdeaProjects\X-Axis_FinalProject\BulletBattleGround" />
       <recent name="C:\Users\Miche\Documents\X-Axis_FinalProject\BulletBattleGround\src\main\resources\Sound" />
       <recent name="C:\Users\Miche\Documents\X-Axis_FinalProject\Project Documents" />
     </key>
@@ -95,7 +100,11 @@
       <recent name="" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Miche\OneDrive\Documents\X-Axis_FinalProject" />
+      <recent name="C:\Users\aribe\IdeaProjects\X-Axis_FinalProject\Files\txt" />
+      <recent name="C:\Users\aribe\IdeaProjects\X-Axis_FinalProject" />
+      <recent name="C:\Users\aribe\IdeaProjects\X-Axis_FinalProject\BulletBattleGround\build\classes\java\main\com\example\bulletbattleground" />
+      <recent name="C:\Users\aribe\IdeaProjects\X-Axis_FinalProject\BulletBattleGround\build\classes\java" />
+      <recent name="C:\Users\aribe\IdeaProjects\X-Axis_FinalProject\BulletBattleGround\src\main\java\com\example\bulletbattleground" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.example.bulletbattleground" />
@@ -153,16 +162,15 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.BattleGround" />
-        <item itemvalue="JUnit.All in X-Axis_FinalProject" />
         <item itemvalue="Gradle.Tests in 'BulletBattleGround.test'" />
+        <item itemvalue="Application.BattleGround" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-18.0.2-corretto-18.0.2-4caba194b151-5720f15e" />
+        <option value="jdk-18.0.2-corretto-18.0.2-4caba194b151-68fdadd5" />
       </set>
     </attachedChunks>
   </component>
@@ -192,9 +200,29 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/controllers/EducationGameController.java</url>
+          <line>41</line>
+          <option name="timeStamp" value="86" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/levels/EduLevel.java</url>
+          <line>118</line>
+          <option name="timeStamp" value="88" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/Game.java</url>
-          <line>259</line>
-          <option name="timeStamp" value="98" />
+          <line>297</line>
+          <option name="timeStamp" value="102" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/levels/StandardLevel.java</url>
+          <line>59</line>
+          <option name="timeStamp" value="105" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/BattleGround.java</url>
+          <line>68</line>
+          <option name="timeStamp" value="110" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

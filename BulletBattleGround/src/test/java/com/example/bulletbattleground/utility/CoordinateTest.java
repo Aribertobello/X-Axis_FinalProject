@@ -2,6 +2,8 @@ package com.example.bulletbattleground.utility;
 
 import org.junit.jupiter.api.Test;
 
+import java.text.ParseException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CoordinateTest {
@@ -26,5 +28,12 @@ class CoordinateTest {
 
     @Test
     void testToString() {
+    }
+    @Test
+    void testValueOf() throws ParseException {
+        String str = "(8,9)";
+        Coordinate result = Coordinate.valueOf(str);
+        Coordinate expectedResult = new Coordinate(8,9);
+        assertEquals(expectedResult, result);
     }
 }
