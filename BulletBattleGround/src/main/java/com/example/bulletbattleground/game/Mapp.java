@@ -9,7 +9,7 @@ import com.example.bulletbattleground.utility.HitBox;
 import com.example.bulletbattleground.utility.MovingBody;
 import com.example.bulletbattleground.utility.Vector;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -67,16 +67,38 @@ public class Mapp extends Pane {
     public Mapp(String type) {
 
         if (type.equalsIgnoreCase("earth")) {
-            this.setStyle("-fx-background-color: #bce1f5;");
-            earth = new Rectangle(0, BattleGround.screenHeight-300, 3000,250);
-            earth.setFill(Color.SEAGREEN);
+
+            Image backgroundImageSpace = new Image("file:sky.jpeg");
+            BackgroundImage background = new BackgroundImage(
+                    backgroundImageSpace,
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundPosition.DEFAULT,
+                    new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false)
+            );
+            this.setBackground(new Background(background));
+
+        //    this.setStyle("-fx-background-color: #bce1f5;");
+            Image groundEarthImage = new Image("file:ground.jpeg");
+            earth = new Rectangle(0, BattleGround.screenHeight-200, 3000,250);
+            earth.setFill(new ImagePattern(groundEarthImage));
             this.getChildren().add(earth);
             gravity = new Vector(0,9.8);
             this.type = 0;
         }
 
         if (type.equalsIgnoreCase("space")) {
-            this.setStyle("-fx-background-color: #150c26;");
+
+            Image backgroundImageSpace = new Image("file:spaceBackground.png");
+            BackgroundImage background = new BackgroundImage(
+                    backgroundImageSpace,
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundPosition.DEFAULT,
+                    new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false)
+            );
+            this.setBackground(new Background(background));
+
             earth = new Circle(BattleGround.screenWidth/2.0, BattleGround.screenHeight/2.0, 120);
             Image earth_image = new Image("file:Files/img/earth_Image.png");
             earth.setFill(new ImagePattern(earth_image));
