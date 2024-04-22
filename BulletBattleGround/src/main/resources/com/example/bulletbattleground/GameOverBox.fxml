@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="gameOverBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: #76827a; -fx-background-color: white; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bulletbattleground.controllers.GameOverBoxController">
+   <children>
+      <Label fx:id="gameOverLabel" text="GAME OVER" />
+      <Label fx:id="congratulationsLabel" alignment="CENTER" prefHeight="307.0" prefWidth="499.0" text="CONGRATULATIONS">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#backToLevelSelector" text="EXIT" />
+   </children>
+</VBox>

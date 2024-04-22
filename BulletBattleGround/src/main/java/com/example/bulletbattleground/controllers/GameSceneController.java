@@ -79,7 +79,7 @@ public class GameSceneController {
 
     @FXML
     private void handleExit(){
-        Platform.exit();
+        BattleGround.prevScene();
     }
 
     @FXML

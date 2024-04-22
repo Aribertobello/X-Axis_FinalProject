@@ -29,26 +29,15 @@ public class MainMenuController {
      */
     public void switchToSubmenu(ActionEvent event) throws IOException {
         Scene submenuScene = new Scene(BattleGround.subMenuLoader().load());
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(submenuScene);
-        stage.show();
-    }
-
-    /**
-     *@param event Action Event for a button to go back to the Main menu from the submenu by loading the FXML file.
-     */
-    public void switchToMainMenu(ActionEvent event) throws IOException {
-         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-         Scene mainMenuScene = new Scene(BattleGround.mainMenuLoader().load());
-         stage.setScene(mainMenuScene);
-         stage.show();
+        BattleGround.center();
+        BattleGround.newScene(submenuScene);
     }
 
     /**
      *@param event Action Event to Exit the game by clicking a button from the sub menu.
      */
     @FXML
-    void ExitGame(ActionEvent event) {
+    void exitGame(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
@@ -58,28 +47,24 @@ public class MainMenuController {
      */
     @FXML
     public void freePlayButton(ActionEvent actionEvent) {
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         try{
             BattleGround.activeGame = new Game(FileManager.freePlayLevel());
         }catch(IOException e){
             e.printStackTrace();
         }
-        stage.setScene(BattleGround.activeGame);
-        stage.setMaximized(true);
-        stage.show();
+        BattleGround.newScene(BattleGround.activeGame);
+        BattleGround.fullscreen();
         BattleGround.activeGame.run();
     }
     @FXML
     public void selectEduMap(ActionEvent actionEvent) {
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         try{
             BattleGround.activeGame = new Game(FileManager.defaultEduLevel());
         }catch(IOException e){
             e.printStackTrace();
         }
-        stage.setScene(BattleGround.activeGame);
-        stage.setMaximized(true);
-        stage.show();
+        BattleGround.newScene(BattleGround.activeGame);
+        BattleGround.fullscreen();
         BattleGround.activeGame.run();
     }
 }

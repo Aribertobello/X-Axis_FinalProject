@@ -1,6 +1,7 @@
 package com.example.bulletbattleground.game;
 
 import com.example.bulletbattleground.BattleGround;
+import com.example.bulletbattleground.controllers.DescriptionBoxController;
 import com.example.bulletbattleground.controllers.EducationGameController;
 import com.example.bulletbattleground.controllers.GameSceneController;
 import com.example.bulletbattleground.controllers.TurnVariablesController;
@@ -8,6 +9,8 @@ import com.example.bulletbattleground.gameObjects.Loot.Loot;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
 import com.example.bulletbattleground.gameObjects.projectiles.Bullet;
 import com.example.bulletbattleground.gameObjects.projectiles.Grenade;
+import com.example.bulletbattleground.gameObjects.projectiles.Rocket;
+import com.example.bulletbattleground.gameObjects.projectiles.Spear;
 import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.GameUI;
 import com.example.bulletbattleground.utility.Vector;
@@ -33,6 +36,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -44,6 +48,7 @@ import java.util.ArrayList;
 
 public abstract class Level extends AnchorPane implements GameUI {
 
+    public Arrow arrow;
     //Level properties-----------------
     protected boolean dragging = false;
     @Getter
@@ -56,6 +61,12 @@ public abstract class Level extends AnchorPane implements GameUI {
     @Getter
     @Setter
     protected Fighter selectedFighter;
+    @Getter
+    @Setter
+    protected int type;
+    @Getter
+    @Setter
+    protected int index;
     //------------------------------------------------------------------------
 
     // Level controllers--------
@@ -64,6 +75,7 @@ public abstract class Level extends AnchorPane implements GameUI {
     @Setter
     protected Pane headsUpDisplay;
     @FXML
+    @Getter
     protected AnchorPane container;
     @FXML
     private Label activeProjectileLabel;
@@ -110,6 +122,9 @@ public abstract class Level extends AnchorPane implements GameUI {
     public ImageView GImg;
     public ImageView BImg;
     private Arc angleArc;
+    private Label descriptionLabel;
+    private Button playBtn;
+    private VBox descriptionBox;
 
     /**
      *
@@ -128,8 +143,9 @@ public abstract class Level extends AnchorPane implements GameUI {
         container.getChildren().add(this.map);
         map.toBack();
         this.headsUpDisplay.setPrefWidth(BattleGround.screenWidth);
-        this.getChildren().add(trajectoryLine);// TODO arrow
-
+        this.getChildren().add(trajectoryLine);
+        arrow = new Arrow();
+        descriptionBox();
         angleArc = new Arc();
         angleArc.setStroke(Color.RED);
         angleArc.setFill(Color.TRANSPARENT);
@@ -141,7 +157,14 @@ public abstract class Level extends AnchorPane implements GameUI {
     public boolean[] update(double dt,double time) {
         map.setPrefWidth(((Stage) this.getScene().getWindow()).getWidth());
         updateHUD();
-        return new boolean[]{map.update(dt)};
+        if(map.update(dt)){
+            return levelStatus(map);
+        }
+        return new boolean[]{false,false};
+    }
+
+    public boolean[] levelStatus(Mapp map) {
+        return new boolean[]{false,false};
     }
 
     @FXML
@@ -235,7 +258,7 @@ public abstract class Level extends AnchorPane implements GameUI {
 
                     // Update the angle arc
                     angleArc.setCenterX(1065);
-                    angleArc.setCenterY(960);
+                    angleArc.setCenterY(945);
                     angleArc.setRadiusX(radius);
                     angleArc.setRadiusY(radius);
                     angleArc.setStartAngle(0.00); // Adjust start angle based on your requirements
@@ -286,16 +309,6 @@ public abstract class Level extends AnchorPane implements GameUI {
             AccLabel.setText("Acceleration: "+ map.getActiveProjectile().acceleration());
             MomLabel.setText("Momentum: " + Math.round(map.getActiveProjectile().momentum()));
         }
-        if (map != null && map.activeProjectile != null) {
-
-            KELabel.setText("Kinetic energy: " + map.getActiveProjectile().kE());
-            System.out.println(KELabel);
-        }
-        if (healthProgressbar != null) {
-
-            healthProgressbar.setProgress(20);
-            healthProgressbar.setStyle("-fx-accent: red; -fx-progress-bar-indeterminate-fill: red;");
-        }
     }
 
     public void updateTurnBox(double time, double timeLimit, int playerTurn) {
@@ -317,4 +330,50 @@ public abstract class Level extends AnchorPane implements GameUI {
         map.removeFighter(fighter);
         setOrigin(null);
     }
+
+    public void descriptionBox() throws IOException {
+        FXMLLoader descriptionBoxLoader = new FXMLLoader(BattleGround.class.getResource("DescriptionBox.fxml"));
+        descriptionBox = descriptionBoxLoader.load();
+        DescriptionBoxController controller = descriptionBoxLoader.getController();
+        playBtn = controller.playBtn;
+        descriptionLabel = controller.descriptionLabel;
+    }
+
+    public void displayDescription() {
+        container.setOpacity(0.25);
+        this.getChildren().add(descriptionBox);
+    }
+
+    public class Arrow extends Polyline {
+        public Arrow(){
+            super();
+            this.setStroke(Color.WHITE);
+        }
+        public void update(Fighter fighter, double dt, Coordinate coordinate, Vector direction){
+
+            Projectile projectile;
+            this.getPoints().clear();
+            this.getPoints().addAll(coordinate.getX(),coordinate.getY());
+            map.getChildren().remove(this);
+            switch(fighter.loadout.type){
+                case 1 -> projectile = new Bullet();
+                case 2 -> projectile = new Spear();
+                default -> projectile = new Rocket();
+            }
+            projectile.setVelocity(direction);
+            projectile.setCoordinate(coordinate);
+            if(direction.magnitude()>=40){
+                System.out.println();
+            }
+
+            for(double t = 0 ; t < 0.5; t += dt){
+
+                projectile.move(dt);
+                this.getPoints().addAll(projectile.getCoordinate().getX(),projectile.getCoordinate().getY());
+                map.addForces(projectile);
+            }
+            map.getChildren().add(this);
+        }
+    }
 }
+

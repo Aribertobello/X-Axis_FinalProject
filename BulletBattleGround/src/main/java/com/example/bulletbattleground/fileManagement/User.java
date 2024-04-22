@@ -2,6 +2,7 @@ package com.example.bulletbattleground.fileManagement;
 
 import com.example.bulletbattleground.BattleGround;
 import com.example.bulletbattleground.fileManagement.FileManager;
+import com.example.bulletbattleground.game.Level;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -25,19 +26,24 @@ public class User {
 
     @FXML
     private HBox AccountHbox;
+
     @FXML
     private TextField PassWordTextField;
 
     @FXML
     private TextField UserNameTextField;
-    protected int pVeLevelsCompleted;
-    protected int pVeMaxLevelIndex;
-    protected int pVCLevelsCompleted;
-    protected int pVCMaxLevelIndex;
+
+
+    protected int pVeLevelsCompleted = 5;
+    protected int pVeMaxLevelIndex = 5;
+    protected int pVCLevelsCompleted = 5;
+    protected int pVCMaxLevelIndex = 5;
+
+
+
+
     protected String password;
     protected String username;
-    protected String usernameTest = "Lucas";
-    protected String passwordTest = "Lucas";
     protected boolean loggedin;
     protected boolean isSignedIn = false;
 
@@ -78,10 +84,8 @@ public class User {
 
         if (true)/*<---TODO change back to normal login*/ {
             {
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Scene mainMenuScene = new Scene(BattleGround.mainMenuLoader().load());
-                stage.setScene(mainMenuScene);
-                stage.show();
+                BattleGround.newScene(mainMenuScene);
             }
         }
 
@@ -105,12 +109,15 @@ public class User {
 
             if (isSignedIn = true) {
                 FileManager.saveUserdata(username, password);
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Scene mainMenuScene = new Scene(BattleGround.mainMenuLoader().load());
-                stage.setScene(mainMenuScene);
-                stage.show();
+                BattleGround.newScene(mainMenuScene);
             }
 
         }
+    }
+
+    public boolean isUnlocked(Level level) {
+        if(level.getType() == 1) return pVeMaxLevelIndex > level.getIndex();
+        return pVCMaxLevelIndex > level.getIndex();
     }
 }

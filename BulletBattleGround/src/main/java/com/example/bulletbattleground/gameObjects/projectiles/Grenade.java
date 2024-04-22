@@ -1,50 +1,43 @@
 package com.example.bulletbattleground.gameObjects.projectiles;
 
 import com.example.bulletbattleground.BattleGround;
-import com.example.bulletbattleground.game.Fighter;
-import com.example.bulletbattleground.game.Game;
 import com.example.bulletbattleground.game.Projectile;
-import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.HitBox;
 import com.example.bulletbattleground.utility.Vector;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Bounds;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Ellipse;
 import javafx.util.Duration;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
+import javax.sound.sampled.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
 
 @Getter @Setter
 public class Grenade extends Projectile {
 
-    private final Image explosionEffect1 = new Image("file:1.PNG");
+    private final Image explosionEffect1 = new Image("file:Files/img/1.PNG");
 
-    private final Image explosionEffect2 = new Image("file:2.PNG");
+    private final Image explosionEffect2 = new Image("file:Files/img/2.PNG");
 
-    private final Image explosionEffect3 = new Image("file:3.PNG");
+    private final Image explosionEffect3 = new Image("file:Files/img/3.PNG");
 
-    private final Image explosionEffect4 = new Image("file:4.PNG");
+    private final Image explosionEffect4 = new Image("file:Files/img/4.PNG");
 
-    private final Image explosionEffect5 = new Image("file:5.PNG");
+    private final Image explosionEffect5 = new Image("file:Files/img/5.PNG");
 
-    private final Image explosionEffect6 = new Image("file:6.PNG");
+    private final Image explosionEffect6 = new Image("file:Files/img/6.PNG");
 
-    private final Image explosionEffect7 = new Image("file:7.PNG");
+    private final Image explosionEffect7 = new Image("file:Files/img/7.PNG");
 
-    private final Image explosionEffect8 = new Image("file:8.PNG");
+    private final Image explosionEffect8 = new Image("file:Files/img/8.PNG");
 
     private final double ExplosionRadius = 90;
 
@@ -68,7 +61,7 @@ public class Grenade extends Projectile {
 
     public Grenade(){
         fuseTimer = 2.50;
-        Image grenadeImg = new Image("file:grenade.png");
+        Image grenadeImg = new Image("file:Files/img/grenade.png");
         grenade.setFill(new ImagePattern(grenadeImg));
         this.lift = new Vector(0, 0);
         this.getChildren().add(grenade);
@@ -76,7 +69,6 @@ public class Grenade extends Projectile {
         setMass(0.5);
         this.setDamage(impactCollisionDamage); //at least it does a little damage only if the grenades hits the player
     }
-
     @Override
     public void bounce(HitBox hitBox) {
         //TODO
@@ -93,7 +85,7 @@ public class Grenade extends Projectile {
 
         if (fuseTimer <= 0.0 ) {
             fuseTimer = Math.sqrt (-1); //Makes sure that the explode method is only called once, or else it gets called every 1ms
-
+            playExplosionSound();
             explosionCircle.setLayoutX(getChildren().get(0).getLayoutX());
             explosionCircle.setLayoutY(getChildren().get(0).getLayoutY());
             this.getChildren().remove(0);
@@ -107,10 +99,19 @@ public class Grenade extends Projectile {
             animationTimeLine.play();
         }
     }
+    private void playExplosionSound() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Explosion.wav"));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void explosionAnimation() {
         explosionCircle.setFill(new ImagePattern(explosionEffects[index]));
-
         if (index < 6) {
             index++;
         } else {

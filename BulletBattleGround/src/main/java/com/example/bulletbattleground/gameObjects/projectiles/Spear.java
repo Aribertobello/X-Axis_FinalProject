@@ -10,13 +10,18 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.transform.Rotate;
 
+import javax.sound.sampled.*;
+import java.io.File;
+import java.io.IOException;
+
 public class Spear extends Projectile {
+    private boolean hasPlayedSound = false;
     
     Circle spearHitBox;
     Circle spear;
 
     public Spear() {
-        Image spearImg = new Image("file:spear.png");
+        Image spearImg = new Image("file:Files/img/spear.png");
         spearHitBox = new Circle(2, Color.DARKGRAY);
         spearHitBox.setFill(Color.TRANSPARENT);
         spear = new Circle(30 ,Color.BLUE);
@@ -27,12 +32,27 @@ public class Spear extends Projectile {
         this.lift = new Vector(0, -0.5);
         this.forces.add(lift);
         this.setMass(3.0);
+        setTerminalVelocity(60);
+    }
+    private void playSpearSound() {
+        if(!hasPlayedSound) {
+            try {
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Spear.wav"));
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                clip.start();
+            } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
+                e.printStackTrace();
+            }
+            hasPlayedSound = true;
+        }
     }
 
     @Override
     public void move(double time) {
         allign();
         super.move(time);
+        playSpearSound();
     }
 
     @Override

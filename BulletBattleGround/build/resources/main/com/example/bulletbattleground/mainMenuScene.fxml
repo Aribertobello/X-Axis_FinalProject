@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane fx:id="pve" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="741.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bulletbattleground.controllers.MainMenuController">
+<AnchorPane fx:id="pve" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="741.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bulletbattleground.controllers.MainMenuController">
     <children>
         <HBox alignment="CENTER_LEFT" layoutX="72.0" layoutY="39.0" prefHeight="675.0" prefWidth="200.0">
             <children>
@@ -21,5 +21,6 @@
                 <Button fx:id="freeplayBtn" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#freePlayButton" prefHeight="767.0" prefWidth="265.0" text="FREE PLAY" />
             </children>
         </HBox>
+      <Button layoutX="909.0" layoutY="27.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="37.0" prefWidth="77.0" text="Exit" />
     </children>
 </AnchorPane>
