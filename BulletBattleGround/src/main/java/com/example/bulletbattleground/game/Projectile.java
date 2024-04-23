@@ -75,12 +75,9 @@ public abstract class  Projectile extends MovingBody {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("GunShot.wav"));
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
+            FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            volumeControl.setValue(-10.0f);
             clip.start();
-            clip.addLineListener(event -> {
-                if (event.getType() == LineEvent.Type.STOP) {
-                    clip.close(); // Close the clip after it finishes playing
-                }
-            });
         } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
             e.printStackTrace();
         }
@@ -90,6 +87,8 @@ public abstract class  Projectile extends MovingBody {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Spear.wav"));
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
+            FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            volumeControl.setValue(-10.0f);
             clip.start();
         } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
             e.printStackTrace();
@@ -100,6 +99,8 @@ public abstract class  Projectile extends MovingBody {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Rocket.wav"));
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
+            FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            volumeControl.setValue(-10.0f);
             clip.start();
         } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
             e.printStackTrace();
