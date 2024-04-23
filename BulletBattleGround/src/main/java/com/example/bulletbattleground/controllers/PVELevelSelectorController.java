@@ -17,7 +17,7 @@ public class PVELevelSelectorController {
     public void launchPVELevel1(ActionEvent event) {
         try{
             BattleGround.activeGame = new Game(FileManager.createLevel("Files/txt/PVE.lvl.1.txt"));
-            BattleGround.newScene(new Scene(BattleGround.classSelectorLoader().load()));
+            BattleGround.mainStage.setScene(new Scene(BattleGround.classSelectorLoader().load()));
         }catch(Exception e){
             throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
         }
@@ -26,7 +26,7 @@ public class PVELevelSelectorController {
     public void launchPVELevel2(ActionEvent event) {
         try{
             BattleGround.activeGame = new Game(FileManager.createLevel("Files/txt/PVE.lvl.2.txt"));
-            BattleGround.newScene(new Scene(BattleGround.classSelectorLoader().load()));
+            BattleGround.mainStage.setScene(new Scene(BattleGround.classSelectorLoader().load()));
         }catch(Exception e){
             throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
         }
@@ -35,7 +35,7 @@ public class PVELevelSelectorController {
     public void launchPVELevel3(ActionEvent event) {
         try{
             BattleGround.activeGame = new Game(FileManager.createLevel("Files/txt/PVE.lvl.3.txt"));
-            BattleGround.newScene(new Scene(BattleGround.classSelectorLoader().load()));
+            BattleGround.mainStage.setScene(new Scene(BattleGround.classSelectorLoader().load()));
         }catch(Exception e){
             throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
         }
@@ -44,7 +44,7 @@ public class PVELevelSelectorController {
     public void launchPVELevel4(ActionEvent event) {
         try{
             BattleGround.activeGame = new Game(FileManager.createLevel("Files/txt/PVE.lvl.4.txt"));
-            BattleGround.newScene(new Scene(BattleGround.classSelectorLoader().load()));
+            BattleGround.mainStage.setScene(new Scene(BattleGround.classSelectorLoader().load()));
         }catch(Exception e){
             throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
         }
@@ -53,7 +53,7 @@ public class PVELevelSelectorController {
     public void launchPVELevel5(ActionEvent event) {
         try{
             BattleGround.activeGame = new Game(FileManager.createLevel("Files/txt/PVE.lvl.5.txt"));
-            BattleGround.newScene(new Scene(BattleGround.classSelectorLoader().load()));
+            BattleGround.mainStage.setScene(new Scene(BattleGround.classSelectorLoader().load()));
         }catch(Exception e){
             throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
         }
@@ -62,7 +62,7 @@ public class PVELevelSelectorController {
     public void launchPVELevel6(ActionEvent event) {
         try{
             BattleGround.activeGame = new Game(FileManager.createLevel("Files/txt/PVE.lvl.6.txt"));
-            BattleGround.newScene(new Scene(BattleGround.classSelectorLoader().load()));
+            BattleGround.mainStage.setScene(new Scene(BattleGround.classSelectorLoader().load()));
         }catch(Exception e){
             throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
         }
@@ -71,7 +71,7 @@ public class PVELevelSelectorController {
     public void launchPVELevel7(ActionEvent event) {
         try{
             BattleGround.activeGame = new Game(FileManager.createLevel("Files/txt/PVC.lvl.7.txt"));
-            BattleGround.newScene(new Scene(BattleGround.classSelectorLoader().load()));
+            BattleGround.mainStage.setScene(new Scene(BattleGround.classSelectorLoader().load()));
         }catch(Exception e){
             throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
         }
@@ -89,7 +89,7 @@ public class PVELevelSelectorController {
     public void launchPVELevel9(ActionEvent event) {
         try{
             BattleGround.activeGame = new Game(FileManager.createLevel("Files/txt/PVE.lvl.9.txt"));
-            BattleGround.newScene(new Scene(BattleGround.classSelectorLoader().load()));
+            BattleGround.mainStage.setScene(new Scene(BattleGround.classSelectorLoader().load()));
         }catch(Exception e){
             throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
         }
@@ -98,7 +98,7 @@ public class PVELevelSelectorController {
     public void launchPVELevel10(ActionEvent event) {
         try{
             BattleGround.activeGame = new Game(FileManager.createLevel("Files/txt/PVE.lvl.10.txt"));
-            BattleGround.newScene(new Scene(BattleGround.classSelectorLoader().load()));
+            BattleGround.mainStage.setScene(new Scene(BattleGround.classSelectorLoader().load()));
         }catch(Exception e){
             throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
         }

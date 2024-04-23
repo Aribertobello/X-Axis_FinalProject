@@ -83,46 +83,48 @@ public abstract class Level extends AnchorPane implements GameUI {
     @FXML
     @Getter
     protected AnchorPane container;
-    @FXML
+
     private Label activeProjectileLabel;
-    @FXML
+
     private Label GrenadeLabel;
     private Label SmokeLabel;
     private Label KELabel;
-    @FXML
-    private Label blankLabel;
-    @FXML
+
+    private Label Ehealthlbl;
+
+    private ProgressBar EhealthBar;
+
+   // private Label blankLabel;
+
     private ProgressBar healthProgressbar;
     private Label VeloLabel;
     private Label AccLabel;
     private Label healthLabel;
-    @FXML
-    private MenuBar topMenu;
+
+    //private MenuBar topMenu;
     private Label angleLabel;
     private Label MomLabel;
-    private Label MagLabel;
-    private Menu newGameButton;
-    @FXML
-    private Menu exitButton;
+    //private Label MagLabel;
+   // private Menu newGameButton;
 
-    @FXML
-    private Menu settingsButton;
+   // private Menu exitButton;
+
+
+    //private Menu settingsButton;
     private Label turnStatusLabel;
     private Label timeLeftLabel;
     private ProgressBar timerBar;
     public Pane turnStatusBox;
     @FXML
     private ProgressBar VeloBar;
-    @FXML
-    private Menu pauseButton;
-    private Line Xaxis;
+
+    //private Menu pauseButton;
+    //private Line Xaxis;
     private Line AngleDisp;
     @Getter
     @Setter
     private double LastAngel = 0.0;
     static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
-    private Line ArrLinee;
-    private Line ArrLine;
     private Label BltAmount;
     private Label GTimer;
     private Label STimer;
@@ -131,7 +133,7 @@ public abstract class Level extends AnchorPane implements GameUI {
     private Arc angleArc;
     @Getter
     private Label descriptionLabel;
-    private Button playBtn;
+   private Button playBtn;
     private VBox descriptionBox;
 
     /**
@@ -206,18 +208,16 @@ public abstract class Level extends AnchorPane implements GameUI {
         VeloLabel = controller.getVeloLabel();
         AccLabel = controller.getAccLabel();
         MomLabel = controller.getMomLabel();
-        Xaxis = controller.getXaxis();
         AngleDisp = controller.getAngleDisp();
         VeloBar = controller.getVeloBar();
-        ArrLinee = controller.getArrLinee();
-        ArrLine = controller.getArrLine();
         BltAmount = controller.getBltAmount();
-        pauseButton = controller.getPauseButton();
         GTimer = controller.getGTimer();
         GImg = controller.getGImg();
         BImg = controller.getBImg();
         SmokeLabel = controller.getSmokeLabel();
         STimer = controller.getSTimer();
+        Ehealthlbl = controller.getEhealthlbl();
+        EhealthBar = controller.getEhealthBar();
 
     }
 
@@ -329,6 +329,7 @@ public abstract class Level extends AnchorPane implements GameUI {
             AccLabel.setText("Acceleration: "+ map.getActiveProjectile().acceleration());
             MomLabel.setText("Momentum: " + Math.round(map.getActiveProjectile().momentum()));
         }
+
     }
 
     public void updateTurnBox(double time, double timeLimit, int playerTurn) {

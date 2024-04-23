@@ -22,7 +22,7 @@ import java.io.IOException;
 @Getter
 @Setter
 public class GameSceneController {
-
+    //TODO enemy health
     @FXML
     private Pane headsUpDisplay;
     @FXML
@@ -79,6 +79,10 @@ public class GameSceneController {
     private ImageView GImg;
     @FXML
     private ImageView BImg;
+    @FXML
+    private Label Ehealthlbl;
+    @FXML
+    private ProgressBar EhealthBar;
     public int light = 1;
     public int medium = 2;
     public int heavy = 3;

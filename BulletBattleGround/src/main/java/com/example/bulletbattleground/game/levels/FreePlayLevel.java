@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class FreePlayLevel extends Level {
+    //TODO Check controller
 
     public ImageView allyImageView;
     public ImageView smokeScreenImageView;
