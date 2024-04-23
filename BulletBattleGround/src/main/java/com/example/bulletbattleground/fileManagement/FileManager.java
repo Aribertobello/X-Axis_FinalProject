@@ -61,9 +61,8 @@ public class FileManager extends ClassSelectorController {
                 }
                 readFighters(scanner, level);
             }
-            if(line.startsWith("loot :")){
-                scanLoot(line,level);
-            }
+            if(line.startsWith("loot :")) scanLoot(line,level);
+            if(line.startsWith(""));
         }
         level.setIndex(index);
         return level;

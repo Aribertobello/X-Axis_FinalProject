@@ -92,5 +92,6 @@ public class BattleGround extends Application {
     public static FXMLLoader pvcLevelSelectorLoader(){ return new FXMLLoader(BattleGround.class.getResource("PVCLevelSelector.fxml"));}
     public static FXMLLoader pvpLevelSelectorLoader(){ return new FXMLLoader(BattleGround.class.getResource("PVPLevelSelector.fxml"));}
     public static FXMLLoader classSelectorLoader(){ return new FXMLLoader(BattleGround.class.getResource("ClassSelector.fxml"));}
+    public static FXMLLoader instructionBoxLoader(){ return new FXMLLoader(BattleGround.class.getResource("InstructionBox.fxml"));}
 
 }

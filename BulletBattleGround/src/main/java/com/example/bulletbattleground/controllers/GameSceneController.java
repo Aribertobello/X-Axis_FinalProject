@@ -3,7 +3,10 @@ package com.example.bulletbattleground.controllers;
 import com.example.bulletbattleground.BattleGround;
 import com.example.bulletbattleground.game.Game;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,6 +15,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.io.IOException;
+
 @Getter
 @Setter
 public class GameSceneController {
@@ -90,5 +96,17 @@ public class GameSceneController {
             GImg.setImage(new Image("file:grenade.png"));
             BImg.setImage(new Image("file:smallBullet.png"));
         }
+    }
+
+    public void displayHowToPlay(ActionEvent event) {
+        TabPane instructionBox;
+        try {
+            instructionBox = BattleGround.instructionBoxLoader().load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        BattleGround.activeGame.unfocus();
+        BattleGround.activeGame.getLevel().getChildren().add(instructionBox);
+        BattleGround.activeGame.pauseGame();
     }
 }

@@ -12,3 +12,8 @@ MAX_PROJ_ANIMATION_IMER
 tickspeed :
 }
 Description :
+{
+ This is Level One
+ just getting started
+ and get to know the basics
+}

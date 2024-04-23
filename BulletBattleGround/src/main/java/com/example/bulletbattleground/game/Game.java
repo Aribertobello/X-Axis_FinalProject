@@ -135,6 +135,13 @@ public class Game extends Scene {
         level.getChildren().add(gameOverBox);
     }
 
+    public void unfocus(){
+        this.level.getContainer().setOpacity(0.2);
+    }
+    public void focus(){
+        this.level.getContainer().setOpacity(1);
+    }
+
     public void exitGame() {
         BattleGround.prevScene();
     }
