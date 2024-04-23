@@ -32,11 +32,6 @@ import java.util.ArrayList;
 
 public class StandardLevel extends Level {
 
-    public ArrayList<Fighter> team1 = new ArrayList<>();
-    public ArrayList<Fighter> team2 = new ArrayList<>();
-    static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
-
-    private String description = "";
 
     /**
      *

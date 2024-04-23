@@ -56,7 +56,6 @@ public class GameSceneController {
     private Menu settingsButton;
     @FXML
     private Menu pauseButton;
-
     @FXML
     private Label MomLabel;
     @FXML
@@ -93,8 +92,8 @@ public class GameSceneController {
         exitButton.setOnAction(e -> handleExit());
         pauseButton.setOnAction(e -> handlePause());
         if(GImg != null && BImg != null) {
-            GImg.setImage(new Image("file:grenade.png"));
-            BImg.setImage(new Image("file:smallBullet.png"));
+            GImg.setImage(new Image("file:Files/img/grenade.png"));
+            BImg.setImage(new Image("file:Files/img/smallBullet.png"));
         }
     }
 

@@ -70,6 +70,8 @@ public abstract class Level extends AnchorPane implements GameUI {
     @Getter
     @Setter
     String description = "";
+    public ArrayList<Fighter> team1 = new ArrayList<>();
+    public ArrayList<Fighter> team2 = new ArrayList<>();
     //------------------------------------------------------------------------
 
     // Level controllers--------
@@ -286,7 +288,7 @@ public abstract class Level extends AnchorPane implements GameUI {
             KELabel.setText("Kinetic energy: "+ Math.round(map.getActiveProjectile().kE()));
         }
         if(healthProgressbar != null && selectedFighter != null){
-            int previousHealth = (int) (healthProgressbar.getProgress() * 15); // Assuming the progress bar is based on a scale of 0 to 1
+            int previousHealth = (int) (healthProgressbar.getProgress() * 5); // Assuming the progress bar is based on a scale of 0 to 1
             int currentHealth = selectedFighter.getHealth();
             if (currentHealth < previousHealth) {
                 double healthChange = (previousHealth - currentHealth) / 100.0; // Convert to decimal

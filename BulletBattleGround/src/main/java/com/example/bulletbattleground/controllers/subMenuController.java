@@ -25,7 +25,7 @@ public class subMenuController{
      */
     public void player_computer_btn_clicked(ActionEvent event) throws IOException {
         ClassSelectorController.pvcClicked = true;
-        BattleGround.newScene(new Scene(BattleGround.classSelectorLoader().load()));
+        BattleGround.newScene(new Scene(BattleGround.pvcLevelSelectorLoader().load()));
 
 //        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 //        stage.setScene(new Scene(BattleGround.pvcLevelSelectorLoader().load()));
@@ -36,7 +36,7 @@ public class subMenuController{
      */
     public void player_environ_btn_clicked(ActionEvent event) throws IOException {
         ClassSelectorController.pveClicked = true;
-        BattleGround.newScene(new Scene(BattleGround.classSelectorLoader().load()));
+        BattleGround.newScene(new Scene(BattleGround.pveLevelSelectorLoader().load()));
 
 //        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 //        stage.setScene(new Scene(BattleGround.pveLevelSelectorLoader().load()));
@@ -47,11 +47,7 @@ public class subMenuController{
      */
     public void player_player_btn_clicked(ActionEvent event) throws IOException {
         ClassSelectorController.pvpClicked = true;
-        BattleGround.newScene(new Scene(BattleGround.classSelectorLoader().load()));
-
-        //Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        //stage.setScene(new Scene(BattleGround.pvpLevelSelectorLoader().load()));
-        //stage.show();
+        BattleGround.newScene(new Scene(BattleGround.pvpLevelSelectorLoader().load()));
     }
 
     @FXML
