@@ -160,8 +160,8 @@ public class Vector {
      */
     public Vector rotate(double angle) {
         return new Vector(
-                x * Math.cos(angle) - y * Math.sin(angle / Math.PI * 180)
-                , x * Math.sin(angle) + y * Math.cos(angle / Math.PI * 180));
+                x * Math.cos(angle / 180 * Math.PI ) - y * Math.sin(angle / 180 * Math.PI )
+                , x * Math.sin(angle / 180 * Math.PI ) + y * Math.cos(angle / 180 * Math.PI ));
     }
 
     /**

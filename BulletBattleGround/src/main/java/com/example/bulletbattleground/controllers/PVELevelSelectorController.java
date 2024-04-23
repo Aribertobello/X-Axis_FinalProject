@@ -21,8 +21,9 @@ public class PVELevelSelectorController {
             throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
         }
         BattleGround.newScene(BattleGround.activeGame);
-        BattleGround.fullscreen();
+
         BattleGround.activeGame.run();
+        BattleGround.fullscreen();
     }
 
     public void launchPVELevel2(ActionEvent event) {
