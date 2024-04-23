@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class Bullet extends Projectile {
-    private boolean hasPlayedSound = false;
 
     /**
      * Constructs a new Bullet object.
@@ -38,19 +37,6 @@ public class Bullet extends Projectile {
         setMass(0.5);
 
     }
-    private void playGunshotSound() {
-        if(!hasPlayedSound) {
-          try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("GunShot.wav"));
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            clip.start();
-        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
-            e.printStackTrace();
-        }
-          hasPlayedSound = true;
-    }
-    }
 
     @Override
     public void bounce(HitBox hitBox) {
@@ -60,10 +46,6 @@ public class Bullet extends Projectile {
 
     @Override
     public void move(double time) {
-        if(!hasPlayedSound) {
-            playGunshotSound();
-            hasPlayedSound = true;
-        }
         super.move(time);
         this.getChildren().get(0).setRotate(velocity().angle());
     }
