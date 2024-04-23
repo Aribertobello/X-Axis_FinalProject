@@ -1,5 +1,8 @@
 package com.example.bulletbattleground.game;
 
+import com.example.bulletbattleground.gameObjects.projectiles.Bullet;
+import com.example.bulletbattleground.gameObjects.projectiles.Rocket;
+import com.example.bulletbattleground.gameObjects.projectiles.Spear;
 import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.HitBox;
 import com.example.bulletbattleground.utility.MovingBody;
@@ -57,8 +60,51 @@ public abstract class  Projectile extends MovingBody {
         forces.clear();
         forces.add(lift);
         forces.addAll(Arrays.asList(Forces));
+        if(this instanceof Bullet){
+            playGunshotSound();
+        }
+        if(this instanceof Spear) {
+            playSpearSound();
+        }
+        if(this instanceof Rocket) {
+            playRocketSound();
+        }
     }
-
+    private void playGunshotSound() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("GunShot.wav"));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+            clip.addLineListener(event -> {
+                if (event.getType() == LineEvent.Type.STOP) {
+                    clip.close(); // Close the clip after it finishes playing
+                }
+            });
+        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void playSpearSound() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Spear.wav"));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void playRocketSound() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Rocket.wav"));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
+            e.printStackTrace();
+        }
+    }
     /**
      *
      * @param vector

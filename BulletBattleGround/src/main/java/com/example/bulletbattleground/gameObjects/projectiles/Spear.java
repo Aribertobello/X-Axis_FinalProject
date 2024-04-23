@@ -15,8 +15,6 @@ import java.io.File;
 import java.io.IOException;
 
 public class Spear extends Projectile {
-    private boolean hasPlayedSound = false;
-    
     Circle spearHitBox;
     Circle spear;
 
@@ -34,25 +32,12 @@ public class Spear extends Projectile {
         this.setMass(3.0);
         setTerminalVelocity(60);
     }
-    private void playSpearSound() {
-        if(!hasPlayedSound) {
-            try {
-                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Spear.wav"));
-                Clip clip = AudioSystem.getClip();
-                clip.open(audioInputStream);
-                clip.start();
-            } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
-                e.printStackTrace();
-            }
-            hasPlayedSound = true;
-        }
-    }
+
 
     @Override
     public void move(double time) {
         allign();
         super.move(time);
-        playSpearSound();
     }
 
     @Override
