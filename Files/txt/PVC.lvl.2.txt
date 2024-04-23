@@ -3,7 +3,7 @@ type : 2
 map : Files/txt/PVC.map.lvl.2.txt
 fighters :
 {
-ally : { loadout = 1 , health = 5 , coordinate = (200,600) }
+ally : { loadout = 2 , health = 5 , coordinate = (200,600) }
 computer : { loadout = 1 , health = 5 , coordinate = (1800,700) }
 }
 GameRules : {
@@ -12,3 +12,5 @@ MAX_PROJ_ANIMATION_IMER
 tickspeed :
 }
 Description :
+{
+}

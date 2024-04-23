@@ -67,6 +67,7 @@ public class Grenade extends Projectile {
         this.getChildren().add(grenade);
         this.forces.add(lift);
         setMass(0.5);
+        setTerminalVelocity(95);
         this.setDamage(impactCollisionDamage); //at least it does a little damage only if the grenades hits the player
     }
     @Override

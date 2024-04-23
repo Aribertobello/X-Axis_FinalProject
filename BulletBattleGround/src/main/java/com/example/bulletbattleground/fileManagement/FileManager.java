@@ -40,6 +40,7 @@ public class FileManager extends ClassSelectorController {
     public static Level createLevel(String filePath) throws ParseException, IOException {
         Level level = null;
         String mapLocation = "";
+        String description = "";
         int type = 0;
         int index = 0;
         Scanner scanner = null;
@@ -62,9 +63,18 @@ public class FileManager extends ClassSelectorController {
                 readFighters(scanner, level);
             }
             if(line.startsWith("loot :")) scanLoot(line,level);
-            if(line.startsWith(""));
+            if(line.startsWith("Description :")) {
+                scanner.nextLine();
+                String l = scanner.nextLine();
+                while(!l.endsWith("}")) {
+                    description = description + "\n" + l ;
+                    l = scanner.nextLine();
+                }
+            }
         }
         level.setIndex(index);
+        level.getDescriptionLabel().setText(description);
+        level.setDescription(description);
         return level;
     }
 

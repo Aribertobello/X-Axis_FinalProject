@@ -1,4 +1,4 @@
-type : earth
+type : space
 Forces : 
 {
 GMagnitude = 9.8

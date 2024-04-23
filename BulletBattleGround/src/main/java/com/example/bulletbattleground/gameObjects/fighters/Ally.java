@@ -54,14 +54,14 @@ public class Ally extends Fighter {
         ((Mapp) this.getParent()).setBuffer(0);
 
         if (projectile instanceof Rocket) {
-            Vector a = projectile.acceleration();
+            Vector a = new Vector(0,4.9);
             double angle = projectile.velocity().angle();
             Vector v = projectile.velocity();
             double vx = v.getX();
             double ax = a.getX();
             double ay = a.getY();
             double tan = Math.tan(Math.PI*(angle/180));
-            double dropZone = 220+(2*vx*vx*tan*(ax*tan-ay)/(ay*ay));
+            double dropZone = this.getCoordinate().getX()+20+(2*vx*vx*tan*(ax*tan-ay)/(ay*ay));
              ((Rocket)projectile).setDropZone(dropZone);
 
             if (((Rocket) projectile).getDropZone() >= 1915) {

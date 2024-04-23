@@ -67,6 +67,9 @@ public abstract class Level extends AnchorPane implements GameUI {
     @Getter
     @Setter
     protected int index;
+    @Getter
+    @Setter
+    String description = "";
     //------------------------------------------------------------------------
 
     // Level controllers--------
@@ -122,6 +125,7 @@ public abstract class Level extends AnchorPane implements GameUI {
     public ImageView GImg;
     public ImageView BImg;
     private Arc angleArc;
+    @Getter
     private Label descriptionLabel;
     private Button playBtn;
     private VBox descriptionBox;
@@ -337,6 +341,7 @@ public abstract class Level extends AnchorPane implements GameUI {
         DescriptionBoxController controller = descriptionBoxLoader.getController();
         playBtn = controller.playBtn;
         descriptionLabel = controller.descriptionLabel;
+        descriptionLabel.setText(description);
     }
 
     public void displayDescription() {
@@ -358,16 +363,16 @@ public abstract class Level extends AnchorPane implements GameUI {
             switch(fighter.loadout.type){
                 case 1 -> projectile = new Bullet();
                 case 2 -> projectile = new Spear();
-                default -> projectile = new Rocket();
+                default -> projectile = new Bullet();
             }
             projectile.setVelocity(direction);
             projectile.setCoordinate(coordinate);
-            if(direction.magnitude()>=40){
-                System.out.println();
-            }
 
             for(double t = 0 ; t < 0.5; t += dt){
-
+                if(fighter.loadout.type==3){
+                    projectile.forces.clear();
+                    projectile.forces.add(new Vector(0,4.9).multiply(projectile.getMass()));
+                }
                 projectile.move(dt);
                 this.getPoints().addAll(projectile.getCoordinate().getX(),projectile.getCoordinate().getY());
                 map.addForces(projectile);
