@@ -151,11 +151,11 @@ public abstract class Level extends AnchorPane implements GameUI {
         angleArc.setFill(Color.TRANSPARENT);
         angleArc.setStrokeWidth(1.5);
         container.getChildren().add(angleArc);
+        map.setPrefWidth(BattleGround.screenWidth);
     }
     //------------------------------------------------
 
     public boolean[] update(double dt,double time) {
-        map.setPrefWidth(((Stage) this.getScene().getWindow()).getWidth());
         updateHUD();
         if(map.update(dt)){
             return levelStatus(map);

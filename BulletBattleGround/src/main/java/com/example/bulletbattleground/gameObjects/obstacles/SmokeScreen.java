@@ -50,4 +50,10 @@ public class SmokeScreen extends Obstacle {
         //this.getChildren().get(0).setLayoutX(getCoordinate().getX());
         //this.getChildren().get(0).setLayoutX(getCoordinate().getY());
     }
+
+    @Override
+    public HitBox hitBox(){
+        hitBox = new HitBox(new SpaceShip(0,0,0));
+        return hitBox;
+    }
 }
