@@ -12,3 +12,5 @@ MAX_PROJ_ANIMATION_IMER
 tickspeed :
 }
 Description :
+{
+}

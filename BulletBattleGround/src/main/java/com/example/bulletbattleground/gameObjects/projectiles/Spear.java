@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Spear extends Projectile {
+
     Circle spearHitBox;
     Circle spear;
 
@@ -32,8 +33,6 @@ public class Spear extends Projectile {
         this.setMass(3.0);
         setTerminalVelocity(60);
     }
-
-
     @Override
     public void move(double time) {
         allign();

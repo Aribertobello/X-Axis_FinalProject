@@ -9,6 +9,7 @@ import com.example.bulletbattleground.game.Mapp;
 import com.example.bulletbattleground.game.Projectile;
 import com.example.bulletbattleground.gameObjects.Loot.Loot;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
+import com.example.bulletbattleground.gameObjects.fighters.Computer;
 import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.Vector;
 import javafx.fxml.FXMLLoader;
@@ -31,11 +32,6 @@ import java.util.ArrayList;
 
 public class StandardLevel extends Level {
 
-    public ArrayList<Fighter> team1 = new ArrayList<>();
-    public ArrayList<Fighter> team2 = new ArrayList<>();
-    static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
-
-    private String description = "";
 
     /**
      *
@@ -105,6 +101,16 @@ public class StandardLevel extends Level {
             team1.remove(fighter);
         } else {
             team2.remove(fighter);
+        }
+    }
+    public void compShoot(Computer comp){
+        for (int i = 0; i < 1; i++) {
+            for (int j = 0; j < 1; j++) {
+                ;
+                for (double dt = 0; dt < 1 ; dt++) {
+
+                }
+            }
         }
     }
 }

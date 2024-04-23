@@ -47,4 +47,15 @@ public class Wall extends Obstacle {
         ((Rectangle) this.getChildren().get(0)).setX(getCoordinate().getX() - (double) thickness / 2);
         ((Rectangle) this.getChildren().get(0)).setY(getCoordinate().getY() - (double) height / 2);
     }
+
+    @Override
+    public void rotate(double angle) {
+        super.rotate(angle);
+    }
+
+    @Override
+    public HitBox hitBox(){
+        hitBox = new HitBox(this);
+        return hitBox;
+    }
 }

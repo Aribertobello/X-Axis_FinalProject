@@ -115,4 +115,10 @@ public class SmokeScreen extends Obstacle {
     @Override
     public void allign() {
     }
+
+    @Override
+    public HitBox hitBox(){
+        hitBox = new HitBox(new SpaceShip(0,0,0));
+        return hitBox;
+    }
 }

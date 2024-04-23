@@ -68,6 +68,11 @@ public abstract class Level extends AnchorPane implements GameUI {
     @Getter
     @Setter
     protected int index;
+    @Getter
+    @Setter
+    String description = "";
+    public ArrayList<Fighter> team1 = new ArrayList<>();
+    public ArrayList<Fighter> team2 = new ArrayList<>();
     //------------------------------------------------------------------------
 
     // Level controllers--------
@@ -124,6 +129,7 @@ public abstract class Level extends AnchorPane implements GameUI {
     public ImageView GImg;
     public ImageView BImg;
     private Arc angleArc;
+    @Getter
     private Label descriptionLabel;
     private Button playBtn;
     private VBox descriptionBox;
@@ -153,11 +159,11 @@ public abstract class Level extends AnchorPane implements GameUI {
         angleArc.setFill(Color.TRANSPARENT);
         angleArc.setStrokeWidth(1.5);
         container.getChildren().add(angleArc);
+        map.setPrefWidth(BattleGround.screenWidth);
     }
     //------------------------------------------------
 
     public boolean[] update(double dt,double time) {
-        map.setPrefWidth(((Stage) this.getScene().getWindow()).getWidth());
         updateHUD();
         if(map.update(dt)){
             return levelStatus(map);
@@ -296,7 +302,7 @@ public abstract class Level extends AnchorPane implements GameUI {
             KELabel.setText("Kinetic energy: "+ Math.round(map.getActiveProjectile().kE()));
         }
         if(healthProgressbar != null && selectedFighter != null){
-            int previousHealth = (int) (healthProgressbar.getProgress() * 15); // Assuming the progress bar is based on a scale of 0 to 1
+            int previousHealth = (int) (healthProgressbar.getProgress() * 5); // Assuming the progress bar is based on a scale of 0 to 1
             int currentHealth = selectedFighter.getHealth();
             if (currentHealth < previousHealth) {
                 double healthChange = (previousHealth - currentHealth) / 100.0; // Convert to decimal
@@ -351,6 +357,7 @@ public abstract class Level extends AnchorPane implements GameUI {
         DescriptionBoxController controller = descriptionBoxLoader.getController();
         playBtn = controller.playBtn;
         descriptionLabel = controller.descriptionLabel;
+        descriptionLabel.setText(description);
     }
 
     public void displayDescription() {
@@ -372,16 +379,16 @@ public abstract class Level extends AnchorPane implements GameUI {
             switch(fighter.loadout.type){
                 case 1 -> projectile = new Bullet();
                 case 2 -> projectile = new Spear();
-                default -> projectile = new Rocket();
+                default -> projectile = new Bullet();
             }
             projectile.setVelocity(direction);
             projectile.setCoordinate(coordinate);
-            if(direction.magnitude()>=40){
-                System.out.println();
-            }
 
             for(double t = 0 ; t < 0.5; t += dt){
-
+                if(fighter.loadout.type==3){
+                    projectile.forces.clear();
+                    projectile.forces.add(new Vector(0,4.9).multiply(projectile.getMass()));
+                }
                 projectile.move(dt);
                 this.getPoints().addAll(projectile.getCoordinate().getX(),projectile.getCoordinate().getY());
                 map.addForces(projectile);

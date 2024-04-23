@@ -61,20 +61,77 @@ public class HitBox extends Group {
         body = projectile;
     }
 
+
     /**
      *
-     * @param obstacle
+     * @param wall
+     *
      */
-    public HitBox(Obstacle obstacle) {
-        center = new Coordinate(obstacle.getCoordinate().getX(), obstacle.getCoordinate().getY());
-        if (obstacle instanceof Wall) {
-            double height = ((Wall) obstacle).getHeight();
-            double thickness = ((Wall) obstacle).getThickness();
+    public HitBox(Wall wall) {
+        center = new Coordinate(wall.getCoordinate().getX(), wall.getCoordinate().getY());
+        double height = wall.getHeight();
+        double thickness = wall.getThickness();
+        for (int i = 1; i < thickness; i++) {
+            points.add(new Coordinate(center.getX() - thickness / 2 + i, center.getY() - height / 2));
+        }
+        for (int i = 0; i < height + 1; i++) {
+            points.add(new Coordinate(center.getX() + thickness / 2, center.getY() - height / 2 + i));
+        }
+        for (int i = 1; i < thickness; i++) {
+            points.add(new Coordinate(center.getX() + thickness / 2 - i, center.getY() + height / 2));
+        }
+        for (int i = 0; i < height + 1; i++) {
+            points.add(new Coordinate(center.getX() - thickness / 2, center.getY() + height / 2 - i));
+        }
+        for(int i = 0 ; i < points.size() ; i++){
+            points.set(i,points.get(i).rotateAbout(wall.getRotationAngle(),center));
+        }
+        border = new Polygon();
+        for (Coordinate point : points) {
+            border.getPoints().addAll(point.getX(), point.getY());
+        }
+        this.getChildren().add(border);
+        this.setVisible(false);
+        body = wall;
+        overlapped =new Coordinate(0,0);
+    }
+
+    /**
+     *
+     * @param spaceShip
+     */
+    public HitBox(SpaceShip spaceShip) {
+        center = new Coordinate(spaceShip.getCoordinate().getX(), spaceShip.getCoordinate().getY());
+        int height = (int) SpaceShip.DEFAULT_HEIGHT;
+        int thickness = (int) SpaceShip.DEFAULT_WIDTH;
+
+
+        if (spaceShip.getVelocityY() > 0) {
+
+            for (int i = 1; i < thickness; i++) {
+                points.add(new Coordinate(center.getX() + thickness / 2 - i, center.getY() + height / 2 + 25 - 25.0 * i / 40.0));
+            }
+            for (int i = 0; i < height - 10 + 1; i++) {
+                points.add(new Coordinate(center.getX() - thickness / 2, center.getY() + height / 2 - i));
+            }
+            for (int i = height - 10; i < height; i++) {
+                points.add(new Coordinate(center.getX() - thickness / 2 - i + height - 10, center.getY() + height / 2 - i));
+            }
             for (int i = 1; i < thickness; i++) {
                 points.add(new Coordinate(center.getX() - thickness / 2 + i, center.getY() - height / 2));
             }
             for (int i = 0; i < height + 1; i++) {
                 points.add(new Coordinate(center.getX() + thickness / 2, center.getY() - height / 2 + i));
+            }
+        } else {
+            for (int i = 1; i < thickness; i++) {
+                points.add(new Coordinate(center.getX() - thickness / 2 + i, center.getY() - height / 2 - 25 + 25.0 * i / 40.0));
+            }
+            for (int i = 0; i < height - 10 + 1; i++) {
+                points.add(new Coordinate(center.getX() + thickness / 2, center.getY() - height / 2 + i));
+            }
+            for (int i = height - 10; i < height; i++) {
+                points.add(new Coordinate(center.getX() + thickness / 2 + i - height + 10, center.getY() - height / 2 + i));
             }
             for (int i = 1; i < thickness; i++) {
                 points.add(new Coordinate(center.getX() + thickness / 2 - i, center.getY() + height / 2));
@@ -83,54 +140,18 @@ public class HitBox extends Group {
                 points.add(new Coordinate(center.getX() - thickness / 2, center.getY() + height / 2 - i));
             }
         }
-        if (obstacle instanceof SpaceShip) {
-            int height = (int) SpaceShip.DEFAULT_HEIGHT;
-            int thickness = (int) SpaceShip.DEFAULT_WIDTH;
 
-            if(obstacle.getVelocityY()>0) {
-
-                for (int i = 1; i < thickness; i++) {
-                    points.add(new Coordinate(center.getX() + thickness / 2 - i, center.getY() + height / 2 + 25 - 25.0 * i / 40.0));
-                }
-                for (int i = 0; i < height - 10 + 1; i++) {
-                    points.add(new Coordinate(center.getX() - thickness / 2, center.getY() + height / 2 - i));
-                }
-                for (int i = height - 10; i < height; i++) {
-                    points.add(new Coordinate(center.getX() - thickness / 2 - i + height - 10, center.getY() + height / 2 - i));
-                }
-                for (int i = 1; i < thickness; i++) {
-                    points.add(new Coordinate(center.getX() - thickness / 2 + i, center.getY() - height / 2));
-                }
-                for (int i = 0; i < height + 1; i++) {
-                    points.add(new Coordinate(center.getX() + thickness / 2, center.getY() - height / 2 + i));
-                }
-            } else {
-                for (int i = 1; i < thickness; i++) {
-                    points.add(new Coordinate(center.getX() - thickness / 2 + i, center.getY() - height / 2 - 25 + 25.0 * i / 40.0));
-                }
-                for (int i = 0; i < height - 10 + 1; i++) {
-                    points.add(new Coordinate(center.getX() + thickness / 2, center.getY() - height / 2 + i));
-                }
-                for (int i = height - 10; i < height; i++) {
-                    points.add(new Coordinate(center.getX() + thickness / 2 + i - height + 10, center.getY() - height / 2 + i));
-                }
-                for (int i = 1; i < thickness; i++) {
-                    points.add(new Coordinate(center.getX() + thickness / 2 - i, center.getY() + height / 2));
-                }
-                for (int i = 0; i < height + 1; i++) {
-                    points.add(new Coordinate(center.getX() - thickness / 2, center.getY() + height / 2 - i));
-                }
-            }
-        }
         border = new Polygon();
         for (Coordinate point : points) {
             border.getPoints().addAll(point.getX(), point.getY());
         }
         this.getChildren().add(border);
         this.setVisible(false);
-        body = obstacle;
-        overlapped =new Coordinate(0,0);
+        body = spaceShip;
+        overlapped = new Coordinate(0, 0);
     }
+
+
 
     /**
      *
@@ -179,6 +200,7 @@ public class HitBox extends Group {
         this.getChildren().add(border);
         this.setVisible(false);
     }
+
 
     /**
      *

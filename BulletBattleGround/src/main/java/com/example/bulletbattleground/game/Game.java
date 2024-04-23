@@ -135,6 +135,13 @@ public class Game extends Scene {
         level.getChildren().add(gameOverBox);
     }
 
+    public void unfocus(){
+        this.level.getContainer().setOpacity(0.2);
+    }
+    public void focus(){
+        this.level.getContainer().setOpacity(1);
+    }
+
     public void exitGame() {
         BattleGround.prevScene();
     }
@@ -193,7 +200,7 @@ public class Game extends Scene {
                 new pauseEvent().handle(event);
             }
 
-            if (event.getCode() == KeyCode.S) {
+            if (event.getCode() == KeyCode.S && level.selectedFighter!=null) {
                    level.selectedFighter.launchProjectile(
                           level.selectedFighter.loadout.smokeGrenades.get(0), new Vector(15, 0.0), level.origin);
                 level.selectedFighter.loadout.smokeGrenades.remove(level.selectedFighter.loadout.smokeGrenades.get(0));
@@ -305,6 +312,7 @@ public class Game extends Scene {
     public void play() {
         timeline.play();
     }
+
 
     public class pauseEvent implements EventHandler {
         @Override

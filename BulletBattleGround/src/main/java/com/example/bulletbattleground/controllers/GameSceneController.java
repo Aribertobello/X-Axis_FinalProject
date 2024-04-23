@@ -4,7 +4,10 @@ import com.example.bulletbattleground.BattleGround;
 import com.example.bulletbattleground.fileManagement.FileManager;
 import com.example.bulletbattleground.game.Game;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,6 +16,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.io.IOException;
+
 @Getter
 @Setter
 public class GameSceneController {
@@ -92,14 +98,26 @@ public class GameSceneController {
         exitButton.setOnAction(e -> handleExit());
         pauseButton.setOnAction(e -> handlePause());
         if (GImg != null && BImg != null) {
-            GImg.setImage(new Image("file:grenade.png"));
+            GImg.setImage(new Image("file:Files/img/grenade.png"));
             if (FileManager.loadoutType == light) {
-                BImg.setImage(new Image("file:smallBullet.png"));
+                BImg.setImage(new Image("file:Files/img/smallBullet.png"));
             } else if (FileManager.loadoutType == medium) {
-                BImg.setImage(new Image("file:spear.png"));
+                BImg.setImage(new Image("file:Files/img/spear.png"));
             } else if (FileManager.loadoutType == heavy) {
-                BImg.setImage(new Image("file:rocket.png"));
+                BImg.setImage(new Image("file:Files/img/rocket.png"));
             }
         }
+    }
+
+    public void displayHowToPlay(ActionEvent event) {
+        TabPane instructionBox;
+        try {
+            instructionBox = BattleGround.instructionBoxLoader().load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        BattleGround.activeGame.unfocus();
+        BattleGround.activeGame.getLevel().getChildren().add(instructionBox);
+        BattleGround.activeGame.pauseGame();
     }
 }

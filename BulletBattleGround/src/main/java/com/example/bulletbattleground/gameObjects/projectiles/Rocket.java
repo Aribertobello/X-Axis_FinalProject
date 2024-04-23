@@ -32,6 +32,7 @@ public class Rocket extends Projectile {
         this.lift = new Vector(0, -2.0);
         this.forces.add(lift);
         this.setMass(9.0);
+        setTerminalVelocity(50);
     }
 
 

@@ -6,7 +6,6 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -31,18 +30,12 @@
       <Line fx:id="ArrLine" endX="-107.0" endY="-4.0" layoutX="1319.0" layoutY="62.0" startX="-93.5" startY="9.70709228515625" />
       <Line fx:id="ArrLine" endX="96.5" endY="11.70709228515625" layoutX="1129.0" layoutY="61.0" startX="86.0" startY="25.0" />
       <Label fx:id="GTimer" layoutX="488.0" layoutY="25.0" text="Label" />
-      <ImageView fx:id="GImg" fitHeight="35.0" fitWidth="65.0" layoutX="450.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../../grenade.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="BImg" fitHeight="25.0" fitWidth="28.0" layoutX="454.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../../smallBullet.png" />
-         </image>
-      </ImageView>
+      <ImageView fx:id="GImg" fitHeight="35.0" fitWidth="65.0" layoutX="450.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="BImg" fitHeight="25.0" fitWidth="28.0" layoutX="454.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="454.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="STimer" layoutX="626.0" layoutY="78.0" text="Label" />
+      <Label fx:id="Ehealthlbl" layoutX="1414.0" layoutY="17.0" text="Label" />
+      <ProgressBar fx:id="EhealthBar" layoutX="1335.0" layoutY="40.0" prefWidth="200.0" progress="0.0" />
     </Pane>
     <MenuBar fx:id="topMenu" style="-fx-background-color: #76827a;">
       <menus>
@@ -51,14 +44,16 @@
                   <MenuItem mnemonicParsing="false" text="Close" />
               </items>
           </Menu>
-          <Menu fx:id="settingsButton" mnemonicParsing="false" text="Settings">
+          <Menu fx:id="settingsButton" mnemonicParsing="false" text="How to Play">
               <items>
-                  <MenuItem mnemonicParsing="false" text="Delete" />
+                  <MenuItem mnemonicParsing="false" onAction="#displayHowToPlay" text="how to Play" />
               </items>
           </Menu>
-          <Menu fx:id="pauseButton" mnemonicParsing="false" text="pause">
+          <Menu fx:id="pauseButton" mnemonicParsing="false" text="settings">
               <items>
+               <MenuItem mnemonicParsing="false" text="User" />
                   <MenuItem mnemonicParsing="false" text="About" />
+               <MenuItem mnemonicParsing="false" text="Sound" />
               </items>
           </Menu>
       </menus>

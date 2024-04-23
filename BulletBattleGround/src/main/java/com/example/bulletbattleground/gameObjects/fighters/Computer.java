@@ -19,6 +19,9 @@ public class Computer extends Fighter {
     }
 
     protected Vector calculateLaunchAngle() {
+
+
+
         return null;
     }
 
