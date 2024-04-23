@@ -1,6 +1,7 @@
 package com.example.bulletbattleground.controllers;
 
 import com.example.bulletbattleground.BattleGround;
+import com.example.bulletbattleground.fileManagement.FileManager;
 import com.example.bulletbattleground.game.Game;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -21,7 +22,7 @@ import java.io.IOException;
 @Getter
 @Setter
 public class GameSceneController {
-
+    //TODO enemy health
     @FXML
     private Pane headsUpDisplay;
     @FXML
@@ -73,9 +74,18 @@ public class GameSceneController {
     @FXML
     private Label GTimer;
     @FXML
+    private Label STimer;
+    @FXML
     private ImageView GImg;
     @FXML
     private ImageView BImg;
+    @FXML
+    private Label Ehealthlbl;
+    @FXML
+    private ProgressBar EhealthBar;
+    public int light = 1;
+    public int medium = 2;
+    public int heavy = 3;
 
     @FXML
     private void handlePause() {
@@ -88,12 +98,18 @@ public class GameSceneController {
     }
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         exitButton.setOnAction(e -> handleExit());
         pauseButton.setOnAction(e -> handlePause());
-        if(GImg != null && BImg != null) {
+        if (GImg != null && BImg != null) {
             GImg.setImage(new Image("file:Files/img/grenade.png"));
-            BImg.setImage(new Image("file:Files/img/smallBullet.png"));
+            if (FileManager.loadoutType == light) {
+                BImg.setImage(new Image("file:Files/img/smallBullet.png"));
+            } else if (FileManager.loadoutType == medium) {
+                BImg.setImage(new Image("file:Files/img/spear.png"));
+            } else if (FileManager.loadoutType == heavy) {
+                BImg.setImage(new Image("file:Files/img/rocket.png"));
+            }
         }
     }
 

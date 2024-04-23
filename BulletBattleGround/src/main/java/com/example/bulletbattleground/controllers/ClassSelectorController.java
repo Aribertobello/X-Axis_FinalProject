@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ClassSelectorController extends subMenuController {
+    //TODO CLASS COMPLETE
 
     public Button lightClassBtn;
     public Button mediumClassBtn;

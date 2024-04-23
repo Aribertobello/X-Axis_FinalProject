@@ -22,6 +22,7 @@ import java.util.Scanner;
 
 public class FileManager extends ClassSelectorController {
 
+    //TODO GameRules
     private static File managerFile;
 
     public static int loadoutType;

@@ -220,7 +220,7 @@ public class Mapp extends Pane {
                 MovingBody.collision(projectile,obstacle);
                 HitBox collidedObstacleHitBox = obstacle.hitBox();
                 collidedObstacleHitBox.setDisplayed(true);
-                addHitBox(collidedObstacleHitBox);
+                //addHitBox(collidedObstacleHitBox);
                 return true;
             }
         }

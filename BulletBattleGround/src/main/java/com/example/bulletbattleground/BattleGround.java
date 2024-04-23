@@ -67,7 +67,7 @@ public class BattleGround extends Application {
     }
     public static void prevScene(){
         if(mainStage.getScene() == activeGame){
-            activeGame =null;
+            activeGame = null;
         }
 
         workFlowStack.pop();
