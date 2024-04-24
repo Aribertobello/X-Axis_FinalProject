@@ -45,6 +45,7 @@ public abstract class  Projectile extends MovingBody {
         this.setVelocityX(acceleration().getX() * time*10 + getVelocityX());
         this.setVelocityY(acceleration().getY() * time*10 + getVelocityY());
         setCoordinate(new Coordinate(x,y));
+
     }
 
     /**
@@ -59,15 +60,17 @@ public abstract class  Projectile extends MovingBody {
         forces.clear();
         forces.add(lift);
         forces.addAll(Arrays.asList(Forces));
-        if(this instanceof Bullet) {
+
+        if(this instanceof Bullet){
             playGunshotSound();
         }
-        if (this instanceof Rocket) {
-            playRocketSound();
-        }
-        if (this instanceof Spear) {
+        if(this instanceof Spear) {
             playSpearSound();
         }
+        if(this instanceof Rocket) {
+            playRocketSound();
+        }
+
     }
     private void playGunshotSound() {
         try {

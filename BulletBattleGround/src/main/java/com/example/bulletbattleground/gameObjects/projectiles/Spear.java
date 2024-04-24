@@ -33,7 +33,6 @@ public class Spear extends Projectile {
         this.setMass(3.0);
         setTerminalVelocity(60);
     }
-
     @Override
     public void move(double time) {
         allign();
