@@ -210,12 +210,14 @@ public class Game extends Scene {
         });
     }
 
-    private boolean isWithinPlayerBounds(double x,double y) {
-        double boundX = level.selectedFighter.getCoordinate().getX();
-        double boundY = level.selectedFighter.getCoordinate().getY();
-        return x < boundX + 20 && x > boundX - 20 && y < boundY + 20 && y > boundY - 20;
+    private boolean isWithinPlayerBounds(double x, double y) {
+        if (level.selectedFighter != null) {
+            double boundX = level.selectedFighter.getCoordinate().getX();
+            double boundY = level.selectedFighter.getCoordinate().getY();
+            return x < boundX + 20 && x > boundX - 20 && y < boundY + 20 && y > boundY - 20;
+        }
+        return false;
     }
-
     private boolean checkvelocity(double velocityX, double velocityY) {
         return (new Vector(velocityX,velocityY)).magnitude() > Projectile.MIN_LAUNCH_VELOCITY;
     }

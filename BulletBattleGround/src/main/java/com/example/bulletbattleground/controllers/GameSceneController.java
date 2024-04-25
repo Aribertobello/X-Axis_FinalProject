@@ -103,11 +103,11 @@ public class GameSceneController {
         pauseButton.setOnAction(e -> handlePause());
         if (GImg != null && BImg != null) {
             GImg.setImage(new Image("file:Files/img/grenade.png"));
-            if (FileManager.loadoutType == light) {
+            if (FileManager.loadoutType == 1) {
                 BImg.setImage(new Image("file:Files/img/smallBullet.png"));
-            } else if (FileManager.loadoutType == medium) {
+            } else if (FileManager.loadoutType == 2) {
                 BImg.setImage(new Image("file:Files/img/spear.png"));
-            } else if (FileManager.loadoutType == heavy) {
+            } else if (FileManager.loadoutType == 3) {
                 BImg.setImage(new Image("file:Files/img/rocket.png"));
             }
         }
