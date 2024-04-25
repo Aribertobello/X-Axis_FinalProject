@@ -147,7 +147,6 @@ public abstract class Level extends AnchorPane implements GameUI {
      * @param map
      */
     public Level(Mapp map) throws IOException {
-
         this.map = map;
         createHUD();
         container.getChildren().add(this.map);
@@ -156,13 +155,9 @@ public abstract class Level extends AnchorPane implements GameUI {
         this.getChildren().add(trajectoryLine);
         arrow = new Arrow();
         descriptionBox();
-        angleArc = new Arc();
-        angleArc.setStroke(Color.RED);
-        angleArc.setFill(Color.TRANSPARENT);
-        angleArc.setStrokeWidth(1.5);
-        container.getChildren().add(angleArc);
         map.setPrefWidth(BattleGround.screenWidth);
     }
+
     //------------------------------------------------
 
     public boolean[] update(double dt,double time) {
@@ -175,11 +170,6 @@ public abstract class Level extends AnchorPane implements GameUI {
 
     public boolean[] levelStatus(Mapp map) {
         return new boolean[]{false,false};
-    }
-
-    @FXML
-    private void handleExit(){
-        Platform.exit();
     }
 
     public void createHUD() throws IOException {
@@ -216,17 +206,12 @@ public abstract class Level extends AnchorPane implements GameUI {
         BImg = controller.getBImg();
         SmokeLabel = controller.getSmokeLabel();
         STimer = controller.getSTimer();
-        Ehealthlbl = controller.getEhealthlbl();
-        EhealthBar = controller.getEhealthBar();
-
-    }
-
-    /**
-     *
-     * @param selectedFighter
-     */
-    protected void displayLoadout(Fighter selectedFighter) {
-        //TODO
+        angleArc = new Arc(1065,943,20,20,0,0);
+        angleArc.setStroke(Color.RED);
+        angleArc.setFill(Color.TRANSPARENT);
+        angleArc.setStrokeWidth(1.5);
+        container.getChildren().add(angleArc);
+        angleArc.toFront();
     }
 
     public void resetTrajectoryLine() {
@@ -243,7 +228,6 @@ public abstract class Level extends AnchorPane implements GameUI {
     }
 
     public void displaceTrajectoryLine(double startX, double startY, double endX, double endY) {
-
         trajectoryLine.setStartX(startX);
         trajectoryLine.setStartY(startY);
         trajectoryLine.setEndX(endX);
@@ -251,44 +235,14 @@ public abstract class Level extends AnchorPane implements GameUI {
     }
 
     public void updateHUD(){
+        setKELabelHUD();
+        setGrenadeLabelHUD();
+        setSmokeGrenadeLabelHUD();
+        setHealthHUD();
+        setVelocityHUD();
         if(trajectoryLine != null && angleLabel != null && selectedFighter != null) {
             Vector direction = new Vector(trajectoryLine.getEndX() - trajectoryLine.getStartX(), trajectoryLine.getEndY() - trajectoryLine.getStartY());
-            double angle = 180 - direction.angle();
-            if(!Double.isNaN(angle)) {
-                if (angle != LastAngel) {
-                    angleLabel.setText("Angle: " + Math.round(angle));
-                    LastAngel = angle;
-                    AngleDisp.setRotate(-angle);
-                    AngleDisp.setStroke(Color.WHITE);
-
-
-                    // Calculate the radius of the arc
-                    double radius = Math.sqrt(Math.pow(AngleDisp.getEndX() - AngleDisp.getStartX(), 2) +
-                            Math.pow(AngleDisp.getEndY() - AngleDisp.getStartY(), 2)) / 2;
-
-                    // Update the angle arc
-                    angleArc.setCenterX(1065);
-                    angleArc.setCenterY(945);
-                    angleArc.setRadiusX(radius);
-                    angleArc.setRadiusY(radius);
-                    angleArc.setStartAngle(0.00); // Adjust start angle based on your requirements
-                    angleArc.setLength(angle);
-                    angleArc.toFront();
-                } else if(angleLabel!=null){
-                    angleLabel.setText("Angle: " + Math.round(LastAngel));
-                }
-            }
-            SmokeLabel.setText("Number of Smoke left: " + selectedFighter.loadout.smokeGrenades.size());
-            if (map.activeProjectile instanceof SmokeGrenade) {
-                STimer.setText("Smoke Screen Timer: " + ((SmokeGrenade) map.activeProjectile).getFuseTimer());
-            }
-            GrenadeLabel.setText("Number of Grenades left: " + selectedFighter.loadout.grenades.size());
-            if( map.activeProjectile instanceof Grenade){
-                GTimer.setText("Grenade Timer: " + ((Grenade)map.activeProjectile).getFuseTimer());
-
-            } else {
-                GTimer.setText("Grenade Timer: No Grenades shot!");
-            }
+            setAngleHUD(direction);
 
             if (selectedFighter.loadout.type == 1) {
                 BltAmount.setText("Number of Bullets left: ∞");
@@ -298,26 +252,8 @@ public abstract class Level extends AnchorPane implements GameUI {
                 BltAmount.setText("Number of Rockets left: ∞");
             }
         }
-        if(map != null && map.activeProjectile != null){
-            KELabel.setText("Kinetic energy: "+ Math.round(map.getActiveProjectile().kE()));
-        }
-        if(healthProgressbar != null && selectedFighter != null){
-            int previousHealth = (int) (healthProgressbar.getProgress() * 5); // Assuming the progress bar is based on a scale of 0 to 1
-            int currentHealth = selectedFighter.getHealth();
-            if (currentHealth < previousHealth) {
-                double healthChange = (previousHealth - currentHealth) / 100.0; // Convert to decimal
-                double newProgress = Math.max(0, healthProgressbar.getProgress() - healthChange); // Ensure progress doesn't go below 0
-                healthProgressbar.setProgress(newProgress);
-            } else if (currentHealth > previousHealth) {
-                double healthChange = (currentHealth - previousHealth) / 100.0; // Convert to decimal
-                double newProgress = Math.min(1, healthProgressbar.getProgress() + healthChange); // Ensure progress doesn't go above 1
-                healthProgressbar.setProgress(newProgress);
-            }
-            healthLabel.setText("Player Health: " + currentHealth);
-            healthProgressbar.setStyle("-fx-accent: red; -fx-progress-bar-indeterminate-fill: red;");
-        }
+
         if(map.activeProjectile != null){
-            activeProjectileLabel.setText("Projectile Coordinates: "+ map.getActiveProjectile().getCoordinate());
             VeloLabel.setText("Velocity X and Y: "+ map.getActiveProjectile().velocity());
             Vector velocity = map.getActiveProjectile().velocity();
             double MaxVelocity = 200000;
@@ -326,20 +262,68 @@ public abstract class Level extends AnchorPane implements GameUI {
             String barStyle = "-fx-accent: rgb(255," + (int)red + ", " + (int)red + ");";
             VeloBar.setStyle(barStyle);
             VeloBar.setProgress(progress);
+
+            activeProjectileLabel.setText("Projectile Coordinates: "+ map.getActiveProjectile().getCoordinate());
             AccLabel.setText("Acceleration: "+ map.getActiveProjectile().acceleration());
             MomLabel.setText("Momentum: " + Math.round(map.getActiveProjectile().momentum()));
         }
+    }
+
+    private void setVelocityHUD() {
 
     }
 
+    private void setSmokeGrenadeLabelHUD() {
+        if (map.activeProjectile instanceof SmokeGrenade) {
+            SmokeLabel.setText("Number of Smoke left: " + selectedFighter.loadout.smokeGrenades.size());
+            STimer.setText("Smoke Screen Timer: " + ((SmokeGrenade) map.activeProjectile).getFuseTimer());
+        }
+    }
+
+    private void setGrenadeLabelHUD() {
+        if( map.activeProjectile instanceof Grenade){
+            GTimer.setText("Grenade Timer: " + ((Grenade)map.activeProjectile).getFuseTimer());
+            GrenadeLabel.setText("Number of Grenades left: " + selectedFighter.loadout.grenades.size());
+        } else {
+            GTimer.setText("Grenade Timer: No Grenades shot!");
+        }
+    }
+
+
+
+    private void setHealthHUD() {
+        if(selectedFighter!=null) {
+            healthProgressbar.setProgress((double) selectedFighter.getHealth() / (double) selectedFighter.getMaxHealth());
+            healthProgressbar.setStyle("-fx-accent: red; -fx-progress-bar-indeterminate-fill: red;");
+            healthLabel.setText("Player Health: " + selectedFighter.getHealth());
+        }
+    }
+
+    private void setKELabelHUD() {
+        if(map != null && map.activeProjectile != null){
+            KELabel.setText("Kinetic energy: "+ Math.round(map.getActiveProjectile().kE()));
+        }
+    }
+
+    public void setAngleHUD( Vector direction){
+        double angle = 180 - direction.angle();
+        if(!Double.isNaN(angle)){
+            AngleDisp.setRotate(-angle);
+            AngleDisp.setStroke(Color.WHITE);
+            angleArc.setLength(angle);
+            angleLabel.setText("Angle: " + Math.round(angle));
+        }
+    }
+
+
     public void updateTurnBox(double time, double timeLimit, int playerTurn) {
         switch(playerTurn){
-                case 1  -> {timerBar.setStyle("-fx-accent: cyan;");
-                    turnStatusLabel.setText("It is Player 1's Turn");}
-                case 2 -> {timerBar.setStyle("-fx-accent: red;");
-                    turnStatusLabel.setText("It is Player 2's Turn");}
-                default -> {timerBar.setStyle("-fx-accent: gray;");
-                    turnStatusLabel.setText("Projectile Moving");}
+            case 1  -> {timerBar.setStyle("-fx-accent: cyan;");
+                turnStatusLabel.setText("It is Player 1's Turn");}
+            case 2 -> {timerBar.setStyle("-fx-accent: red;");
+                turnStatusLabel.setText("It is Player 2's Turn");}
+            default -> {timerBar.setStyle("-fx-accent: gray;");
+                turnStatusLabel.setText("Projectile Moving");}
         }
         timeLeftLabel.setText(String.valueOf(Math.round(10*(timeLimit-time))/10.0));
         timerBar.setProgress(1-(time/timeLimit));
@@ -356,7 +340,6 @@ public abstract class Level extends AnchorPane implements GameUI {
         FXMLLoader descriptionBoxLoader = new FXMLLoader(BattleGround.class.getResource("DescriptionBox.fxml"));
         descriptionBox = descriptionBoxLoader.load();
         DescriptionBoxController controller = descriptionBoxLoader.getController();
-        playBtn = controller.playBtn;
         descriptionLabel = controller.descriptionLabel;
         descriptionLabel.setText(description);
     }
