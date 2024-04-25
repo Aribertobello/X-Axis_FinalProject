@@ -13,9 +13,8 @@ import java.io.IOException;
 import java.util.Random;
 
 public class SpaceShip extends Obstacle {
+
     private boolean hasPlayedSound = false;
-
-
     public static final double DEFAULT_HEIGHT = 80;
     public static final double DEFAULT_WIDTH = 40;
     public static final double SPACESHIP_MASS = 190000;

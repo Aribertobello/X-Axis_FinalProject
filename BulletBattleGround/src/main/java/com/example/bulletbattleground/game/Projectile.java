@@ -40,8 +40,8 @@ public abstract class  Projectile extends MovingBody {
         if(this.velocity().magnitude()>TERMINAL_VELOCITY){
             this.setVelocity( velocity().scale(TERMINAL_VELOCITY));
         }
-        double x = ((acceleration().getX() / 2) * time * time*100 + getVelocityX() * time*terminalVelocity/10 + getCoordinate().getX());
-        double y  = ((acceleration().getY() / 2) * time * time*100 + getVelocityY() * time*terminalVelocity/10 + getCoordinate().getY());
+        double x = ((acceleration().getX() / 2) * time * time + getVelocityX() * time + getCoordinate().getX());
+        double y  = ((acceleration().getY() / 2) * time * time + getVelocityY() * time + getCoordinate().getY());
         this.setVelocityX(acceleration().getX() * time*10 + getVelocityX());
         this.setVelocityY(acceleration().getY() * time*10 + getVelocityY());
         setCoordinate(new Coordinate(x,y));

@@ -20,19 +20,13 @@ import java.util.Stack;
 
 public class BattleGround extends Application {
 
-    static protected ArrayList<String> pVeLevelsArrayList = new ArrayList<>();
-    static protected ArrayList<String> pVcLevelsArrayList = new ArrayList<>();
-    static protected ArrayList<String> mapsArrayList = new ArrayList<>();
     static protected String userDataLocation = "";//TODO Put User Data File Here
 
     static public Game activeGame;
     public static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
     public static int screenHeight = (int) Screen.getPrimary().getBounds().getHeight();
     public static Stack<Scene> workFlowStack = new Stack<>();
-
     public static Stage mainStage;
-
-
     public static User user = new User();
 
     /**

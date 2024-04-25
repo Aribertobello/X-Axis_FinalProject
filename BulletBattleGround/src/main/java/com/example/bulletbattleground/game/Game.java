@@ -35,12 +35,10 @@ import java.util.ArrayList;
 public class Game extends Scene {
 
     protected Boolean gameOver = false;
-
     @Getter
     protected Level level;
     protected Boolean gameWon = false;
     protected Integer tickRate = 100;
-
     protected double time = 0;
     protected Timeline timeline;
     private boolean isTicking;

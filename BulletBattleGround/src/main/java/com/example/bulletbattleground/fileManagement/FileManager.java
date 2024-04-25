@@ -284,10 +284,6 @@ public class FileManager extends ClassSelectorController {
         return false; //false means username and password are incorrect or not submitted.
     }
 
-
-
-
-
     /**
      * Generates the default level for the player vs player mode
      * calls the defaultMapPvp to generate the map of the level
@@ -321,9 +317,6 @@ public class FileManager extends ClassSelectorController {
         map.addObstacle(new Wall(160, 12, 900, 480, 300));
         return map;
     }
-
-
-
 
     public static Mapp defaultEduMap() {
         Mapp map = new Mapp("space");

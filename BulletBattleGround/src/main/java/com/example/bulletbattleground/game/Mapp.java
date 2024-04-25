@@ -113,10 +113,8 @@ public class Mapp extends Pane {
      * @param dt
      */
     public boolean update(double dt) {
-
         for (Obstacle obstacle : obstacles) {
             obstacle.move(dt);
-
         }
         if (activeProjectile != null) {
             if(!isInBounds(activeProjectile)){
@@ -127,7 +125,6 @@ public class Mapp extends Pane {
             activeProjectile.move(dt);
             buffer++;
             if (buffer > 10) {
-
                 if (activeProjectile instanceof Grenade) {
 
                     if (((Grenade) activeProjectile).getFuseTimer() <= 0) {
