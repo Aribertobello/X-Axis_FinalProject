@@ -83,43 +83,21 @@ public abstract class Level extends AnchorPane implements GameUI {
     @FXML
     @Getter
     protected AnchorPane container;
-
     private Label activeProjectileLabel;
-
     private Label GrenadeLabel;
     private Label SmokeLabel;
     private Label KELabel;
-
-    private Label Ehealthlbl;
-
-    private ProgressBar EhealthBar;
-
-   // private Label blankLabel;
-
     private ProgressBar healthProgressbar;
     private Label VeloLabel;
     private Label AccLabel;
     private Label healthLabel;
-
-    //private MenuBar topMenu;
     private Label angleLabel;
     private Label MomLabel;
-    //private Label MagLabel;
-   // private Menu newGameButton;
-
-   // private Menu exitButton;
-
-
-    //private Menu settingsButton;
     private Label turnStatusLabel;
     private Label timeLeftLabel;
     private ProgressBar timerBar;
     public Pane turnStatusBox;
-    @FXML
     private ProgressBar VeloBar;
-
-    //private Menu pauseButton;
-    //private Line Xaxis;
     private Line AngleDisp;
     @Getter
     @Setter
@@ -133,7 +111,6 @@ public abstract class Level extends AnchorPane implements GameUI {
     private Arc angleArc;
     @Getter
     private Label descriptionLabel;
-   private Button playBtn;
     private VBox descriptionBox;
 
     /**
@@ -240,10 +217,20 @@ public abstract class Level extends AnchorPane implements GameUI {
         setSmokeGrenadeLabelHUD();
         setHealthHUD();
         setVelocityHUD();
+        setLoadoutHUD();
         if(trajectoryLine != null && angleLabel != null && selectedFighter != null) {
             Vector direction = new Vector(trajectoryLine.getEndX() - trajectoryLine.getStartX(), trajectoryLine.getEndY() - trajectoryLine.getStartY());
             setAngleHUD(direction);
+        }
+        if(map.activeProjectile != null){
+            activeProjectileLabel.setText("Projectile Coordinates: "+ map.getActiveProjectile().getCoordinate());
+            AccLabel.setText("Acceleration: "+ map.getActiveProjectile().acceleration());
+            MomLabel.setText("Momentum: " + Math.round(map.getActiveProjectile().momentum()));
+        }
+    }
 
+    private void setLoadoutHUD() {
+        if(trajectoryLine != null && angleLabel != null && selectedFighter != null) {
             if (selectedFighter.loadout.type == 1) {
                 BltAmount.setText("Number of Bullets left: ∞");
             } else if (selectedFighter.loadout.type == 2) {
@@ -253,24 +240,19 @@ public abstract class Level extends AnchorPane implements GameUI {
             }
         }
 
-        if(map.activeProjectile != null){
-            VeloLabel.setText("Velocity X and Y: "+ map.getActiveProjectile().velocity());
-            Vector velocity = map.getActiveProjectile().velocity();
-            double MaxVelocity = 200000;
-            double progress = velocity.magnitude() / MaxVelocity;
-            double red = 255 * (1-progress);
-            String barStyle = "-fx-accent: rgb(255," + (int)red + ", " + (int)red + ");";
-            VeloBar.setStyle(barStyle);
-            VeloBar.setProgress(progress);
-
-            activeProjectileLabel.setText("Projectile Coordinates: "+ map.getActiveProjectile().getCoordinate());
-            AccLabel.setText("Acceleration: "+ map.getActiveProjectile().acceleration());
-            MomLabel.setText("Momentum: " + Math.round(map.getActiveProjectile().momentum()));
-        }
     }
 
     private void setVelocityHUD() {
-
+        if(map.activeProjectile != null) {
+            VeloLabel.setText("Velocity X and Y: " + map.getActiveProjectile().velocity());
+            Vector velocity = map.getActiveProjectile().velocity();
+            double MaxVelocity = map.getActiveProjectile().getTerminalVelocity();
+            double progress = velocity.magnitude() / MaxVelocity;
+            double red = 255 * (1 - progress);
+            String barStyle = "-fx-accent: rgb(255," + (int) red + ", " + (int) red + ");";
+            VeloBar.setStyle(barStyle);
+            VeloBar.setProgress(progress);
+        }
     }
 
     private void setSmokeGrenadeLabelHUD() {
@@ -282,7 +264,7 @@ public abstract class Level extends AnchorPane implements GameUI {
 
     private void setGrenadeLabelHUD() {
         if( map.activeProjectile instanceof Grenade){
-            GTimer.setText("Grenade Timer: " + ((Grenade)map.activeProjectile).getFuseTimer());
+            GTimer.setText("Grenade Timer: " + Math.round(((Grenade)map.activeProjectile).getFuseTimer()) + " Seconds");
             GrenadeLabel.setText("Number of Grenades left: " + selectedFighter.loadout.grenades.size());
         } else {
             GTimer.setText("Grenade Timer: No Grenades shot!");

@@ -1,0 +1,39 @@
+<changelist name="Uncommitted_changes_before_Checkout_at_2024-04-25_3_57_p_m__[Changes]1" date="1714075074538" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-25_3_57_p_m__[Changes]1/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 2024-04-25 3:57 p.m. [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="BulletBattleGround/.gradle/8.2/executionHistory/executionHistory.lock" />
+    <option name="AFTER_PATH" value="BulletBattleGround/.gradle/8.2/executionHistory/executionHistory.lock" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-25_3_57_p_m__[Changes]1/executionHistory.lock" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BulletBattleGround/.gradle/8.2/fileHashes/fileHashes.lock" />
+    <option name="AFTER_PATH" value="BulletBattleGround/.gradle/8.2/fileHashes/fileHashes.lock" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-25_3_57_p_m__[Changes]1/fileHashes.lock" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BulletBattleGround/build/libs/BulletBattleGround-1.0-SNAPSHOT.jar" />
+    <option name="AFTER_PATH" value="BulletBattleGround/build/libs/BulletBattleGround-1.0-SNAPSHOT.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-25_3_57_p_m__[Changes]1/BulletBattleGround-1.0-SNAPSHOT.jar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BulletBattleGround/build/tmp/compileJava/previous-compilation-data.bin" />
+    <option name="AFTER_PATH" value="BulletBattleGround/build/tmp/compileJava/previous-compilation-data.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-25_3_57_p_m__[Changes]1/previous-compilation-data.bin" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/game/Level.class" />
+    <option name="AFTER_PATH" value="BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/game/Level.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-25_3_57_p_m__[Changes]1/Level.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BulletBattleGround/build/classes/java/main/module-info.class" />
+    <option name="AFTER_PATH" value="BulletBattleGround/build/classes/java/main/module-info.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-25_3_57_p_m__[Changes]1/module-info.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BulletBattleGround/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
+    <option name="AFTER_PATH" value="BulletBattleGround/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-25_3_57_p_m__[Changes]1/buildOutputCleanup.lock" />
+  </binary>
+</changelist>
