@@ -29,7 +29,9 @@ public class Fighter extends Rectangle {
 
     @Getter
     protected Coordinate coordinate = new Coordinate(0, 0);
-
+    @Getter
+    @Setter
+    protected int maxHealth;
     @Getter
     @Setter
     protected int teamNb;
@@ -53,6 +55,7 @@ public class Fighter extends Rectangle {
         this.setLayoutY(coordinateY - 20);
         highlighted = false;
         setHealth(health);
+        setMaxHealth(health);
         this.setOnMouseClicked(event -> highlight());
         hitBox();
     }
