@@ -5,6 +5,7 @@ import com.example.bulletbattleground.controllers.DescriptionBoxController;
 import com.example.bulletbattleground.controllers.EducationGameController;
 import com.example.bulletbattleground.controllers.GameSceneController;
 import com.example.bulletbattleground.controllers.TurnVariablesController;
+import com.example.bulletbattleground.fileManagement.FileManager;
 import com.example.bulletbattleground.gameObjects.Loot.Loot;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
 import com.example.bulletbattleground.gameObjects.projectiles.Bullet;
@@ -102,6 +103,8 @@ public abstract class Level extends AnchorPane implements GameUI {
     @Getter
     @Setter
     private double LastAngel = 0.0;
+    private Label EnemyCoor;
+    private Label AllyCoor;
     static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
     private Label BltAmount;
     private Label GTimer;
@@ -189,6 +192,8 @@ public abstract class Level extends AnchorPane implements GameUI {
         angleArc.setStrokeWidth(1.5);
         container.getChildren().add(angleArc);
         angleArc.toFront();
+        AllyCoor = controller.getAllyCoor();
+        EnemyCoor = controller.getEnemyCoor();
     }
 
     public void resetTrajectoryLine() {
@@ -218,6 +223,8 @@ public abstract class Level extends AnchorPane implements GameUI {
         setHealthHUD();
         setVelocityHUD();
         setLoadoutHUD();
+        setFightersCoordinates();
+        setLoadoutImageHUD();
         if(trajectoryLine != null && angleLabel != null && selectedFighter != null) {
             Vector direction = new Vector(trajectoryLine.getEndX() - trajectoryLine.getStartX(), trajectoryLine.getEndY() - trajectoryLine.getStartY());
             setAngleHUD(direction);
@@ -241,6 +248,28 @@ public abstract class Level extends AnchorPane implements GameUI {
         }
 
     }
+    private void setFightersCoordinates(){
+        if (selectedFighter != null) {
+            if (selectedFighter.teamNb == 1 && AllyCoor != null) {
+                AllyCoor.setText("Ally Coordinates: " + selectedFighter.getCoordinate().getX() + " " + selectedFighter.getCoordinate().getY());
+            } else if (selectedFighter.teamNb == 2 && EnemyCoor != null) {
+                EnemyCoor.setText("Enemy Coordinates: " + selectedFighter.getCoordinate().getX() + " " + selectedFighter.getCoordinate().getY());
+            }
+        }
+    }
+    private void setLoadoutImageHUD(){
+        if(selectedFighter != null) {
+            if (selectedFighter.loadout.type == 1) {
+                BImg.setImage(new Image("file:Files/img/smallBullet.png"));
+
+           // } else if (selectedFighter.loadout.type == 2) {
+              //  BImg.setImage(new Image("file:Files/img/spear.png"));
+
+            } else if (selectedFighter.loadout.type == 3) {
+                BImg.setImage(new Image("file:Files/img/rocket.png"));
+            }
+        }
+    }
 
     private void setVelocityHUD() {
         if(map.activeProjectile != null) {
@@ -256,16 +285,21 @@ public abstract class Level extends AnchorPane implements GameUI {
     }
 
     private void setSmokeGrenadeLabelHUD() {
-        if (map.activeProjectile instanceof SmokeGrenade) {
+        if(selectedFighter != null){
             SmokeLabel.setText("Number of Smoke left: " + selectedFighter.loadout.smokeGrenades.size());
+        }
+        if (map.activeProjectile instanceof SmokeGrenade) {
+
             STimer.setText("Smoke Screen Timer: " + ((SmokeGrenade) map.activeProjectile).getFuseTimer());
         }
     }
 
     private void setGrenadeLabelHUD() {
+        if(selectedFighter != null) {
+            GrenadeLabel.setText("Number of Grenades left: " + selectedFighter.loadout.grenades.size());
+        }
         if( map.activeProjectile instanceof Grenade){
             GTimer.setText("Grenade Timer: " + Math.round(((Grenade)map.activeProjectile).getFuseTimer()) + " Seconds");
-            GrenadeLabel.setText("Number of Grenades left: " + selectedFighter.loadout.grenades.size());
         } else {
             GTimer.setText("Grenade Timer: No Grenades shot!");
         }

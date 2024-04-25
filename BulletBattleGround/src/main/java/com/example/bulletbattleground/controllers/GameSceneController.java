@@ -80,9 +80,11 @@ public class GameSceneController {
     @FXML
     private ImageView BImg;
     @FXML
-    private Label Ehealthlbl;
+    private Label EnemyCoor;
     @FXML
-    private ProgressBar EhealthBar;
+    private Label AllyCoor;
+
+
     public int light = 1;
     public int medium = 2;
     public int heavy = 3;
@@ -103,13 +105,6 @@ public class GameSceneController {
         pauseButton.setOnAction(e -> handlePause());
         if (GImg != null && BImg != null) {
             GImg.setImage(new Image("file:Files/img/grenade.png"));
-            if (FileManager.loadoutType == 1) {
-                BImg.setImage(new Image("file:Files/img/smallBullet.png"));
-            } else if (FileManager.loadoutType == 2) {
-                BImg.setImage(new Image("file:Files/img/spear.png"));
-            } else if (FileManager.loadoutType == 3) {
-                BImg.setImage(new Image("file:Files/img/rocket.png"));
-            }
         }
     }
 
