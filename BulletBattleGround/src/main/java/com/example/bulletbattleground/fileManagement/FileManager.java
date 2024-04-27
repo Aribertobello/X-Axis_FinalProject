@@ -18,14 +18,16 @@ import javafx.stage.Screen;
 
 import java.io.*;
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class FileManager extends ClassSelectorController {
 
     private static File managerFile;
 
-    public static int loadoutType;
+    static User user;
 
+    public static int loadoutType;
 
     /**
      * Constructs a new FileManager instance with the specified file path.
@@ -36,6 +38,8 @@ public class FileManager extends ClassSelectorController {
     public FileManager(String filePath) throws FileNotFoundException {
         managerFile = new File(filePath);
     }
+
+
 
     public static Level createLevel(String filePath) throws ParseException, IOException {
         Level level = null;
@@ -214,6 +218,22 @@ public class FileManager extends ClassSelectorController {
         }
     }
 
+//    public static void saveUserProgress() throws IOException {
+//        File file = new File("nameOfYourFile");
+//        FileOutputStream f = new FileOutputStream(file);
+//        ObjectOutputStream s = new ObjectOutputStream(f);
+//        s.writeObject(user.pVeUserProgress);
+//        s.close();
+//    }
+
+//    public static void loadUserProgress() throws IOException, ClassNotFoundException {
+//        File file = new File("temp");
+//        FileInputStream f = new FileInputStream(file);
+//        ObjectInputStream s = new ObjectInputStream(f);
+//        HashMap<String, Object> fileObj2 = (HashMap<String, Object>) s.readObject(); //TODO fix
+//        s.close();
+//    }
+
     /**
      * Saves user data (username and password) to the file managed by this FileManager.
      *
@@ -225,7 +245,6 @@ public class FileManager extends ClassSelectorController {
             FileWriter fileWriter = new FileWriter(managerFile, true); // true for append mode. (means you can add stuff to the text file without overwriting the current data)
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.newLine();
-            //   bufferedWriter.write("User " );
             bufferedWriter.newLine();
             bufferedWriter.write("Username: " + username);
             bufferedWriter.newLine();
@@ -275,7 +294,37 @@ public class FileManager extends ClassSelectorController {
     }
 
 
+    private static final String PROGRESS_FILE_PATH = "Files/txt/PVE.progress.txt";
 
+    public static HashMap<String, Integer> loadPVEProgress() {
+        HashMap<String, Integer> userPVEProgress = new HashMap<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(PROGRESS_FILE_PATH))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(":");
+                if (parts.length == 2) {
+                    String username = parts[0].trim();
+                    int progress = Integer.parseInt(parts[1].trim());
+                    userPVEProgress.put(username, progress);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return userPVEProgress;
+    }
+
+    public static void savePVEProgress(HashMap<String, Integer> userPVEProgress) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(PROGRESS_FILE_PATH))) {
+            for (String username : userPVEProgress.keySet()) {
+                int progress = userPVEProgress.get(username);
+                writer.write(username + ": " + progress);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     /**
@@ -311,9 +360,6 @@ public class FileManager extends ClassSelectorController {
         map.addObstacle(new Wall(160, 12, 900, 480, 300));
         return map;
     }
-
-
-
 
     public static Mapp defaultEduMap() {
         Mapp map = new Mapp("space");

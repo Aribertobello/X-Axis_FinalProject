@@ -30,8 +30,7 @@ public class BattleGround extends Application {
     public static Stack<Scene> workFlowStack = new Stack<>();
 
     public static Stage mainStage;
-
-
+    public static String username;
     public static User user = new User();
 
     /**

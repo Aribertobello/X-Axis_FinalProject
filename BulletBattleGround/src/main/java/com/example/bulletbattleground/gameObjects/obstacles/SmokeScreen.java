@@ -14,6 +14,8 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
+import java.io.FileNotFoundException;
+
 public class SmokeScreen extends Obstacle {
 
     protected double radius;
@@ -31,7 +33,12 @@ public class SmokeScreen extends Obstacle {
 
     protected final Image[] appearingsSmokeEffects = {smokeEffect4, smokeEffect5};
 
-
+    /**
+     * Sets up the smoke screen by by creating the values of the circle in another method
+     * @param radius The radius of the smoke screen
+     * @param coordinateX The x position of the smoke screen
+     * @param coordinateY The Y position of the smoke screen
+     */
     public SmokeScreen(double radius, double coordinateX, double coordinateY) {
         setCoordinate(new Coordinate(coordinateX, coordinateY));
         ispenetrable = true;
@@ -43,6 +50,10 @@ public class SmokeScreen extends Obstacle {
         upTime3 = 15.0;
     }
 
+    /**
+     * Loads user data from the file managed by this FileManager and checks if the provided username and password match the stored credentials from the player.
+     *
+     */
     @Override
     public void move(double dt) {
         super.move(dt);

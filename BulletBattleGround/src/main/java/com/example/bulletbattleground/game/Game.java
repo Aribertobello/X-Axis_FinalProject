@@ -3,6 +3,7 @@ package com.example.bulletbattleground.game;
 import com.example.bulletbattleground.BattleGround;
 import com.example.bulletbattleground.controllers.DescriptionBoxController;
 import com.example.bulletbattleground.controllers.GameOverBoxController;
+import com.example.bulletbattleground.fileManagement.User;
 import com.example.bulletbattleground.game.levels.StandardLevel;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
 import com.example.bulletbattleground.utility.Coordinate;
@@ -81,7 +82,9 @@ public class Game extends Scene {
         }));
         turnManager = new TurnManager(level);
         timeline.setCycleCount(Timeline.INDEFINITE);
-        if (BattleGround.user.isUnlocked(getLevel())) getLevel().displayDescription();
+        if (BattleGround.user.isUnlocked(getLevel())) {
+            getLevel().displayDescription();
+        }
         else {
             endGame();
             congratulationsLabel.setText("Level Not Unlocked Yet");
@@ -114,6 +117,8 @@ public class Game extends Scene {
         }
     }
 
+   // public String username;
+
     private void endGame() {
         FXMLLoader gameOverBoxLoader = new FXMLLoader(BattleGround.class.getResource("GameOverBox.fxml"));
         try {
@@ -124,11 +129,20 @@ public class Game extends Scene {
         GameOverBoxController controller = gameOverBoxLoader.getController();
         exitBtn = controller.exitBtn;
         congratulationsLabel = controller.congratulationsLabel;
-        if(gameWon){
+        int currentProgress = BattleGround.user.getProgress(BattleGround.username);
+
+        if (gameWon){ //this is a case where the user replays his previous level... it's at least gotta display congrats even if u win without updating the progress...
             congratulationsLabel.setText("CONGRATULATIONS YOU HAVE WON!");
-        } else {
+        }
+
+        if(gameWon && level.getIndex() >= currentProgress){
+            BattleGround.user.updateProgress(BattleGround.username, BattleGround.user.getProgress(BattleGround.username)+ 1);
+        }
+
+       else if (!gameWon) {
             congratulationsLabel.setText("BETTER LUCK NEXT TIME");
         }
+
         gameOverBox.setLayoutX(BattleGround.screenWidth/3);
         gameOverBox.setLayoutY(BattleGround.screenHeight/4);
         level.container.setOpacity(0.25);

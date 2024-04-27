@@ -14,5 +14,6 @@ public class GameOverBoxController {
 
     public void backToLevelSelector(ActionEvent event) {
         BattleGround.activeGame.exitGame();
+
     }
 }
