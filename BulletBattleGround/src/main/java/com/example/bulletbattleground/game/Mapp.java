@@ -4,15 +4,13 @@ import com.example.bulletbattleground.BattleGround;
 import com.example.bulletbattleground.gameObjects.Loot.Loot;
 import com.example.bulletbattleground.gameObjects.projectiles.Bullet;
 import com.example.bulletbattleground.gameObjects.projectiles.Grenade;
-import com.example.bulletbattleground.utility.Coordinate;
-import com.example.bulletbattleground.utility.HitBox;
-import com.example.bulletbattleground.utility.MovingBody;
-import com.example.bulletbattleground.utility.Vector;
+import com.example.bulletbattleground.utility.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import lombok.Getter;
@@ -24,7 +22,7 @@ import java.util.Collection;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
-public class Mapp extends Pane {
+public class Mapp extends Pane implements GameUI {
 
     @Getter
     private int type;
@@ -38,8 +36,9 @@ public class Mapp extends Pane {
     private ArrayList<HitBox> hitBoxes = new ArrayList<>();
     double terminalVelocity;
     private Pane hitBoxPane = new Pane();
-    private Vector gravity;
-    private Vector airResistance;
+    private double gravity;
+    private double airResistance;
+
     protected int scale;
     @Setter
     private double[] bounds  = {BattleGround.screenWidth,BattleGround.screenHeight};
@@ -55,7 +54,7 @@ public class Mapp extends Pane {
     @Getter
     @Setter
     protected Shape earth;
-    public Vector[] environmentForces = {gravity,airResistance,new Vector(0,0)};
+    public Vector[] environmentForces = {new Vector(0,0),new Vector(0,0),new Vector(0,0)};
     @Getter
     @Setter
     private boolean hasLoot = false;
@@ -65,9 +64,7 @@ public class Mapp extends Pane {
      * @param type
      */
     public Mapp(String type) {
-
         if (type.equalsIgnoreCase("earth")) {
-
             Image backgroundImageSpace = new Image("file:sky.jpeg");
             BackgroundImage background = new BackgroundImage(
                     backgroundImageSpace,
@@ -77,18 +74,15 @@ public class Mapp extends Pane {
                     new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false)
             );
             this.setBackground(new Background(background));
-
-        //    this.setStyle("-fx-background-color: #bce1f5;");
             Image groundEarthImage = new Image("file:ground.jpeg");
             earth = new Rectangle(0, BattleGround.screenHeight-200, 3000,250);
             earth.setFill(new ImagePattern(groundEarthImage));
             this.getChildren().add(earth);
-            gravity = new Vector(0,9.8);
+            gravity  = 9.8;
+            airResistance = 3;
             this.type = 0;
         }
-
         if (type.equalsIgnoreCase("space")) {
-
             Image backgroundImageSpace = new Image("file:spaceBackground.png");
             BackgroundImage background = new BackgroundImage(
                     backgroundImageSpace,
@@ -108,35 +102,34 @@ public class Mapp extends Pane {
         this.getChildren().add(new Circle(2000, 1200, 1));
     }
 
-    /**
-     *
-     * @param dt
-     */
-    public boolean update(double dt) {
-        for (Obstacle obstacle : obstacles) {
-            obstacle.move(dt);
-        }
-        if (activeProjectile != null) {
-            if(!isInBounds(activeProjectile)){
-                removeActiveProjectile();
-                return false;
+    @Override
+    public boolean[] update(double dt, double time) {
+        for (double t = dt/10; t < dt; t+=(dt/10)) {
+            for (Obstacle obstacle : obstacles) {
+                obstacle.move(dt/10);
             }
-            addForces(activeProjectile);
-            activeProjectile.move(dt);
-            buffer++;
-            if (buffer > 10) {
-                if (activeProjectile instanceof Grenade) {
-
-                    if (((Grenade) activeProjectile).getFuseTimer() <= 0) {
-                        explosion(activeProjectile.getCoordinate());
-                    }
+            if (activeProjectile != null) {
+                if (!isInBounds(activeProjectile)) {
+                    removeActiveProjectile();
+                    return new boolean[]{false};
                 }
-                return checkCollision(activeProjectile);
+                addForces(activeProjectile);
+                activeProjectile.move(dt);
+                buffer++;
+                if (buffer > 100) {
+                    if (activeProjectile instanceof Grenade) {
+
+                        if (((Grenade) activeProjectile).getFuseTimer() <= 0) {
+                            explosion(activeProjectile.getCoordinate());
+                        }
+                    }
+                    if(checkCollision(activeProjectile)) return new boolean[]{true};
+                }
+            } else {
+                buffer = 0;
             }
-        } else {
-            buffer = 0;
         }
-        return false;
+        return new boolean[]{false};
     }
 
     /**
@@ -182,10 +175,8 @@ public class Mapp extends Pane {
      * @param projectile
      */
     public void addForces(Projectile projectile) {
-
         if (type == 0) {
-            environmentForces[0] = gravity.multiply(projectile.getMass());
-            environmentForces[1] = projectile.velocity().unitVector().multiply(-0.5);
+            environmentForces[0] = new Vector(0,gravity).multiply(projectile.getMass());
         } else {
             Circle earth = (Circle) this.earth;
             projectile.setMass(2000);
@@ -199,6 +190,7 @@ public class Mapp extends Pane {
             environmentForces[1] = new Vector(-0.00, 0);
             projectile.setLift(new Vector(0, 0));
         }
+        environmentForces[1] = projectile.velocity().multiply(-airResistance/1000000*Math.pow(projectile.velocity().magnitude(),2));
             projectile.forces.clear();
             projectile.forces.add(environmentForces[0]);
             projectile.forces.add(environmentForces[1]);

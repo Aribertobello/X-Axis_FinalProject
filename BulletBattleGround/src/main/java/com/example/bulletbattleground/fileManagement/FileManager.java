@@ -284,42 +284,8 @@ public class FileManager extends ClassSelectorController {
         return false; //false means username and password are incorrect or not submitted.
     }
 
-    /**
-     * Generates the default level for the player vs player mode
-     * calls the defaultMapPvp to generate the map of the level
-     *
-     * @return applications default level for PVP
-     */
-    public static StandardLevel defaultLevelPvp() {
-        Mapp map = defaultMapPvp();
-        try {
-            StandardLevel level = new StandardLevel(map, 3);
-            level.addFighter(new Ally(1, 15, 200, 600), 1);
-            level.addFighter(new Ally(2, 15, BattleGround.screenWidth - 200, 600), 2);
-            return level;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * generates the default map for player vs computer game mode
-     * map is of type earth
-     * map includes a 12x160 wall at 900,480
-     * map has a player at 200,600 of type 3
-     * map has a player at screenWidth - 200,600 of type 2
-     *
-     * @return applications default map for PVC
-     */
-    public static Mapp defaultMapPvp() {
-        Mapp map = new Mapp("space");
-        //map.addObstacle(new SmokeScreen(40,500,600));
-        map.addObstacle(new Wall(160, 12, 900, 480, 300));
-        return map;
-    }
-
     public static Mapp defaultEduMap() {
-        Mapp map = new Mapp("space");
+        Mapp map = new Mapp("earth");
         return map;
     }
 

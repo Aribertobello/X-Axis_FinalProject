@@ -46,14 +46,13 @@ public class FreePlayLevel extends Level {
 
     public FreePlayLevel(Mapp map) throws IOException {
         super(map);
+        map.setBounds(new double[]{5000,5000});
         type = 0;
         freePlayGame();
     }
 
     public boolean[] update(double dt,double time) {
-        updateHUD();
-        map.update(dt);
-        return new boolean[]{false,false};
+       return super.update( dt, time);
     }
 
     public void freePlayGame() throws IOException {
