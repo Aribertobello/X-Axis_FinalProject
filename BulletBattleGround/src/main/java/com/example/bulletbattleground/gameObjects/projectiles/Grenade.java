@@ -105,6 +105,8 @@ public class Grenade extends Projectile {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Explosion.wav"));
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
+            FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            volumeControl.setValue(-20.0f);
             clip.start();
         } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
             e.printStackTrace();

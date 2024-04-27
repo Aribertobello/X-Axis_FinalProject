@@ -3,9 +3,8 @@ type : 2
 map : Files/txt/PVC.map.lvl.2.txt
 fighters :
 {
-ally : { loadout = 2 , health = 25 , coordinate = (427,294) }
-ally : { loadout = 1 , health = 25 , coordinate = (440,554) }
-computer : { loadout = 1 , health = 55 , coordinate = (618,831) }
+ally : { loadout = 1 , health = 5 , coordinate = (165,170) }
+computer : { loadout = 2 , health = 5 , coordinate = (1123,721) }
 }
 GameRules : {
 MAX_TURN_TIMER :

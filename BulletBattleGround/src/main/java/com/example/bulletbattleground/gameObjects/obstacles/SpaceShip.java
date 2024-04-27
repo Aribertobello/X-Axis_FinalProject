@@ -1,5 +1,6 @@
 package com.example.bulletbattleground.gameObjects.obstacles;
 
+import com.example.bulletbattleground.BattleGround;
 import com.example.bulletbattleground.game.Mapp;
 import com.example.bulletbattleground.game.Obstacle;
 import com.example.bulletbattleground.utility.Coordinate;
@@ -48,10 +49,13 @@ public class SpaceShip extends Obstacle {
 
                 // Start the sound
                 clip.start();
+                if(BattleGround.activeGame.gameOverBox != null) {
+                    clip.stop();
+                }
             } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
                 e.printStackTrace();
-            }
-    }
+           }
+  }
 
     @Override
     public void move(double dt) {
@@ -64,10 +68,6 @@ public class SpaceShip extends Obstacle {
             allign();
         }
         super.move(dt);
-        if(!hasPlayedSound){
-        playSpaceShipSound();
-            hasPlayedSound = true;
-        }
     }
 
     @Override

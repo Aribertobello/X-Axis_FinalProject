@@ -92,15 +92,13 @@ public class SmokeScreen extends Obstacle {
     }
 
     public void disappearingSmokeAnimation() {
-        ball.setFill(new ImagePattern(appearingsSmokeEffects[index]));
-
-        if (index < 2) {
+        if (index < appearingsSmokeEffects.length) {
+            ball.setFill(new ImagePattern(appearingsSmokeEffects[index]));
             index++;
         } else {
             animationTimeLine.stop();
             BattleGround.activeGame.getLevel().map.removeActiveProjectile();
         }
-
     }
 
     private void removeSmokeScreen() {
