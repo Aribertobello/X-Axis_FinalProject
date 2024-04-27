@@ -175,7 +175,7 @@ public class Game extends Scene {
                             level.origin.getY(),
                             level.origin.getX() + dragX,
                             level.origin.getY() + dragY);
-                    level.arrow.updateDrag(level.selectedFighter,(1.0 / tickRate),level.getOrigin(),new Vector(-event.getSceneX() + dragStartX[0],-event.getSceneY() + dragStartY[0]));
+                    level.arrow.updateDrag(level.selectedFighter,level.getMap(),(1.0 / tickRate),level.getOrigin(),new Vector(-event.getSceneX() + dragStartX[0],-event.getSceneY() + dragStartY[0]));
                 }
             }
         });
