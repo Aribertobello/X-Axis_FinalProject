@@ -36,7 +36,11 @@ public class Mapp extends Pane implements GameUI {
     private ArrayList<HitBox> hitBoxes = new ArrayList<>();
     double terminalVelocity;
     private Pane hitBoxPane = new Pane();
+    @Getter
+    @Setter
     private double gravity;
+    @Getter
+    @Setter
     private double airResistance;
 
     protected int scale;

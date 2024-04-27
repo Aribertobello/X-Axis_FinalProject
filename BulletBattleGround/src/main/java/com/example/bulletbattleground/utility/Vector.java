@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.text.ParseException;
-import java.util.Objects;
 
 @AllArgsConstructor
 public class Vector {
@@ -154,11 +153,6 @@ public class Vector {
     }
     public double slope(){
         return y/x;
-    }
-
-
-    public void toArrow(){
-
     }
 
     /**

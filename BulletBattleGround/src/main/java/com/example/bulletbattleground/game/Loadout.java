@@ -6,12 +6,15 @@ import com.example.bulletbattleground.gameObjects.projectiles.*;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 
 public class Loadout {
 
     protected Projectile mainWeapon;
+    @Getter
+    @Setter
     protected int type;
     protected ArrayList<Grenade> grenades = new ArrayList<Grenade>();
     protected ArrayList<SmokeGrenade> smokeGrenades = new ArrayList<SmokeGrenade>();
