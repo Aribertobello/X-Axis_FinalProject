@@ -35,12 +35,10 @@ import java.util.ArrayList;
 public class Game extends Scene {
 
     protected Boolean gameOver = false;
-
     @Getter
     protected Level level;
     protected Boolean gameWon = false;
     protected Integer tickRate = 100;
-
     protected double time = 0;
     protected Timeline timeline;
     private boolean isTicking;
@@ -166,7 +164,7 @@ public class Game extends Scene {
         });
 
         this.setOnMouseDragged(event -> {
-            if (level.dragging && isWithinPlayerBounds(dragStartX[0],dragStartY[0])) {
+            if (level.dragging &&isWithinPlayerBounds(dragStartX[0],dragStartY[0])) {
                 if (level.origin == null) {
                     /*TODO  -notify user to select a fighter   */
                 } else {
@@ -177,7 +175,7 @@ public class Game extends Scene {
                             level.origin.getY(),
                             level.origin.getX() + dragX,
                             level.origin.getY() + dragY);
-                    level.arrow.update(level.selectedFighter,(1.0 / tickRate),level.getOrigin(),new Vector(-event.getSceneX() + dragStartX[0],-event.getSceneY() + dragStartY[0]));
+                    level.arrow.updateDrag(level.selectedFighter,(1.0 / tickRate),level.getOrigin(),new Vector(-event.getSceneX() + dragStartX[0],-event.getSceneY() + dragStartY[0]));
                 }
             }
         });
@@ -186,14 +184,12 @@ public class Game extends Scene {
 
             double velocityX = -event.getSceneX() + dragStartX[0];
             double velocityY = -event.getSceneY() + dragStartY[0];
-
             level.resetTrajectoryLine();
-            if(level.selectedFighter!=null && level.selectedFighter instanceof Ally && level.selectedFighter.isHighlighted() && checkvelocity(velocityX,velocityY) && isWithinPlayerBounds(dragStartX[0],dragStartY[0])){
+            if(level.selectedFighter!=null && level.selectedFighter instanceof Ally && level.selectedFighter.isHighlighted() && checkVelocity(velocityX,velocityY) && isWithinPlayerBounds(dragStartX[0],dragStartY[0])){
                 shoot(event, (Ally) level.selectedFighter,velocityX,velocityY);
             }
             // TODO -LAUNCH GRENADE
         });
-
         this.setOnKeyPressed(event -> {//Pauses the game when hitting key P
 
             if (event.getCode() == KeyCode.P) {
@@ -201,22 +197,25 @@ public class Game extends Scene {
             }
 
             if (event.getCode() == KeyCode.S && level.selectedFighter!=null) {
-                   level.selectedFighter.launchProjectile(
+                level.selectedFighter.launchProjectile(
                           level.selectedFighter.loadout.smokeGrenades.get(0), new Vector(15, 0.0), level.origin);
                 level.selectedFighter.loadout.smokeGrenades.remove(level.selectedFighter.loadout.smokeGrenades.get(0));
                     turnManager.projectileShot();
                     System.out.println("Smoke grenade deployed");
-                    }
+            }
         });
     }
 
     private boolean isWithinPlayerBounds(double x,double y) {
-        double boundX = level.selectedFighter.getCoordinate().getX();
-        double boundY = level.selectedFighter.getCoordinate().getY();
-        return x < boundX + 20 && x > boundX - 20 && y < boundY + 20 && y > boundY - 20;
+        if(level.selectedFighter!=null){
+            double boundX = level.selectedFighter.getCoordinate().getX();
+            double boundY = level.selectedFighter.getCoordinate().getY();
+            return x < boundX + 20 && x > boundX - 20 && y < boundY + 20 && y > boundY - 20;
+        }
+        return  false;
     }
 
-    private boolean checkvelocity(double velocityX, double velocityY) {
+    private boolean checkVelocity(double velocityX, double velocityY) {
         return (new Vector(velocityX,velocityY)).magnitude() > Projectile.MIN_LAUNCH_VELOCITY;
     }
 
@@ -262,38 +261,6 @@ public class Game extends Scene {
                 turnManager.projectileShot();
             }
         }
-    }
-
-    public void handleFighterClick() {
-        ArrayList team2;
-        if(level instanceof StandardLevel){
-            team2 = ((StandardLevel)level).team2;
-        } else {
-            team2 = null;
-        }
-        for (Fighter fighter : level.map.people) {
-            if (fighter instanceof Ally) {
-                fighter.setOnMouseReleased(event -> {
-                    System.out.println("Fighter selected"); //TODO remove this in final code
-                    if (level.selectedFighter != null) {
-                        level.selectedFighter.setStroke(Color.TRANSPARENT);
-                    }
-                    level.selectedFighter = (Ally) fighter;
-                    if (level instanceof StandardLevel && team2.contains(fighter)) {
-                        level.origin = new Coordinate(
-                                level.selectedFighter.getCoordinate().getX() - level.selectedFighter.getWidth() / 2
-                                , level.selectedFighter.getCoordinate().getY() - level.selectedFighter.getHeight() / 2);
-                        level.selectedFighter.setStroke(Color.DARKRED);
-                    } else {
-                        level.origin = new Coordinate(
-                                level.selectedFighter.getCoordinate().getX() + level.selectedFighter.getWidth() / 2
-                                , level.selectedFighter.getCoordinate().getY() - level.selectedFighter.getHeight() / 2);
-                        level.selectedFighter.setStroke(Color.CYAN);
-                    }
-                });
-            }
-        }
-        this.setOnKeyPressed(new pauseEvent());
     }
 
     public void pauseGame(){

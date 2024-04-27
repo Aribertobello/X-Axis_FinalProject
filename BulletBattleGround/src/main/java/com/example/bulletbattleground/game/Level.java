@@ -52,13 +52,9 @@ public abstract class Level extends AnchorPane implements GameUI {
     public Arrow arrow;
     //Level properties-----------------
     protected boolean dragging = false;
-    @Getter
-    @Setter
-    public Mapp map;
+    @Getter @Setter public Mapp map;
     protected Line trajectoryLine = new Line();//TODO
-    @Getter
-    @Setter
-    protected Coordinate origin;
+    @Getter @Setter protected Coordinate origin;
     @Getter
     @Setter
     protected Fighter selectedFighter;
@@ -71,6 +67,13 @@ public abstract class Level extends AnchorPane implements GameUI {
     @Getter
     @Setter
     String description = "";
+
+    //private Line Xaxis;
+    private Line AngleDisp;
+    @Getter
+    @Setter
+    private double LastAngel = 0.0;
+
     public ArrayList<Fighter> team1 = new ArrayList<>();
     public ArrayList<Fighter> team2 = new ArrayList<>();
     //------------------------------------------------------------------------
@@ -85,46 +88,21 @@ public abstract class Level extends AnchorPane implements GameUI {
     protected AnchorPane container;
 
     private Label activeProjectileLabel;
-
     private Label GrenadeLabel;
     private Label SmokeLabel;
     private Label KELabel;
-
-    private Label Ehealthlbl;
-
-    private ProgressBar EhealthBar;
-
-   // private Label blankLabel;
-
-    private ProgressBar healthProgressbar;
     private Label VeloLabel;
     private Label AccLabel;
     private Label healthLabel;
-
-    //private MenuBar topMenu;
     private Label angleLabel;
     private Label MomLabel;
-    //private Label MagLabel;
-   // private Menu newGameButton;
+    private ProgressBar healthProgressbar;
 
-   // private Menu exitButton;
-
-
-    //private Menu settingsButton;
     private Label turnStatusLabel;
     private Label timeLeftLabel;
     private ProgressBar timerBar;
     public Pane turnStatusBox;
-    @FXML
     private ProgressBar VeloBar;
-
-    //private Menu pauseButton;
-    //private Line Xaxis;
-    private Line AngleDisp;
-    @Getter
-    @Setter
-    private double LastAngel = 0.0;
-    static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
     private Label BltAmount;
     private Label GTimer;
     private Label STimer;
@@ -133,21 +111,9 @@ public abstract class Level extends AnchorPane implements GameUI {
     private Arc angleArc;
     @Getter
     private Label descriptionLabel;
-   private Button playBtn;
     private VBox descriptionBox;
 
-    /**
-     *
-     * @param dt
-     */
-
-    //constructor---------------------------------
-    /**
-     *
-     * @param map
-     */
     public Level(Mapp map) throws IOException {
-
         this.map = map;
         createHUD();
         container.getChildren().add(this.map);
@@ -156,18 +122,13 @@ public abstract class Level extends AnchorPane implements GameUI {
         this.getChildren().add(trajectoryLine);
         arrow = new Arrow();
         descriptionBox();
-        angleArc = new Arc();
-        angleArc.setStroke(Color.RED);
-        angleArc.setFill(Color.TRANSPARENT);
-        angleArc.setStrokeWidth(1.5);
-        container.getChildren().add(angleArc);
         map.setPrefWidth(BattleGround.screenWidth);
     }
     //------------------------------------------------
 
     public boolean[] update(double dt,double time) {
         updateHUD();
-        if(map.update(dt)){
+        if(map.update(dt,time)[0]){
             return levelStatus(map);
         }
         return new boolean[]{false,false};
@@ -175,11 +136,6 @@ public abstract class Level extends AnchorPane implements GameUI {
 
     public boolean[] levelStatus(Mapp map) {
         return new boolean[]{false,false};
-    }
-
-    @FXML
-    private void handleExit(){
-        Platform.exit();
     }
 
     public void createHUD() throws IOException {
@@ -216,17 +172,12 @@ public abstract class Level extends AnchorPane implements GameUI {
         BImg = controller.getBImg();
         SmokeLabel = controller.getSmokeLabel();
         STimer = controller.getSTimer();
-        Ehealthlbl = controller.getEhealthlbl();
-        EhealthBar = controller.getEhealthBar();
-
-    }
-
-    /**
-     *
-     * @param selectedFighter
-     */
-    protected void displayLoadout(Fighter selectedFighter) {
-        //TODO
+        angleArc = new Arc(1065,943,20,20,0,0);
+        angleArc.setStroke(Color.RED);
+        angleArc.setFill(Color.TRANSPARENT);
+        angleArc.setStrokeWidth(1.5);
+        container.getChildren().add(angleArc);
+        angleArc.toFront();
     }
 
     public void resetTrajectoryLine() {
@@ -251,33 +202,10 @@ public abstract class Level extends AnchorPane implements GameUI {
     }
 
     public void updateHUD(){
+        setKELabelHUD();
         if(trajectoryLine != null && angleLabel != null && selectedFighter != null) {
             Vector direction = new Vector(trajectoryLine.getEndX() - trajectoryLine.getStartX(), trajectoryLine.getEndY() - trajectoryLine.getStartY());
-            double angle = 180 - direction.angle();
-            if(!Double.isNaN(angle)) {
-                if (angle != LastAngel) {
-                    angleLabel.setText("Angle: " + Math.round(angle));
-                    LastAngel = angle;
-                    AngleDisp.setRotate(-angle);
-                    AngleDisp.setStroke(Color.WHITE);
-
-
-                    // Calculate the radius of the arc
-                    double radius = Math.sqrt(Math.pow(AngleDisp.getEndX() - AngleDisp.getStartX(), 2) +
-                            Math.pow(AngleDisp.getEndY() - AngleDisp.getStartY(), 2)) / 2;
-
-                    // Update the angle arc
-                    angleArc.setCenterX(1065);
-                    angleArc.setCenterY(945);
-                    angleArc.setRadiusX(radius);
-                    angleArc.setRadiusY(radius);
-                    angleArc.setStartAngle(0.00); // Adjust start angle based on your requirements
-                    angleArc.setLength(angle);
-                    angleArc.toFront();
-                } else if(angleLabel!=null){
-                    angleLabel.setText("Angle: " + Math.round(LastAngel));
-                }
-            }
+            setAngleHUD(direction);
             SmokeLabel.setText("Number of Smoke left: " + selectedFighter.loadout.smokeGrenades.size());
             if (map.activeProjectile instanceof SmokeGrenade) {
                 STimer.setText("Smoke Screen Timer: " + ((SmokeGrenade) map.activeProjectile).getFuseTimer());
@@ -298,24 +226,7 @@ public abstract class Level extends AnchorPane implements GameUI {
                 BltAmount.setText("Number of Rockets left: ∞");
             }
         }
-        if(map != null && map.activeProjectile != null){
-            KELabel.setText("Kinetic energy: "+ Math.round(map.getActiveProjectile().kE()));
-        }
-        if(healthProgressbar != null && selectedFighter != null){
-            int previousHealth = (int) (healthProgressbar.getProgress() * 5); // Assuming the progress bar is based on a scale of 0 to 1
-            int currentHealth = selectedFighter.getHealth();
-            if (currentHealth < previousHealth) {
-                double healthChange = (previousHealth - currentHealth) / 100.0; // Convert to decimal
-                double newProgress = Math.max(0, healthProgressbar.getProgress() - healthChange); // Ensure progress doesn't go below 0
-                healthProgressbar.setProgress(newProgress);
-            } else if (currentHealth > previousHealth) {
-                double healthChange = (currentHealth - previousHealth) / 100.0; // Convert to decimal
-                double newProgress = Math.min(1, healthProgressbar.getProgress() + healthChange); // Ensure progress doesn't go above 1
-                healthProgressbar.setProgress(newProgress);
-            }
-            healthLabel.setText("Player Health: " + currentHealth);
-            healthProgressbar.setStyle("-fx-accent: red; -fx-progress-bar-indeterminate-fill: red;");
-        }
+        setHealthHUD();
         if(map.activeProjectile != null){
             activeProjectileLabel.setText("Projectile Coordinates: "+ map.getActiveProjectile().getCoordinate());
             VeloLabel.setText("Velocity X and Y: "+ map.getActiveProjectile().velocity());
@@ -329,7 +240,30 @@ public abstract class Level extends AnchorPane implements GameUI {
             AccLabel.setText("Acceleration: "+ map.getActiveProjectile().acceleration());
             MomLabel.setText("Momentum: " + Math.round(map.getActiveProjectile().momentum()));
         }
+    }
 
+    private void setHealthHUD() {
+        if(selectedFighter!=null) {
+            healthProgressbar.setProgress((double) selectedFighter.getHealth() / (double) selectedFighter.getMaxHealth());
+            healthProgressbar.setStyle("-fx-accent: red; -fx-progress-bar-indeterminate-fill: red;");
+            healthLabel.setText("Player Health: " + selectedFighter.getHealth());
+        }
+    }
+
+    private void setKELabelHUD() {
+        if(map != null && map.activeProjectile != null){
+            KELabel.setText("Kinetic energy: "+ Math.round(map.getActiveProjectile().kE()));
+        }
+    }
+
+    public void setAngleHUD( Vector direction){
+        double angle = 180 - direction.angle();
+        if(!Double.isNaN(angle)){
+                AngleDisp.setRotate(-angle);
+                AngleDisp.setStroke(Color.WHITE);
+                angleArc.setLength(angle);
+                angleLabel.setText("Angle: " + Math.round(angle));
+        }
     }
 
     public void updateTurnBox(double time, double timeLimit, int playerTurn) {
@@ -344,7 +278,6 @@ public abstract class Level extends AnchorPane implements GameUI {
         timeLeftLabel.setText(String.valueOf(Math.round(10*(timeLimit-time))/10.0));
         timerBar.setProgress(1-(time/timeLimit));
     }
-
     public void removeFighter(Fighter fighter) {
         selectedFighter.unhiglight();
         selectedFighter = null;
@@ -356,7 +289,6 @@ public abstract class Level extends AnchorPane implements GameUI {
         FXMLLoader descriptionBoxLoader = new FXMLLoader(BattleGround.class.getResource("DescriptionBox.fxml"));
         descriptionBox = descriptionBoxLoader.load();
         DescriptionBoxController controller = descriptionBoxLoader.getController();
-        playBtn = controller.playBtn;
         descriptionLabel = controller.descriptionLabel;
         descriptionLabel.setText(description);
     }
@@ -367,11 +299,13 @@ public abstract class Level extends AnchorPane implements GameUI {
     }
 
     public class Arrow extends Polyline {
+        Coordinate ultimateCoord = null;
+        Coordinate penUltimateCoord = null;
         public Arrow(){
             super();
             this.setStroke(Color.WHITE);
         }
-        public void update(Fighter fighter, double dt, Coordinate coordinate, Vector direction){
+        public void updateDrag(Fighter fighter, double dt, Coordinate coordinate, Vector direction){
 
             Projectile projectile;
             this.getPoints().clear();
@@ -385,16 +319,29 @@ public abstract class Level extends AnchorPane implements GameUI {
             projectile.setVelocity(direction);
             projectile.setCoordinate(coordinate);
 
-            for(double t = 0 ; t < 0.5; t += dt){
-                if(fighter.loadout.type==3){
-                    projectile.forces.clear();
-                    projectile.forces.add(new Vector(0,4.9).multiply(projectile.getMass()));
-                }
-                projectile.move(dt);
+            for(double T = 0 ; T < 10; T += 2*dt){
+                    if(fighter.loadout.type==3){
+                        projectile.forces.clear();
+                        projectile.forces.add(new Vector(0,4.9).multiply(projectile.getMass()));
+                    }
+                    projectile.move(2*dt);
+                    map.addForces(projectile);
                 this.getPoints().addAll(projectile.getCoordinate().getX(),projectile.getCoordinate().getY());
-                map.addForces(projectile);
+                penUltimateCoord = ultimateCoord;
+                ultimateCoord = projectile.getCoordinate();
+
             }
             map.getChildren().add(this);
+            addTip();
+        }
+        public void addTip(){
+            if(!this.getPoints().isEmpty()){
+                Vector slopeVector = ultimateCoord.distanceVector(penUltimateCoord).scale(5);
+                getPoints().addAll(ultimateCoord.move(slopeVector.rotate(90)).getX(), ultimateCoord.move(slopeVector.rotate(90)).getY());
+                getPoints().addAll(ultimateCoord.move(slopeVector.rotate(-90)).getX(), ultimateCoord.move(slopeVector.rotate(-90)).getY());
+                getPoints().addAll(ultimateCoord.move(slopeVector.multiply(2)).getX(), ultimateCoord.move(slopeVector.multiply(2)).getY());
+                getPoints().addAll(ultimateCoord.move(slopeVector.rotate(90)).getX(), ultimateCoord.move(slopeVector.rotate(90)).getY());
+            }
         }
     }
 }

@@ -39,7 +39,7 @@
       <RadioButton layoutX="177.0" layoutY="259.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="55.0" text="Medium" toggleGroup="$compClassGroup" />
       <RadioButton layoutX="177.0" layoutY="285.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="55.0" text="Heavy" toggleGroup="$compClassGroup" />
       <Button layoutX="14.0" layoutY="281.0" mnemonicParsing="false" text="Reflect" />
-      <Slider fx:id="wallMassSlider" layoutX="212.0" layoutY="392.0" orientation="VERTICAL" prefHeight="82.0" prefWidth="14.0" />
+      <Slider fx:id="wallMassSlider" layoutX="212.0" layoutY="392.0" min="1.0" orientation="VERTICAL" prefHeight="82.0" prefWidth="14.0" />
       <Slider fx:id="spaceShipSpeedslider" layoutX="212.0" layoutY="552.0" orientation="VERTICAL" prefHeight="93.0" prefWidth="14.0" />
       <Slider fx:id="radiusSlider" layoutX="212.0" layoutY="717.0" orientation="VERTICAL" prefHeight="93.0" prefWidth="14.0" />
       <Button layoutX="14.0" layoutY="247.0" mnemonicParsing="false" text="Shoot" />
