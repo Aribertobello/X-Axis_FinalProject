@@ -35,9 +35,6 @@ public class Fighter extends Rectangle {
     protected Coordinate coordinate = new Coordinate(0, 0);
     @Getter
     @Setter
-    protected int maxHealth;
-    @Getter
-    @Setter
     protected int teamNb;
     @Getter
     boolean highlighted;
