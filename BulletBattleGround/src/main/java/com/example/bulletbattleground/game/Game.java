@@ -125,10 +125,12 @@ public class Game extends Scene {
                 } else {
                     double dragX = event.getSceneX() - dragStartX[0];
                     double dragY = event.getSceneY() - dragStartY[0];
-                    level.trajectoryLine.setStartX(level.origin.getX());
-                    level.trajectoryLine.setStartY(level.origin.getY());
-                    level.trajectoryLine.setEndX(level.origin.getX() + dragX);
-                    level.trajectoryLine.setEndY(level.origin.getY() + dragY);
+                    level.displaceTrajectoryLine(
+                            level.origin.getX(),
+                            level.origin.getY(),
+                            level.origin.getX() + dragX,
+                            level.origin.getY() + dragY);
+                    level.arrow.updateDrag(level.selectedFighter,(1.0 / tickRate),level.getOrigin(),new Vector(-event.getSceneX() + dragStartX[0],-event.getSceneY() + dragStartY[0]));
                 }
             }
         });
@@ -138,15 +140,73 @@ public class Game extends Scene {
             double velocityX = -event.getSceneX() + dragStartX[0];
 
             double velocityY = -event.getSceneY() + dragStartY[0];
+            level.resetTrajectoryLine();
+            if(level.selectedFighter!=null && level.selectedFighter instanceof Ally && level.selectedFighter.isHighlighted() && checkVelocity(velocityX,velocityY) && isWithinPlayerBounds(dragStartX[0],dragStartY[0])){
+                shoot(event, (Ally) level.selectedFighter,velocityX,velocityY);
+            }
+            // TODO -LAUNCH GRENADE
+        });
 
-            level.trajectoryLine.setStartX(0);
-            level.trajectoryLine.setStartY(0);
-            level.trajectoryLine.setEndX(0);
-            level.trajectoryLine.setEndY(0);
+        this.setOnKeyPressed(event -> {//Pauses the game when hitting key P
 
-            if (event.getButton() == MouseButton.PRIMARY && clickNb.get() > 0) {
-                level.selectedFighter.launchProjectile(level.selectedFighter.loadout.mainWeapon, new Vector(-event.getSceneX() + dragStartX[0], -event.getSceneY() + dragStartY[0]), level.origin);
-                clickNb.set(0);
+            if (event.getCode() == KeyCode.P) {
+                new pauseEvent().handle(event);
+            }
+
+            if (event.getCode() == KeyCode.S && level.selectedFighter!=null) {
+                   level.selectedFighter.launchProjectile(
+                          level.selectedFighter.loadout.smokeGrenades.get(0), new Vector(15, 0.0), level.origin);
+                level.selectedFighter.loadout.smokeGrenades.remove(level.selectedFighter.loadout.smokeGrenades.get(0));
+                    turnManager.projectileShot();
+                    System.out.println("Smoke grenade deployed");
+                    }
+        });
+    }
+
+    private boolean isWithinPlayerBounds(double x,double y) {
+        double boundX = level.selectedFighter.getCoordinate().getX();
+        double boundY = level.selectedFighter.getCoordinate().getY();
+        return x < boundX + 20 && x > boundX - 20 && y < boundY + 20 && y > boundY - 20;
+    }
+
+    private boolean checkVelocity(double velocityX, double velocityY) {
+        return (new Vector(velocityX,velocityY)).magnitude() > Projectile.MIN_LAUNCH_VELOCITY;
+    }
+
+    private void shoot(MouseEvent event, Ally selectedFighter, double velocityX, double velocityY) {
+        if(level instanceof StandardLevel && level.origin!=null){
+            StandardLevel level = (StandardLevel) this.level;
+            if(turnManager.isPlayer1Turn() && level.team1.contains(selectedFighter)) {
+                if (event.getButton() == MouseButton.PRIMARY) {
+                    selectedFighter.launchProjectile(
+                            selectedFighter.loadout.mainWeapon, new Vector(velocityX, velocityY), level.origin);
+                    turnManager.projectileShot();
+                }// TODO -LAUNCH MAIN PROJECTILE
+                if (event.getButton() == MouseButton.SECONDARY) {
+                    selectedFighter.launchProjectile(
+                            selectedFighter.loadout.grenades.get(0), new Vector(velocityX, velocityY), level.origin);
+                    selectedFighter.loadout.grenades.remove(level.selectedFighter.loadout.grenades.get(0));
+                    turnManager.projectileShot();
+                }
+
+            } else if(turnManager.isPlayer2Turn() && level.team2.contains(selectedFighter)){
+                if (event.getButton() == MouseButton.PRIMARY) {
+                    selectedFighter.launchProjectile(
+                            selectedFighter.loadout.mainWeapon, new Vector(velocityX, velocityY), level.origin);
+                    turnManager.projectileShot();
+                }// TODO -LAUNCH MAIN PROJECTILE
+                if (event.getButton() == MouseButton.SECONDARY) {
+                    selectedFighter.launchProjectile(
+                            selectedFighter.loadout.grenades.get(0), new Vector(velocityX, velocityY), level.origin);
+                    selectedFighter.loadout.grenades.remove(level.selectedFighter.loadout.grenades.get(0));
+                    turnManager.projectileShot();
+                }
+            }
+        } else {
+            if (event.getButton() == MouseButton.PRIMARY) {
+                selectedFighter.launchProjectile(
+                        selectedFighter.loadout.mainWeapon, new Vector(velocityX, velocityY), level.origin);
+                turnManager.projectileShot();
             }// TODO -LAUNCH MAIN PROJECTILE
 
             if (event.getButton() == MouseButton.SECONDARY && clickNb.get() > 0) {
@@ -154,25 +214,8 @@ public class Game extends Scene {
                 level.selectedFighter.loadout.grenades.remove(level.selectedFighter.loadout.grenades.get(0));
                 clickNb.set(0);
             }// TODO -LAUNCH GRENADE
-
             level.dragging = false;
-        });
-
-        for (Fighter fighter : level.map.people) {
-            if (fighter instanceof Ally) {
-                fighter.setOnMousePressed(event -> {
-                    clickNb.getAndIncrement();
-                    System.out.println(clickNb);
-                    System.out.println("Fighter selected"); //TODO remove this in final code
-                    level.selectedFighter = (Ally) fighter;
-                    level.origin = new Coordinate(
-                            level.selectedFighter.getCoordinate().getX() + level.selectedFighter.getWidth() / 2
-                            , level.selectedFighter.getCoordinate().getY() - level.selectedFighter.getHeight() / 2);
-                    level.selectedFighter.setStroke(Color.CYAN);
-                });
-            }
         }
-        this.setOnKeyPressed(new pauseEvent());
     }
     private class pauseEvent implements EventHandler {
         @Override

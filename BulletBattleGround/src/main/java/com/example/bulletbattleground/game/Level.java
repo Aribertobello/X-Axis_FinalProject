@@ -130,10 +130,32 @@ public class Level extends AnchorPane {
         map.toBack();
         this.getChildren().add(trajectoryLine);// TODO arrow
     }
-    public void LinkElements() throws IOException {
-        FXMLLoader loader = new FXMLLoader(BattleGround.class.getResource("GameScene.fxml"));
-        this.getChildren().add(loader.load());
-        GameSceneController controller = loader.getController();
+    //------------------------------------------------
+
+    public boolean[] update(double dt,double time) {
+        updateHUD();
+        if(map.update(dt,time)[0]){
+            return levelStatus(map);
+        }
+        return new boolean[]{false,false};
+    }
+
+    public boolean[] levelStatus(Mapp map) {
+        return new boolean[]{false,false};
+    }
+
+    @FXML
+    private void handleExit(){
+        Platform.exit();
+    }
+
+    public void createHUD() throws IOException {
+        FXMLLoader hudLoader = new FXMLLoader(BattleGround.class.getResource("GameScene.fxml"));
+        FXMLLoader turnLoader = new FXMLLoader(BattleGround.class.getResource("TurnVariables.fxml"));
+        this.getChildren().add(hudLoader.load());
+        turnLoader.load();
+        GameSceneController controller = hudLoader.getController();
+        TurnVariablesController controller1 = turnLoader.getController();
         container = controller.getContainer();
         headsUpDisplay = controller.getHeadsUpDisplay();
         angleLabel = controller.getAngleLabel();
@@ -165,6 +187,101 @@ public class Level extends AnchorPane {
         if(healthProgressbar != null){
             healthProgressbar.setProgress(20);
             healthProgressbar.setStyle("-fx-accent: red; -fx-progress-bar-indeterminate-fill: red;");
+        }
+        if(map.activeProjectile != null){
+            activeProjectileLabel.setText("Projectile Coordinates: "+ map.getActiveProjectile().getCoordinate());
+            VeloLabel.setText("Velocity X and Y: "+ map.getActiveProjectile().velocity());
+            Vector velocity = map.getActiveProjectile().velocity();
+            double MaxVelocity = 200000;
+            double progress = velocity.magnitude() / MaxVelocity;
+            double red = 255 * (1-progress);
+            String barStyle = "-fx-accent: rgb(255," + (int)red + ", " + (int)red + ");";
+            VeloBar.setStyle(barStyle);
+            VeloBar.setProgress(progress);
+            AccLabel.setText("Acceleration: "+ map.getActiveProjectile().acceleration());
+            MomLabel.setText("Momentum: " + Math.round(map.getActiveProjectile().momentum()));
+        }
+
+    }
+
+    public void updateTurnBox(double time, double timeLimit, int playerTurn) {
+        switch(playerTurn){
+                case 1  -> {timerBar.setStyle("-fx-accent: cyan;");
+                    turnStatusLabel.setText("It is Player 1's Turn");}
+                case 2 -> {timerBar.setStyle("-fx-accent: red;");
+                    turnStatusLabel.setText("It is Player 2's Turn");}
+                default -> {timerBar.setStyle("-fx-accent: gray;");
+                    turnStatusLabel.setText("Projectile Moving");}
+        }
+        timeLeftLabel.setText(String.valueOf(Math.round(10*(timeLimit-time))/10.0));
+        timerBar.setProgress(1-(time/timeLimit));
+    }
+
+    public void removeFighter(Fighter fighter) {
+        selectedFighter.unhiglight();
+        selectedFighter = null;
+        map.removeFighter(fighter);
+        setOrigin(null);
+    }
+
+    public void descriptionBox() throws IOException {
+        FXMLLoader descriptionBoxLoader = new FXMLLoader(BattleGround.class.getResource("DescriptionBox.fxml"));
+        descriptionBox = descriptionBoxLoader.load();
+        DescriptionBoxController controller = descriptionBoxLoader.getController();
+        playBtn = controller.playBtn;
+        descriptionLabel = controller.descriptionLabel;
+        descriptionLabel.setText(description);
+    }
+
+    public void displayDescription() {
+        container.setOpacity(0.25);
+        this.getChildren().add(descriptionBox);
+    }
+
+    public class Arrow extends Polyline {
+        Coordinate ultimateCoord = null;
+        Coordinate penUltimateCoord = null;
+        public Arrow(){
+            super();
+            this.setStroke(Color.WHITE);
+        }
+        public void updateDrag(Fighter fighter, double dt, Coordinate coordinate, Vector direction){
+
+            Projectile projectile;
+            this.getPoints().clear();
+            this.getPoints().addAll(coordinate.getX(),coordinate.getY());
+            map.getChildren().remove(this);
+            switch(fighter.loadout.type){
+                case 1 -> projectile = new Bullet();
+                case 2 -> projectile = new Spear();
+                default -> projectile = new Bullet();
+            }
+            projectile.setVelocity(direction);
+            projectile.setCoordinate(coordinate);
+
+            for(double T = 0 ; T < 10; T += 2*dt){
+                    if(fighter.loadout.type==3){
+                        projectile.forces.clear();
+                        projectile.forces.add(new Vector(0,4.9).multiply(projectile.getMass()));
+                    }
+                    projectile.move(2*dt);
+                    map.addForces(projectile);
+                this.getPoints().addAll(projectile.getCoordinate().getX(),projectile.getCoordinate().getY());
+                penUltimateCoord = ultimateCoord;
+                ultimateCoord = projectile.getCoordinate();
+
+            }
+            map.getChildren().add(this);
+            addTip();
+        }
+        public void addTip(){
+            if(!this.getPoints().isEmpty()){
+                Vector slopeVector = ultimateCoord.distanceVector(penUltimateCoord).scale(5);
+                getPoints().addAll(ultimateCoord.move(slopeVector.rotate(90)).getX(), ultimateCoord.move(slopeVector.rotate(90)).getY());
+                getPoints().addAll(ultimateCoord.move(slopeVector.rotate(-90)).getX(), ultimateCoord.move(slopeVector.rotate(-90)).getY());
+                getPoints().addAll(ultimateCoord.move(slopeVector.multiply(2)).getX(), ultimateCoord.move(slopeVector.multiply(2)).getY());
+                getPoints().addAll(ultimateCoord.move(slopeVector.rotate(90)).getX(), ultimateCoord.move(slopeVector.rotate(90)).getY());
+            }
         }
     }
 }

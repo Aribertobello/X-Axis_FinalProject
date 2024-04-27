@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="freePlayUI" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="839.0" prefWidth="246.0" style="-fx-border-color: black; -fx-border-width: 12; -fx-border-radius: 0; -fx-background-color: #76827a;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bulletbattleground.controllers.FreePlayController">
+   <children>
+      <Label alignment="CENTER" layoutX="20.0" layoutY="14.0" prefHeight="17.0" prefWidth="207.0" text="Drag and Drop items onto the map" />
+      <ImageView fx:id="allyImageView" fitHeight="74.0" fitWidth="84.0" layoutX="82.0" layoutY="69.0" onMouseDragged="#dragging" onMousePressed="#allyDragStart" onMouseReleased="#dragEndFighter" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="computerImageView" fitHeight="74.0" fitWidth="84.0" layoutX="82.0" layoutY="239.0" onMouseDragged="#dragging" onMousePressed="#compDragStart" onMouseReleased="#dragEndFighter" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="wallImageView" fitHeight="74.0" fitWidth="84.0" layoutX="82.0" layoutY="383.0" onMouseDragged="#dragging" onMousePressed="#wallDragStart" onMouseReleased="#dragEndWall" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="spaceShipImageView" fitHeight="74.0" fitWidth="84.0" layoutX="81.0" layoutY="554.0" onMouseDragged="#dragging" onMousePressed="#spaceShipDragStart" onMouseReleased="#dragEndSpaceShip" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="smokeScreenImageView" fitHeight="74.0" fitWidth="84.0" layoutX="81.0" layoutY="703.0" onMouseDragged="#dragging" onMousePressed="#smokeScreenDragStart" onMouseReleased="#dragEndSmokeScreen" pickOnBounds="true" preserveRatio="true" />
+      <Label alignment="CENTER" layoutX="21.0" layoutY="143.0" prefHeight="17.0" prefWidth="207.0" text="Ally" />
+      <Label alignment="CENTER" layoutX="21.0" layoutY="313.0" prefHeight="17.0" prefWidth="207.0" text="Computer" />
+      <Label alignment="CENTER" layoutX="20.0" layoutY="457.0" prefHeight="17.0" prefWidth="207.0" text="Wall" />
+      <Label alignment="CENTER" layoutX="21.0" layoutY="628.0" prefHeight="17.0" prefWidth="207.0" text="SpaceShip" />
+      <Label alignment="CENTER" layoutX="21.0" layoutY="777.0" prefHeight="17.0" prefWidth="207.0" text="SmokeScreen" />
+      <RadioButton fx:id="allyLightbtn" layoutX="184.0" layoutY="69.0" mnemonicParsing="false" onAction="#allyLightClassChosen" prefHeight="17.0" prefWidth="55.0" text="Light">
+         <toggleGroup>
+            <ToggleGroup fx:id="allyClassGroup" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="allyMedbtn" layoutX="184.0" layoutY="98.0" mnemonicParsing="false" onAction="#allyMedClassChosen" prefHeight="17.0" prefWidth="55.0" text="Medium" toggleGroup="$allyClassGroup" />
+      <RadioButton fx:id="allyHeavybtn" layoutX="184.0" layoutY="126.0" mnemonicParsing="false" onAction="#allyHeavyClassChosen" prefHeight="17.0" prefWidth="55.0" text="Heavy" toggleGroup="$allyClassGroup" />
+      <Button layoutX="14.0" layoutY="122.0" mnemonicParsing="false" text="Reflect" />
+      <RadioButton layoutX="177.0" layoutY="231.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="55.0" text="Light">
+         <toggleGroup>
+            <ToggleGroup fx:id="compClassGroup" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton layoutX="177.0" layoutY="259.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="55.0" text="Medium" toggleGroup="$compClassGroup" />
+      <RadioButton layoutX="177.0" layoutY="285.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="55.0" text="Heavy" toggleGroup="$compClassGroup" />
+      <Button layoutX="14.0" layoutY="281.0" mnemonicParsing="false" text="Reflect" />
+      <Slider fx:id="wallMassSlider" layoutX="212.0" layoutY="392.0" min="1.0" orientation="VERTICAL" prefHeight="82.0" prefWidth="14.0" />
+      <Slider fx:id="spaceShipSpeedslider" layoutX="212.0" layoutY="552.0" orientation="VERTICAL" prefHeight="93.0" prefWidth="14.0" />
+      <Slider fx:id="radiusSlider" layoutX="212.0" layoutY="717.0" orientation="VERTICAL" prefHeight="93.0" prefWidth="14.0" />
+      <Button layoutX="14.0" layoutY="247.0" mnemonicParsing="false" text="Shoot" />
+      <Label alignment="CENTER" layoutX="157.0" layoutY="375.0" prefHeight="17.0" prefWidth="40.0" text="Rotation">
+         <font>
+            <Font size="9.0" />
+         </font></Label>
+      <Label alignment="TOP_CENTER" layoutX="195.0" layoutY="535.0" prefHeight="17.0" prefWidth="47.0" text="Speed">
+         <font>
+            <Font size="10.0" />
+         </font></Label>
+      <Label layoutX="196.0" layoutY="695.0" prefHeight="17.0" prefWidth="61.0" text="Radius" />
+      <Slider fx:id="wallRotationSlider" layoutX="170.0" layoutY="392.0" max="360.0" orientation="VERTICAL" prefHeight="82.0" prefWidth="14.0" />
+      <Line endX="100.0" layoutX="123.0" layoutY="366.0" startX="-100.0" />
+      <Line endX="100.0" layoutX="123.0" layoutY="211.0" startX="-100.0" />
+      <Line endX="100.0" layoutX="123.0" layoutY="524.0" startX="-100.0" />
+      <Line endX="100.0" layoutX="123.0" layoutY="684.0" startX="-100.0" />
+      <Label layoutX="205.0" layoutY="375.0" text="Mass" />
+      <Slider fx:id="wallWidthSlider" layoutX="59.0" layoutY="392.0" min="1.0" orientation="VERTICAL" prefHeight="82.0" prefWidth="14.0" />
+      <Slider fx:id="wallHeightSlider" layoutX="24.0" layoutY="392.0" max="500.0" min="1.0" orientation="VERTICAL" prefHeight="82.0" prefWidth="14.0" />
+      <Label layoutX="52.0" layoutY="375.0" text="Width">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <Label layoutX="17.0" layoutY="375.0" text="Height">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

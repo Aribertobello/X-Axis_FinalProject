@@ -27,6 +27,44 @@ public class SmokeScreen extends Obstacle {
     public void move(double dt) {
         super.move(dt);
     }
+
+    public void createDisappearSmokeAnimationTimeline() {
+        upTime2 = Math.sqrt(-1); //Calls the method only once
+        animationTimeLine = new Timeline(new KeyFrame(Duration.seconds(0.5), event -> disappearingSmokeAnimation()));
+        animationTimeLine.setCycleCount(Timeline.INDEFINITE);
+        animationTimeLine.play();
+    }
+
+    public void smokeAnimationRotate() {
+        ball.setRotate(angle); //Makes a small little animation instead of a boring ass picture lol
+        angle += 0.15;
+    }
+
+    public void createSmokeScreen(){
+        ball.setRadius(radius);
+        ball.setCenterX(coordinateX);
+        ball.setCenterY(coordinateY);
+        this.getChildren().add(ball);
+        ball.setFill(new ImagePattern(smokeEffect4));
+    }
+
+    public void disappearingSmokeAnimation() {
+        ball.setFill(new ImagePattern(appearingsSmokeEffects[index]));
+
+        if (index < 2) {
+            index++;
+           } else {
+            animationTimeLine.stop();
+            BattleGround.activeGame.getLevel().map.removeActiveProjectile();
+        }
+
+    }
+
+    private void removeSmokeScreen() {
+        upTime1 = Math.sqrt(-1); //calls the method once
+        this.getChildren().remove(0);
+    }
+
     @Override
     public void bounce(HitBox hitBox) {
         //TODO

@@ -3,15 +3,13 @@ package com.example.bulletbattleground.game;
 import com.example.bulletbattleground.gameObjects.Loot.Loot;
 import com.example.bulletbattleground.gameObjects.projectiles.Bullet;
 import com.example.bulletbattleground.gameObjects.projectiles.Grenade;
-import com.example.bulletbattleground.utility.Coordinate;
-import com.example.bulletbattleground.utility.HitBox;
-import com.example.bulletbattleground.utility.MovingBody;
-import com.example.bulletbattleground.utility.Vector;
+import com.example.bulletbattleground.utility.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Shape;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,7 +18,7 @@ import java.util.ArrayList;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
-public class Mapp extends Pane {
+public class Mapp extends Pane implements GameUI {
 
     private int type;
 
@@ -30,7 +28,8 @@ public class Mapp extends Pane {
     private ArrayList<HitBox> hitBoxes = new ArrayList<>();
     private Pane hitBoxPane = new Pane();
 
-
+    private double gravity;
+    private double airResistance;
     protected int scale;
 
     @Getter
@@ -40,30 +39,54 @@ public class Mapp extends Pane {
     @Getter
     @Setter
     protected int buffer = 0;
-
-    protected Loot loot;
-
-    protected Circle earth;
-
-    public Vector[] environmentForces = {new Vector(0, 9.8), new Vector(-1, 0)};
+    @Getter
+    public Loot loot;
+    @Getter
+    @Setter
+    protected Shape earth;
+    public Vector[] environmentForces = {new Vector(0,0),new Vector(0,0),new Vector(0,0)};
+    @Getter
+    @Setter
+    private boolean hasLoot = false;
 
     /**
      *
      * @param type
      */
     public Mapp(String type) {
-
         if (type.equalsIgnoreCase("earth")) {
-            this.setStyle("-fx-background-color: #bce1f5;");
-            earth = new Circle(540, 673100640, 673100000, Color.SEAGREEN);
+            Image backgroundImageSpace = new Image("file:sky.jpeg");
+            BackgroundImage background = new BackgroundImage(
+                    backgroundImageSpace,
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundPosition.DEFAULT,
+                    new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false)
+            );
+            this.setBackground(new Background(background));
+
+            Image groundEarthImage = new Image("file:ground.jpeg");
+            earth = new Rectangle(0, BattleGround.screenHeight-200, 3000,250);
+            earth.setFill(new ImagePattern(groundEarthImage));
             this.getChildren().add(earth);
+            gravity  = 9.8;
+            airResistance = 3;
             this.type = 0;
         }
 
         if (type.equalsIgnoreCase("space")) {
-            this.setStyle("-fx-background-color: #150c26;");
-            earth = new Circle(900, 600, 120);
-            Image earth_image = new Image("file:earth_Image.png");
+            Image backgroundImageSpace = new Image("file:spaceBackground.png");
+            BackgroundImage background = new BackgroundImage(
+                    backgroundImageSpace,
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundPosition.DEFAULT,
+                    new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false)
+            );
+            this.setBackground(new Background(background));
+
+            earth = new Circle(BattleGround.screenWidth/2.0, BattleGround.screenHeight/2.0, 120);
+            Image earth_image = new Image("file:Files/img/earth_Image.png");
             earth.setFill(new ImagePattern(earth_image));
             this.getChildren().add(earth);
             this.type = 1;
@@ -72,37 +95,35 @@ public class Mapp extends Pane {
 
     }
 
-    /**
-     *
-     * @param dt
-     */
-    protected void update(double dt) {
 
-        for (Obstacle obstacle : obstacles) {
-            obstacle.move(dt);
-        }
-
-        if (activeProjectile != null) {
-            activeProjectile.move(dt);
-            addForces(activeProjectile);
-            buffer++;
-
-            if (buffer > 50) {
-
-                if (activeProjectile instanceof Grenade) {
-                    checkCollision(activeProjectile);
-                    if (((Grenade) activeProjectile).getFuseTimer() <= 0) {
-                        explosion(activeProjectile.getCoordinate());
-                    }
-
-                } else {
-                    checkCollision(activeProjectile);
-                }
+    @Override
+    public boolean[] update(double dt, double time) {
+        for (double t = dt/10; t < dt; t+=(dt/10)) {
+            for (Obstacle obstacle : obstacles) {
+                obstacle.move(dt/10);
             }
-        } else {
-            buffer = 0;
-        }
+            if (activeProjectile != null) {
+                if (!isInBounds(activeProjectile)) {
+                    removeActiveProjectile();
+                    return new boolean[]{false};
+                }
+                addForces(activeProjectile);
+                activeProjectile.move(dt);
+                buffer++;
+                if (buffer > 100) {
+                    if (activeProjectile instanceof Grenade) {
 
+                        if (((Grenade) activeProjectile).getFuseTimer() <= 0) {
+                            explosion(activeProjectile.getCoordinate());
+                        }
+                    }
+                    if(checkCollision(activeProjectile)) return new boolean[]{true};
+                }
+            } else {
+                buffer = 0;
+            }
+        }
+        return new boolean[]{false};
     }
 
     /**
@@ -149,10 +170,9 @@ public class Mapp extends Pane {
      * @param projectile
      */
     public void addForces(Projectile projectile) {
-
         if (type == 0) {
-           // environmentForces[0] = environmentForces[0].multiply(projectile.getMass());
-            //environmentForces[1] = environmentForces[1].multiply(projectile.getMass());
+
+            environmentForces[0] = new Vector(0,gravity).multiply(projectile.getMass());
         } else {
             projectile.setMass(2000);
             Coordinate earthCenterOfGravity = new Coordinate(earth.getCenterX(), earth.getCenterY());
@@ -165,11 +185,8 @@ public class Mapp extends Pane {
             environmentForces[1] = new Vector(-0.00, 0);
             projectile.setLift(new Vector(0, 0));
         }
-
-        if (projectile.forces.size() >= 3) {
-            projectile.forces.set(1, environmentForces[0]);
-            projectile.forces.set(2, environmentForces[1]);
-        } else {
+        environmentForces[1] = projectile.velocity().multiply(-airResistance/1000000*Math.pow(projectile.velocity().magnitude(),2));
+            projectile.forces.clear();
             projectile.forces.add(environmentForces[0]);
             projectile.forces.add(environmentForces[1]);
         }
