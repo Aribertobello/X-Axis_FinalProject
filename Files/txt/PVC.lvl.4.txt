@@ -1,10 +1,11 @@
 index : 4
 type : 2
-map : Files/txt/PVC.map.lvl.5.txt
+map : Files/txt/PVC.map.lvl.4.txt
 fighters :
 {
-ally : { loadout = 1 , health = 5 , coordinate = (200,600) }
-computer : { loadout = 1 , health = 5 , coordinate = (1200,700) }
+ally : { loadout = 1 , health = 5 , coordinate = (127,690) }
+computer : { loadout = 1 , health = 5 , coordinate = (630,350) }
+computer : { loadout = 1 , health = 5 , coordinate = (700,641) }
 }
 GameRules : {
 MAX_TURN_TIMER :

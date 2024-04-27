@@ -15,6 +15,7 @@ import com.example.bulletbattleground.gameObjects.projectiles.Rocket;
 import com.example.bulletbattleground.gameObjects.projectiles.Spear;
 import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.GameUI;
+import com.example.bulletbattleground.utility.MovingBody;
 import com.example.bulletbattleground.utility.Vector;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -136,6 +137,7 @@ public abstract class Level extends AnchorPane implements GameUI {
         arrow = new Arrow();
         descriptionBox();
         map.setPrefWidth(BattleGround.screenWidth);
+
     }
 
     //------------------------------------------------
@@ -262,8 +264,8 @@ public abstract class Level extends AnchorPane implements GameUI {
             if (selectedFighter.loadout.type == 1) {
                 BImg.setImage(new Image("file:Files/img/smallBullet.png"));
 
-           // } else if (selectedFighter.loadout.type == 2) {
-              //  BImg.setImage(new Image("file:Files/img/spear.png"));
+           /* } else if (selectedFighter.loadout.type == 2) {
+                BImg.setImage(new Image("file:Files/img/spear.png"));*/
 
             } else if (selectedFighter.loadout.type == 3) {
                 BImg.setImage(new Image("file:Files/img/rocket.png"));
@@ -290,7 +292,7 @@ public abstract class Level extends AnchorPane implements GameUI {
         }
         if (map.activeProjectile instanceof SmokeGrenade) {
 
-            STimer.setText("Smoke Screen Timer: " + ((SmokeGrenade) map.activeProjectile).getFuseTimer());
+            STimer.setText("Smoke Screen Timer: " + Math.round(((SmokeGrenade) map.activeProjectile).getFuseTimer()) + " Seconds");
         }
     }
 

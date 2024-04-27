@@ -8,11 +8,11 @@ wind = <-0.9,0.0>
 }
 Obstacles :
 {
-spaceship : { speed = 20 , coordinate = (900,200) }
-spaceship : { speed = -20 , coordinate = (1200,200) }
-spaceship : { speed = 60 , coordinate = (1400,200) }
+wall : { height = 500 , width = 19 , coordinate = (668,195) , rotation  = 0 , mass = 2 }
+spaceship : { speed = -21 , coordinate = (356,1019) }
+spaceship : { speed = 21 , coordinate = (1053,1045) }
 }
 Description : 
-WOW! this map is very normal i hope its stays that way
+WOW! this map is very normal I hope its stays that way
 
  

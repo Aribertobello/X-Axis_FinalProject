@@ -12,6 +12,6 @@ wall : { height = 400 , width = 50 , coordinate = (900,200) , rotation  = 0 , ma
 spaceship : { speed = 20 , coordinate = (900,200) }
 }
 Description : 
-WOW! this map is very normal i hope its stays that way
+WOW! this map is very normal I hope its stays that way
 
  
