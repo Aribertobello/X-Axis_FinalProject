@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bulletbattleground.controllers.PVPLevelSelectorController">
+   <children>
+      <Label text="Select a Map" />
+      <HBox alignment="CENTER" prefHeight="133.0" prefWidth="600.0" spacing="20.0">
+         <children>
+            <Button fx:id="map1Btn" mnemonicParsing="false" onAction="#map1Selected" prefHeight="88.0" prefWidth="89.0" text="map 1" />
+            <Button fx:id="map2Btn" layoutX="266.0" layoutY="33.0" mnemonicParsing="false" onAction="#map2Selected" prefHeight="88.0" prefWidth="89.0" text="map 2" />
+            <Button fx:id="map3Btn" layoutX="201.0" layoutY="33.0" mnemonicParsing="false" onAction="#map3Selected" prefHeight="88.0" prefWidth="89.0" text="map 3" />
+            <Button fx:id="map4Btn" layoutX="137.0" layoutY="33.0" mnemonicParsing="false" onAction="#map4Selected" prefHeight="88.0" prefWidth="89.0" text="map 4" />
+            <Button fx:id="map5Btn" layoutX="72.0" layoutY="33.0" mnemonicParsing="false" onAction="#map5Selected" prefHeight="88.0" prefWidth="89.0" text="map 5" />
+         </children>
+         <opaqueInsets>
+            <Insets top="10.0" />
+         </opaqueInsets>
+         <effect>
+            <Blend />
+         </effect>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="133.0" prefWidth="600.0" spacing="20.0">
+         <children>
+            <Button fx:id="map6Btn" mnemonicParsing="false" onAction="#map6Selected" prefHeight="88.0" prefWidth="89.0" text="map 6" />
+            <Button fx:id="map7Btn" layoutX="266.0" layoutY="33.0" mnemonicParsing="false" onAction="#map7Selected" prefHeight="88.0" prefWidth="89.0" text="map 7" />
+            <Button fx:id="map8Btn" layoutX="201.0" layoutY="33.0" mnemonicParsing="false" onAction="#map8Selected" prefHeight="88.0" prefWidth="89.0" text="map 8" />
+            <Button fx:id="map9Btn" layoutX="137.0" layoutY="33.0" mnemonicParsing="false" onAction="#map9Selected" prefHeight="88.0" prefWidth="89.0" text="map 9" />
+            <Button fx:id="map10Btn" layoutX="72.0" layoutY="33.0" mnemonicParsing="false" onAction="#map10Selected" prefHeight="88.0" prefWidth="89.0" text="map 10" />
+         </children>
+         <opaqueInsets>
+            <Insets top="10.0" />
+         </opaqueInsets>
+         <effect>
+            <Blend />
+         </effect>
+      </HBox>
+   </children>
+</VBox>

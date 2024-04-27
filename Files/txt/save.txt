@@ -1,0 +1,24 @@
+user Ariberto
+{
+Username: Ariberto
+Password: 12345
+
+pve completion =
+pvc completion =
+}
+user Matthew
+{
+Username = Matthew
+Password = 1234
+
+pve completion =
+pvc completion =
+}
+user Michel
+{
+Username = Michel
+Password = 123456
+
+pve completion =
+pvc completion =
+}

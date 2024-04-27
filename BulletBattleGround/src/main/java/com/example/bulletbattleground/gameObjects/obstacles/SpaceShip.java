@@ -7,10 +7,14 @@ import com.example.bulletbattleground.utility.HitBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 
+import javax.sound.sampled.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
 public class SpaceShip extends Obstacle {
 
+    private boolean hasPlayedSound = false;
     public static final double DEFAULT_HEIGHT = 80;
     public static final double DEFAULT_WIDTH = 40;
     public static final double SPACESHIP_MASS = 190000;
@@ -31,6 +35,23 @@ public class SpaceShip extends Obstacle {
         setCoordinate(new Coordinate(coordinateX, coordinateY));
         setMass(SPACESHIP_MASS);
     }
+    private void playSpaceShipSound() {
+            try {
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("SpaceShip.wav"));
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+
+                // Set the volume to -10.0f (lower volume by 10 decibels)
+                gainControl.setValue(-15.0f);
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
+
+                // Start the sound
+                clip.start();
+            } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
+                e.printStackTrace();
+            }
+    }
 
     @Override
     public void move(double dt) {
@@ -43,6 +64,10 @@ public class SpaceShip extends Obstacle {
             allign();
         }
         super.move(dt);
+        if(!hasPlayedSound){
+        playSpaceShipSound();
+            hasPlayedSound = true;
+        }
     }
 
     @Override
@@ -66,5 +91,10 @@ public class SpaceShip extends Obstacle {
             double x5 = getCoordinate().getX() - DEFAULT_WIDTH / 2, y5 = getCoordinate().getY() + DEFAULT_HEIGHT / 2;
             (((Polygon) (getChildren()).get(0))).getPoints().setAll(x1, y1, x2, y2, x3, y3, x4, y4, x5, y5);
         }
+    }
+    @Override
+    public HitBox hitBox(){
+        hitBox = new HitBox(this);
+        return hitBox;
     }
 }

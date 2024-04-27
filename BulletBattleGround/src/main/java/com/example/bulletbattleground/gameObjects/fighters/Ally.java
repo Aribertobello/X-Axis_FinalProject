@@ -1,6 +1,8 @@
 package com.example.bulletbattleground.gameObjects.fighters;
 
+import com.example.bulletbattleground.BattleGround;
 import com.example.bulletbattleground.game.Fighter;
+import com.example.bulletbattleground.game.Level;
 import com.example.bulletbattleground.game.Mapp;
 import com.example.bulletbattleground.game.Projectile;
 import com.example.bulletbattleground.gameObjects.projectiles.Rocket;
@@ -22,11 +24,11 @@ public class Ally extends Fighter {
      * @param coordinateY
      * @param type
      */
-    public Ally(int coordinateX, int coordinateY, int type) {
-        super(coordinateX, coordinateY, type);
-        Image ally_Image = new Image("file:Light_Class_Img.png");
+    public Ally(int type, int health, int coordinateX, int coordinateY) {
+        super( type, health, coordinateX, coordinateY);
+        Image ally_Image = new Image("file:Files/img/Light_Class_Img.png");
         this.setFill(new ImagePattern(ally_Image));
-        setHealth(20000);
+        setHealth(health);
     }
 
     /**
@@ -35,6 +37,7 @@ public class Ally extends Fighter {
      * @param velocity
      * @param coordinate
      */
+    @Override
     public void launchProjectile(Projectile projectile, Vector velocity, Coordinate coordinate) {
         projectile.release(velocity, new Coordinate(coordinate.getX(), coordinate.getY()));
         ((Mapp) getParent()).addForces(projectile);
@@ -51,23 +54,15 @@ public class Ally extends Fighter {
         ((Mapp) this.getParent()).setBuffer(0);
 
         if (projectile instanceof Rocket) {
-            Vector a = projectile.acceleration();
+            Vector a = new Vector(0,4.9);
             double angle = projectile.velocity().angle();
             Vector v = projectile.velocity();
             double vx = v.getX();
             double ax = a.getX();
             double ay = a.getY();
             double tan = Math.tan(Math.PI*(angle/180));
-            double dropZone = 220+(2*vx*vx*tan*(ax*tan-ay)/(ay*ay));
+            double dropZone = this.getCoordinate().getX()+20+(2*vx*vx*tan*(ax*tan-ay)/(ay*ay));
              ((Rocket)projectile).setDropZone(dropZone);
-
-            /*((Rocket) projectile).setDropZone(
-                    projectile.getCoordinate().getX()
-                            + 2 * Math.pow(projectile.getVelocityX(), 2)
-                            * Math.tan(Math.PI / 180 * projectile.velocity().angle())
-                            * (projectile.acceleration().getX() * Math.tan(Math.PI / 180 * projectile.velocity().angle())
-                            - projectile.acceleration().getY())
-                            / Math.pow(projectile.acceleration().getY(), 2));*/
 
             if (((Rocket) projectile).getDropZone() >= 1915) {
                 ((Rocket) projectile).setDropZone(1915);
@@ -76,13 +71,6 @@ public class Ally extends Fighter {
             if (((Rocket) projectile).getDropZone() <= 5) {
                 ((Rocket) projectile).setDropZone(5);
             }
-
         }
-
-        System.out.println("added projectile to scene"); //TODO Remove in final code
-        System.out.println(projectile.netForce().magnitude());
-        System.out.println(projectile.netForce().angle());
-
-
     }
 }

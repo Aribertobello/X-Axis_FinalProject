@@ -1,7 +1,12 @@
 package com.example.bulletbattleground.utility;
 
+import javafx.scene.layout.CornerRadii;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.text.ParseException;
+import java.util.IllegalFormatException;
+import java.util.Objects;
 
 @Setter
 @Getter
@@ -23,6 +28,9 @@ public class Coordinate {
         setX(x+ vector.getX());
         setY(y+ vector.getY());
     }
+    public Coordinate move(Vector vector){
+        return new Coordinate(x+ vector.getX(),y+ vector.getY());
+    }
 
     /**
      *
@@ -41,6 +49,11 @@ public class Coordinate {
     public Vector distanceVector(Coordinate coordinate) {
         return new Vector(this.getX() - coordinate.getX(), this.getY() - coordinate.getY());
     }
+    public Coordinate rotateAbout(double angle, Coordinate axisOfRotation){
+        Vector v = distanceVector(axisOfRotation);
+        Vector r  = v.rotate(angle);
+        return axisOfRotation.move(distanceVector(axisOfRotation).rotate(angle));
+    }
 
     /**
      *
@@ -48,6 +61,32 @@ public class Coordinate {
      */
     @Override
     public String toString() {
-        return '(' + " " + x + ", " + y + ')';
+        return '(' + " " + Math.round(x) + ", " + Math.round(y) + ')';
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        Coordinate otherCoord = (Coordinate) object;
+        return x - otherCoord.x == 0 && y -otherCoord.y == 0;
+    }
+
+    public static Coordinate valueOf(String string) throws ParseException {
+        ParseException e = new ParseException("Coordinate String is incorrectly formatted, must be of type \"(x,y)\"",0);
+        if (string.startsWith("(") && string.endsWith(")") && string.contains(",")) {
+            string = string.substring(1, string.length() - 1);
+            String[] coordinates = string.split(",");
+            if (coordinates.length == 2) {
+                try {
+                    double x = Double.parseDouble(coordinates[0]);
+                    double y = Double.parseDouble(coordinates[1]);
+                    return new Coordinate(x, y);
+                } catch (NumberFormatException exception) {
+                    throw e;
+                }
+            }
+        }
+        throw e;
     }
 }

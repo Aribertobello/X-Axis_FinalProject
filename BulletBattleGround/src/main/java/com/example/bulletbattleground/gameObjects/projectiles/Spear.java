@@ -10,14 +10,19 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.transform.Rotate;
 
+import javax.sound.sampled.*;
+import java.io.File;
+import java.io.IOException;
+
 public class Spear extends Projectile {
-    
+
     Circle spearHitBox;
     Circle spear;
 
     public Spear() {
-        Image spearImg = new Image("file:spear.png");
+        Image spearImg = new Image("file:Files/img/spear.png");
         spearHitBox = new Circle(2, Color.DARKGRAY);
+        spearHitBox.setFill(Color.TRANSPARENT);
         spear = new Circle(30 ,Color.BLUE);
         spear.setFill(new ImagePattern((spearImg)));
         this.getChildren().add(spearHitBox);
@@ -26,8 +31,8 @@ public class Spear extends Projectile {
         this.lift = new Vector(0, -0.5);
         this.forces.add(lift);
         this.setMass(3.0);
+        setTerminalVelocity(60);
     }
-
     @Override
     public void move(double time) {
         allign();
@@ -47,7 +52,7 @@ public class Spear extends Projectile {
     }
 
     public void allign() {
-        double offset = 2; // Adjust as needed
+        double offset = 20; // Adjust as needed
         double offsetX = offset * Math.cos(Math.toRadians(velocity().angle()));
         double offsetY = offset * Math.sin(Math.toRadians(velocity().angle()));
         spear.setCenterX(getChildren().get(0).getLayoutX() - offsetX);

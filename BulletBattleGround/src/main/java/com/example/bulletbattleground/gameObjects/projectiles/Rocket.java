@@ -10,6 +10,10 @@ import javafx.scene.shape.Polygon;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.sound.sampled.*;
+import java.io.File;
+import java.io.IOException;
+
 public class Rocket extends Projectile {
 
     @Getter
@@ -28,7 +32,9 @@ public class Rocket extends Projectile {
         this.lift = new Vector(0, -2.0);
         this.forces.add(lift);
         this.setMass(9.0);
+        setTerminalVelocity(50);
     }
+
 
 
     @Override

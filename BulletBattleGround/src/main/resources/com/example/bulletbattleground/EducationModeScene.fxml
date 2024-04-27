@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox fx:id="chartBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="309.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bulletbattleground.controllers.EducationGameController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="309.0" prefWidth="270.0">
+         <children>
+            <LineChart fx:id="chart1" prefHeight="198.0" prefWidth="240.0">
+              <xAxis>
+                  <NumberAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+            </LineChart>
+            <Label text="Select Value of Interest" />
+            <ChoiceBox fx:id="chart1ChoiceBox" prefHeight="25.0" prefWidth="205.0" />
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="309.0" prefWidth="270.0">
+         <children>
+            <LineChart fx:id="chart2" prefHeight="198.0" prefWidth="270.0">
+               <xAxis>
+                  <NumberAxis side="BOTTOM" />
+               </xAxis>
+               <yAxis>
+                  <NumberAxis side="LEFT" />
+               </yAxis>
+            </LineChart>
+            <Label text="Select Value of Interest" />
+            <ChoiceBox fx:id="chart2ChoiceBox" prefHeight="25.0" prefWidth="205.0" />
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="309.0" prefWidth="270.0">
+         <children>
+            <LineChart fx:id="chart3" prefHeight="198.0" prefWidth="270.0">
+               <xAxis>
+                  <NumberAxis side="BOTTOM" />
+               </xAxis>
+               <yAxis>
+                  <NumberAxis side="LEFT" />
+               </yAxis>
+            </LineChart>
+            <Label text="Select Value of Interest" />
+            <ChoiceBox fx:id="chart3ChoiceBox" prefHeight="25.0" prefWidth="205.0" />
+         </children>
+      </VBox>
+   </children>
+</HBox>

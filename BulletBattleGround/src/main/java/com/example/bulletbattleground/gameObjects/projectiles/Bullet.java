@@ -12,7 +12,16 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
+import javax.sound.sampled.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+
 public class Bullet extends Projectile {
+
+    private final static int BULLET_DAMAGE = 3;
+    private final static double BULLET_MASS = 0.5;
+    private final static Vector BULLET_LIFT = new Vector(0, -2.0);
 
     /**
      * Constructs a new Bullet object.
@@ -22,14 +31,17 @@ public class Bullet extends Projectile {
     public Bullet() {
         Circle small_bullet = new Circle(10);
         small_bullet.setRotate(90);
-        Image smallBulletImg = new Image("file:smallBullet.png");
+        Image smallBulletImg = new Image("file:Files/img/smallBullet.png");
         small_bullet.setFill(new ImagePattern(smallBulletImg));
         this.getChildren().add(small_bullet);
-        this.damage = 3;
-        this.lift = new Vector(0, -2.0);
+        this.damage = BULLET_DAMAGE;
+        this.lift = BULLET_LIFT;
         this.forces.add(lift);
-        setMass(0.5);
+        setTerminalVelocity(99);
+        setMass(BULLET_MASS);
+
     }
+
 
     @Override
     public void bounce(HitBox hitBox) {

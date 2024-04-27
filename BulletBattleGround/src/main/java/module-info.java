@@ -2,7 +2,7 @@ module com.example.bulletbattleground {
     requires javafx.controls;
     requires javafx.fxml;
     requires static lombok;
-
+requires java.desktop;
 
     opens com.example.bulletbattleground to javafx.fxml;
     exports com.example.bulletbattleground;
@@ -22,4 +22,6 @@ module com.example.bulletbattleground {
     opens com.example.bulletbattleground.gameObjects.Loot to javafx.fxml;
     exports com.example.bulletbattleground.controllers;
     opens com.example.bulletbattleground.controllers to javafx.fxml;
+    exports com.example.bulletbattleground.game.levels;
+    opens com.example.bulletbattleground.game.levels to javafx.fxml;
 }

@@ -1,80 +1,127 @@
 package com.example.bulletbattleground.controllers;
 
+import com.example.bulletbattleground.BattleGround;
+import com.example.bulletbattleground.fileManagement.FileManager;
+import com.example.bulletbattleground.game.Game;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.ProgressBar;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Line;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.IOException;
+
+@Getter
+@Setter
 public class GameSceneController {
+    //TODO enemy health
     @FXML
-    @Getter
-    @Setter
     private Pane headsUpDisplay;
-    @Getter
-    @Setter
     @FXML
     private AnchorPane container;
-    @Getter
-    @Setter
     @FXML
     private Label activeProjectileLabel;
-    @Getter
-    @Setter
     @FXML
     private Label KELabel;
-    @Getter
-    @Setter
     @FXML
     private Label blankLabel;
-    @Getter
-    @Setter
     @FXML
     private ProgressBar healthProgressbar;
-    @Getter
-    @Setter
     @FXML
     private Label healthLabel;
-    @Getter
-    @Setter
     @FXML
     private MenuBar topMenu;
-    @Getter
-    @Setter
     @FXML
     private Label angleLabel;
-    @Getter
-    @Setter
     @FXML
     private Menu newGameButton;
-    @Getter
-    @Setter
     @FXML
     private Menu exitButton;
     @FXML
-    private void handleExit(){
-        Platform.exit();
-    }
-    @Getter
-    @Setter
+    private Label GrenadeLabel;
+    @FXML
+    private Label SmokeLabel;
+    @FXML
+    private Label VeloLabel;
+    @FXML
+    private Label AccLabel;
     @FXML
     private Menu settingsButton;
-    @Getter
-    @Setter
     @FXML
     private Menu pauseButton;
     @FXML
-    private void handlePause() {
-
-    }
+    private Label MomLabel;
     @FXML
-    public void initialize(){
+    private Line Xaxis;
+    @FXML
+    private Line AngleDisp;
+    @FXML
+    private ProgressBar VeloBar;
+    @FXML
+    private Line ArrLinee;
+    @FXML
+    private Line ArrLine;
+    @FXML
+    private Label BltAmount;
+    @FXML
+    private Label GTimer;
+    @FXML
+    private Label STimer;
+    @FXML
+    private ImageView GImg;
+    @FXML
+    private ImageView BImg;
+    @FXML
+    private Label Ehealthlbl;
+    @FXML
+    private ProgressBar EhealthBar;
+    public int light = 1;
+    public int medium = 2;
+    public int heavy = 3;
+
+    @FXML
+    private void handlePause() {
+        BattleGround.activeGame.pauseGame();
+    }
+
+    @FXML
+    private void handleExit(){
+        BattleGround.prevScene();
+    }
+
+    @FXML
+    public void initialize() {
         exitButton.setOnAction(e -> handleExit());
         pauseButton.setOnAction(e -> handlePause());
+        if (GImg != null && BImg != null) {
+            GImg.setImage(new Image("file:Files/img/grenade.png"));
+            if (FileManager.loadoutType == light) {
+                BImg.setImage(new Image("file:Files/img/smallBullet.png"));
+            } else if (FileManager.loadoutType == medium) {
+                BImg.setImage(new Image("file:Files/img/spear.png"));
+            } else if (FileManager.loadoutType == heavy) {
+                BImg.setImage(new Image("file:Files/img/rocket.png"));
+            }
+        }
+    }
+
+    public void displayHowToPlay(ActionEvent event) {
+        TabPane instructionBox;
+        try {
+            instructionBox = BattleGround.instructionBoxLoader().load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        BattleGround.activeGame.unfocus();
+        BattleGround.activeGame.getLevel().getChildren().add(instructionBox);
+        BattleGround.activeGame.pauseGame();
     }
 }

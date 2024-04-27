@@ -8,13 +8,16 @@ import lombok.Setter;
 public abstract class Obstacle extends MovingBody implements BattleGroundObject {
 
     protected boolean ispenetrable;
+    @Getter
+    @Setter
+    protected double rotationAngle;
 
     /**
      *
      * @param dt
      */
     public void move(double dt) {
-        setCoordinate(getVelocityX() * dt + getCoordinate().getX(),getVelocityY() * dt + getCoordinate().getY());
+        setCoordinate(getVelocityX() * dt*10 + getCoordinate().getX(),getVelocityY() * dt*10 + getCoordinate().getY());
     }
     @Override
     public void setCoordinate(Coordinate coordinate){
@@ -26,8 +29,10 @@ public abstract class Obstacle extends MovingBody implements BattleGroundObject 
         super.setCoordinate(x,y);
         allign();
     }
-    public HitBox hitBox(){
-        hitBox = new HitBox(this);
-        return hitBox;
+    public abstract HitBox hitBox();
+
+    public void rotate(double angle){
+        this.setRotationAngle(angle);
+        this.getChildren().get(0).setRotate(angle);
     }
 }

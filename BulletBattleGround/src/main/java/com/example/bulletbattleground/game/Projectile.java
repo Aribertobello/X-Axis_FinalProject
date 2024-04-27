@@ -1,17 +1,24 @@
 package com.example.bulletbattleground.game;
 
+import com.example.bulletbattleground.gameObjects.projectiles.Bullet;
+import com.example.bulletbattleground.gameObjects.projectiles.Rocket;
+import com.example.bulletbattleground.gameObjects.projectiles.Spear;
 import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.HitBox;
 import com.example.bulletbattleground.utility.MovingBody;
 import com.example.bulletbattleground.utility.Vector;
+import javafx.scene.shape.Circle;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.sound.sampled.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 
-public abstract class Projectile extends MovingBody {
+public abstract class  Projectile extends MovingBody {
 
-    public static final double TERMINAL_VELOCITY = 200;
+    public static final double TERMINAL_VELOCITY = 100;
     public static final double MIN_LAUNCH_VELOCITY = 10.0;
 
     @Getter
@@ -20,7 +27,6 @@ public abstract class Projectile extends MovingBody {
     @Setter
     @Getter
     protected int damage;
-
     @Setter
     @Getter
     protected Vector lift;
@@ -39,6 +45,7 @@ public abstract class Projectile extends MovingBody {
         this.setVelocityX(acceleration().getX() * time + getVelocityX());
         this.setVelocityY(acceleration().getY() * time + getVelocityY());
         setCoordinate(new Coordinate(x,y));
+
     }
 
     /**
@@ -53,6 +60,55 @@ public abstract class Projectile extends MovingBody {
         forces.clear();
         forces.add(lift);
         forces.addAll(Arrays.asList(Forces));
+
+        if(this instanceof Bullet){
+            playGunshotSound();
+        }
+        if(this instanceof Spear) {
+            playSpearSound();
+        }
+        if(this instanceof Rocket) {
+            playRocketSound();
+        }
+
+    }
+    private void playGunshotSound() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("GunShot.wav"));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            volumeControl.setValue(-20.0f);
+            clip.start();
+        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void playRocketSound() {
+
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Rocket.wav"));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            volumeControl.setValue(-15.0f);
+            clip.start();
+        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void playSpearSound() {
+
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Spear.wav"));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            volumeControl.setValue(-10.0f);
+            clip.start();
+        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -63,15 +119,16 @@ public abstract class Projectile extends MovingBody {
         setVelocityX(vector.getX());
         setVelocityY(vector.getY());
     }
+
     @Override
     public void setCoordinate(Coordinate coordinate) {
         this.getChildren().get(0).setLayoutX(coordinate.getX());
         this.getChildren().get(0).setLayoutY(coordinate.getY());
         super.setCoordinate(coordinate);
     }
+
     public HitBox hitBox(){
         hitBox = new HitBox(this);
         return hitBox;
     }
-
 }

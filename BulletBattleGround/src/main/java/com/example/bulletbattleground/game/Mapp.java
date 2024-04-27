@@ -1,41 +1,51 @@
 package com.example.bulletbattleground.game;
 
+import com.example.bulletbattleground.BattleGround;
 import com.example.bulletbattleground.gameObjects.Loot.Loot;
 import com.example.bulletbattleground.gameObjects.projectiles.Bullet;
 import com.example.bulletbattleground.gameObjects.projectiles.Grenade;
 import com.example.bulletbattleground.utility.*;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+
+import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
 public class Mapp extends Pane implements GameUI {
 
+    @Getter
     private int type;
 
+    @Getter
+    @Setter
     protected ArrayList<Fighter> people = new ArrayList<>();
-
+    @Getter
+    @Setter
     protected ArrayList<Obstacle> obstacles = new ArrayList<>();
     private ArrayList<HitBox> hitBoxes = new ArrayList<>();
+    double terminalVelocity;
     private Pane hitBoxPane = new Pane();
-
     private double gravity;
     private double airResistance;
+
     protected int scale;
+    @Setter
+    private double[] bounds  = {BattleGround.screenWidth,BattleGround.screenHeight};
 
     @Getter
     @Setter
     public Projectile activeProjectile;
-
     @Getter
     @Setter
     protected int buffer = 0;
@@ -64,7 +74,6 @@ public class Mapp extends Pane implements GameUI {
                     new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false)
             );
             this.setBackground(new Background(background));
-
             Image groundEarthImage = new Image("file:ground.jpeg");
             earth = new Rectangle(0, BattleGround.screenHeight-200, 3000,250);
             earth.setFill(new ImagePattern(groundEarthImage));
@@ -73,7 +82,6 @@ public class Mapp extends Pane implements GameUI {
             airResistance = 3;
             this.type = 0;
         }
-
         if (type.equalsIgnoreCase("space")) {
             Image backgroundImageSpace = new Image("file:spaceBackground.png");
             BackgroundImage background = new BackgroundImage(
@@ -92,9 +100,7 @@ public class Mapp extends Pane implements GameUI {
             this.type = 1;
         }
         this.getChildren().add(new Circle(2000, 1200, 1));
-
     }
-
 
     @Override
     public boolean[] update(double dt, double time) {
@@ -144,6 +150,7 @@ public class Mapp extends Pane implements GameUI {
         obstacles.add(obstacle);
         getChildren().add(obstacle);
     }
+
     public void addHitBox(HitBox hitBox) {
         boolean exists = false;
         int i = 0;
@@ -161,8 +168,6 @@ public class Mapp extends Pane implements GameUI {
             hitBoxes.add(hitBox);
             getChildren().add(hitBox);
         }
-
-
     }
 
     /**
@@ -171,9 +176,9 @@ public class Mapp extends Pane implements GameUI {
      */
     public void addForces(Projectile projectile) {
         if (type == 0) {
-
             environmentForces[0] = new Vector(0,gravity).multiply(projectile.getMass());
         } else {
+            Circle earth = (Circle) this.earth;
             projectile.setMass(2000);
             Coordinate earthCenterOfGravity = new Coordinate(earth.getCenterX(), earth.getCenterY());
             double bigG = 6.67 * pow(10, -11);
@@ -189,7 +194,6 @@ public class Mapp extends Pane implements GameUI {
             projectile.forces.clear();
             projectile.forces.add(environmentForces[0]);
             projectile.forces.add(environmentForces[1]);
-        }
     }
 
     /**
@@ -205,7 +209,7 @@ public class Mapp extends Pane implements GameUI {
                 MovingBody.collision(projectile,obstacle);
                 HitBox collidedObstacleHitBox = obstacle.hitBox();
                 collidedObstacleHitBox.setDisplayed(true);
-                addHitBox(collidedObstacleHitBox);
+                //addHitBox(collidedObstacleHitBox);
                 return true;
             }
         }
@@ -213,20 +217,18 @@ public class Mapp extends Pane implements GameUI {
 
             if (projectile.hitBox().overlaps(fighter.hitBox())) {
                 fighter.setHealth(fighter.getHealth() - projectile.getDamage());
-                this.getChildren().remove(activeProjectile);
-                activeProjectile = null;
+                removeActiveProjectile();
                 if (fighter.getHealth() <= 0) {
-                    people.remove(fighter);
-                    this.getChildren().remove(fighter);
+                    ((Level)getParent().getParent()).removeFighter(fighter);
                 }
                 return true;
             }
 
         }
-
         if (loot != null && projectile.hitBox().overlaps(loot.hitBox())) {
-            this.getChildren().remove(loot);
-            loot = null;
+            removeLoot();
+            removeActiveProjectile();
+            return true;
             //TODO Game Won
         }
         return false;
@@ -239,4 +241,35 @@ public class Mapp extends Pane implements GameUI {
     protected void explosion(Coordinate coordinate) {
         activeProjectile.setVelocity(new Vector(0, 0));
     }
+
+    private boolean isInBounds(MovingBody body) {
+        double x = body.getCoordinate().getX();
+        double y = body.getCoordinate().getY();
+        return !(x < BattleGround.screenWidth-bounds[0]-50 || x > bounds[0]+50 || y <  BattleGround.screenHeight-bounds[0]-50 || y > bounds[1]+50);
+    }
+    public void removeActiveProjectile() {
+        if(activeProjectile!=null){
+            this.getChildren().remove(activeProjectile);
+            activeProjectile = null;
+            ((Game)getScene()).turnManager.endAnimation();
+        }
+    }
+    public void removeFighter(Fighter fighter){
+        people.remove(fighter);
+        this.getChildren().remove(fighter);
+    }
+    public void removeLoot(){
+        this.getChildren().remove(loot);
+        loot = null;
+        hasLoot = false;
+    }
+
+    public void setAirResistanceMagnitude(double magnitude){
+        //airResistance = airResistance.scale(magnitude);
+    }
+    public void setGravityMagnitude(double magnitude){
+
+        //gravity = gravity.scale(magnitude);
+    }
+
 }
