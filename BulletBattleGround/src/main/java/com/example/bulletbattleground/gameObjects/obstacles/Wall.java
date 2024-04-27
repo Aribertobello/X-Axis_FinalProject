@@ -16,7 +16,7 @@ public class Wall extends Obstacle {
     int thickness;
     int height;
 
-    public Wall(int height, int thickness, int coordinateX, int coordinateY, int mass) {
+    public Wall(int height, int thickness, int coordinateX, int coordinateY, double rotationAngle, int mass) {
         setHeight(height);
         setThickness(thickness);
         Rectangle rectangle = new Rectangle(coordinateX - (double) thickness / 2, coordinateY - (double) height / 2, thickness, height);
@@ -27,6 +27,7 @@ public class Wall extends Obstacle {
         this.getChildren().addAll(rectangle, label);
         this.setCoordinate(new Coordinate(coordinateX, coordinateY));
         setMass(mass);
+        rotate(rotationAngle);
     }
 
     @Override

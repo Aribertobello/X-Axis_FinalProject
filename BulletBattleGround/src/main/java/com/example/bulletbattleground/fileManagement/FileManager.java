@@ -165,8 +165,8 @@ public class FileManager extends ClassSelectorController {
             }
             str = scanner.next();
         }
-        map.setGravityMagnitude(gMag);
-        map.setAirResistanceMagnitude(aiResMag);
+        map.setGravity(gMag);
+        map.setAirResistance(aiResMag);
         map.environmentForces[2] = wind;
     }
 
@@ -204,7 +204,7 @@ public class FileManager extends ClassSelectorController {
                         mass = lineScanner.nextInt();
                     }
                 }
-                map.addObstacle(new Wall(height, width, (int) coordinate.getX(), (int) coordinate.getY(), mass));
+                map.addObstacle(new Wall(height, width, (int) coordinate.getX(), (int) coordinate.getY(), rotation, mass));
             }
             if (line.startsWith("spaceship")) {
                 while (!lineScanner.next().startsWith("}")) {
