@@ -9,14 +9,11 @@ import javafx.scene.shape.Rectangle;
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter
+@Setter
 public class Wall extends Obstacle {
 
-    @Getter
-    @Setter
     int thickness;
-
-    @Getter
-    @Setter
     int height;
 
     public Wall(int height, int thickness, int coordinateX, int coordinateY, int mass) {

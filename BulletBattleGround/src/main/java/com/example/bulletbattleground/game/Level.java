@@ -54,13 +54,9 @@ public abstract class Level extends AnchorPane implements GameUI {
     public Arrow arrow;
     //Level properties-----------------
     protected boolean dragging = false;
-    @Getter
-    @Setter
-    public Mapp map;
+    @Getter @Setter public Mapp map;
     protected Line trajectoryLine = new Line();//TODO
-    @Getter
-    @Setter
-    protected Coordinate origin;
+    @Getter @Setter protected Coordinate origin;
     @Getter
     @Setter
     protected Fighter selectedFighter;
@@ -73,6 +69,13 @@ public abstract class Level extends AnchorPane implements GameUI {
     @Getter
     @Setter
     String description = "";
+
+    //private Line Xaxis;
+    private Line AngleDisp;
+    @Getter
+    @Setter
+    private double LastAngel = 0.0;
+
     public ArrayList<Fighter> team1 = new ArrayList<>();
     public ArrayList<Fighter> team2 = new ArrayList<>();
     //------------------------------------------------------------------------
@@ -89,21 +92,18 @@ public abstract class Level extends AnchorPane implements GameUI {
     private Label GrenadeLabel;
     private Label SmokeLabel;
     private Label KELabel;
-    private ProgressBar healthProgressbar;
     private Label VeloLabel;
     private Label AccLabel;
     private Label healthLabel;
     private Label angleLabel;
     private Label MomLabel;
+    private ProgressBar healthProgressbar;
     private Label turnStatusLabel;
     private Label timeLeftLabel;
     private ProgressBar timerBar;
     public Pane turnStatusBox;
     private ProgressBar VeloBar;
-    private Line AngleDisp;
-    @Getter
-    @Setter
-    private double LastAngel = 0.0;
+
     private Label EnemyCoor;
     private Label AllyCoor;
     static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
@@ -117,16 +117,6 @@ public abstract class Level extends AnchorPane implements GameUI {
     private Label descriptionLabel;
     private VBox descriptionBox;
 
-    /**
-     *
-     * @param dt
-     */
-
-    //constructor---------------------------------
-    /**
-     *
-     * @param map
-     */
     public Level(Mapp map) throws IOException {
         this.map = map;
         createHUD();
@@ -144,7 +134,7 @@ public abstract class Level extends AnchorPane implements GameUI {
 
     public boolean[] update(double dt,double time) {
         updateHUD();
-        if(map.update(dt)){
+        if(map.update(dt,time)[0]){
             return levelStatus(map);
         }
         return new boolean[]{false,false};
@@ -308,7 +298,6 @@ public abstract class Level extends AnchorPane implements GameUI {
     }
 
 
-
     private void setHealthHUD() {
         if(selectedFighter!=null) {
             healthProgressbar.setProgress((double) selectedFighter.getHealth() / (double) selectedFighter.getMaxHealth());
@@ -326,12 +315,13 @@ public abstract class Level extends AnchorPane implements GameUI {
     public void setAngleHUD( Vector direction){
         double angle = 180 - direction.angle();
         if(!Double.isNaN(angle)){
-            AngleDisp.setRotate(-angle);
-            AngleDisp.setStroke(Color.WHITE);
-            angleArc.setLength(angle);
-            angleLabel.setText("Angle: " + Math.round(angle));
+                AngleDisp.setRotate(-angle);
+                AngleDisp.setStroke(Color.WHITE);
+                angleArc.setLength(angle);
+                angleLabel.setText("Angle: " + Math.round(angle));
         }
     }
+
 
 
     public void updateTurnBox(double time, double timeLimit, int playerTurn) {
@@ -346,7 +336,6 @@ public abstract class Level extends AnchorPane implements GameUI {
         timeLeftLabel.setText(String.valueOf(Math.round(10*(timeLimit-time))/10.0));
         timerBar.setProgress(1-(time/timeLimit));
     }
-
     public void removeFighter(Fighter fighter) {
         selectedFighter.unhiglight();
         selectedFighter = null;
@@ -368,11 +357,13 @@ public abstract class Level extends AnchorPane implements GameUI {
     }
 
     public class Arrow extends Polyline {
+        Coordinate ultimateCoord = null;
+        Coordinate penUltimateCoord = null;
         public Arrow(){
             super();
             this.setStroke(Color.WHITE);
         }
-        public void update(Fighter fighter, double dt, Coordinate coordinate, Vector direction){
+        public void updateDrag(Fighter fighter, double dt, Coordinate coordinate, Vector direction){
 
             Projectile projectile;
             this.getPoints().clear();
@@ -386,16 +377,29 @@ public abstract class Level extends AnchorPane implements GameUI {
             projectile.setVelocity(direction);
             projectile.setCoordinate(coordinate);
 
-            for(double t = 0 ; t < 0.5; t += dt){
-                if(fighter.loadout.type==3){
-                    projectile.forces.clear();
-                    projectile.forces.add(new Vector(0,4.9).multiply(projectile.getMass()));
-                }
-                projectile.move(dt);
+            for(double T = 0 ; T < 10; T += 2*dt){
+                    if(fighter.loadout.type==3){
+                        projectile.forces.clear();
+                        projectile.forces.add(new Vector(0,4.9).multiply(projectile.getMass()));
+                    }
+                    projectile.move(2*dt);
+                    map.addForces(projectile);
                 this.getPoints().addAll(projectile.getCoordinate().getX(),projectile.getCoordinate().getY());
-                map.addForces(projectile);
+                penUltimateCoord = ultimateCoord;
+                ultimateCoord = projectile.getCoordinate();
+
             }
             map.getChildren().add(this);
+            addTip();
+        }
+        public void addTip(){
+            if(!this.getPoints().isEmpty()){
+                Vector slopeVector = ultimateCoord.distanceVector(penUltimateCoord).scale(5);
+                getPoints().addAll(ultimateCoord.move(slopeVector.rotate(90)).getX(), ultimateCoord.move(slopeVector.rotate(90)).getY());
+                getPoints().addAll(ultimateCoord.move(slopeVector.rotate(-90)).getX(), ultimateCoord.move(slopeVector.rotate(-90)).getY());
+                getPoints().addAll(ultimateCoord.move(slopeVector.multiply(2)).getX(), ultimateCoord.move(slopeVector.multiply(2)).getY());
+                getPoints().addAll(ultimateCoord.move(slopeVector.rotate(90)).getX(), ultimateCoord.move(slopeVector.rotate(90)).getY());
+            }
         }
     }
 }

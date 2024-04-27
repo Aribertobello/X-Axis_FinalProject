@@ -25,6 +25,10 @@ public class Fighter extends Rectangle {
 
     @Getter
     @Setter
+    protected int maxHealth;
+
+    @Getter
+    @Setter
     protected int health;
 
     @Getter

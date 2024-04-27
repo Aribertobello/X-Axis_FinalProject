@@ -81,17 +81,6 @@ public class Vector {
 
     /**
      * static
-     *calculates cross product of 2 given vectors
-     * @param vector1
-     * @param vector2
-     * @return
-     */
-    public static Vector crossProduct(Vector vector1, Vector vector2) {
-        return null;
-    }
-
-    /**
-     * static
      * calculates the sum of an array of vectors
      * follows formula sumX = x1+x2+x3...   sumY = y1+y2+y3...
      * @param Vectors given array of vectors to be summed
@@ -131,7 +120,7 @@ public class Vector {
      */
     public Vector scale(double newMagnitude) {
         double scale = newMagnitude / this.magnitude();
-        return this.multiply(Math.abs(scale));
+        return this.multiply(scale);
     }
 
     /**
@@ -162,6 +151,14 @@ public class Vector {
         return new Vector(
                 x * Math.cos(angle / 180 * Math.PI ) - y * Math.sin(angle / 180 * Math.PI )
                 , x * Math.sin(angle / 180 * Math.PI ) + y * Math.cos(angle / 180 * Math.PI ));
+    }
+    public double slope(){
+        return y/x;
+    }
+
+
+    public void toArrow(){
+
     }
 
     /**
