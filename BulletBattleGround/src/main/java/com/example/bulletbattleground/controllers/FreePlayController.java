@@ -19,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import lombok.Getter;
 import lombok.Setter;
@@ -78,6 +79,7 @@ public class FreePlayController {
         fighter = new Computer(compLoadoutNb,15,0,0);
         Image computerImage = new Image("file:Files/img/Light_Class_Img_Inverted.png");
         fighter.setFill(new ImagePattern(computerImage));
+        fighter.setTeamNb(2);
         imageView = (ImageView) event.getSource();
         returnCoordinate = new Coordinate(event.getSceneX(),event.getSceneY());
         coordinate = new Coordinate(event.getSceneX(),event.getSceneY());
@@ -127,7 +129,7 @@ public class FreePlayController {
     public void dragEndFighter(MouseEvent event) {
         fighter.setCoordinate(coordinate);
         Level level = ((Level)((Node)event.getSource()).getParent().getParent().getParent());
-        level.addFighter(fighter, 0);
+        level.addFighter(fighter, 1);
 
         imageView.setTranslateX(0);
         imageView.setTranslateY(0);
@@ -190,16 +192,20 @@ public class FreePlayController {
         allyLoadoutNb = 3;
     }
 
-
-    public void reflectAllyImage(ActionEvent event) {
-        //fighter.reflect();
-        Image allyImageInverted = new Image("file:Files/img/Light_Class_Img_Inverted.png");
-        fighter.setFill(new ImagePattern(allyImageInverted));
-    }
     @FXML
-    void reflectComputerImage(ActionEvent event) {
-        Image computerImageInverted = new Image("file:Files/img/Light_Class_Img.png");
-        fighter.setFill(new ImagePattern(computerImageInverted));
+    void reflectAllyImageright(ActionEvent event) {
+        if(fighter instanceof  Ally){
+            fighter.reflect();
+            fighter.setTeamNb(fighter.isInverted() ? 2 :  1 );
+        }
+    }
+
+    @FXML
+    void reflectComputerImageRight(ActionEvent event) {
+        if(fighter instanceof  Computer){
+            fighter.reflect();
+            fighter.setTeamNb(fighter.isInverted() ? 2 :  1 );
+        }
     }
 
     public void compLightClassChosen(ActionEvent event) {

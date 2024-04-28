@@ -121,7 +121,7 @@ public class Fighter extends Rectangle {
     public void reflect(){
         inverted = !inverted;
         if(inverted) setFill(new ImagePattern(new Image("file:Files/img/Light_Class_Img_Inverted.png")));
-        else setFill(new ImagePattern(new Image("file:Files/img/Light_Class.png")));
+        else setFill(new ImagePattern(new Image("file:Files/img/Light_Class_Img.png")));
     }
 
     public void highlight(){
