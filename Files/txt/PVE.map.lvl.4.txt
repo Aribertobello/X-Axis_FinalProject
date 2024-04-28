@@ -1,5 +1,6 @@
+index : 1
 type : earth
-Forces : 
+Forces :
 {
 GMagnitude = 9.8
 AirResMagnitude = 2.0
@@ -7,11 +8,13 @@ wind = <-0.9,0.0>
 }
 Obstacles :
 {
-wall : { height = 50 , width = 5 , coordinate = (500,500) , rotation  = 0 , mass = 2 }
-wall : { height = 400 , width = 50 , coordinate = (900,200) , rotation  = 0 , mass = 20 }
-spaceship : { speed = 20 , coordinate = (900,200) }
+wall : { height = 199 , width = 14 , coordinate = (580,300) , rotation  = 0 , mass = 2 }
+wall : { height = 199 , width = 14 , coordinate = (750,450) , rotation  = 220 , mass = 2 }
+spaceship : { speed = -25 , coordinate = (1824,586) }
+spaceship : { speed = 25 , coordinate = (942,296) }
 }
-Description : 
-WOW! this map is very normal i hope its stays that way
+Description :
+You have to Hit both enemies 3 times to pass this level.
+
 
  

@@ -9,6 +9,7 @@ wind = <-0.9,0.0>
 Obstacles :
 {
 wall : { height = 250 , width = 25 , coordinate = (936,196) , rotation  = 0 , mass = 2 }
+wall : { height = 50 , width = 5 , coordinate = (500,500) , rotation  = 0 , mass = 2 }
 spaceship : { speed = 14 , coordinate = (1155,1070) }
 spaceship : { speed = 16 , coordinate = (1068,1037) }
 }

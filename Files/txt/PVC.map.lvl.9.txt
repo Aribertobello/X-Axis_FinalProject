@@ -8,9 +8,17 @@ wind = <-0.9,0.0>
 }
 Obstacles :
 {
-wall : { height = 50 , width = 5 , coordinate = (500,500) , rotation  = 0 , mass = 2 }
-wall : { height = 400 , width = 50 , coordinate = (900,200) , rotation  = 0 , mass = 20 }
+wall : { height = 170 , width = 10 , coordinate = (1003,686) , rotation  = 116 , mass = 2 }
+wall : { height = 170 , width = 10 , coordinate = (1367,397) , rotation  = 116 , mass = 2 }
+wall : { height = 170 , width = 10 , coordinate = (1049,222) , rotation  = 206 , mass = 2 }
+wall : { height = 75 , width = 10 , coordinate = (846,272) , rotation  = 0 , mass = 2 }
+wall : { height = 75 , width = 10 , coordinate = (1196,491) , rotation  = 0 , mass = 2 }
+wall : { height = 75 , width = 10 , coordinate = (779,740) , rotation  = 0 , mass = 2 }
+wall : { height = 140 , width = 10 , coordinate = (670,50) , rotation  = 75 , mass = 2 }
+wall : { height = 140 , width = 10 , coordinate = (400,600) , rotation  = 75 , mass = 2 }
 spaceship : { speed = 20 , coordinate = (900,200) }
+spaceship : { speed = 20 , coordinate = (1200,200) }
+spaceship : { speed = 20 , coordinate = (1200,400) }
 }
 Description : 
 WOW! this map is very normal i hope its stays that way

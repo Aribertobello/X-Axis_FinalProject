@@ -86,15 +86,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.Build BulletBattleGround.executor": "Run",
-    "Gradle.BulletBattleGround [:BattleGround.main()].executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "git-widget-placeholder": "Merging matt",
-    "kotlin-language-version-configured": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Build BulletBattleGround.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.BulletBattleGround [:BattleGround.main()].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Merging matt&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\aribe\IdeaProjects\X-Axis_FinalProject\BulletBattleGround\src\main\resources\com\example\bulletbattleground" />

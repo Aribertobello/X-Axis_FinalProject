@@ -11,6 +11,7 @@ Obstacles :
 wall : { height = 279 , width = 25 , coordinate = (770,277) , rotation = 127 , mass = 2 }
 wall : { height = 279 , width = 25 , coordinate = (875,751) , rotation = 127 , mass = 2 }
 wall : { height = 279 , width = 25 , coordinate = (1450,440) , rotation  = 127 , mass = 2 }
+wall : { height = 40 , width = 25 , coordinate = (1000,500) , rotation  = 0 , mass = 2 }
 spaceship : { speed = -19 , coordinate = (876,545) }
 spaceship : { speed = 19 , coordinate = (981,124) }
 spaceship : { speed = -19 , coordinate = (979,822) }
