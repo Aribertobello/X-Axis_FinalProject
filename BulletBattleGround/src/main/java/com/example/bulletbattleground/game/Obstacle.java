@@ -12,6 +12,9 @@ public abstract class Obstacle extends MovingBody implements BattleGroundObject 
     @Setter
     protected double rotationAngle;
 
+    @Getter
+    @Setter
+    private Mapp map;
     /**
      *
      * @param dt

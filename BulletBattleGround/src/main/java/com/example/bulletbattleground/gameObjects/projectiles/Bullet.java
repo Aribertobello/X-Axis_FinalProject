@@ -37,11 +37,21 @@ public class Bullet extends Projectile {
         this.damage = BULLET_DAMAGE;
         this.lift = BULLET_LIFT;
         this.forces.add(lift);
-        setTerminalVelocity(99);
+        setTerminalVelocity(190);
         setMass(BULLET_MASS);
 
     }
 
+    private void playGunshotSound() {
+          try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("GunShot.wav"));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void bounce(HitBox hitBox) {

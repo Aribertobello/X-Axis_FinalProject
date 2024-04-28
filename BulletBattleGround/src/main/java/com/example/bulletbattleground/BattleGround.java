@@ -27,6 +27,7 @@ public class BattleGround extends Application {
     public static int screenHeight = (int) Screen.getPrimary().getBounds().getHeight();
     public static Stack<Scene> workFlowStack = new Stack<>();
     public static Stage mainStage;
+    public static String username;
     public static User user = new User();
 
     /**
@@ -43,7 +44,6 @@ public class BattleGround extends Application {
         Scene signInScene = new Scene(signInPageLoader().load());
         stage.setTitle("Bullet BattleGround");
         newScene(signInScene);
-
         stage.show();
     }
 
@@ -52,13 +52,14 @@ public class BattleGround extends Application {
      * @param args
      */
     public static void main(String[] args) {
-
         launch();
     }
+
     public static void newScene(Scene newScene){
         workFlowStack.push(newScene);
         mainStage.setScene(workFlowStack.peek());
     }
+
     public static void prevScene(){
         if(mainStage.getScene() == activeGame){
             activeGame = null;
@@ -68,6 +69,7 @@ public class BattleGround extends Application {
         mainStage.setScene(workFlowStack.peek());
         center();
     }
+
     public static void center(){
         mainStage.setFullScreen(false);
         mainStage.setMaximized(false);
@@ -78,11 +80,11 @@ public class BattleGround extends Application {
         mainStage.setX(centerX);
         mainStage.setY(centerY);
     }
+
     public static void fullscreen(){
         mainStage.setMaximized(true);
         mainStage.setFullScreen(true);
     }
-
 
     public static FXMLLoader mainMenuLoader(){ return new FXMLLoader(BattleGround.class.getResource("mainMenuScene.fxml"));}
     public static FXMLLoader signInPageLoader(){ return new FXMLLoader(BattleGround.class.getResource("SignInPageScene.fxml"));}

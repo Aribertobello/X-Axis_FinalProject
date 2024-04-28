@@ -3,8 +3,10 @@ package com.example.bulletbattleground.game;
 import com.example.bulletbattleground.BattleGround;
 import com.example.bulletbattleground.controllers.DescriptionBoxController;
 import com.example.bulletbattleground.controllers.GameOverBoxController;
+import com.example.bulletbattleground.fileManagement.User;
 import com.example.bulletbattleground.game.levels.StandardLevel;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
+import com.example.bulletbattleground.gameObjects.fighters.Computer;
 import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.TurnManager;
 import com.example.bulletbattleground.utility.Vector;
@@ -45,6 +47,7 @@ public class Game extends Scene {
     boolean gameStart = false;
     TurnManager turnManager ;
 
+    public int tickDuration = 10;
 
     public Label congratulationsLabel;
     public Button exitBtn;
@@ -71,7 +74,7 @@ public class Game extends Scene {
      */
     public void run() {
         handleDragAndShoot();
-        timeline = new Timeline(new KeyFrame(Duration.millis(10), e
+        timeline = new Timeline(new KeyFrame(Duration.millis(tickDuration), e
                 -> {
             double dt = (1.0 / tickRate);
             time += dt;
@@ -79,7 +82,9 @@ public class Game extends Scene {
         }));
         turnManager = new TurnManager(level);
         timeline.setCycleCount(Timeline.INDEFINITE);
-        if (BattleGround.user.isUnlocked(getLevel())) getLevel().displayDescription();
+        if (BattleGround.user.isUnlocked(getLevel())) {
+            getLevel().displayDescription();
+        }
         else {
             endGame();
             congratulationsLabel.setText("Level Not Unlocked Yet");
@@ -98,9 +103,6 @@ public class Game extends Scene {
             }
             if (level.type == 2 && turnManager.isPlayer2Turn()) {
                 Fighter computer = level.team2.get(0);
-                computer.launchProjectile(
-                        computer.getLoadout().mainWeapon, new Vector(-97.8, -57.00), computer.getCoordinate().move(new Vector(-20, -20)));
-                turnManager.projectileShot();
             }
         }
         boolean[] gameStatus = level.update(dt, time);
@@ -112,6 +114,8 @@ public class Game extends Scene {
         }
     }
 
+   // public String username;
+
     private void endGame() {
         FXMLLoader gameOverBoxLoader = new FXMLLoader(BattleGround.class.getResource("GameOverBox.fxml"));
         try {
@@ -122,11 +126,25 @@ public class Game extends Scene {
         GameOverBoxController controller = gameOverBoxLoader.getController();
         exitBtn = controller.exitBtn;
         congratulationsLabel = controller.congratulationsLabel;
-        if(gameWon){
+        int currentPveProgress = BattleGround.user.getPVEProgress(BattleGround.username);
+        int currentPvcProgress = BattleGround.user.getPVCProgress(BattleGround.username);
+
+        if (gameWon){ //this is a case where the user replays his previous level... it's at least gotta display congrats even if u win without updating the progress...
             congratulationsLabel.setText("CONGRATULATIONS YOU HAVE WON!");
-        } else {
+        }
+
+        if(gameWon && level.getIndex() >= currentPveProgress){
+            BattleGround.user.updatePVEProgress(BattleGround.username, BattleGround.user.getPVEProgress(BattleGround.username)+ 1);
+        }
+
+        if(gameWon && level.getIndex() >= currentPvcProgress){
+            BattleGround.user.updatePVCProgress(BattleGround.username, BattleGround.user.getPVCProgress(BattleGround.username)+ 1);
+        }
+
+       else if (!gameWon) {
             congratulationsLabel.setText("BETTER LUCK NEXT TIME");
         }
+
         gameOverBox.setLayoutX(BattleGround.screenWidth/3);
         gameOverBox.setLayoutY(BattleGround.screenHeight/4);
         level.container.setOpacity(0.25);
@@ -141,6 +159,7 @@ public class Game extends Scene {
     }
 
     public void exitGame() {
+        timeline.stop();
         BattleGround.prevScene();
     }
 
@@ -164,7 +183,7 @@ public class Game extends Scene {
         });
 
         this.setOnMouseDragged(event -> {
-            if (level.dragging &&isWithinPlayerBounds(dragStartX[0],dragStartY[0])) {
+            if (level.dragging && isWithinPlayerBounds(dragStartX[0],dragStartY[0]) && level.selectedFighter instanceof Ally) {
                 if (level.origin == null) {
                     /*TODO  -notify user to select a fighter   */
                 } else {
@@ -198,7 +217,7 @@ public class Game extends Scene {
 
             if (event.getCode() == KeyCode.S && level.selectedFighter!=null) {
                 level.selectedFighter.launchProjectile(
-                          level.selectedFighter.loadout.smokeGrenades.get(0), new Vector(15, 0.0), level.origin);
+                          level.selectedFighter.loadout.smokeGrenades.get(0), new Vector(15, 0.0));
                 level.selectedFighter.loadout.smokeGrenades.remove(level.selectedFighter.loadout.smokeGrenades.get(0));
                     turnManager.projectileShot();
                     System.out.println("Smoke grenade deployed");
@@ -225,12 +244,12 @@ public class Game extends Scene {
             if(turnManager.isPlayer1Turn() && level.team1.contains(selectedFighter)) {
                 if (event.getButton() == MouseButton.PRIMARY) {
                     selectedFighter.launchProjectile(
-                            selectedFighter.loadout.mainWeapon, new Vector(velocityX, velocityY), level.origin);
+                            selectedFighter.loadout.mainWeapon, new Vector(velocityX, velocityY));
                     turnManager.projectileShot();
                 }// TODO -LAUNCH MAIN PROJECTILE
                 if (event.getButton() == MouseButton.SECONDARY) {
                     selectedFighter.launchProjectile(
-                            selectedFighter.loadout.grenades.get(0), new Vector(velocityX, velocityY), level.origin);
+                            selectedFighter.loadout.grenades.get(0), new Vector(velocityX, velocityY));
                     selectedFighter.loadout.grenades.remove(level.selectedFighter.loadout.grenades.get(0));
                     turnManager.projectileShot();
                 }
@@ -238,12 +257,12 @@ public class Game extends Scene {
             } else if(turnManager.isPlayer2Turn() && level.team2.contains(selectedFighter)){
                 if (event.getButton() == MouseButton.PRIMARY) {
                     selectedFighter.launchProjectile(
-                            selectedFighter.loadout.mainWeapon, new Vector(velocityX, velocityY), level.origin);
+                            selectedFighter.loadout.mainWeapon, new Vector(velocityX, velocityY));
                     turnManager.projectileShot();
                 }// TODO -LAUNCH MAIN PROJECTILE
                 if (event.getButton() == MouseButton.SECONDARY) {
                     selectedFighter.launchProjectile(
-                            selectedFighter.loadout.grenades.get(0), new Vector(velocityX, velocityY), level.origin);
+                            selectedFighter.loadout.grenades.get(0), new Vector(velocityX, velocityY));
                     selectedFighter.loadout.grenades.remove(level.selectedFighter.loadout.grenades.get(0));
                     turnManager.projectileShot();
                 }
@@ -251,12 +270,12 @@ public class Game extends Scene {
         } else {
             if (event.getButton() == MouseButton.PRIMARY) {
                 selectedFighter.launchProjectile(
-                        selectedFighter.loadout.mainWeapon, new Vector(velocityX, velocityY), level.origin);
+                        selectedFighter.loadout.mainWeapon, new Vector(velocityX, velocityY));
                 turnManager.projectileShot();
             }// TODO -LAUNCH MAIN PROJECTILE
             if (event.getButton() == MouseButton.SECONDARY) {
                 selectedFighter.launchProjectile(
-                        selectedFighter.loadout.grenades.get(0), new Vector(velocityX, velocityY), level.origin);
+                        selectedFighter.loadout.grenades.get(0), new Vector(velocityX, velocityY));
                 selectedFighter.loadout.grenades.remove(level.selectedFighter.loadout.grenades.get(0));
                 turnManager.projectileShot();
             }
@@ -269,7 +288,7 @@ public class Game extends Scene {
             timeline.play();
         } else {
             //Debug
-            Object variableOfInterest = level.map.activeProjectile;
+            var variableOfInterest = level.map.activeProjectile.acceleration();
             //----------------
             timeline.pause();
             isTicking = false;

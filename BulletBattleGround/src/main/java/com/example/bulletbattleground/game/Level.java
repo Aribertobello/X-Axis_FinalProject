@@ -19,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
 import javafx.scene.control.Label;
@@ -91,7 +92,6 @@ public abstract class Level extends AnchorPane implements GameUI {
 
     private Label EnemyCoor;
     private Label AllyCoor;
-    static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
     private Label BltAmount;
     private Label GTimer;
     private Label STimer;
@@ -183,7 +183,11 @@ public abstract class Level extends AnchorPane implements GameUI {
     }
 
     public void addFighter(Fighter fighter, int teamNb){
+
         map.addFighter(fighter);
+        fighter.setTeamNb(teamNb);
+        if (teamNb==1) team1.add(fighter);
+        else team2.add(fighter);
     }
 
     public void displaceTrajectoryLine(double startX, double startY, double endX, double endY) {
@@ -340,6 +344,5 @@ public abstract class Level extends AnchorPane implements GameUI {
         container.setOpacity(0.25);
         this.getChildren().add(descriptionBox);
     }
-
 }
 

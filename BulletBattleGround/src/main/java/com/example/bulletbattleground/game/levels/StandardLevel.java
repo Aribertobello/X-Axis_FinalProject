@@ -19,10 +19,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
@@ -34,50 +36,44 @@ public class StandardLevel extends Level {
     //TODO CLASS COMPLETE
 
     /**
-     *
      * @param map
      * @param type
      */
     public StandardLevel(Mapp map, int type) throws IOException {
         super(map);
         this.type = type;
-        switch(type){
-            case 1:
-                break;
-            case 2,3:
-                break;
-        }
     }
+
     @Override
     public boolean[] levelStatus(Mapp map) {
         boolean gameWon = false;
         boolean gameEnd = false;
-        switch (type){
+        switch (type) {
             case 1 -> {
-                if(!map.isHasLoot()){
+                if (!map.isHasLoot()) {
                     gameEnd = true;
                     gameWon = true;
-                } else if(team1.isEmpty()){
+                } else if (team1.isEmpty()) {
                     gameEnd = true;
                 }
             }
             case 2 -> {
-                if(team1.isEmpty()){
+                if (team1.isEmpty()) {
                     gameEnd = true;
                     gameWon = false;
-                } else if (team2.isEmpty()){
+                } else if (team2.isEmpty()) {
                     gameEnd = true;
                     gameWon = true;
                 }
             }
             case 3 -> {
-                if(team1.isEmpty() || team2.isEmpty()){
+                if (team1.isEmpty() || team2.isEmpty()) {
                     gameEnd = true;
                     gameWon = true;
                 }
             }
         }
-        return new boolean[]{gameEnd,gameWon};
+        return new boolean[]{gameEnd, gameWon};
     }
 
     public void addLoot(Loot loot) {
@@ -85,32 +81,53 @@ public class StandardLevel extends Level {
         map.getChildren().add(map.getLoot());
         map.setHasLoot(true);
     }
+
     @Override
-    public void addFighter(Fighter fighter, int teamNb){
+    public void addFighter(Fighter fighter, int teamNb) {
         map.addFighter(fighter);
-        if(teamNb==1){
+        if (teamNb == 1) {
             team1.add(fighter);
         } else {
+            Image ally_Image_Inverted = new Image("file:Files/img/Light_Class_Img_Inverted.png");
+            fighter.setFill(new ImagePattern(ally_Image_Inverted));
             team2.add(fighter);
         }
         fighter.setTeamNb(teamNb);
     }
+
+    public void toPVP () {
+        ArrayList<Integer> indexes = new ArrayList<>();
+        ArrayList<Coordinate> coordinates = new ArrayList<>();
+        ArrayList<Integer> loadoutTypes = new ArrayList<>();
+        for (Fighter fighter : team2) {
+            if (fighter instanceof Computer) {
+                coordinates.add(fighter.getCoordinate());
+                loadoutTypes.add(fighter.getLoadout().getType());
+                indexes.add(team2.indexOf(fighter));
+            }
+        }
+        for (int i = 0; i < indexes.size(); i++) {
+            removeFighter(team2.get(indexes.get(i)));
+        }
+        for (int i = 0; i < coordinates.size(); i++) {
+            addFighter(new Ally(loadoutTypes.get(i), 25, (int) coordinates.get(i).getX(), (int) coordinates.get(i).getY()), 2);
+        }
+        for(Fighter fighter : team1){
+            fighter.setHealth(20);
+        }
+        for(Fighter fighter : team2){
+            fighter.setHealth(20);
+        }
+        setType(3);
+    }
+
     @Override
-    public void removeFighter(Fighter fighter){
-        if(fighter.getTeamNb()==1){
+    public void removeFighter (Fighter fighter){
+        if (fighter.getTeamNb() == 1) {
             team1.remove(fighter);
         } else {
             team2.remove(fighter);
         }
-    }
-    public void compShoot(Computer comp){
-        for (int i = 0; i < 1; i++) {
-            for (int j = 0; j < 1; j++) {
-                ;
-                for (double dt = 0; dt < 1 ; dt++) {
-
-                }
-            }
-        }
+        map.removeFighter(fighter);
     }
 }

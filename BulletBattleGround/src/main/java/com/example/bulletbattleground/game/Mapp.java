@@ -2,6 +2,8 @@ package com.example.bulletbattleground.game;
 
 import com.example.bulletbattleground.BattleGround;
 import com.example.bulletbattleground.gameObjects.Loot.Loot;
+import com.example.bulletbattleground.gameObjects.obstacles.SpaceShip;
+import com.example.bulletbattleground.gameObjects.obstacles.Wall;
 import com.example.bulletbattleground.gameObjects.projectiles.Bullet;
 import com.example.bulletbattleground.gameObjects.projectiles.Grenade;
 import com.example.bulletbattleground.utility.*;
@@ -22,11 +24,10 @@ import java.util.Collection;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
-public class Mapp extends Pane implements GameUI {
+public class Mapp extends Pane implements GameUI , Cloneable {
 
     @Getter
     private int type;
-
     @Getter
     @Setter
     protected ArrayList<Fighter> people = new ArrayList<>();
@@ -34,19 +35,15 @@ public class Mapp extends Pane implements GameUI {
     @Setter
     protected ArrayList<Obstacle> obstacles = new ArrayList<>();
     private ArrayList<HitBox> hitBoxes = new ArrayList<>();
-    double terminalVelocity;
-    private Pane hitBoxPane = new Pane();
     @Getter
     @Setter
     private double gravity;
     @Getter
     @Setter
     private double airResistance;
-
     protected int scale;
     @Setter
     private double[] bounds  = {BattleGround.screenWidth,BattleGround.screenHeight};
-
     @Getter
     @Setter
     public Projectile activeProjectile;
@@ -62,6 +59,10 @@ public class Mapp extends Pane implements GameUI {
     @Getter
     @Setter
     private boolean hasLoot = false;
+    @Getter
+    @Setter
+    private boolean fighterHit = false;
+
 
     /**
      *
@@ -83,7 +84,7 @@ public class Mapp extends Pane implements GameUI {
             earth.setFill(new ImagePattern(groundEarthImage));
             this.getChildren().add(earth);
             gravity  = 9.8;
-            airResistance = 3;
+            airResistance = 1.5;
             this.type = 0;
         }
         if (type.equalsIgnoreCase("space")) {
@@ -115,7 +116,7 @@ public class Mapp extends Pane implements GameUI {
             if (activeProjectile != null) {
                 if (!isInBounds(activeProjectile)) {
                     removeActiveProjectile();
-                    return new boolean[]{false};
+                    return new boolean[]{false,false};
                 }
                 addForces(activeProjectile);
                 activeProjectile.move(dt);
@@ -127,13 +128,15 @@ public class Mapp extends Pane implements GameUI {
                             explosion(activeProjectile.getCoordinate());
                         }
                     }
-                    if(checkCollision(activeProjectile)) return new boolean[]{true};
+                    if(checkCollision(activeProjectile)) return new boolean[]{true,fighterHit};
                 }
+                if(Double.isNaN(activeProjectile.getCoordinate().getX())||Double.isNaN(activeProjectile.getCoordinate().getY())) removeActiveProjectile();
             } else {
                 buffer = 0;
             }
         }
-        return new boolean[]{false};
+        fighterHit = false;
+        return new boolean[]{false, false};
     }
 
     /**
@@ -144,6 +147,7 @@ public class Mapp extends Pane implements GameUI {
         people.add(fighter);
         hitBoxes.add(fighter.hitBox());
         getChildren().add(fighter);
+        fighter.setMap(this);
     }
 
     /**
@@ -153,6 +157,7 @@ public class Mapp extends Pane implements GameUI {
     public void addObstacle(Obstacle obstacle) {
         obstacles.add(obstacle);
         getChildren().add(obstacle);
+        obstacle.setMap(this);
     }
 
     public void addHitBox(HitBox hitBox) {
@@ -225,6 +230,7 @@ public class Mapp extends Pane implements GameUI {
                 if (fighter.getHealth() <= 0) {
                     ((Level)getParent().getParent()).removeFighter(fighter);
                 }
+                fighterHit = true;
                 return true;
             }
 
@@ -267,13 +273,55 @@ public class Mapp extends Pane implements GameUI {
         loot = null;
         hasLoot = false;
     }
+    @Override
+    public Object clone() {
+        try {
+            Mapp clonedMap = (Mapp) super.clone();
 
-    public void setAirResistanceMagnitude(double magnitude){
-        //airResistance = airResistance.scale(magnitude);
+
+
+            clonedMap.people = new ArrayList<>(this.people.size());
+            for (Fighter fighter : this.people) {
+                Fighter person  = new Fighter(fighter.loadout.type,fighter.health, (int)fighter.coordinate.getX(),(int)fighter.getCoordinate().getY());
+                clonedMap.people.add(person);
+                person.setMap(clonedMap);
+            }
+
+            clonedMap.obstacles = new ArrayList<>(this.obstacles.size());
+            for (Obstacle obstacle : this.obstacles) {
+                if(obstacle instanceof Wall) {
+                    Wall wall = (Wall)obstacle;
+                    Wall cloneWall = new Wall(wall.getHeight(),wall.getThickness(), (int)wall.getCoordinate().getX(),(int)wall.getCoordinate().getY(),wall.getRotationAngle(),(int)wall.getMass());
+                    cloneWall.setMap(clonedMap);
+                    clonedMap.obstacles.add(cloneWall);
+                }
+                if( obstacle instanceof SpaceShip){
+                    SpaceShip spaceShip = (SpaceShip) obstacle;
+                    SpaceShip cloneSpaceShip = new SpaceShip((int)obstacle.velocity().magnitude(),(int)obstacle.getCoordinate().getX(),(int)obstacle.getCoordinate().getY());
+                    cloneSpaceShip.setMap(clonedMap);
+                    clonedMap.obstacles.add(cloneSpaceShip);
+                }
+            }
+
+            // Clone the Shape objects
+            if (this.earth instanceof Circle) {
+                Circle earthCircle = (Circle) this.earth;
+                Circle clonedEarth = new Circle(earthCircle.getCenterX(), earthCircle.getCenterY(), earthCircle.getRadius());
+                clonedEarth.setFill(earthCircle.getFill());
+                clonedMap.earth = clonedEarth;
+            } else if (this.earth instanceof Rectangle) {
+                Rectangle earthRectangle = (Rectangle) this.earth;
+                Rectangle clonedEarth = new Rectangle(earthRectangle.getX(), earthRectangle.getY(), earthRectangle.getWidth(), earthRectangle.getHeight());
+                clonedEarth.setFill(earthRectangle.getFill());
+                clonedMap.earth = clonedEarth;
+            }
+
+            // Clone other fields
+            // (you may need to implement deep copying for other fields if necessary)
+
+            return clonedMap;
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
     }
-    public void setGravityMagnitude(double magnitude){
-
-        //gravity = gravity.scale(magnitude);
-    }
-
 }
