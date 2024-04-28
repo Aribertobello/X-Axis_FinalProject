@@ -5,6 +5,7 @@ import com.example.bulletbattleground.controllers.ClassSelectorController;
 import com.example.bulletbattleground.game.Loadout;
 import com.example.bulletbattleground.game.levels.StandardLevel;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
+import com.example.bulletbattleground.gameObjects.fighters.Computer;
 import com.example.bulletbattleground.gameObjects.projectiles.Rocket;
 import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.HitBox;
@@ -38,6 +39,8 @@ public class Fighter extends Rectangle {
     protected int teamNb;
     @Getter
     boolean highlighted;
+    @Getter @Setter
+    private Mapp map;
 
 
     /**
@@ -78,9 +81,41 @@ public class Fighter extends Rectangle {
      * Launches Projectile according to parameters
      * @param projectile the projectile which will be fired
      * @param velocity the velocity vector of the launch for this projecile
-     * @param coordinate the coordinates from which to begin the launch
      */
-    public void launchProjectile(Projectile projectile, Vector velocity, Coordinate coordinate) {
+    public void launchProjectile(Projectile projectile, Vector velocity) {
+        Coordinate launchCoordinate;
+        if(teamNb!=1 || this instanceof Computer){
+            launchCoordinate = this.coordinate.move(new Vector(-20,-20));
+        } else {
+            launchCoordinate = this.coordinate.move(new Vector(20,-20));
+        }
+        projectile.release(velocity, new Coordinate(launchCoordinate.getX(), launchCoordinate.getY()));
+        if (map.getActiveProjectile() == null) {
+            map.getChildren().add(projectile);
+            map.setActiveProjectile(projectile);
+        } else {
+            map.getChildren().remove(((Mapp) this.getParent()).getActiveProjectile());
+            map.getChildren().add(projectile);
+            map.setActiveProjectile(projectile);
+        }
+        map.setBuffer(0);
+        if (projectile instanceof Rocket) {
+            Vector a = new Vector(0,4.9);
+            double angle = projectile.velocity().angle();
+            Vector v = projectile.velocity();
+            double vx = v.getX();
+            double ax = a.getX();
+            double ay = a.getY();
+            double tan = Math.tan(Math.PI*(angle/180));
+            double dropZone = this.getCoordinate().getX()+20+(2*vx*vx*tan*(ax*tan-ay)/(ay*ay));
+            ((Rocket)projectile).setDropZone(dropZone);
+            if (((Rocket) projectile).getDropZone() >= 1915) {
+                ((Rocket) projectile).setDropZone(1915);
+            }
+            if (((Rocket) projectile).getDropZone() <= 5) {
+                ((Rocket) projectile).setDropZone(5);
+            }
+        }
     }
 
     public void highlight(){

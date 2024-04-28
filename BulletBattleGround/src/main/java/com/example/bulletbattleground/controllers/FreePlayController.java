@@ -1,10 +1,7 @@
 package com.example.bulletbattleground.controllers;
 
 import com.example.bulletbattleground.BattleGround;
-import com.example.bulletbattleground.game.Fighter;
-import com.example.bulletbattleground.game.Level;
-import com.example.bulletbattleground.game.Loadout;
-import com.example.bulletbattleground.game.Obstacle;
+import com.example.bulletbattleground.game.*;
 import com.example.bulletbattleground.gameObjects.fighters.Ally;
 import com.example.bulletbattleground.gameObjects.fighters.Computer;
 import com.example.bulletbattleground.gameObjects.obstacles.SmokeScreen;
@@ -13,10 +10,10 @@ import com.example.bulletbattleground.gameObjects.obstacles.Wall;
 import com.example.bulletbattleground.gameObjects.projectiles.Grenade;
 import com.example.bulletbattleground.gameObjects.projectiles.SmokeGrenade;
 import com.example.bulletbattleground.utility.Coordinate;
+import com.example.bulletbattleground.utility.Vector;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
-import javafx.scene.control.Slider;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
@@ -43,6 +40,20 @@ public class FreePlayController {
     public ToggleGroup compClassGroup;
     public ToggleGroup allyClassGroup;
     public Slider spaceShipSpeedslider;
+    public Label massLabel;
+    public Label rotationLabel;
+    public Label widthLabel;
+    public Label heightLabel;
+    public Label speedLabel;
+    public Label radiusLabel;
+    public RadioButton allyLightbtn;
+    public RadioButton allyMedbtn;
+    public RadioButton allyHeavybtn;
+    public Button compShotBtn;
+    public Slider compShotSlider;
+    public Label compShotLabel;
+    public Slider compShotSpeedSlider;
+    public Label compShotSpeedLabel;
     Fighter fighter;
     int allyLoadoutNb = 1;
     int compLoadoutNb = 1;
@@ -53,6 +64,7 @@ public class FreePlayController {
     private Coordinate returnCoordinate;
 
     public void allyDragStart(MouseEvent event) {
+        
         fighter = new Ally(allyLoadoutNb,25,0,0);
         imageView = (ImageView) event.getSource();
         returnCoordinate = new Coordinate(event.getSceneX(),event.getSceneY());
@@ -153,6 +165,13 @@ public class FreePlayController {
         wallImageView.setImage(new Image("file:Files/img/WallTemporary.jpg"));
         spaceShipImageView.setImage(new Image("file:rocket.png"));
         smokeScreenImageView.setImage(new Image("file:s4.png"));
+        wallRotationSlider.valueProperty().addListener( event -> {rotationLabel.setText(String.valueOf(Math.round(wallRotationSlider.getValue())));});
+        wallMassSlider.valueProperty().addListener( event -> {massLabel.setText(String.valueOf(Math.round(wallMassSlider.getValue())));});
+        wallHeightSlider.valueProperty().addListener( event -> {heightLabel.setText(String.valueOf(Math.round(wallHeightSlider.getValue())));});
+        wallWidthSlider.valueProperty().addListener( event -> {widthLabel.setText(String.valueOf(Math.round(wallWidthSlider.getValue())));});
+        spaceShipSpeedslider.valueProperty().addListener( event -> {speedLabel.setText(String.valueOf(Math.round(spaceShipSpeedslider.getValue())));});
+        compShotSlider.valueProperty().addListener( event -> {compShotLabel.setText(String.valueOf(Math.round(compShotSlider.getValue())));});
+        compShotSpeedSlider.valueProperty().addListener( event -> {compShotSpeedLabel.setText(String.valueOf(Math.round(compShotSpeedSlider.getValue())));});
     }
 
     public void allyLightClassChosen(ActionEvent event) {
@@ -165,5 +184,23 @@ public class FreePlayController {
 
     public void allyHeavyClassChosen(ActionEvent event) {
         allyLoadoutNb = 3;
+    }
+
+    public void compLightClassChosen(ActionEvent event) {
+        compLoadoutNb = 1;
+    }
+
+    public void compMediumClassChosen(ActionEvent event) {
+        compLoadoutNb = 2;
+    }
+
+    public void compHeavyClassChosen(ActionEvent event) {
+        compLoadoutNb = 3;
+    }
+
+    public void compShoot(ActionEvent event) {
+        if(fighter!=null && fighter instanceof Computer){
+            fighter.launchProjectile(fighter.getLoadout().getMainWeapon(),new Vector(compShotSlider.getValue()).scale(compShotSpeedSlider.getValue()));
+        }
     }
 }

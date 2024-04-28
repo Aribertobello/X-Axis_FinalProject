@@ -31,7 +31,7 @@ public class Spear extends Projectile {
         this.lift = new Vector(0, -0.5);
         this.forces.add(lift);
         this.setMass(3.0);
-        setTerminalVelocity(60);
+        setTerminalVelocity(120);
     }
     @Override
     public void move(double time) {

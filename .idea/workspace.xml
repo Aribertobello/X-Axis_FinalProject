@@ -7,9 +7,6 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-<<<<<<< Updated upstream
-    <list default="true" id="3bdc538a-ae43-453e-88b9-92375f746fca" name="Changes" comment="" />
-=======
     <list default="true" id="3bdc538a-ae43-453e-88b9-92375f746fca" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/cody_history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cody_history.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -31,7 +28,7 @@
       <change beforePath="$PROJECT_DIR$/Files/txt/PVC.map.lvl.3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Files/txt/PVC.map.lvl.3.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Files/txt/PVC.map.lvl.4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Files/txt/PVC.map.lvl.4.txt" afterDir="false" />
     </list>
->>>>>>> Stashed changes
+    &gt;&gt;&gt;&gt;&gt;&gt;&gt; Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -89,16 +86,16 @@
     <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 6
-}</component>
+    &quot;customColor&quot;: &quot;&quot;,
+    &quot;associatedIndex&quot;: 6
+    }</component>
   <component name="ProjectId" id="2eJjb5LnpFObplHU49JFspQR0lU" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
+    &quot;keyToString&quot;: {
     &quot;Gradle.Build BulletBattleGround.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.BulletBattleGround [:BattleGround.main()].executor&quot;: &quot;Run&quot;,
     &quot;Gradle.Tests in 'BulletBattleGround.test'.executor&quot;: &quot;Run&quot;,
@@ -112,8 +109,8 @@
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/aribe/IdeaProjects/X-Axis_FinalProject/BulletBattleGround/src/main/resources/com/example/bulletbattleground&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;
-  }
-}]&gt;</component>
+    }
+    }]&gt;</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\aribe\IdeaProjects\X-Axis_FinalProject\BulletBattleGround\src\main\resources\com\example\bulletbattleground" />

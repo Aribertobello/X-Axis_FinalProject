@@ -6,14 +6,20 @@ import lombok.Setter;
 
 import java.text.ParseException;
 
+import static java.lang.Math.PI;
+
+@Setter
+@Getter
 @AllArgsConstructor
 public class Vector {
-    @Getter
-    @Setter
+
     protected double x;
-    @Getter
-    @Setter
     protected double y;
+
+    public Vector( double angle){
+        x = Math.cos(angle*PI/180);
+        y = Math.sin(angle*PI/180);
+    }
 
     public static Vector valueOf(String string) throws ParseException {
 
@@ -41,7 +47,7 @@ public class Vector {
      * @return magnitude of this Vector
      */
     public double magnitude() {
-        return Math.sqrt(x * x + y * y);
+        return Math.sqrt(Math.pow(x,2) + Math.pow(y,2));
     }
 
     /**
@@ -104,9 +110,9 @@ public class Vector {
      */
     public double angle() {
         if (x >= 0) {
-            return 180 * Math.atan(y / x) / Math.PI;
+            return 180 * Math.atan(y / x) / PI;
         } else {
-            return 180 * Math.atan(y / x) / Math.PI + 180;
+            return 180 * Math.atan(y / x) / PI + 180;
         }
     }
 
@@ -148,8 +154,8 @@ public class Vector {
      */
     public Vector rotate(double angle) {
         return new Vector(
-                x * Math.cos(angle / 180 * Math.PI ) - y * Math.sin(angle / 180 * Math.PI )
-                , x * Math.sin(angle / 180 * Math.PI ) + y * Math.cos(angle / 180 * Math.PI ));
+                x * Math.cos(angle / 180 * PI ) - y * Math.sin(angle / 180 * PI )
+                , x * Math.sin(angle / 180 * PI ) + y * Math.cos(angle / 180 * PI ));
     }
     public double slope(){
         return y/x;
@@ -166,6 +172,9 @@ public class Vector {
                 " " + x +
                 ", " + y +
                 " >" ;
+    }
+    public Arrow toArrow(Coordinate origin){
+         return new Arrow(this,origin);
     }
 
     @Override

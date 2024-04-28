@@ -30,19 +30,19 @@
       </RadioButton>
       <RadioButton fx:id="allyMedbtn" layoutX="184.0" layoutY="98.0" mnemonicParsing="false" onAction="#allyMedClassChosen" prefHeight="17.0" prefWidth="55.0" text="Medium" toggleGroup="$allyClassGroup" />
       <RadioButton fx:id="allyHeavybtn" layoutX="184.0" layoutY="126.0" mnemonicParsing="false" onAction="#allyHeavyClassChosen" prefHeight="17.0" prefWidth="55.0" text="Heavy" toggleGroup="$allyClassGroup" />
-      <Button layoutX="14.0" layoutY="122.0" mnemonicParsing="false" text="Reflect" />
-      <RadioButton layoutX="177.0" layoutY="231.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="55.0" text="Light">
+      <Button layoutX="14.0" layoutY="139.0" mnemonicParsing="false" text="Reflect" />
+      <RadioButton layoutX="177.0" layoutY="231.0" mnemonicParsing="false" onAction="#compLightClassChosen" prefHeight="17.0" prefWidth="55.0" text="Light">
          <toggleGroup>
             <ToggleGroup fx:id="compClassGroup" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton layoutX="177.0" layoutY="259.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="55.0" text="Medium" toggleGroup="$compClassGroup" />
-      <RadioButton layoutX="177.0" layoutY="285.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="55.0" text="Heavy" toggleGroup="$compClassGroup" />
-      <Button layoutX="14.0" layoutY="281.0" mnemonicParsing="false" text="Reflect" />
+      <RadioButton layoutX="177.0" layoutY="259.0" mnemonicParsing="false" onAction="#compMediumClassChosen" prefHeight="17.0" prefWidth="55.0" text="Medium" toggleGroup="$compClassGroup" />
+      <RadioButton layoutX="177.0" layoutY="285.0" mnemonicParsing="false" onAction="#compHeavyClassChosen" prefHeight="17.0" prefWidth="55.0" text="Heavy" toggleGroup="$compClassGroup" />
+      <Button layoutX="14.0" layoutY="301.0" mnemonicParsing="false" text="Reflect" />
       <Slider fx:id="wallMassSlider" layoutX="212.0" layoutY="392.0" min="1.0" orientation="VERTICAL" prefHeight="82.0" prefWidth="14.0" />
       <Slider fx:id="spaceShipSpeedslider" layoutX="212.0" layoutY="552.0" orientation="VERTICAL" prefHeight="93.0" prefWidth="14.0" />
       <Slider fx:id="radiusSlider" layoutX="212.0" layoutY="717.0" orientation="VERTICAL" prefHeight="93.0" prefWidth="14.0" />
-      <Button layoutX="14.0" layoutY="247.0" mnemonicParsing="false" text="Shoot" />
+      <Button fx:id="compShotBtn" layoutX="16.0" layoutY="247.0" mnemonicParsing="false" onAction="#compShoot" text="Shoot" />
       <Label alignment="CENTER" layoutX="157.0" layoutY="375.0" prefHeight="17.0" prefWidth="40.0" text="Rotation">
          <font>
             <Font size="9.0" />
@@ -66,6 +66,24 @@
          </font>
       </Label>
       <Label layoutX="17.0" layoutY="375.0" text="Height">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <Label fx:id="massLabel" alignment="CENTER" layoutX="204.0" layoutY="474.0" prefHeight="17.0" prefWidth="27.0" text="0.0" />
+      <Label fx:id="rotationLabel" alignment="TOP_CENTER" layoutX="165.0" layoutY="474.0" prefHeight="17.0" prefWidth="24.0" text="0.0" />
+      <Label fx:id="widthLabel" layoutX="58.0" layoutY="474.0" text="0.0" />
+      <Label fx:id="heightLabel" layoutX="23.0" layoutY="474.0" text="0.0" />
+      <Label fx:id="speedLabel" layoutX="211.0" layoutY="645.0" text="0.0" />
+      <Label fx:id="radiusLabel" layoutX="205.0" layoutY="810.0" text="0.0" />
+      <Slider fx:id="compShotSlider" layoutX="12.0" layoutY="220.0" max="360.0" prefHeight="14.0" prefWidth="61.0" />
+      <Label fx:id="compShotLabel" alignment="CENTER" layoutX="18.0" layoutY="231.0" prefHeight="17.0" prefWidth="52.0" text="shotAngle">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <Slider fx:id="compShotSpeedSlider" layoutX="81.0" layoutY="220.0" prefHeight="14.0" prefWidth="61.0" />
+      <Label fx:id="compShotSpeedLabel" alignment="CENTER" layoutX="86.0" layoutY="231.0" prefHeight="17.0" prefWidth="52.0" text="shotSpeed">
          <font>
             <Font size="9.0" />
          </font>

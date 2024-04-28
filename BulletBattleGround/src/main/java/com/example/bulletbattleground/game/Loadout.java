@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 public class Loadout {
 
+    @Getter
+    @Setter
     protected Projectile mainWeapon;
     @Getter
     @Setter
