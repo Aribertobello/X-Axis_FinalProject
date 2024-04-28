@@ -21,6 +21,8 @@ public class Arrow extends Polyline {
         super();
         this.setStroke(Color.WHITE);
         this.getPoints().addAll(origin.getX(),origin.getY(),origin.move(vector).getX(),origin.move(vector).getY());
+        penUltimateCoord = origin;
+        ultimateCoord = origin.move(vector);
         addTip();
     }
     public void updateDrag(Fighter fighter, Mapp map , double dt, Coordinate coordinate, Vector direction){
@@ -37,7 +39,7 @@ public class Arrow extends Polyline {
         projectile.setVelocity(direction);
         projectile.setCoordinate(coordinate);
 
-        for(double T = 0 ; T < 10; T += 2*dt){
+        for(double T = 0 ; T < 5; T += 5*dt){
             if(fighter.getLoadout().getType()==3){
                 projectile.forces.clear();
                 projectile.forces.add(new Vector(0,4.9).multiply(projectile.getMass()));

@@ -35,7 +35,12 @@ class CoordinateTest {
     }
 
     @Test
-    void testToString() {
+    void testEquals() {
+        Coordinate coord = new Coordinate(5,0);
+        Coordinate coord1 = new Coordinate(4.9999,0.001);
+        boolean result = coord.equals(coord1);
+        boolean expectedResult = true;
+        assertEquals(expectedResult, result);
     }
     @Test
     void testValueOf() throws ParseException {

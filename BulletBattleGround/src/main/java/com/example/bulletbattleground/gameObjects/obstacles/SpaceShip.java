@@ -58,7 +58,7 @@ public class SpaceShip extends Obstacle {
 
         if (getCoordinate().getY() <= -160 || getCoordinate().getY() > 1200/*TODO max width of screen parameter*/) {
             Random random = new Random();
-            getCoordinate().setX(random.nextInt((int) ((Mapp) this.getParent()).getWidth() / 4, (int) (2 * ((Mapp) this.getParent()).getWidth() / 3)));
+            getCoordinate().setX(random.nextInt((int) getMap().getWidth() / 4, (int) (2 * getMap().getWidth() / 3)));
             setVelocityY(-getVelocityY() * (random.nextInt(5, 51)) / Math.abs(getVelocityY()));
             setVelocityX(0);
             allign();

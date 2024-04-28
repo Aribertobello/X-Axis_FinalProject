@@ -170,7 +170,11 @@ public abstract class Level extends AnchorPane implements GameUI {
     }
 
     public void addFighter(Fighter fighter, int teamNb){
+
         map.addFighter(fighter);
+        fighter.setTeamNb(teamNb);
+        if (teamNb==1) team1.add(fighter);
+        else team2.add(fighter);
     }
 
     public void displaceTrajectoryLine(double startX, double startY, double endX, double endY) {
@@ -277,6 +281,7 @@ public abstract class Level extends AnchorPane implements GameUI {
         container.setOpacity(0.25);
         this.getChildren().add(descriptionBox);
     }
+
 
 }
 

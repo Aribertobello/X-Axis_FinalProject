@@ -41,12 +41,6 @@ public class StandardLevel extends Level {
     public StandardLevel(Mapp map, int type) throws IOException {
         super(map);
         this.type = type;
-        switch(type){
-            case 1:
-                break;
-            case 2,3:
-                break;
-        }
     }
     @Override
     public boolean[] levelStatus(Mapp map) {
@@ -85,15 +79,24 @@ public class StandardLevel extends Level {
         map.getChildren().add(map.getLoot());
         map.setHasLoot(true);
     }
-    @Override
-    public void addFighter(Fighter fighter, int teamNb){
-        map.addFighter(fighter);
-        if(teamNb==1){
-            team1.add(fighter);
-        } else {
-            team2.add(fighter);
+    public  void toPVP(){
+        ArrayList<Integer> indexes = new ArrayList<>();
+        ArrayList<Coordinate> coordinates = new ArrayList<>();
+        ArrayList<Integer> loadoutTypes = new ArrayList<>();
+        for(Fighter fighter : team2){
+            if(fighter instanceof Computer){
+                coordinates.add(fighter.getCoordinate());
+                loadoutTypes.add(fighter.getLoadout().getType());
+                indexes.add(team2.indexOf(fighter));
+            }
         }
-        fighter.setTeamNb(teamNb);
+        for (int i = 0; i < indexes.size(); i++) {
+            removeFighter(team2.get(indexes.get(i)));
+        }
+        for (int i = 0; i < coordinates.size(); i++) {
+            addFighter(new Ally(loadoutTypes.get(i),25,(int)coordinates.get(i).getX(),(int)coordinates.get(i).getY()),2);
+        }
+        setType(3);
     }
     @Override
     public void removeFighter(Fighter fighter){
@@ -102,6 +105,7 @@ public class StandardLevel extends Level {
         } else {
             team2.remove(fighter);
         }
+        map.removeFighter(fighter);
     }
     public void compShoot(Computer comp){
         for (int i = 0; i < 1; i++) {

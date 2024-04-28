@@ -37,7 +37,7 @@ public class Bullet extends Projectile {
         this.damage = BULLET_DAMAGE;
         this.lift = BULLET_LIFT;
         this.forces.add(lift);
-        setTerminalVelocity(99);
+        setTerminalVelocity(190);
         setMass(BULLET_MASS);
 
     }

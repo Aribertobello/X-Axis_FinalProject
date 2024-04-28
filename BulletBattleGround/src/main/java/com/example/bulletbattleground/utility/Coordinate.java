@@ -69,7 +69,7 @@ public class Coordinate {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         Coordinate otherCoord = (Coordinate) object;
-        return x - otherCoord.x == 0 && y -otherCoord.y == 0;
+        return Math.round(x - otherCoord.x) == 0 && Math.round(y -otherCoord.y) == 0;
     }
 
     public static Coordinate valueOf(String string) throws ParseException {

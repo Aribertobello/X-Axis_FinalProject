@@ -35,7 +35,7 @@ public class User {
 
 
     protected int pVeLevelsCompleted = 5;
-    protected int pVeMaxLevelIndex = 5;
+    protected int pVeMaxLevelIndex = 11;
     protected int pVCLevelsCompleted = 5;
     protected int pVCMaxLevelIndex = 5;
 

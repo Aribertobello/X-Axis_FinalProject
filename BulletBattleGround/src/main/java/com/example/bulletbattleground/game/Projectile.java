@@ -18,11 +18,10 @@ import java.util.Arrays;
 
 public abstract class  Projectile extends MovingBody {
 
-    public static final double TERMINAL_VELOCITY = 100;
+    public static final double TERMINAL_VELOCITY = 300;
     public static final double MIN_LAUNCH_VELOCITY = 10.0;
 
     @Getter
-    @Setter
     double terminalVelocity;
     @Setter
     @Getter
@@ -37,15 +36,14 @@ public abstract class  Projectile extends MovingBody {
      * @param time
      */
     public void move(double time) {
-        if(this.velocity().magnitude()>TERMINAL_VELOCITY){
-            this.setVelocity( velocity().scale(TERMINAL_VELOCITY));
+        if(this.velocity().magnitude()>terminalVelocity){
+            this.setVelocity( velocity().scale(terminalVelocity-0.5));
         }
         double x = ((acceleration().getX() / 2) * time * time + getVelocityX() * time + getCoordinate().getX());
         double y  = ((acceleration().getY() / 2) * time * time + getVelocityY() * time + getCoordinate().getY());
         this.setVelocityX(acceleration().getX() * time + getVelocityX());
         this.setVelocityY(acceleration().getY() * time + getVelocityY());
         setCoordinate(new Coordinate(x,y));
-
     }
 
     /**
@@ -118,6 +116,11 @@ public abstract class  Projectile extends MovingBody {
     public void setVelocity(Vector vector) {
         setVelocityX(vector.getX());
         setVelocityY(vector.getY());
+    }
+    public void setTerminalVelocity(double terminalVelocity) {
+        if(this.terminalVelocity<TERMINAL_VELOCITY){
+            this.terminalVelocity = terminalVelocity;
+        } else throw new IllegalArgumentException("terminal Velocity must be positive and musn't be greater than the TERMINAL_VELOCITY final field in class Projectile");
     }
 
     @Override
