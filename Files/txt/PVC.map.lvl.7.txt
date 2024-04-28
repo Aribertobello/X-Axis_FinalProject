@@ -1,5 +1,5 @@
 index : 1
-type : earth
+type : space
 Forces : 
 {
 GMagnitude = 9.8
@@ -15,9 +15,9 @@ wall : { height = 200 , width = 5 , coordinate = (497,158) , rotation  = 123 , m
 wall : { height = 140 , width = 5 , coordinate = (504,323) , rotation  = 233 , mass = 2 }
 wall : { height = 200 , width = 5 , coordinate = (858,455) , rotation  = 119 , mass = 2 }
 wall : { height = 140 , width = 5 , coordinate = (893,620) , rotation  = 250 , mass = 2 }
-wall : { height = 140 , width = 5 , coordinate = (1078,204) , rotation  = 250 , mass = 2 }
-wall : { height = 140 , width = 5 , coordinate = (1018,43) , rotation  = 123 , mass = 2 }
-wall : { height = 140 , width = 5 , coordinate = (1126,106) , rotation  = 123 , mass = 2 }
+wall : { height = 200 , width = 5 , coordinate = (1078,204) , rotation  = 250 , mass = 2 }
+wall : { height = 450 , width = 5 , coordinate = (1018,43) , rotation  = 123 , mass = 2 }
+wall : { height = 140 , width = 5 , coordinate = (150,150) , rotation  = 65 , mass = 2 }
 }
 Description : 
 WOW! this map is very normal i hope its stays that way

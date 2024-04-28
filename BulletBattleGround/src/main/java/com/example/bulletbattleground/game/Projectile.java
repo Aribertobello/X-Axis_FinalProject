@@ -61,7 +61,7 @@ public abstract class  Projectile extends MovingBody {
         forces.add(lift);
         forces.addAll(Arrays.asList(Forces));
 
-        if(this instanceof Bullet){
+        /*if(this instanceof Bullet){
             playGunshotSound();
         }
         if(this instanceof Spear) {
@@ -69,7 +69,7 @@ public abstract class  Projectile extends MovingBody {
         }
         if(this instanceof Rocket) {
             playRocketSound();
-        }
+        }*/
 
     }
     private void playGunshotSound() {

@@ -7,7 +7,6 @@ ally : { loadout = 1 , health = 5 , coordinate = (150,542) }
 computer : { loadout = 1 , health = 5 , coordinate = (346,218) }
 computer : { loadout = 1 , health = 5 , coordinate = (750,550) }
 computer : { loadout = 1 , health = 5 , coordinate = (920,106) }
-
 }
 GameRules : {
 MAX_TURN_TIMER :

@@ -1,11 +1,12 @@
 index : 6
 type : 1
-map : Files/txt/PVC.map.lvl.1.txt
+map : Files/txt/PVE.map.lvl.6.txt
 fighters :
 {
-ally : { loadout = 1 , health = 5 , coordinate = (200,600) }
+ally : { loadout = 1 , health = 5 , coordinate = (100,462) }
 }
-loot : { coordinate = (800,600) }
+loot : { coordinate = (604,40) }
+loot : { coordinate = (932,725) }
 GameRules : {
 MAX_TURN_TIMER :
 MAX_PROJ_ANIMATION_IMER

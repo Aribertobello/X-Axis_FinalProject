@@ -1,5 +1,5 @@
 index : 1
-type : space
+type : earth
 Forces : 
 {
 GMagnitude = 9.8
@@ -8,12 +8,17 @@ wind = <-0.9,0.0>
 }
 Obstacles :
 {
-wall : { height = 155 , width = 5 , coordinate = (909,450) , rotation  = 0 , mass = 2 }
-wall : { height = 155 , width = 5 , coordinate = (1038,564) , rotation  = 220 , mass = 2 }
-wall : { height = 155 , width = 5 , coordinate = (898,300) , rotation  = 76 , mass = 2 }
-wall : { height = 155 , width = 5 , coordinate = (769,196) , rotation  = 0 , mass = 2 }
-wall : { height = 155 , width = 5 , coordinate = (1150,221) , rotation  = 216 , mass = 2 }
-wall : { height = 155 , width = 5 , coordinate = (1102,98) , rotation  = 127 , mass = 2 }
+wall : { height = 140 , width = 5 , coordinate = (474,71) , rotation  = 0 , mass = 2 }
+wall : { height = 140 , width = 5 , coordinate = (650,100) , rotation  = 250 , mass = 2 }
+wall : { height = 100 , width = 5 , coordinate = (825,725) , rotation  = 0 , mass = 2 }
+wall : { height = 155 , width = 5 , coordinate = (541,194) , rotation  = 206 , mass = 2 }
+wall : { height = 155 , width = 5 , coordinate = (938,629) , rotation  = 148 , mass = 2 }
+wall : { height = 155 , width = 5 , coordinate = (150,720) , rotation  = 65 , mass = 2 }
+spaceship : { speed = 30 , coordinate = (540,80) }
+spaceship : { speed = 30 , coordinate = (772,-43) }
+spaceship : { speed = 30 , coordinate = (1043,533) }
+spaceship : { speed = 30 , coordinate = (9798,855) }
+spaceship : { speed = 30 , coordinate = (552,938) }
 }
 Description : 
 WOW! this map is very normal i hope its stays that way

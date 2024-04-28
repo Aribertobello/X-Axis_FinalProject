@@ -4,8 +4,9 @@ map : Files/txt/PVC.map.lvl.5.txt
 fighters :
 {
 ally : { loadout = 1 , health = 5 , coordinate = (297,502) }
-computer : { loadout = 1 , health = 5 , coordinate = (1007,468) }
-computer : { loadout = 1 , health = 5 , coordinate = (1406,94) }
+computer : { loadout = 1 , health = 5 , coordinate = (1007,468) } computer : { loadout = 1 , health = 5 , coordinate = (1200,400) }
+computer : { loadout = 1 , health = 5 , coordinate = (900,200) }
+computer : { loadout = 1 , health = 5 , coordinate = (1200,400) }
 }
 GameRules : {
 MAX_TURN_TIMER :
