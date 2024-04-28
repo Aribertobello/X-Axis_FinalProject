@@ -30,7 +30,7 @@
       </RadioButton>
       <RadioButton fx:id="allyMedbtn" layoutX="184.0" layoutY="98.0" mnemonicParsing="false" onAction="#allyMedClassChosen" prefHeight="17.0" prefWidth="55.0" text="Medium" toggleGroup="$allyClassGroup" />
       <RadioButton fx:id="allyHeavybtn" layoutX="184.0" layoutY="126.0" mnemonicParsing="false" onAction="#allyHeavyClassChosen" prefHeight="17.0" prefWidth="55.0" text="Heavy" toggleGroup="$allyClassGroup" />
-      <Button layoutX="14.0" layoutY="122.0" mnemonicParsing="false" onAction="#reflectAllyImage" text="Reflect" />
+      <Button layoutX="14.0" layoutY="122.0" mnemonicParsing="false" onAction="#reflectAllyImageright" text="Reflect Right" />
       <RadioButton layoutX="177.0" layoutY="231.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="55.0" text="Light">
          <toggleGroup>
             <ToggleGroup fx:id="compClassGroup" />
@@ -38,7 +38,7 @@
       </RadioButton>
       <RadioButton layoutX="177.0" layoutY="259.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="55.0" text="Medium" toggleGroup="$compClassGroup" />
       <RadioButton layoutX="177.0" layoutY="285.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="55.0" text="Heavy" toggleGroup="$compClassGroup" />
-      <Button layoutX="14.0" layoutY="281.0" mnemonicParsing="false" onAction="#reflectComputerImage" text="Reflect" />
+      <Button layoutX="14.0" layoutY="281.0" mnemonicParsing="false" onAction="#reflectComputerImageRight" text="Reflect Right" />
       <Slider fx:id="wallMassSlider" layoutX="212.0" layoutY="392.0" orientation="VERTICAL" prefHeight="82.0" prefWidth="14.0" />
       <Slider fx:id="spaceShipSpeedslider" layoutX="212.0" layoutY="552.0" orientation="VERTICAL" prefHeight="93.0" prefWidth="14.0" />
       <Slider fx:id="radiusSlider" layoutX="212.0" layoutY="717.0" orientation="VERTICAL" prefHeight="93.0" prefWidth="14.0" />
@@ -70,5 +70,7 @@
             <Font size="9.0" />
          </font>
       </Label>
+      <Button layoutX="14.0" layoutY="86.0" mnemonicParsing="false" onAction="#reflectAllyImageleft" text="Reflect Left" />
+      <Button layoutX="14.0" layoutY="318.0" mnemonicParsing="false" onAction="#reflectComputerImageLeft" text="Reflect Left" />
    </children>
 </Pane>

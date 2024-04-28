@@ -65,6 +65,7 @@ public class FreePlayController {
         fighter = new Computer(compLoadoutNb,15,0,0);
         Image computerImage = new Image("file:Files/img/Light_Class_Img_Inverted.png");
         fighter.setFill(new ImagePattern(computerImage));
+        fighter.setTeamNb(2);
         imageView = (ImageView) event.getSource();
         returnCoordinate = new Coordinate(event.getSceneX(),event.getSceneY());
         coordinate = new Coordinate(event.getSceneX(),event.getSceneY());
@@ -170,14 +171,35 @@ public class FreePlayController {
         allyLoadoutNb = 3;
     }
 
-
-    public void reflectAllyImage(ActionEvent event) {
-        Image allyImageInverted = new Image("file:Files/img/Light_Class_Img_Inverted.png");
-        fighter.setFill(new ImagePattern(allyImageInverted));
-    }
     @FXML
-    void reflectComputerImage(ActionEvent event) {
-        Image computerImageInverted = new Image("file:Files/img/Light_Class_Img.png");
-        fighter.setFill(new ImagePattern(computerImageInverted));
+    void reflectAllyImageleft(ActionEvent event) {
+        if (BattleGround.activeGame.getLevel().getSelectedFighter().getTeamNb()  == 1) {
+            Image allyImageInverted = new Image("file:Files/img/Light_Class_Img_Inverted.png");
+            BattleGround.activeGame.getLevel().getSelectedFighter().setFill(new ImagePattern(allyImageInverted));
+        }
+    }
+
+    @FXML
+    void reflectAllyImageright(ActionEvent event) {
+        if (BattleGround.activeGame.getLevel().getSelectedFighter().getTeamNb()  == 1) {
+            Image allyImage = new Image("file:Files/img/Light_Class_Img.png");
+            BattleGround.activeGame.getLevel().getSelectedFighter().setFill(new ImagePattern(allyImage));
+        }
+    }
+
+    @FXML
+    void reflectComputerImageLeft(ActionEvent event) {
+        if (BattleGround.activeGame.getLevel().getSelectedFighter().getTeamNb()  == 2) {
+            Image computerImageInverted = new Image("file:Files/img/Light_Class_Img_Inverted.png");
+            BattleGround.activeGame.getLevel().getSelectedFighter().setFill(new ImagePattern(computerImageInverted));
+        }
+    }
+
+    @FXML
+    void reflectComputerImageRight(ActionEvent event) {
+        if (BattleGround.activeGame.getLevel().getSelectedFighter().getTeamNb()  == 2) {
+            Image computerImage = new Image("file:Files/img/Light_Class_Img.png");
+            BattleGround.activeGame.getLevel().getSelectedFighter().setFill(new ImagePattern(computerImage));
+        }
     }
 }
