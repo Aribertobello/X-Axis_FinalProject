@@ -10,18 +10,19 @@ import com.example.bulletbattleground.gameObjects.projectiles.Rocket;
 import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.HitBox;
 import com.example.bulletbattleground.utility.Vector;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
 
+@Getter@Setter
 public class Fighter extends Rectangle {
 
-    @Getter
-    @Setter
     protected Loadout loadout;
 
     @Getter
@@ -31,17 +32,17 @@ public class Fighter extends Rectangle {
     @Getter
     @Setter
     protected int health;
-
     @Getter
     protected Coordinate coordinate = new Coordinate(0, 0);
+
+    boolean inverted = false ;
+
     @Getter
     @Setter
     protected int teamNb;
-    @Getter
     boolean highlighted;
     @Getter @Setter
     private Mapp map;
-
 
     /**
      * Creates a Fighter  instance, this is what can shoot bullets in the game
@@ -49,7 +50,7 @@ public class Fighter extends Rectangle {
      * @param coordinateY coordinate y of the center of the fighter in the map
      * @param type type of loadout the fighter will have : 1=light 2=medium 3=heavy
      */
-    public Fighter( int type,int health, int coordinateX, int coordinateY) {
+    public Fighter (int type,int health, int coordinateX, int coordinateY) {
         super(40, 40);
         loadout = new Loadout(type);
         coordinate.setX(coordinateX);
@@ -116,6 +117,11 @@ public class Fighter extends Rectangle {
                 ((Rocket) projectile).setDropZone(5);
             }
         }
+    }
+    public void reflect(){
+        inverted = !inverted;
+        if(inverted) setFill(new ImagePattern(new Image("file:Files/img/Light_Class_Img_Inverted.png")));
+        else setFill(new ImagePattern(new Image("file:Files/img/Light_Class_Img.png")));
     }
 
     public void highlight(){
