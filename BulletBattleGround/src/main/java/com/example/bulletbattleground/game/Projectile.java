@@ -58,7 +58,6 @@ public abstract class  Projectile extends MovingBody {
         forces.clear();
         forces.add(lift);
         forces.addAll(Arrays.asList(Forces));
-
         if(this instanceof Bullet){
             playGunshotSound();
         }
@@ -68,7 +67,6 @@ public abstract class  Projectile extends MovingBody {
         if(this instanceof Rocket) {
             playRocketSound();
         }
-
     }
     private void playGunshotSound() {
         try {
@@ -108,6 +106,7 @@ public abstract class  Projectile extends MovingBody {
             e.printStackTrace();
         }
     }
+
 
     /**
      *

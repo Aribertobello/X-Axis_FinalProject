@@ -19,6 +19,7 @@ public class Computer extends Fighter {
 
     public Computer(int type, int health, int coordinateX, int coordinateY) {
         super(type, health, coordinateX, coordinateY);
+        reflect();
     }
 
     public void calculateLaunchAngle() {

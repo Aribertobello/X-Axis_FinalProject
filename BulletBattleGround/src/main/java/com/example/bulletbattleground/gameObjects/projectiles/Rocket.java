@@ -35,8 +35,6 @@ public class Rocket extends Projectile {
         setTerminalVelocity(50);
     }
 
-
-
     @Override
     public void move(double time) {
         forces.clear();

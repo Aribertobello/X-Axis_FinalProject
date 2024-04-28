@@ -42,6 +42,16 @@ public class Bullet extends Projectile {
 
     }
 
+    private void playGunshotSound() {
+          try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("GunShot.wav"));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void bounce(HitBox hitBox) {

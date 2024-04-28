@@ -52,7 +52,7 @@ public class SmokeScreen extends Obstacle {
 
         if(upTime1 >= 10.0){
             ball.setRadius(radius);
-            radius += 0.3;
+            radius += 0.3/BattleGround.activeGame.tickDuration;
         }
 
         if (upTime1 <= 0.0){
@@ -65,7 +65,7 @@ public class SmokeScreen extends Obstacle {
 
         if (upTime3 <= 4.0){
             ball.setRadius(radius);
-            radius -= 0.5;
+            radius -= 0.5/BattleGround.activeGame.tickDuration;
         }
 
         smokeAnimationRotate();
