@@ -67,6 +67,7 @@ public class Grenade extends Projectile {
         this.getChildren().add(grenade);
         this.forces.add(lift);
         setMass(0.5);
+        setTerminalVelocity(95);
         this.setDamage(impactCollisionDamage); //at least it does a little damage only if the grenades hits the player
     }
     @Override
@@ -104,6 +105,8 @@ public class Grenade extends Projectile {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Explosion.wav"));
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
+            FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            volumeControl.setValue(-20.0f);
             clip.start();
         } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
             e.printStackTrace();

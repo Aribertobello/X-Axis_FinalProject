@@ -25,9 +25,22 @@ class CoordinateTest {
         Vector result = coord1.distanceVector(coord2);
         assertEquals(expectedResult, result);
     }
+    @Test
+    void testRotateAbout() throws ParseException {
+        Coordinate coord = new Coordinate(5,0);
+        Coordinate axis = new Coordinate(0,0);
+        Coordinate expectedResult = new Coordinate(4,3);
+        Coordinate result = coord.rotateAbout(36.86,axis);
+        assertEquals(expectedResult, result);
+    }
 
     @Test
-    void testToString() {
+    void testEquals() {
+        Coordinate coord = new Coordinate(5,0);
+        Coordinate coord1 = new Coordinate(4.9999,0.001);
+        boolean result = coord.equals(coord1);
+        boolean expectedResult = true;
+        assertEquals(expectedResult, result);
     }
     @Test
     void testValueOf() throws ParseException {
@@ -36,4 +49,5 @@ class CoordinateTest {
         Coordinate expectedResult = new Coordinate(8,9);
         assertEquals(expectedResult, result);
     }
+
 }

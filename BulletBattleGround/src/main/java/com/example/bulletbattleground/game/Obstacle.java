@@ -12,6 +12,9 @@ public abstract class Obstacle extends MovingBody implements BattleGroundObject 
     @Setter
     protected double rotationAngle;
 
+    @Getter
+    @Setter
+    private Mapp map;
     /**
      *
      * @param dt
@@ -29,10 +32,8 @@ public abstract class Obstacle extends MovingBody implements BattleGroundObject 
         super.setCoordinate(x,y);
         allign();
     }
-    public HitBox hitBox(){
-        hitBox = new HitBox(this);
-        return hitBox;
-    }
+    public abstract HitBox hitBox();
+
     public void rotate(double angle){
         this.setRotationAngle(angle);
         this.getChildren().get(0).setRotate(angle);

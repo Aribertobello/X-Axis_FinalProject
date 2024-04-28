@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ClassSelectorController extends subMenuController {
+    //TODO CLASS COMPLETE
 
     public Button lightClassBtn;
     public Button mediumClassBtn;
@@ -33,36 +34,33 @@ public class ClassSelectorController extends subMenuController {
     public boolean loadoutSelected;
 
     public void lightClassSelected(ActionEvent event) throws IOException {
-        FileManager.loadoutType = light;
         loadoutSelected = true;
-
+        for (int i = 0; i < BattleGround.activeGame.getLevel().team1.size(); i++) {
+            BattleGround.activeGame.getLevel().team1.get(i).setLoadout(new Loadout(1));
+        }
+        BattleGround.newScene(BattleGround.activeGame);
+        BattleGround.fullscreen();
+        BattleGround.activeGame.run();
     }
 
     public void mediumClassSelected(ActionEvent event) throws IOException {
-        FileManager.loadoutType = medium;
         loadoutSelected = true;
+        for (int i = 0; i < BattleGround.activeGame.getLevel().team1.size(); i++) {
+            BattleGround.activeGame.getLevel().team1.get(i).setLoadout(new Loadout(2));
+        }
+        BattleGround.newScene(BattleGround.activeGame);
+        BattleGround.fullscreen();
+        BattleGround.activeGame.run();
     }
+
 
     public void heavyClassSelected(ActionEvent event) throws IOException {
-        FileManager.loadoutType = heavy;
         loadoutSelected = true;
-    }
-
-    @FXML
-    void switchScenes(ActionEvent event) throws IOException {
-        if(loadoutSelected) {
-            if (pvpClicked) {
-                BattleGround.newScene(new Scene(BattleGround.pvpLevelSelectorLoader().load()));
-            }
-
-            if (pveClicked) {
-                BattleGround.newScene(new Scene(BattleGround.pveLevelSelectorLoader().load()));
-            }
-
-            if (pvcClicked) {
-                BattleGround.newScene(new Scene(BattleGround.pvcLevelSelectorLoader().load()));
-            }
+        for (int i = 0; i < BattleGround.activeGame.getLevel().team1.size(); i++) {
+            BattleGround.activeGame.getLevel().team1.get(i).setLoadout(new Loadout(3));
         }
-     }
-
+        BattleGround.newScene(BattleGround.activeGame);
+        BattleGround.fullscreen();
+        BattleGround.activeGame.run();
+    }
 }

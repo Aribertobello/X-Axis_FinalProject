@@ -23,6 +23,7 @@ import java.util.Scanner;
 
 public class FileManager extends ClassSelectorController {
 
+    //TODO GameRules
     private static File managerFile;
     static User user;
     public static int loadoutType;
@@ -39,11 +40,10 @@ public class FileManager extends ClassSelectorController {
         managerFile = new File(filePath);
     }
 
-
-
     public static Level createLevel(String filePath) throws ParseException, IOException {
         Level level = null;
         String mapLocation = "";
+        String description = "";
         int type = 0;
         int index = 0;
         Scanner scanner = null;
@@ -65,11 +65,19 @@ public class FileManager extends ClassSelectorController {
                 }
                 readFighters(scanner, level);
             }
-            if(line.startsWith("loot :")){
-                scanLoot(line,level);
+            if(line.startsWith("loot :")) scanLoot(line,level);
+            if(line.startsWith("Description :")) {
+                scanner.nextLine();
+                String l = scanner.nextLine();
+                while(!l.endsWith("}")) {
+                    description = description + "\n" + l ;
+                    l = scanner.nextLine();
+                }
             }
         }
         level.setIndex(index);
+        level.getDescriptionLabel().setText(description);
+        level.setDescription(description);
         return level;
     }
 
@@ -158,8 +166,8 @@ public class FileManager extends ClassSelectorController {
             }
             str = scanner.next();
         }
-        map.setGravityMagnitude(gMag);
-        map.setAirResistanceMagnitude(aiResMag);
+        map.setGravity(gMag);
+        map.setAirResistance(aiResMag);
         map.environmentForces[2] = wind;
     }
 
@@ -197,7 +205,7 @@ public class FileManager extends ClassSelectorController {
                         mass = lineScanner.nextInt();
                     }
                 }
-                map.addObstacle(new Wall(height, width, (int) coordinate.getX(), (int) coordinate.getY(), mass));
+                map.addObstacle(new Wall(height, width, (int) coordinate.getX(), (int) coordinate.getY(), rotation, mass));
             }
             if (line.startsWith("spaceship")) {
                 while (!lineScanner.next().startsWith("}")) {
@@ -336,42 +344,8 @@ public class FileManager extends ClassSelectorController {
         }
     }
 
-    /**
-     * Generates the default level for the player vs player mode
-     * calls the defaultMapPvp to generate the map of the level
-     *
-     * @return applications default level for PVP
-     */
-    public static StandardLevel defaultLevelPvp() {
-        Mapp map = defaultMapPvp();
-        try {
-            StandardLevel level = new StandardLevel(map, 3);
-            level.addFighter(new Ally(1, 15, 200, 600), 1);
-            level.addFighter(new Ally(2, 15, BattleGround.screenWidth - 200, 600), 2);
-            return level;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * generates the default map for player vs computer game mode
-     * map is of type earth
-     * map includes a 12x160 wall at 900,480
-     * map has a player at 200,600 of type 3
-     * map has a player at screenWidth - 200,600 of type 2
-     *
-     * @return applications default map for PVC
-     */
-    public static Mapp defaultMapPvp() {
-        Mapp map = new Mapp("space");
-        //map.addObstacle(new SmokeScreen(40,500,600));
-        map.addObstacle(new Wall(160, 12, 900, 480, 300));
-        return map;
-    }
-
     public static Mapp defaultEduMap() {
-        Mapp map = new Mapp("space");
+        Mapp map = new Mapp("earth");
         return map;
     }
 

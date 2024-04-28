@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 public class GameOverBoxController {
+    //TODO CLASS COMPLETE
     public Label gameOverLabel;
     public Label congratulationsLabel;
     public Button exitBtn;

@@ -32,8 +32,8 @@ public class Rocket extends Projectile {
         this.lift = new Vector(0, -2.0);
         this.forces.add(lift);
         this.setMass(9.0);
+        setTerminalVelocity(50);
     }
-
 
     @Override
     public void move(double time) {
@@ -46,7 +46,6 @@ public class Rocket extends Projectile {
         }
         align();
         super.move(time);
-
     }
 
     @Override

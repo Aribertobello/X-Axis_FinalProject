@@ -20,10 +20,8 @@ import java.util.Stack;
 
 public class BattleGround extends Application {
 
-    static protected ArrayList<String> pVeLevelsArrayList = new ArrayList<>();
-    static protected ArrayList<String> pVcLevelsArrayList = new ArrayList<>();
-    static protected ArrayList<String> mapsArrayList = new ArrayList<>();
     static protected String userDataLocation = "";//TODO Put User Data File Here
+
     static public Game activeGame;
     public static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
     public static int screenHeight = (int) Screen.getPrimary().getBounds().getHeight();
@@ -63,6 +61,9 @@ public class BattleGround extends Application {
     }
 
     public static void prevScene(){
+        if(mainStage.getScene() == activeGame){
+            activeGame = null;
+        }
 
         workFlowStack.pop();
         mainStage.setScene(workFlowStack.peek());
@@ -70,13 +71,14 @@ public class BattleGround extends Application {
     }
 
     public static void center(){
+        mainStage.setFullScreen(false);
+        mainStage.setMaximized(false);
+
         double centerX = (screenWidth - mainStage.getWidth()) / 2;
         double centerY = (screenHeight - mainStage.getHeight()) / 2;
 
-        mainStage.setFullScreen(false);
-        mainStage.setMaximized(false);
-        mainStage.setWidth(((Region)mainStage.getScene().getRoot()).getWidth());
-        mainStage.setHeight(((Region)mainStage.getScene().getRoot()).getHeight());
+        mainStage.setX(centerX);
+        mainStage.setY(centerY);
     }
 
     public static void fullscreen(){
@@ -91,5 +93,6 @@ public class BattleGround extends Application {
     public static FXMLLoader pvcLevelSelectorLoader(){ return new FXMLLoader(BattleGround.class.getResource("PVCLevelSelector.fxml"));}
     public static FXMLLoader pvpLevelSelectorLoader(){ return new FXMLLoader(BattleGround.class.getResource("PVPLevelSelector.fxml"));}
     public static FXMLLoader classSelectorLoader(){ return new FXMLLoader(BattleGround.class.getResource("ClassSelector.fxml"));}
+    public static FXMLLoader instructionBoxLoader(){ return new FXMLLoader(BattleGround.class.getResource("InstructionBox.fxml"));}
 
 }

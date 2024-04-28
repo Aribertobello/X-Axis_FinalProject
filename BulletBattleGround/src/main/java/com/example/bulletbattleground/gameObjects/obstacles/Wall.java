@@ -9,17 +9,14 @@ import javafx.scene.shape.Rectangle;
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter
+@Setter
 public class Wall extends Obstacle {
 
-    @Getter
-    @Setter
     int thickness;
-
-    @Getter
-    @Setter
     int height;
 
-    public Wall(int height, int thickness, int coordinateX, int coordinateY, int mass) {
+    public Wall(int height, int thickness, int coordinateX, int coordinateY, double rotationAngle, int mass) {
         setHeight(height);
         setThickness(thickness);
         Rectangle rectangle = new Rectangle(coordinateX - (double) thickness / 2, coordinateY - (double) height / 2, thickness, height);
@@ -30,6 +27,7 @@ public class Wall extends Obstacle {
         this.getChildren().addAll(rectangle, label);
         this.setCoordinate(new Coordinate(coordinateX, coordinateY));
         setMass(mass);
+        rotate(rotationAngle);
     }
 
     @Override
@@ -46,5 +44,16 @@ public class Wall extends Obstacle {
     public void allign() {
         ((Rectangle) this.getChildren().get(0)).setX(getCoordinate().getX() - (double) thickness / 2);
         ((Rectangle) this.getChildren().get(0)).setY(getCoordinate().getY() - (double) height / 2);
+    }
+
+    @Override
+    public void rotate(double angle) {
+        super.rotate(angle);
+    }
+
+    @Override
+    public HitBox hitBox(){
+        hitBox = new HitBox(this);
+        return hitBox;
     }
 }

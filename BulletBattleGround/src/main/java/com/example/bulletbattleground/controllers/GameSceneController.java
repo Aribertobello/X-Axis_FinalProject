@@ -1,9 +1,13 @@
 package com.example.bulletbattleground.controllers;
 
 import com.example.bulletbattleground.BattleGround;
+import com.example.bulletbattleground.fileManagement.FileManager;
 import com.example.bulletbattleground.game.Game;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,10 +16,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.io.IOException;
+
 @Getter
 @Setter
 public class GameSceneController {
-
+    //TODO enemy health
     @FXML
     private Pane headsUpDisplay;
     @FXML
@@ -50,7 +57,6 @@ public class GameSceneController {
     private Menu settingsButton;
     @FXML
     private Menu pauseButton;
-
     @FXML
     private Label MomLabel;
     @FXML
@@ -68,9 +74,20 @@ public class GameSceneController {
     @FXML
     private Label GTimer;
     @FXML
+    private Label STimer;
+    @FXML
     private ImageView GImg;
     @FXML
     private ImageView BImg;
+    @FXML
+    private Label EnemyCoor;
+    @FXML
+    private Label AllyCoor;
+
+
+    public int light = 1;
+    public int medium = 2;
+    public int heavy = 3;
 
     @FXML
     private void handlePause() {
@@ -83,12 +100,23 @@ public class GameSceneController {
     }
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         exitButton.setOnAction(e -> handleExit());
         pauseButton.setOnAction(e -> handlePause());
-        if(GImg != null && BImg != null) {
-            GImg.setImage(new Image("file:grenade.png"));
-            BImg.setImage(new Image("file:smallBullet.png"));
+        if (GImg != null && BImg != null) {
+            GImg.setImage(new Image("file:Files/img/grenade.png"));
         }
+    }
+
+    public void displayHowToPlay(ActionEvent event) {
+        TabPane instructionBox;
+        try {
+            instructionBox = BattleGround.instructionBoxLoader().load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        BattleGround.activeGame.unfocus();
+        BattleGround.activeGame.getLevel().getChildren().add(instructionBox);
+        BattleGround.activeGame.pauseGame();
     }
 }

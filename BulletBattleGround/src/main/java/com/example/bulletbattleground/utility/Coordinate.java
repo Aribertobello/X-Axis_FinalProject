@@ -1,5 +1,6 @@
 package com.example.bulletbattleground.utility;
 
+import javafx.scene.layout.CornerRadii;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -48,6 +49,11 @@ public class Coordinate {
     public Vector distanceVector(Coordinate coordinate) {
         return new Vector(this.getX() - coordinate.getX(), this.getY() - coordinate.getY());
     }
+    public Coordinate rotateAbout(double angle, Coordinate axisOfRotation){
+        Vector v = distanceVector(axisOfRotation);
+        Vector r  = v.rotate(angle);
+        return axisOfRotation.move(distanceVector(axisOfRotation).rotate(angle));
+    }
 
     /**
      *
@@ -63,7 +69,7 @@ public class Coordinate {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         Coordinate otherCoord = (Coordinate) object;
-        return x - otherCoord.x == 0 && y -otherCoord.y == 0;
+        return Math.round(x - otherCoord.x) == 0 && Math.round(y -otherCoord.y) == 0;
     }
 
     public static Coordinate valueOf(String string) throws ParseException {

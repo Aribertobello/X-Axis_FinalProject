@@ -15,6 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Setter
 @Getter
 public class EducationGameController extends GameSceneController{
+    //TODO CLASS COMPLETE
     public LineChart chart1;
     public ChoiceBox<XYChart.Series> chart1ChoiceBox;
     public LineChart chart2;

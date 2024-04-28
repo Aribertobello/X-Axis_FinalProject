@@ -1,5 +1,6 @@
 package com.example.bulletbattleground.gameObjects.obstacles;
 
+import com.example.bulletbattleground.BattleGround;
 import com.example.bulletbattleground.game.Mapp;
 import com.example.bulletbattleground.game.Obstacle;
 import com.example.bulletbattleground.utility.Coordinate;
@@ -13,9 +14,8 @@ import java.io.IOException;
 import java.util.Random;
 
 public class SpaceShip extends Obstacle {
+
     private boolean hasPlayedSound = false;
-
-
     public static final double DEFAULT_HEIGHT = 80;
     public static final double DEFAULT_WIDTH = 40;
     public static final double SPACESHIP_MASS = 190000;
@@ -44,31 +44,30 @@ public class SpaceShip extends Obstacle {
                 FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 
                 // Set the volume to -10.0f (lower volume by 10 decibels)
-                gainControl.setValue(-20.0f);
+                gainControl.setValue(-15.0f);
                 clip.loop(Clip.LOOP_CONTINUOUSLY);
 
                 // Start the sound
                 clip.start();
+                if(BattleGround.activeGame.gameOverBox != null) {
+                    clip.stop();
+                }
             } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
                 e.printStackTrace();
-            }
-    }
+           }
+  }
 
     @Override
     public void move(double dt) {
 
         if (getCoordinate().getY() <= -160 || getCoordinate().getY() > 1200/*TODO max width of screen parameter*/) {
             Random random = new Random();
-            getCoordinate().setX(random.nextInt((int) ((Mapp) this.getParent()).getWidth() / 4, (int) (2 * ((Mapp) this.getParent()).getWidth() / 3)));
+            getCoordinate().setX(random.nextInt((int) getMap().getWidth() / 4, (int) (2 * getMap().getWidth() / 3)));
             setVelocityY(-getVelocityY() * (random.nextInt(5, 51)) / Math.abs(getVelocityY()));
             setVelocityX(0);
             allign();
         }
         super.move(dt);
-        if(!hasPlayedSound){
-        playSpaceShipSound();
-            hasPlayedSound = true;
-        }
     }
 
     @Override
@@ -92,5 +91,10 @@ public class SpaceShip extends Obstacle {
             double x5 = getCoordinate().getX() - DEFAULT_WIDTH / 2, y5 = getCoordinate().getY() + DEFAULT_HEIGHT / 2;
             (((Polygon) (getChildren()).get(0))).getPoints().setAll(x1, y1, x2, y2, x3, y3, x4, y4, x5, y5);
         }
+    }
+    @Override
+    public HitBox hitBox(){
+        hitBox = new HitBox(this);
+        return hitBox;
     }
 }

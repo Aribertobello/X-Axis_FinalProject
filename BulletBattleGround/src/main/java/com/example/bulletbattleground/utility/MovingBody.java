@@ -54,7 +54,7 @@ public abstract class MovingBody extends Group {
      * @return
      */
     public Vector velocity() {
-        return new Vector(Math.round(velocityX), Math.round(velocityY));
+        return new Vector(velocityX, velocityY);
     }
 
     /**
@@ -82,6 +82,7 @@ public abstract class MovingBody extends Group {
      * @param dt
      */
     public abstract void move(double dt);
+
 
     /**
      *

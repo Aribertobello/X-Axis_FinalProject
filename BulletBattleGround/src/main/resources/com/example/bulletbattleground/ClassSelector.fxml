@@ -3,13 +3,26 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bulletbattleground.controllers.ClassSelectorController">
    <children>
-      <Button fx:id="lightClassBtn" layoutX="14.0" layoutY="27.0" mnemonicParsing="false" onAction="#lightClassSelected" prefHeight="314.0" prefWidth="176.0" text="light" />
-      <Button fx:id="mediumClassBtn" layoutX="212.0" layoutY="27.0" mnemonicParsing="false" onAction="#mediumClassSelected" prefHeight="314.0" prefWidth="176.0" text="Medium" />
-      <Button fx:id="heavyClassBtn" layoutX="409.0" layoutY="26.0" mnemonicParsing="false" onAction="#heavyClassSelected" prefHeight="314.0" prefWidth="176.0" text="Heavy" />
+      <Button fx:id="lightClassBtn" alignment="TOP_CENTER" layoutX="14.0" layoutY="27.0" mnemonicParsing="false" onAction="#lightClassSelected" prefHeight="314.0" prefWidth="176.0" text="light">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font></Button>
+      <Button fx:id="mediumClassBtn" alignment="TOP_CENTER" layoutX="212.0" layoutY="27.0" mnemonicParsing="false" onAction="#mediumClassSelected" prefHeight="314.0" prefWidth="176.0" text="Medium">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font></Button>
+      <Button fx:id="heavyClassBtn" alignment="TOP_CENTER" layoutX="409.0" layoutY="26.0" mnemonicParsing="false" onAction="#heavyClassSelected" prefHeight="314.0" prefWidth="176.0" text="Heavy">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font></Button>
       <Label layoutX="266.0" layoutY="6.0" text="Select a class" />
-      <Button layoutX="273.0" layoutY="360.0" mnemonicParsing="false" onAction="#switchScenes" text="Continue" />
+      <Button layoutX="273.0" layoutY="360.0" mnemonicParsing="false" text="Continue" />
+      <Label alignment="CENTER" layoutX="38.0" layoutY="216.0" prefHeight="121.0" prefWidth="128.0" style="-fx-border-color: Black; -fx-border-radius: 5;" text="You shoot bullets, they don't do much damage but they're very fast and keep their lift longer than other projectiles" textAlignment="CENTER" wrapText="true" />
+      <Label alignment="CENTER" layoutX="236.0" layoutY="216.0" prefHeight="121.0" prefWidth="128.0" style="-fx-border-color: Black; -fx-border-radius: 5;" text="You Shoot Spears, they are more Powerful than bullets but are not as fast and easy to play with, BEWARE!" textAlignment="CENTER" wrapText="true" />
+      <Label alignment="CENTER" layoutX="433.0" layoutY="216.0" prefHeight="121.0" prefWidth="128.0" style="-fx-border-color: Black; -fx-border-radius: 5;" text="Not your Ordinary Projectile try at your own risk! (VERY STRONG though)" textAlignment="CENTER" wrapText="true" />
    </children>
 </AnchorPane>

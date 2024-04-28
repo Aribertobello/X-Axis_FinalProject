@@ -18,7 +18,10 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class Bullet extends Projectile {
-    private boolean hasPlayedSound = false;
+
+    private final static int BULLET_DAMAGE = 3;
+    private final static double BULLET_MASS = 0.5;
+    private final static Vector BULLET_LIFT = new Vector(0, -2.0);
 
     /**
      * Constructs a new Bullet object.
@@ -31,13 +34,14 @@ public class Bullet extends Projectile {
         Image smallBulletImg = new Image("file:Files/img/smallBullet.png");
         small_bullet.setFill(new ImagePattern(smallBulletImg));
         this.getChildren().add(small_bullet);
-        this.damage = 3;
-        this.lift = new Vector(0, -2.0);
+        this.damage = BULLET_DAMAGE;
+        this.lift = BULLET_LIFT;
         this.forces.add(lift);
-        setTerminalVelocity(95);
-        setMass(0.5);
+        setTerminalVelocity(190);
+        setMass(BULLET_MASS);
 
     }
+
     private void playGunshotSound() {
           try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("GunShot.wav"));
@@ -57,7 +61,6 @@ public class Bullet extends Projectile {
 
     @Override
     public void move(double time) {
-
         super.move(time);
         this.getChildren().get(0).setRotate(velocity().angle());
     }

@@ -5,16 +5,21 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.text.ParseException;
-import java.util.Objects;
 
+import static java.lang.Math.PI;
+
+@Setter
+@Getter
 @AllArgsConstructor
 public class Vector {
-    @Getter
-    @Setter
+
     protected double x;
-    @Getter
-    @Setter
     protected double y;
+
+    public Vector( double angle){
+        x = Math.cos(angle*PI/180);
+        y = Math.sin(angle*PI/180);
+    }
 
     public static Vector valueOf(String string) throws ParseException {
 
@@ -42,7 +47,7 @@ public class Vector {
      * @return magnitude of this Vector
      */
     public double magnitude() {
-        return Math.sqrt(x * x + y * y);
+        return Math.sqrt(Math.pow(x,2) + Math.pow(y,2));
     }
 
     /**
@@ -81,17 +86,6 @@ public class Vector {
 
     /**
      * static
-     *calculates cross product of 2 given vectors
-     * @param vector1
-     * @param vector2
-     * @return
-     */
-    public static Vector crossProduct(Vector vector1, Vector vector2) {
-        return null;
-    }
-
-    /**
-     * static
      * calculates the sum of an array of vectors
      * follows formula sumX = x1+x2+x3...   sumY = y1+y2+y3...
      * @param Vectors given array of vectors to be summed
@@ -116,9 +110,9 @@ public class Vector {
      */
     public double angle() {
         if (x >= 0) {
-            return 180 * Math.atan(y / x) / Math.PI;
+            return 180 * Math.atan(y / x) / PI;
         } else {
-            return 180 * Math.atan(y / x) / Math.PI + 180;
+            return 180 * Math.atan(y / x) / PI + 180;
         }
     }
 
@@ -131,7 +125,7 @@ public class Vector {
      */
     public Vector scale(double newMagnitude) {
         double scale = newMagnitude / this.magnitude();
-        return this.multiply(Math.abs(scale));
+        return this.multiply(scale);
     }
 
     /**
@@ -160,8 +154,11 @@ public class Vector {
      */
     public Vector rotate(double angle) {
         return new Vector(
-                x * Math.cos(angle) - y * Math.sin(angle / Math.PI * 180)
-                , x * Math.sin(angle) + y * Math.cos(angle / Math.PI * 180));
+                x * Math.cos(angle / 180 * PI ) - y * Math.sin(angle / 180 * PI )
+                , x * Math.sin(angle / 180 * PI ) + y * Math.cos(angle / 180 * PI ));
+    }
+    public double slope(){
+        return y/x;
     }
 
     /**
@@ -175,6 +172,9 @@ public class Vector {
                 " " + x +
                 ", " + y +
                 " >" ;
+    }
+    public Arrow toArrow(Coordinate origin){
+         return new Arrow(this,origin);
     }
 
     @Override

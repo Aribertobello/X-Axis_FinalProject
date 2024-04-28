@@ -16,6 +16,7 @@ import javafx.scene.shape.Circle;
 import java.io.IOException;
 
 public class EduLevel extends FreePlayLevel {
+    //TODO CLASS COMPLETE
 
     //Edu properties------------------------------------
     public double dataIncrement = 0;
