@@ -48,6 +48,7 @@ public class Game extends Scene {
     boolean gameStart = false;
     TurnManager turnManager ;
 
+    public int tickDuration = 10;
 
     public Label congratulationsLabel;
     public Button exitBtn;
@@ -74,7 +75,7 @@ public class Game extends Scene {
      */
     public void run() {
         handleDragAndShoot();
-        timeline = new Timeline(new KeyFrame(Duration.millis(10), e
+        timeline = new Timeline(new KeyFrame(Duration.millis(tickDuration), e
                 -> {
             double dt = (1.0 / tickRate);
             time += dt;

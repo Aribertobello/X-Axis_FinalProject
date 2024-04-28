@@ -14,8 +14,6 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
-import java.io.FileNotFoundException;
-
 public class SmokeScreen extends Obstacle {
 
     protected double radius;
@@ -33,12 +31,7 @@ public class SmokeScreen extends Obstacle {
 
     protected final Image[] appearingsSmokeEffects = {smokeEffect4, smokeEffect5};
 
-    /**
-     * Sets up the smoke screen by by creating the values of the circle in another method
-     * @param radius The radius of the smoke screen
-     * @param coordinateX The x position of the smoke screen
-     * @param coordinateY The Y position of the smoke screen
-     */
+
     public SmokeScreen(double radius, double coordinateX, double coordinateY) {
         setCoordinate(new Coordinate(coordinateX, coordinateY));
         ispenetrable = true;
@@ -50,10 +43,6 @@ public class SmokeScreen extends Obstacle {
         upTime3 = 15.0;
     }
 
-    /**
-     * Loads user data from the file managed by this FileManager and checks if the provided username and password match the stored credentials from the player.
-     *
-     */
     @Override
     public void move(double dt) {
         super.move(dt);
@@ -63,7 +52,7 @@ public class SmokeScreen extends Obstacle {
 
         if(upTime1 >= 10.0){
             ball.setRadius(radius);
-            radius += 0.3;
+            radius += 0.3/BattleGround.activeGame.tickDuration;
         }
 
         if (upTime1 <= 0.0){
@@ -76,7 +65,7 @@ public class SmokeScreen extends Obstacle {
 
         if (upTime3 <= 4.0){
             ball.setRadius(radius);
-            radius -= 0.5;
+            radius -= 0.5/BattleGround.activeGame.tickDuration;
         }
 
         smokeAnimationRotate();
@@ -125,5 +114,11 @@ public class SmokeScreen extends Obstacle {
 
     @Override
     public void allign() {
+    }
+
+    @Override
+    public HitBox hitBox(){
+        hitBox = new HitBox(new SpaceShip(0,0,0));
+        return hitBox;
     }
 }
