@@ -204,7 +204,7 @@ public class HitBox extends Group {
 
     /**
      *
-     * @param HitBox
+     * @param //HitBox
      * @return
      */
     public boolean overlaps(HitBox hitBox) {

@@ -69,13 +69,14 @@ public class BattleGround extends Application {
         center();
     }
     public static void center(){
+        mainStage.setFullScreen(false);
+        mainStage.setMaximized(false);
+
         double centerX = (screenWidth - mainStage.getWidth()) / 2;
         double centerY = (screenHeight - mainStage.getHeight()) / 2;
 
-        mainStage.setFullScreen(false);
-        mainStage.setMaximized(false);
-        mainStage.setWidth(((Region)mainStage.getScene().getRoot()).getWidth());
-        mainStage.setHeight(((Region)mainStage.getScene().getRoot()).getHeight());
+        mainStage.setX(centerX);
+        mainStage.setY(centerY);
     }
     public static void fullscreen(){
         mainStage.setMaximized(true);

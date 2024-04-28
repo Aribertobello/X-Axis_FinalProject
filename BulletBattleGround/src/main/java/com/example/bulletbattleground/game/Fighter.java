@@ -34,7 +34,6 @@ public class Fighter extends Rectangle {
 
     @Getter
     protected Coordinate coordinate = new Coordinate(0, 0);
-
     @Getter
     @Setter
     protected int teamNb;

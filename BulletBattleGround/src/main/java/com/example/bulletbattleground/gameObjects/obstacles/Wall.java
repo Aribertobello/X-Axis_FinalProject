@@ -27,7 +27,6 @@ public class Wall extends Obstacle {
         this.getChildren().addAll(rectangle, label);
         this.setCoordinate(new Coordinate(coordinateX, coordinateY));
         setMass(mass);
-        setVelocityX(10);
         rotate(rotationAngle);
     }
 
