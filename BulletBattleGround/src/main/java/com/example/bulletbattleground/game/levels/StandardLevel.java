@@ -114,9 +114,11 @@ public class StandardLevel extends Level {
         }
         for(Fighter fighter : team1){
             fighter.setHealth(20);
+            fighter.setMaxHealth(20);
         }
         for(Fighter fighter : team2){
             fighter.setHealth(20);
+            fighter.setMaxHealth(20);
         }
         setType(3);
     }
