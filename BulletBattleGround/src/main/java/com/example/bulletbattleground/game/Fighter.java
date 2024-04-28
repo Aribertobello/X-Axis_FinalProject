@@ -17,25 +17,14 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 
+@Getter@Setter
 public class Fighter extends Rectangle {
 
-    @Getter
-    @Setter
     protected Loadout loadout;
-
-    @Getter
-    @Setter
     protected int health;
-
-    @Getter
     protected Coordinate coordinate = new Coordinate(0, 0);
-
-    @Getter
-    @Setter
     protected int teamNb;
-    @Getter
     boolean highlighted;
-
 
     /**
      * Creates a Fighter  instance, this is what can shoot bullets in the game
@@ -43,7 +32,7 @@ public class Fighter extends Rectangle {
      * @param coordinateY coordinate y of the center of the fighter in the map
      * @param type type of loadout the fighter will have : 1=light 2=medium 3=heavy
      */
-    public Fighter( int type,int health, int coordinateX, int coordinateY) {
+    public Fighter (int type,int health, int coordinateX, int coordinateY) {
         super(40, 40);
         loadout = new Loadout(type);
         coordinate.setX(coordinateX);

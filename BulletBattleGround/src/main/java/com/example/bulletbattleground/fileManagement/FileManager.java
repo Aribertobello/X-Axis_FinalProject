@@ -107,7 +107,6 @@ public class FileManager extends ClassSelectorController {
     }
 
     private static void readFighters(Scanner scanner, Level level) throws ParseException {
-
         int loadoutType = 0;
         int health = 0;
         Coordinate coordinate = new Coordinate(0, 0);
@@ -217,22 +216,6 @@ public class FileManager extends ClassSelectorController {
             line = scanner.nextLine();
         }
     }
-
-//    public static void saveUserProgress() throws IOException {
-//        File file = new File("nameOfYourFile");
-//        FileOutputStream f = new FileOutputStream(file);
-//        ObjectOutputStream s = new ObjectOutputStream(f);
-//        s.writeObject(user.pVeUserProgress);
-//        s.close();
-//    }
-
-//    public static void loadUserProgress() throws IOException, ClassNotFoundException {
-//        File file = new File("temp");
-//        FileInputStream f = new FileInputStream(file);
-//        ObjectInputStream s = new ObjectInputStream(f);
-//        HashMap<String, Object> fileObj2 = (HashMap<String, Object>) s.readObject(); //TODO fix
-//        s.close();
-//    }
 
     /**
      * Saves user data (username and password) to the file managed by this FileManager.

@@ -9,7 +9,15 @@
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Files/txt/PVC.progress.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Files/txt/PVC.progress.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/libs/BulletBattleGround-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/libs/BulletBattleGround-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/BattleGround.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/BattleGround.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/controllers/FreePlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/controllers/FreePlayController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/fileManagement/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/fileManagement/FileManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/Fighter.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/Fighter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/levels/StandardLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/levels/StandardLevel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/gameObjects/fighters/Ally.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/gameObjects/fighters/Ally.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/resources/com/example/bulletbattleground/FreePlayScene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/resources/com/example/bulletbattleground/FreePlayScene.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +82,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Gradle.Build BulletBattleGround.executor": "Run",
-    "Gradle.BulletBattleGround [:BattleGround.main()].executor": "Debug",
+    "Gradle.BulletBattleGround [:BattleGround.main()].executor": "Run",
     "Gradle.Tests in 'BulletBattleGround.test'.executor": "Run",
     "RunOnceActivity.CodyConvertUrlToCodebaseName": "true",
     "RunOnceActivity.CodyHistoryLlmMigration": "true",
@@ -99,11 +107,11 @@
       <recent name="" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\matth\X-Axis_FinalProject\Files\img" />
       <recent name="C:\Users\aribe\IdeaProjects\X-Axis_FinalProject\Files\txt" />
       <recent name="C:\Users\aribe\IdeaProjects\X-Axis_FinalProject" />
       <recent name="C:\Users\aribe\IdeaProjects\X-Axis_FinalProject\BulletBattleGround\build\classes\java\main\com\example\bulletbattleground" />
       <recent name="C:\Users\aribe\IdeaProjects\X-Axis_FinalProject\BulletBattleGround\build\classes\java" />
-      <recent name="C:\Users\aribe\IdeaProjects\X-Axis_FinalProject\BulletBattleGround\src\main\java\com\example\bulletbattleground" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.example.bulletbattleground" />
@@ -199,11 +207,6 @@
           <url>file://$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/levels/EduLevel.java</url>
           <line>117</line>
           <option name="timeStamp" value="88" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/levels/StandardLevel.java</url>
-          <line>63</line>
-          <option name="timeStamp" value="105" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

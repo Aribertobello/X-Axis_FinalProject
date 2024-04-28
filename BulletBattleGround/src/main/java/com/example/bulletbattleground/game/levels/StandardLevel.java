@@ -18,10 +18,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
@@ -89,12 +91,16 @@ public class StandardLevel extends Level {
         map.getChildren().add(map.getLoot());
         map.setHasLoot(true);
     }
+
+    Ally ally;
     @Override
     public void addFighter(Fighter fighter, int teamNb){
         map.addFighter(fighter);
         if(teamNb==1){
             team1.add(fighter);
         } else {
+            Image ally_Image_Inverted = new Image("file:Files/img/Light_Class_Img_Inverted.png");
+            fighter.setFill(new ImagePattern(ally_Image_Inverted));
             team2.add(fighter);
         }
         fighter.setTeamNb(teamNb);
