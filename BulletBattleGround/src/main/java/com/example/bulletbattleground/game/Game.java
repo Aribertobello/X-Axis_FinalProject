@@ -130,14 +130,19 @@ public class Game extends Scene {
         GameOverBoxController controller = gameOverBoxLoader.getController();
         exitBtn = controller.exitBtn;
         congratulationsLabel = controller.congratulationsLabel;
-        int currentProgress = BattleGround.user.getProgress(BattleGround.username);
+        int currentPveProgress = BattleGround.user.getPVEProgress(BattleGround.username);
+        int currentPvcProgress = BattleGround.user.getPVCProgress(BattleGround.username);
 
         if (gameWon){ //this is a case where the user replays his previous level... it's at least gotta display congrats even if u win without updating the progress...
             congratulationsLabel.setText("CONGRATULATIONS YOU HAVE WON!");
         }
 
-        if(gameWon && level.getIndex() >= currentProgress){
-            BattleGround.user.updateProgress(BattleGround.username, BattleGround.user.getProgress(BattleGround.username)+ 1);
+        if(gameWon && level.getIndex() >= currentPveProgress){
+            BattleGround.user.updatePVEProgress(BattleGround.username, BattleGround.user.getPVEProgress(BattleGround.username)+ 1);
+        }
+
+        if(gameWon && level.getIndex() >= currentPvcProgress){
+            BattleGround.user.updatePVCProgress(BattleGround.username, BattleGround.user.getPVCProgress(BattleGround.username)+ 1);
         }
 
        else if (!gameWon) {

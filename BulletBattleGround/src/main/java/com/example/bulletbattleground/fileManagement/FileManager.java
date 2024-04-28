@@ -24,10 +24,10 @@ import java.util.Scanner;
 public class FileManager extends ClassSelectorController {
 
     private static File managerFile;
-
     static User user;
-
     public static int loadoutType;
+    private static final String PROGRESS_FILE_PATH_PVE = "Files/txt/PVE.progress.txt";
+    private static final String PROGRESS_FILE_PATH_PVC = "Files/txt/PVC.progress.txt";
 
     /**
      * Constructs a new FileManager instance with the specified file path.
@@ -293,12 +293,9 @@ public class FileManager extends ClassSelectorController {
         return false; //false means username and password are incorrect or not submitted.
     }
 
-
-    private static final String PROGRESS_FILE_PATH = "Files/txt/PVE.progress.txt";
-
     public static HashMap<String, Integer> loadPVEProgress() {
         HashMap<String, Integer> userPVEProgress = new HashMap<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(PROGRESS_FILE_PATH))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(PROGRESS_FILE_PATH_PVE))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(":");
@@ -315,7 +312,7 @@ public class FileManager extends ClassSelectorController {
     }
 
     public static void savePVEProgress(HashMap<String, Integer> userPVEProgress) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(PROGRESS_FILE_PATH))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(PROGRESS_FILE_PATH_PVE))) {
             for (String username : userPVEProgress.keySet()) {
                 int progress = userPVEProgress.get(username);
                 writer.write(username + ": " + progress);
@@ -326,6 +323,35 @@ public class FileManager extends ClassSelectorController {
         }
     }
 
+    public static HashMap<String, Integer> loadPVCProgress() {
+        HashMap<String, Integer> userPVEProgress = new HashMap<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(PROGRESS_FILE_PATH_PVC))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(":");
+                if (parts.length == 2) {
+                    String username = parts[0].trim();
+                    int progress = Integer.parseInt(parts[1].trim());
+                    userPVEProgress.put(username, progress);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return userPVEProgress;
+    }
+
+    public static void savePVCProgress(HashMap<String, Integer> userPVCProgress) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(PROGRESS_FILE_PATH_PVC))) {
+            for (String username : userPVCProgress.keySet()) {
+                int progress = userPVCProgress.get(username);
+                writer.write(username + ": " + progress);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Generates the default level for the player vs player mode

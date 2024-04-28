@@ -28,12 +28,14 @@ public class User {
     @FXML
     private TextField UserNameTextField;
     public HashMap <String, Integer> pVeUserProgress = new HashMap <String, Integer>();
+    public HashMap <String, Integer> pVcUserProgress = new HashMap <String, Integer>();
     protected String password;
     @Getter  protected String username;
     protected boolean loggedin;
     protected boolean isSignedIn = false;
     private FileManager fileManager;
     public int userLevelIndexPVEProgress = 0;
+    public int userLevelIndexPVCProgress = 0;
 
 
     /**
@@ -45,6 +47,7 @@ public class User {
         try {
             fileManager = new FileManager("Files/txt/save.txt");
             pVeUserProgress = FileManager.loadPVEProgress();
+            pVcUserProgress = FileManager.loadPVCProgress();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -64,7 +67,9 @@ public class User {
 
         if (FileManager.loadUserData(username,password)) {
             loggedin = true;
-            updateProgress(username, getProgress(username));
+            updatePVEProgress(username, getPVEProgress(username));
+            updatePVCProgress(username, getPVCProgress(username));
+
             BattleGround.username = username;
 
         }
@@ -107,25 +112,34 @@ public class User {
         }
     }
 
-    public int getProgress(String username) {
+    public int getPVEProgress(String username) {
         return pVeUserProgress.getOrDefault(username, 1);
     }
 
-    public void updateProgress(String username, int progress) {
+    public void updatePVEProgress(String username, int progress) {
         pVeUserProgress.put(username, progress);
         FileManager.savePVEProgress(pVeUserProgress);
     }
 
+    public int getPVCProgress(String username) {
+        return pVcUserProgress.getOrDefault(username, 1);
+    }
+
+    public void updatePVCProgress(String username, int progress) {
+        pVcUserProgress.put(username, progress);
+        FileManager.savePVCProgress(pVcUserProgress);
+    }
+
     public boolean isUnlocked(Level level) {
-        userLevelIndexPVEProgress = getProgress(BattleGround.username);
+        userLevelIndexPVEProgress = getPVEProgress(BattleGround.username);
+        userLevelIndexPVCProgress = getPVCProgress(BattleGround.username);
 
         if (level.getType() == 1) {
         return userLevelIndexPVEProgress >= level.getIndex(); // Check if user has completed enough levels...returns true or false
     }
-//        else if (level.getType() == 2){
-//        return TODO add the pvc thing
-//        }
-
+        else if (level.getType() == 2){
+        return userLevelIndexPVCProgress >= level.getIndex();
+        }
 //        else{
 //        return userProgress >= level.getIndex(); // Check if user has unlocked the level based on progress
 //            }
