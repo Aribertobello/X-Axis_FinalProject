@@ -107,7 +107,15 @@ public class StandardLevel extends Level {
             }
         }
         for (int i = 0; i < indexes.size(); i++) {
-            removeFighter(team2.get(indexes.get(i)));
+            int currentIndex = indexes.get(i);
+            Fighter fighterToRemove = team2.get(currentIndex);
+            removeFighter(fighterToRemove);
+            for(int j = i + 1; j < indexes.size(); j++) {
+                if(indexes.get(j) > currentIndex) {
+                    indexes.set(j, indexes.get(j) - 1);
+                }
+
+            }
         }
         for (int i = 0; i < coordinates.size(); i++) {
             addFighter(new Ally(loadoutTypes.get(i), 25, (int) coordinates.get(i).getX(), (int) coordinates.get(i).getY()), 2);
