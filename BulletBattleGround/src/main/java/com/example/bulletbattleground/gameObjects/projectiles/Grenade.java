@@ -60,7 +60,7 @@ public class Grenade extends Projectile {
 
 
     public Grenade(){
-        fuseTimer = 15.0;
+        fuseTimer = 7.0;
         Image grenadeImg = new Image("file:Files/img/grenade.png");
         grenade.setFill(new ImagePattern(grenadeImg));
         this.lift = new Vector(0, 0);
