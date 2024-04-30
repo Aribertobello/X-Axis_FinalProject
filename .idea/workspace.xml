@@ -4,7 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3d752c20-d9fb-4b1c-8717-33dbd1ec407f" name="Changes" comment="" />
+    <list default="true" id="3d752c20-d9fb-4b1c-8717-33dbd1ec407f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BulletBattleGround/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/fileManagement/FileManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/fileManagement/FileManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/game/Fighter.class" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/game/Fighter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/game/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/game/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/game/Mapp.class" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/game/Mapp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/gameObjects/obstacles/Wall.class" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/gameObjects/obstacles/Wall.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/libs/BulletBattleGround-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/libs/BulletBattleGround-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Files/txt/PVE.lvl.10.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Files/txt/PVE.lvl.10.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Files/txt/PVE.lvl.2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Files/txt/PVE.lvl.2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Files/txt/PVE.lvl.3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Files/txt/PVE.lvl.3.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Files/txt/PVE.lvl.4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Files/txt/PVE.lvl.4.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Files/txt/PVE.lvl.5.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Files/txt/PVE.lvl.5.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Files/txt/PVE.lvl.6.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Files/txt/PVE.lvl.6.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Files/txt/PVE.lvl.7.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Files/txt/PVE.lvl.7.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Files/txt/PVE.lvl.8.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Files/txt/PVE.lvl.8.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Files/txt/PVE.lvl.9.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Files/txt/PVE.lvl.9.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -76,7 +97,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "Ariberto",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/2273957/Downloads/X-Axis_FinalProject",
+    "last_opened_file_path": "C:/Program Files/SceneBuilder.exe",
     "settings.editor.selected.configurable": "vcs.Git"
   }
 }]]></component>
@@ -177,7 +198,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/controllers/FreePlayController.java</url>
-          <line>129</line>
+          <line>130</line>
           <option name="timeStamp" value="77" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

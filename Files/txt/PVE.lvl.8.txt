@@ -14,4 +14,6 @@ tickspeed :
 }
 Description :
 {
+Level 8,
+Try not to rage!!
 }

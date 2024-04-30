@@ -13,4 +13,6 @@ tickspeed :
 }
 Description :
 {
+Level 9,
+Pretty difficult don't give up buddy!!
 }

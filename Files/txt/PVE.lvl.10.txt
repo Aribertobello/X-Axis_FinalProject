@@ -15,4 +15,6 @@ tickspeed :
 }
 Description :
 {
+Level 10,
+You almost got all the treasure don't give up my G!
 }
