@@ -15,4 +15,6 @@ tickspeed :
 }
 Description :
 {
+Level 7,
+use the wall and your grenade to try and figure out which on is the real chest!!
 }

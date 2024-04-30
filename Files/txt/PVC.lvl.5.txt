@@ -16,4 +16,6 @@ tickspeed :
 }
 Description :
 {
+Level 5,
+A bit more challenging, don't forget you got grenades!!
 }

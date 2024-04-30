@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="freePlayUI" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="839.0" prefWidth="246.0" style="-fx-border-color: black; -fx-border-width: 12; -fx-border-radius: 0; -fx-background-color: #76827a;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bulletbattleground.controllers.FreePlayController">
+<Pane fx:id="freePlayUI" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="839.0" prefWidth="246.0" style="-fx-border-color: black; -fx-border-width: 12; -fx-border-radius: 0; -fx-background-color: #76827a;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bulletbattleground.controllers.FreePlayController">
    <children>
       <Label alignment="CENTER" layoutX="20.0" layoutY="14.0" prefHeight="17.0" prefWidth="207.0" text="Drag and Drop items onto the map" />
       <ImageView fx:id="allyImageView" fitHeight="74.0" fitWidth="84.0" layoutX="82.0" layoutY="69.0" onMouseDragged="#dragging" onMousePressed="#allyDragStart" onMouseReleased="#dragEndFighter" pickOnBounds="true" preserveRatio="true" />
@@ -57,7 +57,7 @@
       <Line endX="100.0" layoutX="123.0" layoutY="211.0" startX="-100.0" />
       <Line endX="100.0" layoutX="123.0" layoutY="524.0" startX="-100.0" />
       <Line endX="100.0" layoutX="123.0" layoutY="684.0" startX="-100.0" />
-      <Label layoutX="205.0" layoutY="375.0" text="Mass" />
+      <Label layoutX="205.0" layoutY="375.0" text="Spin" />
       <Slider fx:id="wallWidthSlider" layoutX="59.0" layoutY="392.0" min="1.0" orientation="VERTICAL" prefHeight="82.0" prefWidth="14.0" />
       <Slider fx:id="wallHeightSlider" layoutX="24.0" layoutY="392.0" max="500.0" min="1.0" orientation="VERTICAL" prefHeight="82.0" prefWidth="14.0" />
       <Label layoutX="52.0" layoutY="375.0" text="Width">

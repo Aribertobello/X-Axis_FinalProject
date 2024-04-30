@@ -13,4 +13,7 @@ tickspeed :
 }
 Description :
 {
+Level 2,
+Just a little bit harder,
+don't forget to look at the angle display!!!
 }

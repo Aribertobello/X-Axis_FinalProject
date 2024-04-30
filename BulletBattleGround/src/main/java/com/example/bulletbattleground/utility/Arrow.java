@@ -39,7 +39,7 @@ public class Arrow extends Polyline {
         projectile.setVelocity(direction);
         projectile.setCoordinate(coordinate);
 
-        for(double T = 0 ; T < 5; T += 5*dt){
+        for(double T = 0 ; T < 19; T += 5*dt){
             if(fighter.getLoadout().getType()==3){
                 projectile.forces.clear();
                 projectile.forces.add(new Vector(0,4.9).multiply(projectile.getMass()));

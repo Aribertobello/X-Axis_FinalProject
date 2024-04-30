@@ -84,7 +84,7 @@ public class Fighter extends Rectangle {
         } else {
             launchCoordinate = this.coordinate.move(new Vector(FIGHTER_DIMENSIONS,-FIGHTER_DIMENSIONS));
         }
-        projectile.release(velocity, new Coordinate(launchCoordinate.getX(), launchCoordinate.getY()));
+
         if (map.getActiveProjectile() == null) {
             map.getChildren().add(projectile);
             map.setActiveProjectile(projectile);
@@ -93,6 +93,7 @@ public class Fighter extends Rectangle {
             map.getChildren().add(projectile);
             map.setActiveProjectile(projectile);
         }
+        projectile.release(velocity, new Coordinate(launchCoordinate.getX(), launchCoordinate.getY()));
         map.setBuffer(0);
         if (projectile instanceof Rocket) {
             Vector a = new Vector(0,4.9);
