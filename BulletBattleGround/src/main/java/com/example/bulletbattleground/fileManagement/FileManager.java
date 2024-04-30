@@ -178,6 +178,7 @@ public class FileManager extends ClassSelectorController {
         int rotation = 0;
         int mass = 0;
         int speed = 0;
+        int spin = 0;
         String line = scanner.nextLine();
         while (!line.startsWith("}")) {
             Scanner lineScanner = new Scanner(line);
@@ -204,8 +205,14 @@ public class FileManager extends ClassSelectorController {
                         lineScanner.skip("...");
                         mass = lineScanner.nextInt();
                     }
+                    if (str.equalsIgnoreCase("spin")) {
+                        lineScanner.skip("...");
+                        spin = lineScanner.nextInt();
+                    }
                 }
-                map.addObstacle(new Wall(height, width, (int) coordinate.getX(), (int) coordinate.getY(), rotation, mass));
+                Wall wall  = new Wall(height, width, (int) coordinate.getX(), (int) coordinate.getY(), rotation, mass);
+                wall.setVelocityX(spin);
+                map.addObstacle(wall);
             }
             if (line.startsWith("spaceship")) {
                 while (!lineScanner.next().startsWith("}")) {
@@ -345,7 +352,7 @@ public class FileManager extends ClassSelectorController {
     }
 
     public static Mapp defaultEduMap() {
-        Mapp map = new Mapp("earth");
+        Mapp map = new Mapp("space");
         return map;
     }
 
@@ -361,7 +368,7 @@ public class FileManager extends ClassSelectorController {
     }
 
     public static FreePlayLevel freePlayLevel() {
-        Mapp map = new Mapp("space");
+        Mapp map = new Mapp("earth");
         try {
             return new FreePlayLevel(map);
         } catch (IOException e) {
