@@ -15,7 +15,7 @@ import lombok.Setter;
 
 @Getter@Setter
 public class Fighter extends Rectangle {
-    public static int FIGHTER_DIMENSIONS = 40;
+    public static int FIGHTER_DIMENSIONS = 20;
 
     protected Loadout loadout;
 
@@ -45,7 +45,7 @@ public class Fighter extends Rectangle {
      * @param type type of loadout the fighter will have : 1=light 2=medium 3=heavy
      */
     public Fighter (int type,int health, int coordinateX, int coordinateY) {
-        super(FIGHTER_DIMENSIONS, FIGHTER_DIMENSIONS);
+        super(2*FIGHTER_DIMENSIONS, 2*FIGHTER_DIMENSIONS);
         loadout = new Loadout(type);
         coordinate.setX(coordinateX);
         coordinate.setY(coordinateY);
@@ -84,10 +84,7 @@ public class Fighter extends Rectangle {
         } else {
             launchCoordinate = this.coordinate.move(new Vector(FIGHTER_DIMENSIONS,-FIGHTER_DIMENSIONS));
         }
-<<<<<<< Updated upstream
         projectile.release(velocity, new Coordinate(launchCoordinate.getX(), launchCoordinate.getY()));
-=======
->>>>>>> Stashed changes
         if (map.getActiveProjectile() == null) {
             map.getChildren().add(projectile);
             map.setActiveProjectile(projectile);
