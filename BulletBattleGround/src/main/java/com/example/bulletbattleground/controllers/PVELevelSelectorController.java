@@ -80,7 +80,7 @@ public class PVELevelSelectorController {
     public void launchPVELevel8(ActionEvent event) {
         try{
             BattleGround.activeGame = new Game(FileManager.createLevel("Files/txt/PVE.lvl.8.txt"));
-            BattleGround.newScene(new Scene(BattleGround.classSelectorLoader().load()));
+            BattleGround.mainStage.setScene(new Scene(BattleGround.classSelectorLoader().load()));
         }catch(Exception e){
             throw new ExceptionInInitializerError("Failed to Initialize The level, level and map Files were poorly formatted or level and map file paths are incorrect");
         }

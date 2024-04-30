@@ -103,6 +103,7 @@ public class Game extends Scene {
             }
             if (level.type == 2 && turnManager.isPlayer2Turn()) {
                 Fighter computer = level.team2.get(0);
+                computer.launchProjectile(computer.loadout.mainWeapon,StandardLevel.compShtAngles[level.index-1]);
             }
         }
         boolean[] gameStatus = level.update(dt, time);

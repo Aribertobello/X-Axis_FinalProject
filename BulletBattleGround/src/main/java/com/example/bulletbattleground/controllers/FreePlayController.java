@@ -87,7 +87,8 @@ public class FreePlayController {
         translateY = imageView.getTranslateY();
     }
     public void wallDragStart(MouseEvent event) {
-        obstacle = new Wall((int)wallHeightSlider.getValue(),(int)wallWidthSlider.getValue(),0, 0,wallRotationSlider.getValue(), (int)wallMassSlider.getValue());
+        obstacle = new Wall((int)wallHeightSlider.getValue(),(int)wallWidthSlider.getValue(),0, 0,wallRotationSlider.getValue(), 20);
+        obstacle.setVelocityX(wallMassSlider.getValue());
         obstacle.rotate(wallRotationSlider.getValue());
         imageView = (ImageView) event.getSource();
         returnCoordinate = new Coordinate(event.getSceneX(),event.getSceneY());

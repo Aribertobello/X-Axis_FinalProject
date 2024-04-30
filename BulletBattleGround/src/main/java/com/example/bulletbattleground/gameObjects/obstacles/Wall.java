@@ -27,12 +27,16 @@ public class Wall extends Obstacle {
         this.getChildren().addAll(rectangle, label);
         this.setCoordinate(new Coordinate(coordinateX, coordinateY));
         setMass(mass);
+        setVelocityX(10);
         rotate(rotationAngle);
+    }
+    public void spin(double dt){
+        rotate(velocity().magnitude()*dt+rotationAngle);
     }
 
     @Override
     public void move(double dt) {
-        super.move(dt);
+        spin(dt);
     }
 
     @Override
