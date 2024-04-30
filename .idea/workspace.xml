@@ -4,31 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3d752c20-d9fb-4b1c-8717-33dbd1ec407f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Files/img/Loot.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-25_3_57_p_m___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-25_3_57_p_m___Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-25_3_57_p_m___Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-04-25_3_57_p_m___Changes_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/game/Level.class" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/game/Level.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/libs/BulletBattleGround-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/libs/BulletBattleGround-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/game/Level.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/gameObjects/Loot/Loot.java" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/src/main/java/com/example/bulletbattleground/gameObjects/Loot/Loot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Files/txt/PVC.lvl.1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Files/txt/PVC.lvl.1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Files/txt/PVC.lvl.2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Files/txt/PVC.lvl.2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Files/txt/PVC.lvl.3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Files/txt/PVC.lvl.3.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Files/txt/PVC.lvl.4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Files/txt/PVC.lvl.4.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Files/txt/PVC.lvl.5.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Files/txt/PVC.lvl.5.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Files/txt/PVC.lvl.6.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Files/txt/PVC.lvl.6.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Files/txt/PVC.lvl.7.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Files/txt/PVC.lvl.7.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Files/txt/PVC.lvl.8.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Files/txt/PVC.lvl.8.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Files/txt/PVC.map.lvl.5.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Files/txt/PVC.map.lvl.5.txt" afterDir="false" />
-    </list>
+    <list default="true" id="3d752c20-d9fb-4b1c-8717-33dbd1ec407f" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
