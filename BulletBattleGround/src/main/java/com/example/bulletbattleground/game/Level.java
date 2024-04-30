@@ -90,7 +90,6 @@ public abstract class Level extends AnchorPane implements GameUI {
     private ProgressBar timerBar;
     public Pane turnStatusBox;
     private ProgressBar VeloBar;
-
     private Label EnemyCoor;
     private Label AllyCoor;
     private Label BltAmount;
@@ -99,6 +98,15 @@ public abstract class Level extends AnchorPane implements GameUI {
     public ImageView GImg;
     public ImageView BImg;
     private Arc angleArc;
+    public int centerX = 1065;
+    public int centerY = 943;
+    public int radiusX = 20;
+    public int radiusY = 20;
+    public int startAngle = 0;
+    public int length = 0;
+    public double lineWidth = 1.5;
+    public int straightAngle = 180;
+    public double descriptionOpacity = 0.25;
     @Getter
     private Label descriptionLabel;
     private VBox descriptionBox;
@@ -164,10 +172,10 @@ public abstract class Level extends AnchorPane implements GameUI {
         BImg = controller.getBImg();
         SmokeLabel = controller.getSmokeLabel();
         STimer = controller.getSTimer();
-        angleArc = new Arc(1065,943,20,20,0,0);
+        angleArc = new Arc(centerX,centerY,radiusX,radiusY,startAngle,length);
         angleArc.setStroke(Color.RED);
         angleArc.setFill(Color.TRANSPARENT);
-        angleArc.setStrokeWidth(1.5);
+        angleArc.setStrokeWidth(lineWidth);
         container.getChildren().add(angleArc);
         angleArc.toFront();
         AllyCoor = controller.getAllyCoor();
@@ -254,7 +262,7 @@ public abstract class Level extends AnchorPane implements GameUI {
             Vector velocity = map.getActiveProjectile().velocity();
             double MaxVelocity = map.getActiveProjectile().getTerminalVelocity();
             double progress = velocity.magnitude() / MaxVelocity;
-            double red = 255 * (1 - progress);
+            double red = MaxVelocity * (1 - progress);
             String barStyle = "-fx-accent: rgb(255," + (int) red + ", " + (int) red + ");";
             VeloBar.setStyle(barStyle);
             VeloBar.setProgress(progress);
@@ -304,7 +312,7 @@ public abstract class Level extends AnchorPane implements GameUI {
     }
 
     public void setAngleHUD( Vector direction){
-        double angle = 180 - direction.angle();
+        double angle = straightAngle - direction.angle();
         if(!Double.isNaN(angle)){
                 AngleDisp.setRotate(-angle);
                 AngleDisp.setStroke(Color.WHITE);
@@ -343,7 +351,7 @@ public abstract class Level extends AnchorPane implements GameUI {
     }
 
     public void displayDescription() {
-        container.setOpacity(0.25);
+        container.setOpacity(descriptionOpacity);
         this.getChildren().add(descriptionBox);
     }
 }

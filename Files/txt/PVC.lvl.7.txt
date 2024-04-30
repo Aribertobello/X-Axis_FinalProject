@@ -15,4 +15,8 @@ tickspeed :
 }
 Description :
 {
+Level 7,
+Ramping up the difficulty,
+Goodluck!!
+
 }

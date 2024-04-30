@@ -15,4 +15,6 @@ tickspeed :
 }
 Description :
 {
+Level 4,
+GoodLuck, don't miss buddy!!
 }
