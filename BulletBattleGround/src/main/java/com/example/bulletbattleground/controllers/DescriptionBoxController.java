@@ -8,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 public class DescriptionBoxController {
-    //TODO CLASS COMPLETE
     public Label descriptionLabel;
     public Button playBtn;
     public VBox descriptionBox;

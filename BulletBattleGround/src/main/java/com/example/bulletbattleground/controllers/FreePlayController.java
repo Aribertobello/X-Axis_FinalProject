@@ -194,17 +194,17 @@ public class FreePlayController {
 
     @FXML
     void reflectAllyImageright(ActionEvent event) {
-        if(fighter instanceof  Ally){
-            fighter.reflect();
-            fighter.setTeamNb(fighter.isInverted() ? 2 :  1 );
+        if(BattleGround.activeGame.getLevel().getSelectedFighter() instanceof  Ally){
+            BattleGround.activeGame.getLevel().getSelectedFighter().reflect();
+            BattleGround.activeGame.getLevel().getSelectedFighter().setTeamNb(fighter.isInverted() ? 2 :  1 );
         }
     }
 
     @FXML
     void reflectComputerImageRight(ActionEvent event) {
-        if(fighter instanceof  Computer){
-            fighter.reflect();
-            fighter.setTeamNb(fighter.isInverted() ? 2 :  1 );
+        if(BattleGround.activeGame.getLevel().getSelectedFighter() instanceof  Computer){
+            BattleGround.activeGame.getLevel().getSelectedFighter().reflect();
+            BattleGround.activeGame.getLevel().getSelectedFighter().setTeamNb(fighter.isInverted() ? 2 :  1 );
         }
     }
 

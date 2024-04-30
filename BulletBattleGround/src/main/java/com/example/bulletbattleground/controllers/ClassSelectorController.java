@@ -17,16 +17,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ClassSelectorController extends subMenuController {
-    //TODO CLASS COMPLETE
 
     public Button lightClassBtn;
     public Button mediumClassBtn;
     public Button heavyClassBtn;
-
-    public int light = 1;
-    public int medium = 2;
-    public int heavy = 3;
-
     public static boolean pvpClicked;
     public static boolean pveClicked;
     public static boolean pvcClicked;

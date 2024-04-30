@@ -27,6 +27,15 @@ public class User {
 
     @FXML
     private TextField UserNameTextField;
+
+    protected int pVeLevelsCompleted = 11;
+    protected int pVeMaxLevelIndex = 11;
+    protected int pVCLevelsCompleted = 11;
+    protected int pVCMaxLevelIndex = 11;
+
+
+
+
     public HashMap <String, Integer> pVeUserProgress = new HashMap <String, Integer>();
     public HashMap <String, Integer> pVcUserProgress = new HashMap <String, Integer>();
     protected String password;

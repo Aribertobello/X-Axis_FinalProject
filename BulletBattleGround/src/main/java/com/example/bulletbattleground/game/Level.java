@@ -17,6 +17,7 @@ import com.example.bulletbattleground.utility.MovingBody;
 import com.example.bulletbattleground.utility.Vector;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -27,6 +28,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
+import javafx.stage.Screen;
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -241,12 +244,7 @@ public abstract class Level extends AnchorPane implements GameUI {
             if (selectedFighter.loadout.type == 1) {
                 BImg.setImage(new Image("file:Files/img/smallBullet.png"));
 
-           /* } else if (selectedFighter.loadout.type == 2) {
-                BImg.setImage(new Image("file:Files/img/spear.png"));*/
-
-            } else if (selectedFighter.loadout.type == 3) {
-                BImg.setImage(new Image("file:Files/img/rocket.png"));
-            }
+        }
         }
     }
 
@@ -286,10 +284,16 @@ public abstract class Level extends AnchorPane implements GameUI {
 
 
     private void setHealthHUD() {
-        if(selectedFighter!=null) {
-            healthProgressbar.setProgress((double) selectedFighter.getHealth() / (double) selectedFighter.getMaxHealth());
-            healthProgressbar.setStyle("-fx-accent: red; -fx-progress-bar-indeterminate-fill: red;");
-            healthLabel.setText("Player Health: " + selectedFighter.getHealth());
+        if (selectedFighter != null) {
+            if (selectedFighter.teamNb == 1) {
+                healthLabel.setText("Player Health: " + selectedFighter.getHealth());
+                healthProgressbar.setProgress((double) selectedFighter.getHealth() / (double) selectedFighter.getMaxHealth());
+                healthProgressbar.setStyle("-fx-accent: red; -fx-progress-bar-indeterminate-fill: red;");
+            } else if (selectedFighter.teamNb == 2) {
+                healthLabel.setText("AI Health: " + selectedFighter.getHealth());
+                healthProgressbar.setProgress((double) selectedFighter.getHealth() / (double) selectedFighter.getMaxHealth());
+                healthProgressbar.setStyle("-fx-accent: green; -fx-progress-bar-indeterminate-fill: green;");
+            }
         }
     }
 
