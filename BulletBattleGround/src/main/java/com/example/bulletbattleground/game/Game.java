@@ -44,7 +44,7 @@ public class Game extends Scene {
     protected double time = 0;
     protected Timeline timeline;
     private boolean isTicking;
-    boolean gameStart = false;
+    public boolean gameStart = false;
     TurnManager turnManager ;
 
     public int tickDuration = 10;
@@ -98,12 +98,13 @@ public class Game extends Scene {
     protected void tick(double dt) {
         if(level instanceof StandardLevel) {
             StandardLevel level = (StandardLevel) this.level;
-            if (/*gameStart*/true) {
+            if (gameStart) {
                 turnManager.updateTurn(dt);
             }
             if (level.type == 2 && turnManager.isPlayer2Turn()) {
                 Fighter computer = level.team2.get(0);
                 computer.launchProjectile(computer.loadout.mainWeapon,StandardLevel.compShtAngles[level.index-1]);
+                turnManager.projectileShot();
             }
         }
         boolean[] gameStatus = level.update(dt, time);

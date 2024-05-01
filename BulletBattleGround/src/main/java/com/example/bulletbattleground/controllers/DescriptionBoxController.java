@@ -17,6 +17,7 @@ public class DescriptionBoxController {
         ((Level)descriptionBox.getParent()).getChildren().remove(descriptionBox);
         BattleGround.activeGame.getLevel().getContainer().setOpacity(1);
         BattleGround.activeGame.play();
+        BattleGround.activeGame.gameStart = true;
     }
     public void initialize(){
         descriptionBox.setLayoutX(BattleGround.screenWidth/3);

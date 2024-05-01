@@ -35,7 +35,7 @@ import java.util.ArrayList;
 public class StandardLevel extends Level {
 
     public static Vector[] compShtAngles = {
-            new Vector(165).scale(120),
+            new Vector(-168).scale(120),
             new Vector(165).scale(120),
             new Vector(165).scale(120),
             new Vector(165).scale(120),
