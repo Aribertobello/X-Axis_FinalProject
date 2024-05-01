@@ -27,11 +27,8 @@ public class EduLevel extends FreePlayLevel {
 
 
     //Edu Controllers--------------------------------------
-    public LineChart chart1;
     public ChoiceBox<XYChart.Series> chart1ChoiceBox;
-    public LineChart chart2;
     public ChoiceBox<XYChart.Series> chart2ChoiceBox;
-    public LineChart chart3;
     public ChoiceBox<XYChart.Series> chart3ChoiceBox;
     public HBox chartBox;
 
@@ -64,6 +61,7 @@ public class EduLevel extends FreePlayLevel {
     }
 
     public boolean[] update(double dt,double time) {
+
         boolean[] result = super.update(dt,time);
         updateCharts(dt,time);
         return result;
@@ -177,8 +175,6 @@ public class EduLevel extends FreePlayLevel {
             tESeries.getData().clear();
             vAngleSeries.getData().clear();
             aAngleSeries.getData().clear();
-
-
         }
     }
 }

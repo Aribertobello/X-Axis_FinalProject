@@ -1,27 +1,21 @@
 package com.example.bulletbattleground.game;
 
 import com.example.bulletbattleground.BattleGround;
-import com.example.bulletbattleground.controllers.ClassSelectorController;
-import com.example.bulletbattleground.game.Loadout;
-import com.example.bulletbattleground.game.levels.StandardLevel;
-import com.example.bulletbattleground.gameObjects.fighters.Ally;
 import com.example.bulletbattleground.gameObjects.fighters.Computer;
 import com.example.bulletbattleground.gameObjects.projectiles.Rocket;
 import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.HitBox;
 import com.example.bulletbattleground.utility.Vector;
 import javafx.scene.image.Image;
-import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-
 @Getter@Setter
 public class Fighter extends Rectangle {
+    public static int FIGHTER_DIMENSIONS = 20;
 
     protected Loadout loadout;
 
@@ -51,13 +45,13 @@ public class Fighter extends Rectangle {
      * @param type type of loadout the fighter will have : 1=light 2=medium 3=heavy
      */
     public Fighter (int type,int health, int coordinateX, int coordinateY) {
-        super(40, 40);
+        super(2*FIGHTER_DIMENSIONS, 2*FIGHTER_DIMENSIONS);
         loadout = new Loadout(type);
         coordinate.setX(coordinateX);
         coordinate.setY(coordinateY);
         this.teamNb = 1;
-        this.setLayoutX(coordinateX - 20);
-        this.setLayoutY(coordinateY - 20);
+        this.setLayoutX(coordinateX - FIGHTER_DIMENSIONS);
+        this.setLayoutY(coordinateY - FIGHTER_DIMENSIONS);
         highlighted = false;
         setHealth(health);
         setMaxHealth(health);
@@ -67,8 +61,8 @@ public class Fighter extends Rectangle {
 
     public void setCoordinate(Coordinate coordinate){
         this.coordinate = coordinate;
-        this.setLayoutX(coordinate.getX()-20);
-        this.setLayoutY(coordinate.getY()-20);
+        this.setLayoutX(coordinate.getX()-FIGHTER_DIMENSIONS);
+        this.setLayoutY(coordinate.getY()-FIGHTER_DIMENSIONS);
     }
     /**
      * updates the hitbox of the fighter
@@ -86,9 +80,9 @@ public class Fighter extends Rectangle {
     public void launchProjectile(Projectile projectile, Vector velocity) {
         Coordinate launchCoordinate;
         if(teamNb!=1 || this instanceof Computer){
-            launchCoordinate = this.coordinate.move(new Vector(-20,-20));
+            launchCoordinate = this.coordinate.move(new Vector(-FIGHTER_DIMENSIONS,-FIGHTER_DIMENSIONS));
         } else {
-            launchCoordinate = this.coordinate.move(new Vector(20,-20));
+            launchCoordinate = this.coordinate.move(new Vector(FIGHTER_DIMENSIONS,-FIGHTER_DIMENSIONS));
         }
 
         if (map.getActiveProjectile() == null) {
@@ -119,6 +113,7 @@ public class Fighter extends Rectangle {
             }
         }
     }
+
     public void reflect(){
         inverted = !inverted;
         if(inverted) setFill(new ImagePattern(new Image("file:Files/img/Light_Class_Img_Inverted.png")));
@@ -130,7 +125,7 @@ public class Fighter extends Rectangle {
         Level level = BattleGround.activeGame.getLevel();
         if(level.getSelectedFighter()!=null) level.getSelectedFighter().unhiglight();
         level.setSelectedFighter(this);
-        level.setOrigin(teamNb == 1 ? coordinate.move(new Vector(20,-20)) :  coordinate.move(new Vector(-20,-20)));
+        level.setOrigin(teamNb == 1 ? coordinate.move(new Vector(20,-20)) :  coordinate.move(new Vector(-FIGHTER_DIMENSIONS,-FIGHTER_DIMENSIONS)));
         highlighted = true;
         this.setStroke(teamNb == 1 ? Color.CYAN :  Color.DARKRED );
     }

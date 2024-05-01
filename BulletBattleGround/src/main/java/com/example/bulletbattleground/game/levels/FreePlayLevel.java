@@ -42,8 +42,6 @@ public class FreePlayLevel extends Level {
     public ImageView spaceShipImageView;
     public Pane freePlayUI;
 
-
-
     public FreePlayLevel(Mapp map) throws IOException {
         super(map);
         map.setBounds(new double[]{5000,5000});
