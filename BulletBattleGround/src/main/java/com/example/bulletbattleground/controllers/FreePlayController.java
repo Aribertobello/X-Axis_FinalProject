@@ -87,7 +87,8 @@ public class FreePlayController {
         translateY = imageView.getTranslateY();
     }
     public void wallDragStart(MouseEvent event) {
-        obstacle = new Wall((int)wallHeightSlider.getValue(),(int)wallWidthSlider.getValue(),0, 0,wallRotationSlider.getValue(), (int)wallMassSlider.getValue());
+        obstacle = new Wall((int)wallHeightSlider.getValue(),(int)wallWidthSlider.getValue(),0, 0,wallRotationSlider.getValue(), 20);
+        obstacle.setVelocityX(wallMassSlider.getValue());
         obstacle.rotate(wallRotationSlider.getValue());
         imageView = (ImageView) event.getSource();
         returnCoordinate = new Coordinate(event.getSceneX(),event.getSceneY());
@@ -194,17 +195,17 @@ public class FreePlayController {
 
     @FXML
     void reflectAllyImageright(ActionEvent event) {
-        if(fighter instanceof  Ally){
-            fighter.reflect();
-            fighter.setTeamNb(fighter.isInverted() ? 2 :  1 );
+        if(BattleGround.activeGame.getLevel().getSelectedFighter() instanceof  Ally){
+            BattleGround.activeGame.getLevel().getSelectedFighter().reflect();
+            BattleGround.activeGame.getLevel().getSelectedFighter().setTeamNb(fighter.isInverted() ? 2 :  1 );
         }
     }
 
     @FXML
     void reflectComputerImageRight(ActionEvent event) {
-        if(fighter instanceof  Computer){
-            fighter.reflect();
-            fighter.setTeamNb(fighter.isInverted() ? 2 :  1 );
+        if(BattleGround.activeGame.getLevel().getSelectedFighter() instanceof  Computer){
+            BattleGround.activeGame.getLevel().getSelectedFighter().reflect();
+            BattleGround.activeGame.getLevel().getSelectedFighter().setTeamNb(fighter.isInverted() ? 2 :  1 );
         }
     }
 

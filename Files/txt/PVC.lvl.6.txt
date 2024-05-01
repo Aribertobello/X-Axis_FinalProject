@@ -14,4 +14,7 @@ tickspeed :
 }
 Description :
 {
+Level 6,
+Be careful of the plane Buddy,
+you can miss your target!!
 }

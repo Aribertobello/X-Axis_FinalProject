@@ -13,4 +13,7 @@ tickspeed :
 }
 Description :
 {
+Level 3,
+Not necessarily harder,
+But fairly Bouncing HAHA!!
 }

@@ -180,7 +180,7 @@ public class Mapp extends Pane implements GameUI , Cloneable {
             Vector distance = earthCenterOfGravity.distanceVector(projectile.getCoordinate());
             double gMagnitude = (bigG * massEarth * projectile.getMass()) / pow(distance.magnitude() + 120 * 106183, 2);
             Vector gForce = distance.scale(gMagnitude);
-            environmentForces[0] = gForce;
+            environmentForces[0] = gForce.multiply(1);
             environmentForces[1] = new Vector(-0.00, 0);
             projectile.setLift(new Vector(0, 0));
         }
