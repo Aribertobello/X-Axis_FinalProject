@@ -24,25 +24,16 @@ import java.util.ArrayList;
 public class Fighter extends Rectangle {
 
     protected Loadout loadout;
-
-    @Getter
-    @Setter
-    protected int maxHealth;
-
-    @Getter
-    @Setter
-    protected int health;
-    @Getter
-    protected Coordinate coordinate = new Coordinate(0, 0);
-
-    boolean inverted = false ;
-
-    @Getter
-    @Setter
-    protected int teamNb;
+    boolean inverted = false;
     boolean highlighted;
-    @Getter @Setter
-    private Mapp map;
+    int teamOne = 1;
+    int teamTwo = 2;
+
+    @Getter @Setter protected int maxHealth;
+    @Getter @Setter protected int health;
+    @Getter protected Coordinate coordinate = new Coordinate(0, 0);
+    @Getter @Setter protected int teamNb;
+    @Getter @Setter private Mapp map;
 
     /**
      * Creates a Fighter  instance, this is what can shoot bullets in the game
@@ -55,7 +46,7 @@ public class Fighter extends Rectangle {
         loadout = new Loadout(type);
         coordinate.setX(coordinateX);
         coordinate.setY(coordinateY);
-        this.teamNb = 1;
+        this.teamNb = teamOne;
         this.setLayoutX(coordinateX - 20);
         this.setLayoutY(coordinateY - 20);
         highlighted = false;
@@ -85,7 +76,7 @@ public class Fighter extends Rectangle {
      */
     public void launchProjectile(Projectile projectile, Vector velocity) {
         Coordinate launchCoordinate;
-        if(teamNb!=1 || this instanceof Computer){
+        if(teamNb!=teamOne || this instanceof Computer){
             launchCoordinate = this.coordinate.move(new Vector(-20,-20));
         } else {
             launchCoordinate = this.coordinate.move(new Vector(20,-20));
@@ -129,9 +120,9 @@ public class Fighter extends Rectangle {
         Level level = BattleGround.activeGame.getLevel();
         if(level.getSelectedFighter()!=null) level.getSelectedFighter().unhiglight();
         level.setSelectedFighter(this);
-        level.setOrigin(teamNb == 1 ? coordinate.move(new Vector(20,-20)) :  coordinate.move(new Vector(-20,-20)));
+        level.setOrigin(teamNb == teamOne ? coordinate.move(new Vector(20,-20)) :  coordinate.move(new Vector(-20,-20)));
         highlighted = true;
-        this.setStroke(teamNb == 1 ? Color.CYAN :  Color.DARKRED );
+        this.setStroke(teamNb == teamOne ? Color.CYAN :  Color.DARKRED );
     }
 
     public void unhiglight(){

@@ -37,8 +37,6 @@ import java.util.ArrayList;
 public class Game extends Scene {
 
     protected Boolean gameOver = false;
-    @Getter
-    protected Level level;
     protected Boolean gameWon = false;
     protected Integer tickRate = 100;
     protected double time = 0;
@@ -46,13 +44,13 @@ public class Game extends Scene {
     private boolean isTicking;
     boolean gameStart = false;
     TurnManager turnManager ;
-
     public int tickDuration = 10;
-
     public Label congratulationsLabel;
     public Button exitBtn;
     public VBox gameOverBox;
+    public int pvcType = 2;
 
+    @Getter protected Level level;
 
     /**
      * creates a game object
@@ -63,8 +61,6 @@ public class Game extends Scene {
     public Game(Level level) throws IOException {
         super(level);
         this.level = level;
-
-        //TODO add this to fxml and handle click
         isTicking = true;
     }
 
@@ -101,7 +97,7 @@ public class Game extends Scene {
             if (/*gameStart*/true) {
                 turnManager.updateTurn(dt);
             }
-            if (level.type == 2 && turnManager.isPlayer2Turn()) {
+            if (level.type == pvcType && turnManager.isPlayer2Turn()) {
                 Fighter computer = level.team2.get(0);
             }
         }
@@ -113,8 +109,6 @@ public class Game extends Scene {
             endGame();
         }
     }
-
-   // public String username;
 
     private void endGame() {
         FXMLLoader gameOverBoxLoader = new FXMLLoader(BattleGround.class.getResource("GameOverBox.fxml"));
@@ -133,11 +127,11 @@ public class Game extends Scene {
             congratulationsLabel.setText("CONGRATULATIONS YOU HAVE WON!");
         }
 
-        if(gameWon && level.getIndex() >= currentPveProgress){
+        if(gameWon && level.getIndex() >= currentPveProgress && level.type == 1){
             BattleGround.user.updatePVEProgress(BattleGround.username, BattleGround.user.getPVEProgress(BattleGround.username)+ 1);
         }
 
-        if(gameWon && level.getIndex() >= currentPvcProgress){
+        if(gameWon && level.getIndex() >= currentPvcProgress && level.type == 2){
             BattleGround.user.updatePVCProgress(BattleGround.username, BattleGround.user.getPVCProgress(BattleGround.username)+ 1);
         }
 
@@ -175,17 +169,16 @@ public class Game extends Scene {
             level.dragging = true;
 
             if (event.getButton() == MouseButton.PRIMARY) {
-                level.trajectoryLine.setStroke(Color.GOLD);//TODO ARROW
+                level.trajectoryLine.setStroke(Color.GOLD);
             }
             if (event.getButton() == MouseButton.SECONDARY) {
-                level.trajectoryLine.setStroke(Color.DARKGRAY);//TODO ARROW
+                level.trajectoryLine.setStroke(Color.DARKGRAY);
             }
         });
 
         this.setOnMouseDragged(event -> {
             if (level.dragging && isWithinPlayerBounds(dragStartX[0],dragStartY[0]) && level.selectedFighter instanceof Ally) {
                 if (level.origin == null) {
-                    /*TODO  -notify user to select a fighter   */
                 } else {
                     double dragX = event.getSceneX() - dragStartX[0];
                     double dragY = event.getSceneY() - dragStartY[0];

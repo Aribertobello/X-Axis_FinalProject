@@ -28,24 +28,15 @@ public class User {
     @FXML
     private TextField UserNameTextField;
 
-    protected int pVeLevelsCompleted = 11;
-    protected int pVeMaxLevelIndex = 11;
-    protected int pVCLevelsCompleted = 11;
-    protected int pVCMaxLevelIndex = 11;
-
-
-
-
     public HashMap <String, Integer> pVeUserProgress = new HashMap <String, Integer>();
     public HashMap <String, Integer> pVcUserProgress = new HashMap <String, Integer>();
     protected String password;
     @Getter  protected String username;
     protected boolean loggedin;
     protected boolean isSignedIn = false;
-    private FileManager fileManager;
     public int userLevelIndexPVEProgress = 0;
     public int userLevelIndexPVCProgress = 0;
-
+    FileManager fileManager;
 
     /**
      * Constructor for the User class. Initializes a new instance of FileManager.
@@ -54,7 +45,8 @@ public class User {
      */
     public User() {
         try {
-            fileManager = new FileManager("Files/txt/save.txt");
+            String saveFilePath = "Files/txt/save.txt";
+            fileManager = new FileManager(saveFilePath);
             pVeUserProgress = FileManager.loadPVEProgress();
             pVcUserProgress = FileManager.loadPVCProgress();
         } catch (FileNotFoundException e) {
@@ -78,9 +70,7 @@ public class User {
             loggedin = true;
             updatePVEProgress(username, getPVEProgress(username));
             updatePVCProgress(username, getPVCProgress(username));
-
             BattleGround.username = username;
-
         }
 
         if (username.isEmpty() || password.isEmpty()) {
@@ -104,7 +94,6 @@ public class User {
      */
     @FXML
     void SignUp(ActionEvent event) throws IOException {
-
         username = UserNameTextField.getText();
         password = PassWordTextField.getText();
 
@@ -144,15 +133,11 @@ public class User {
         userLevelIndexPVCProgress = getPVCProgress(BattleGround.username);
 
         if (level.getType() == 1) {
-        return userLevelIndexPVEProgress >= level.getIndex(); // Check if user has completed enough levels...returns true or false
+        return userLevelIndexPVEProgress >= level.getIndex(); // Check if user has completed enough pve levels...returns true or false
     }
         else if (level.getType() == 2){
         return userLevelIndexPVCProgress >= level.getIndex();
-        }
-//        else{
-//        return userProgress >= level.getIndex(); // Check if user has unlocked the level based on progress
-//            }
-        else{
+        } else{
             return true;
         }
         
