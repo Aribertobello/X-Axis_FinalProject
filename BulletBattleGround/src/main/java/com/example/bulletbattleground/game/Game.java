@@ -286,7 +286,7 @@ public class Game extends Scene {
             timeline.play();
         } else {
             //Debug
-            var variableOfInterest = level.map.activeProjectile.acceleration();
+            //var variableOfInterest = level.map.activeProjectile.acceleration();
             //----------------
             timeline.pause();
             isTicking = false;
