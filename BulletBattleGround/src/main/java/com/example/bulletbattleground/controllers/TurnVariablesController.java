@@ -10,7 +10,6 @@ import lombok.Setter;
 @Setter
 @Getter
 public class TurnVariablesController {
-    //TODO CLASS COMPLETE
     @FXML
     public Label turnStatusLabel;
     @FXML

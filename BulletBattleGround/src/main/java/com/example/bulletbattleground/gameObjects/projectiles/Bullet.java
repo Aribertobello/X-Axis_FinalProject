@@ -52,7 +52,7 @@ public class Bullet extends Projectile {
     @Override
     public void move(double time) {
         super.move(time);
-        this.getChildren().get(0).setRotate(velocity().angle());
+        allign();
     }
 
     @Override
@@ -60,4 +60,11 @@ public class Bullet extends Projectile {
         return "bullet : "+getCoordinate()+velocity().magnitude();
     }
 
+    /**
+     * alligns the object in the scene according to position and velocity and other individual properties
+     */
+    @Override
+    public void allign() {
+        this.getChildren().get(0).setRotate(velocity().angle());
+    }
 }

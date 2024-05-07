@@ -3,10 +3,7 @@ package com.example.bulletbattleground.game;
 import com.example.bulletbattleground.gameObjects.projectiles.Bullet;
 import com.example.bulletbattleground.gameObjects.projectiles.Rocket;
 import com.example.bulletbattleground.gameObjects.projectiles.Spear;
-import com.example.bulletbattleground.utility.Coordinate;
-import com.example.bulletbattleground.utility.HitBox;
-import com.example.bulletbattleground.utility.MovingBody;
-import com.example.bulletbattleground.utility.Vector;
+import com.example.bulletbattleground.utility.*;
 import javafx.scene.shape.Circle;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +11,7 @@ import lombok.Setter;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public abstract class  Projectile extends MovingBody {
@@ -29,12 +27,11 @@ public abstract class  Projectile extends MovingBody {
     @Setter
     @Getter
     protected Vector lift;
+    @Setter
+    protected boolean forcesDisplayed = false;
+    protected ArrayList<Arrow> forceArrows = new ArrayList<>();
 
 
-    /**
-     *
-     * @param time
-     */
     public void move(double time) {
         if(this.velocity().magnitude()>terminalVelocity){
             this.setVelocity( velocity().scale(terminalVelocity-0.5));
@@ -44,13 +41,16 @@ public abstract class  Projectile extends MovingBody {
         this.setVelocityX(acceleration().getX() * time + getVelocityX());
         this.setVelocityY(acceleration().getY() * time + getVelocityY());
         setCoordinate(new Coordinate(x,y));
+        if(forcesDisplayed){
+            displayForces();
+        }
     }
 
     /**
-     *
-     * @param velocity
-     * @param coordinate
-     * @param Forces
+     * initiates the movement of this body within the system
+     * @param velocity the launch velocity
+     * @param coordinate the starting coordinate
+     * @param Forces the forces acting on this
      */
     public void release(Vector velocity, Coordinate coordinate, Vector... Forces) {
         setVelocity(velocity);
@@ -107,7 +107,6 @@ public abstract class  Projectile extends MovingBody {
         }
     }
 
-
     /**
      *
      * @param vector
@@ -132,5 +131,18 @@ public abstract class  Projectile extends MovingBody {
     public HitBox hitBox(){
         hitBox = new HitBox(this);
         return hitBox;
+    }
+    public void displayForces(){
+        int max =forceArrows.size();
+        if(forcesDisplayed){
+            for(int i = 0 ; i < max ; i++){
+                this.getChildren().remove(forceArrows.get(forceArrows.size()-1));
+                forceArrows.remove(forceArrows.get(forceArrows.size()-1));
+            }
+        }
+        for( int i = 0 ; i < forces.size() ; i++){
+            forceArrows.add(forces.get(i).toArrow(this.getCoordinate()));
+            this.getChildren().add(forceArrows.get(i));
+        }
     }
 }

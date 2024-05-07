@@ -15,17 +15,6 @@ import java.io.IOException;
 
 
 public class MainMenuController {
-    //TODO CLASS COMPLETE
-
-    @FXML
-    private Button educationModebtn;
-    @FXML
-    private Button freeplayBtn;
-    @FXML
-    private Button playbtn;
-    private Button EXITBTN;
-    private Button MAINMENUBTN;
-
 
     /**
      *@param event Action event for a button to create new scene called submenuScene where a player chooses his game mode.
@@ -60,14 +49,7 @@ public class MainMenuController {
         BattleGround.activeGame.run();
     }
     @FXML
-    public void selectEduMap(ActionEvent actionEvent) {
-        try{
-            BattleGround.activeGame = new Game(FileManager.defaultEduLevel());
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-        BattleGround.newScene(BattleGround.activeGame);
-        BattleGround.fullscreen();
-        BattleGround.activeGame.run();
+    public void selectEduMap(ActionEvent actionEvent) throws IOException {
+            BattleGround.mainStage.setScene(new Scene(BattleGround.mapSelectorLoader().load()));
     }
 }

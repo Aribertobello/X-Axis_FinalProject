@@ -47,14 +47,18 @@ public class Rocket extends Projectile {
         } else if (getCoordinate().getX() != dropZone) {
             setVelocity(new Vector(0, -50));
         }
-        align();
+        allign();
         super.move(time);
     }
 
     @Override
     public void bounce(HitBox hitBox) {}
 
-    public void align() {
+    /**
+     * alligns the object in the scene according to position and velocity and other individual properties
+     */
+    @Override
+    public void allign() {
         int NINETY_DEGREE_ANGLE = 90;
         int TWO_SEVENTY_DEGREE_ANGLE = 270;
         int newScaleMagnitude1 = 3;
@@ -84,7 +88,5 @@ public class Rocket extends Projectile {
 
             ((Polygon) this.getChildren().get(1)).getPoints().setAll(x1, y1, x2, y2, x3, y3, x4, y4, x5, y5);
         }
-
     }
-
 }

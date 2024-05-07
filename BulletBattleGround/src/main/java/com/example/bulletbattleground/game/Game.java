@@ -88,8 +88,9 @@ public class Game extends Scene {
     }
 
     /**
-    *
-    * @param dt
+    * ticks the level
+     * updates the screen and generates a new frame
+    * @param dt increment of time between ticks
     */
     protected void tick(double dt) {
         if(level instanceof StandardLevel) {
@@ -111,6 +112,7 @@ public class Game extends Scene {
             endGame();
         }
     }
+
 
     private void endGame() {
         FXMLLoader gameOverBoxLoader = new FXMLLoader(BattleGround.class.getResource("GameOverBox.fxml"));
@@ -143,12 +145,13 @@ public class Game extends Scene {
 
         gameOverBox.setLayoutX(BattleGround.screenWidth/3);
         gameOverBox.setLayoutY(BattleGround.screenHeight/4);
-        level.container.setOpacity(0.25);
+        unfocus();
         level.getChildren().add(gameOverBox);
     }
 
     public void unfocus(){
-        this.level.getContainer().setOpacity(0.2);
+        double opacity = 0.2;
+        this.level.getContainer().setOpacity(opacity);
     }
     public void focus(){
         this.level.getContainer().setOpacity(1);
@@ -224,7 +227,7 @@ public class Game extends Scene {
         if(level.selectedFighter!=null){
             double boundX = level.selectedFighter.getCoordinate().getX();
             double boundY = level.selectedFighter.getCoordinate().getY();
-            return x < boundX + 20 && x > boundX - 20 && y < boundY + 20 && y > boundY - 20;
+            return x < boundX + Fighter.FIGHTER_DIMENSIONS && x > boundX - Fighter.FIGHTER_DIMENSIONS && y < boundY + Fighter.FIGHTER_DIMENSIONS && y > boundY - Fighter.FIGHTER_DIMENSIONS;
         }
         return  false;
     }
@@ -241,7 +244,7 @@ public class Game extends Scene {
                     selectedFighter.launchProjectile(
                             selectedFighter.loadout.mainWeapon, new Vector(velocityX, velocityY));
                     turnManager.projectileShot();
-                }// TODO -LAUNCH MAIN PROJECTILE
+                }
                 if (event.getButton() == MouseButton.SECONDARY) {
                     selectedFighter.launchProjectile(
                             selectedFighter.loadout.grenades.get(0), new Vector(velocityX, velocityY));
@@ -294,21 +297,10 @@ public class Game extends Scene {
         timeline.play();
     }
 
-
     public class pauseEvent implements EventHandler {
         @Override
         public void handle(Event t) {
-            if(timeline.getStatus() == Animation.Status.PAUSED){
-                isTicking = true;
-                timeline.play();
-            }else{
-                //Debug
-                Object variableOfInterest = level.map.activeProjectile;
-                //----------------
-                timeline.pause();
-                //tickRate = -tickRate;
-                isTicking = false;
-            }
+            pauseGame();
         }
     }
 }

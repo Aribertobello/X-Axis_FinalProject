@@ -24,7 +24,7 @@ public class Computer extends Fighter {
 
     public void calculateLaunchAngle() {
         //TODO MAKE COMPUTER LAUNCH PROJECTILE ON ITS OWN
-
+        //INCOMPLETE
         Mapp map = (Mapp) getParent();
         Coordinate target = ((StandardLevel)BattleGround.activeGame.getLevel()).team1.get(0).getCoordinate();
         double uncertainty = 0.025;
@@ -37,7 +37,7 @@ public class Computer extends Fighter {
         for (double v = Projectile.MIN_LAUNCH_VELOCITY+90; v<Projectile.TERMINAL_VELOCITY ; v++){
             double angle = 240;
             for (; angle > 120; angle-- ){
-                Mapp dummyMap = (Mapp)map.clone();
+                Mapp dummyMap = new Mapp("");//(Mapp)map.clone();
                 Fighter fighter = dummyMap.getPeople().get(indexOfthis);
                 fighter.launchProjectile(fighter.getLoadout().getMainWeapon(),new Vector(angle).scale(v));
                 double dt = 0.01;

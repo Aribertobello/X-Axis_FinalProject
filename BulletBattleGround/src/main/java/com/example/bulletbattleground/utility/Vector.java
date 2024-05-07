@@ -21,6 +21,12 @@ public class Vector {
         y = Math.sin(angle*PI/180);
     }
 
+    /**
+     * reads a String and creates a vector object from it
+     * @throws ParseException when the string is formatted improperly
+     * must be formatted as such : "<x,y>"
+     * @return the String as a Vector
+     */
     public static Vector valueOf(String string) throws ParseException {
 
         ParseException e = new ParseException("Coordinate String is incorrectly formatted, must be of type \"<x,y>\"",0);
@@ -173,7 +179,14 @@ public class Vector {
                 ", " + y +
                 " >" ;
     }
+    /**
+     * generates an Arrow representing the vector
+     * @return vector as an Arrow
+     */
     public Arrow toArrow(Coordinate origin){
+        if(magnitude()>250){
+            return new Arrow(this.scale(250),origin);
+        }
          return new Arrow(this,origin);
     }
 

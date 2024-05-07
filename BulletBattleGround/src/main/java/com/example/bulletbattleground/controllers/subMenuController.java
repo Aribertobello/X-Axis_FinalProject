@@ -13,10 +13,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class subMenuController{
-    //TODO CLASS COMPLETE
+
     public  Button exitBtn ;
     public  Button mainMenuBtn ;
-    public Button player_environ_btn;//TODO
+    public Button player_environ_btn;
     public Button player_player_btn;
     public Button player_computer_btn;
 
@@ -26,10 +26,6 @@ public class subMenuController{
     public void player_computer_btn_clicked(ActionEvent event) throws IOException {
         ClassSelectorController.pvcClicked = true;
         BattleGround.newScene(new Scene(BattleGround.pvcLevelSelectorLoader().load()));
-
-//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//        stage.setScene(new Scene(BattleGround.pvcLevelSelectorLoader().load()));
-//        stage.show();
     }
     /**
      * @param event Action event for a button to create new scene for player vs environment game mode.
@@ -37,10 +33,6 @@ public class subMenuController{
     public void player_environ_btn_clicked(ActionEvent event) throws IOException {
         ClassSelectorController.pveClicked = true;
         BattleGround.newScene(new Scene(BattleGround.pveLevelSelectorLoader().load()));
-
-//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//        stage.setScene(new Scene(BattleGround.pveLevelSelectorLoader().load()));
-//        stage.show();
     }
     /**
      *@param event Action handler for a button to create new scene for player vs player game mode.

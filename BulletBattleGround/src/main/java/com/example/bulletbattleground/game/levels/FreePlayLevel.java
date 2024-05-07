@@ -54,9 +54,10 @@ public class FreePlayLevel extends Level {
     }
 
     public void freePlayGame() throws IOException {
+        int screenPadding = 250;
         FXMLLoader loader = new FXMLLoader(BattleGround.class.getResource("FreePlayScene.fxml"));
         freePlayUI = loader.load();
-        freePlayUI.setLayoutX(BattleGround.screenWidth-250);
+        freePlayUI.setLayoutX(BattleGround.screenWidth-screenPadding);
         container.getChildren().remove(turnStatusBox);
         container.getChildren().add(freePlayUI);
         FreePlayController controller = loader.getController();

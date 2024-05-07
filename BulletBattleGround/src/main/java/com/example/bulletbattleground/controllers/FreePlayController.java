@@ -27,7 +27,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class FreePlayController {
-    //TODO comp shoot method  and select fighter type and fighter .flip();
     
     public ImageView allyImageView;
     public ImageView smokeScreenImageView;

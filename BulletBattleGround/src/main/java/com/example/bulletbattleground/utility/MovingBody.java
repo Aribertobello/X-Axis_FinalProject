@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
-public abstract class MovingBody extends Group {
+public abstract class MovingBody extends Group  implements BattleGroundObject{
     @Setter
     @Getter
     private Coordinate coordinate;
@@ -38,8 +38,8 @@ public abstract class MovingBody extends Group {
     }
 
     /**
-     *
-     * @return
+     * from the net force applied on the moving body the acceleration is calculated via the 2nd law of motion f = ma
+     * @return Netforce/mass
      */
     public Vector acceleration() {
         forces.toArray(new Vector[2]);
@@ -50,54 +50,63 @@ public abstract class MovingBody extends Group {
     }
 
     /**
-     *
-     * @return
+     * Vector comprised of velocity x and Y
+     * @return new Vector <velocity x, velocity y>
      */
     public Vector velocity() {
         return new Vector(velocityX, velocityY);
     }
 
     /**
-     *
-     * @return
+     * Kinetic energy of the object
+     * calculated using the formula KE = 1/2 * mass * velocity_magnitude^2
+     * @return mass*(velocity.magnitude()^2)/2
      */
     public double kE() {
         return mass * Math.pow(velocity().magnitude(), 2) / 2;
     }
 
     /**
-     *
-     * @return
+     * Momentum of the object
+     * calculated using the formula P =  mass * velocity_magnitude
+     * @return mass*(velocity.magnitude())
      */
     public double momentum() {
         return mass * velocity().magnitude();
     }
+
     public void setCoordinate(double x, double y){
         coordinate.setX(x);
         coordinate.setY(y);
     }
 
-    /**]
-     *
-     * @param dt
+    /**
+     * moves the body in space according to newtonian mechanics
+     * @param dt the increment of time of the calculation
      */
     public abstract void move(double dt);
 
 
     /**
-     *
+     * reflects the velocity of the moving body along a hitbox
      * @param hitBox
      */
     public abstract void bounce(HitBox hitBox);
 
+
     public abstract HitBox hitBox();
 
+
+    /**
+     * creates a system of equations using the law of conservation of energy and momentum to solve for momentum after the collision
+     * @param a colliding body
+     * @param b second colliding body
+     */
     public static void collision(MovingBody a,MovingBody b) {
 
         int index  = b.getHitBox().getPoints().indexOf(b.getHitBox().getOverlapped());
         Coordinate point1;
         Coordinate point2;
-
 
         if (index+1==b.hitBox.getPoints().size()){
             point1 = b.hitBox.getPoints().get(index-1);
@@ -111,10 +120,6 @@ public abstract class MovingBody extends Group {
         }
         Vector aReflexion = Vector.vectorSum(a.velocity(),a.velocity().projectOver(point1.distanceVector(point2).normal()).multiply(-2));
 
-        double x1;
-        double y1;
-        double x2;
-        double y2;
         double m1 = a.getMass();
         double m2 = b.getMass();
         double k1 = a.kE();
@@ -128,10 +133,7 @@ public abstract class MovingBody extends Group {
         a.getCoordinate().displace(aReflexion.unitVector());
         a.setVelocityX(aReflexion.scale(v1).getX());
         a.setVelocityY(aReflexion.scale( v1).getY());
-        //a.setVelocityX(bReflexion.scale(-v2).getX()); TODO V2
-        // a.setVelocityY(bReflexion.scale(-v2).getY()); TODO V2
         a.bounce(b.hitBox());
         b.bounce(a.hitBox());
     }
-
 }

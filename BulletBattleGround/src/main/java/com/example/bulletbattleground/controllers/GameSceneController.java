@@ -22,7 +22,7 @@ import java.io.IOException;
 @Getter
 @Setter
 public class GameSceneController {
-    //TODO enemy health
+
     @FXML
     private Pane headsUpDisplay;
     @FXML

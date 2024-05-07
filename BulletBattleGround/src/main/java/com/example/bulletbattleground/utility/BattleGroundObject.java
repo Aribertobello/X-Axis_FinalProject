@@ -2,5 +2,9 @@ package com.example.bulletbattleground.utility;
 
 public interface BattleGroundObject {
     HitBox hitBox();
-    void allign();//TODO implement allign in all objects;
+
+    /**
+     * alligns the object in the scene according to position and velocity and other individual properties
+     */
+    void allign();
 }

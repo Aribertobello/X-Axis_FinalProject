@@ -76,6 +76,7 @@ public class TurnManager {
         currentPlayer = previousPlayer == 1 ? 2 : 1;
         startTurn();
     }
+
     public void startAnimation() {
         previousPlayer = currentPlayer;
         currentPlayer = 0;
@@ -94,13 +95,12 @@ public class TurnManager {
         activeTurn = false;
         startAnimation();
     }
+
     public boolean isPlayer1Turn(){
         return currentPlayer == 1;
     }
+
     public boolean isPlayer2Turn(){
         return currentPlayer == 2;
-    }
-    public boolean isAnimationPlaying(){
-        return currentPlayer == 0;
     }
 }

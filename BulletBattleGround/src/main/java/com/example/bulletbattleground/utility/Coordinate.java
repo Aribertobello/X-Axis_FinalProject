@@ -16,9 +16,9 @@ public class Coordinate {
     private double y;
 
     /**
-     *
-     * @param x
-     * @param y
+     * creates a 2D coordinate (x,y)
+     * @param x x component
+     * @param y y component
      */
     public Coordinate(double x, double y) {
         this.x = x;
@@ -55,10 +55,6 @@ public class Coordinate {
         return axisOfRotation.move(distanceVector(axisOfRotation).rotate(angle));
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public String toString() {
         return '(' + " " + Math.round(x) + ", " + Math.round(y) + ')';
@@ -72,6 +68,12 @@ public class Coordinate {
         return Math.round(x - otherCoord.x) == 0 && Math.round(y -otherCoord.y) == 0;
     }
 
+    /**
+     * reads a String and creates a Coordinate object from it
+     * @throws ParseException when the string is formatted improperly
+     * must be formatted as such : "(x,y)"
+     * @return the String as a Coordinate
+     */
     public static Coordinate valueOf(String string) throws ParseException {
         ParseException e = new ParseException("Coordinate String is incorrectly formatted, must be of type \"(x,y)\"",0);
         if (string.startsWith("(") && string.endsWith(")") && string.contains(",")) {

@@ -72,7 +72,7 @@ public class Grenade extends Projectile {
     }
     @Override
     public void bounce(HitBox hitBox) {
-        //TODO
+
     }
 
     @Override
@@ -125,16 +125,16 @@ public class Grenade extends Projectile {
 
     }
 
-    //TODO Choose if we keep this or not: it's just a method to detect collision for debugging purposes
-   /* private void checkPlayerDetection() {
-            Bounds fighterBounds = this.getBoundsInParent();
-            if (explosionCircle.intersects(fighterBounds)) {
-                System.out.println("DETECTED: "  + this.getDamage());
-        }
-    }*/
-
     @Override
     public String toString() {
         return "Grenade";
+    }
+
+    /**
+     * alligns the object in the scene according to position and velocity and other individual properties
+     */
+    @Override
+    public void allign() {
+        this.getChildren().get(0).setRotate(velocity().angle());
     }
 }

@@ -36,7 +36,7 @@ public class StandardLevel extends Level {
 
     public static Vector[] compShtAngles = {
             new Vector(-168).scale(120),
-            new Vector(165).scale(120),
+            new Vector(175).scale(120),
             new Vector(165).scale(120),
             new Vector(165).scale(120),
             new Vector(165).scale(120),
@@ -47,12 +47,6 @@ public class StandardLevel extends Level {
             new Vector(165).scale(120),
     };
 
-    //TODO CLASS COMPLETE
-
-    /**
-     * @param map
-     * @param type
-     */
     public StandardLevel(Mapp map, int type) throws IOException {
         super(map);
         this.type = type;
