@@ -16,23 +16,26 @@ import java.io.IOException;
 
 public class Rocket extends Projectile {
 
-    @Getter
-    @Setter
-    int nausea;
+    @Getter @Setter int nausea;
 
-    @Getter
-    @Setter
-    double dropZone;
+    @Getter @Setter double dropZone;
+
+    Vector LIFT_VECTOR = new Vector(0, -2.0);
+    int CIRCLE_ROCKET_RADIUS = 2;
+    int nauseaEffect = 3;
+    int rocketDamage = 3;
+    double rocketMass = 9.0;
+    final int ROCKET_TERMINAL_VELOCITY = 50;
 
     public Rocket() {
-        this.nausea = 3;
-        this.getChildren().add(new Circle(2, Color.DARKGRAY));
+        this.nausea = nauseaEffect;
+        this.getChildren().add(new Circle(CIRCLE_ROCKET_RADIUS, Color.DARKGRAY));
         this.getChildren().add(new Polygon());
-        this.damage = 3;
-        this.lift = new Vector(0, -2.0);
+        this.damage = rocketDamage;
+        this.lift = LIFT_VECTOR;
         this.forces.add(lift);
-        this.setMass(9.0);
-        setTerminalVelocity(50);
+        this.setMass(rocketMass);
+        setTerminalVelocity(ROCKET_TERMINAL_VELOCITY);
     }
 
     @Override
@@ -49,20 +52,36 @@ public class Rocket extends Projectile {
     }
 
     @Override
-    public void bounce(HitBox hitBox) {
-        //TODO
-    }
+    public void bounce(HitBox hitBox) {}
 
     public void align() {
-        //Got to make all these x values down below more readable
+        int NINETY_DEGREE_ANGLE = 90;
+        int TWO_SEVENTY_DEGREE_ANGLE = 270;
+        int newScaleMagnitude1 = 3;
+        int newScaleMagnitude2 = 6;
+        int newScaleMagnitude3 = 25;
 
         if (velocity().magnitude() != 0) {
-            double x0 = getChildren().get(0).getLayoutX() + velocity().scale(3).getX(), y0 = getChildren().get(0).getLayoutY() + velocity().scale(3).getY();
-            double x1 = x0 + velocity().scale(3).getX(), y1 = y0 + velocity().scale(3).getY();
-            double x2 = x0 + velocity().scale(3).rotate(270).getX(), y2 = y0 + velocity().scale(3).rotate(270).getY();
-            double x3 = x2 - velocity().scale(25).getX(), y3 = y2 - velocity().scale(25).getY();
-            double x4 = x3 + velocity().scale(6).rotate(90).getX(), y4 = y3 + velocity().scale(6).rotate(90).getY();
-            double x5 = x4 + velocity().scale(25).getX(), y5 = y4 + velocity().scale(25).getY();
+
+
+            double x0 = getChildren().get(0).getLayoutX() + velocity().scale(3).getX(),
+                    y0 = getChildren().get(0).getLayoutY() + velocity().scale(3).getY();
+
+            double x1 = x0 + velocity().scale(newScaleMagnitude1).getX(),
+                    y1 = y0 + velocity().scale(newScaleMagnitude1).getY();
+
+            double x2 = x0 + velocity().scale(newScaleMagnitude1).rotate(TWO_SEVENTY_DEGREE_ANGLE).getX(),
+                    y2 = y0 + velocity().scale(newScaleMagnitude1).rotate(TWO_SEVENTY_DEGREE_ANGLE).getY();
+
+            double x3 = x2 - velocity().scale(newScaleMagnitude3).getX(),
+                    y3 = y2 - velocity().scale(newScaleMagnitude3).getY();
+
+            double x4 = x3 + velocity().scale(newScaleMagnitude2).rotate(NINETY_DEGREE_ANGLE).getX(),
+                    y4 = y3 + velocity().scale(newScaleMagnitude2).rotate(NINETY_DEGREE_ANGLE).getY();
+
+            double x5 = x4 + velocity().scale(newScaleMagnitude3).getX(),
+                    y5 = y4 + velocity().scale(newScaleMagnitude3).getY();
+
             ((Polygon) this.getChildren().get(1)).getPoints().setAll(x1, y1, x2, y2, x3, y3, x4, y4, x5, y5);
         }
 

@@ -24,8 +24,8 @@ public class SmokeScreen extends Obstacle {
     protected double upTime3; //The other upTimes are used to make sure the methods are called once
     protected Timeline animationTimeLine;
     Circle ball = new Circle();
-    private final Image smokeEffect4 = new Image("file:s4.png");
-    private final Image smokeEffect5 = new Image("file:s5.png");
+    private final Image smokeEffect4 = new Image("file:Files/img/s4.png");
+    private final Image smokeEffect5 = new Image("file:Files/img/s5.png");
     private int index = 0;
     double angle = 0.0;
 

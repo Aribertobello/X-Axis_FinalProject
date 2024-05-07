@@ -170,8 +170,8 @@ public class FreePlayController {
         allyImageView.setImage(new Image("file:Files/img/Light_Class_Img.png"));
         computerImageView.setImage(new Image("file:Files/img/Light_Class_Img.png"));
         wallImageView.setImage(new Image("file:Files/img/WallTemporary.jpg"));
-        spaceShipImageView.setImage(new Image("file:rocket.png"));
-        smokeScreenImageView.setImage(new Image("file:s4.png"));
+        spaceShipImageView.setImage(new Image("file:Files/img/rocket.png"));
+        smokeScreenImageView.setImage(new Image("file:Files/img/s4.png"));
         wallRotationSlider.valueProperty().addListener( event -> {rotationLabel.setText(String.valueOf(Math.round(wallRotationSlider.getValue())));});
         wallMassSlider.valueProperty().addListener( event -> {massLabel.setText(String.valueOf(Math.round(wallMassSlider.getValue())));});
         wallHeightSlider.valueProperty().addListener( event -> {heightLabel.setText(String.valueOf(Math.round(wallHeightSlider.getValue())));});

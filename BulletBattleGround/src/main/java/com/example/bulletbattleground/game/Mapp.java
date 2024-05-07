@@ -7,6 +7,7 @@ import com.example.bulletbattleground.gameObjects.obstacles.Wall;
 import com.example.bulletbattleground.gameObjects.projectiles.Bullet;
 import com.example.bulletbattleground.gameObjects.projectiles.Grenade;
 import com.example.bulletbattleground.utility.*;
+import javafx.geometry.Side;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -23,45 +24,28 @@ import java.util.Collection;
 
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
-
+@Getter@Setter
 public class Mapp extends Pane implements GameUI , Cloneable {
 
-    @Getter
     private int type;
-    @Getter
-    @Setter
     protected ArrayList<Fighter> people = new ArrayList<>();
-    @Getter
-    @Setter
     protected ArrayList<Obstacle> obstacles = new ArrayList<>();
     private ArrayList<HitBox> hitBoxes = new ArrayList<>();
-    @Getter
-    @Setter
     private double gravity;
-    @Getter
-    @Setter
     private double airResistance;
     protected int scale;
-    @Setter
     private double[] bounds  = {BattleGround.screenWidth,BattleGround.screenHeight};
-    @Getter
-    @Setter
     public Projectile activeProjectile;
-    @Getter
-    @Setter
     protected int buffer = 0;
-    @Getter
     public Loot loot;
-    @Getter
-    @Setter
     protected Shape earth;
     public Vector[] environmentForces = {new Vector(0,0),new Vector(0,0),new Vector(0,0)};
-    @Getter
-    @Setter
     private boolean hasLoot = false;
-    @Getter
-    @Setter
     private boolean fighterHit = false;
+    private String skyFilePath = "file:Files/img/sky.jpeg";
+    private String groundFilePath = "file:Files/img/ground.jpeg";
+    private String spaceFilePath = "file:Files/img/spaceBackground.png";
+    private String earthFilePath = "file:Files/img/earth_Image.png";
 
 
     /**
@@ -70,7 +54,8 @@ public class Mapp extends Pane implements GameUI , Cloneable {
      */
     public Mapp(String type) {
         if (type.equalsIgnoreCase("earth")) {
-            Image backgroundImageSpace = new Image("file:sky.jpeg");
+            Image backgroundImageSpace = new Image(skyFilePath);
+
             BackgroundImage background = new BackgroundImage(
                     backgroundImageSpace,
                     BackgroundRepeat.NO_REPEAT,
@@ -79,7 +64,7 @@ public class Mapp extends Pane implements GameUI , Cloneable {
                     new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false)
             );
             this.setBackground(new Background(background));
-            Image groundEarthImage = new Image("file:ground.jpeg");
+            Image groundEarthImage = new Image(groundFilePath);
             earth = new Rectangle(0, BattleGround.screenHeight-200, 3000,250);
             earth.setFill(new ImagePattern(groundEarthImage));
             this.getChildren().add(earth);
@@ -88,18 +73,18 @@ public class Mapp extends Pane implements GameUI , Cloneable {
             this.type = 0;
         }
         if (type.equalsIgnoreCase("space")) {
-            Image backgroundImageSpace = new Image("file:spaceBackground.png");
+            Image backgroundImageSpace = new Image(spaceFilePath);
             BackgroundImage background = new BackgroundImage(
                     backgroundImageSpace,
-                    BackgroundRepeat.NO_REPEAT,
-                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundRepeat.REPEAT,
+                    BackgroundRepeat.REPEAT,
                     BackgroundPosition.DEFAULT,
                     new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false)
             );
             this.setBackground(new Background(background));
 
             earth = new Circle(BattleGround.screenWidth/2.0, BattleGround.screenHeight/2.0, 120);
-            Image earth_image = new Image("file:Files/img/earth_Image.png");
+            Image earth_image = new Image(earthFilePath);
             earth.setFill(new ImagePattern(earth_image));
             this.getChildren().add(earth);
             this.type = 1;
@@ -218,7 +203,6 @@ public class Mapp extends Pane implements GameUI , Cloneable {
                 MovingBody.collision(projectile,obstacle);
                 HitBox collidedObstacleHitBox = obstacle.hitBox();
                 collidedObstacleHitBox.setDisplayed(true);
-                //addHitBox(collidedObstacleHitBox);
                 return true;
             }
         }
@@ -239,7 +223,6 @@ public class Mapp extends Pane implements GameUI , Cloneable {
             removeLoot();
             removeActiveProjectile();
             return true;
-            //TODO Game Won
         }
         return false;
     }
@@ -277,9 +260,6 @@ public class Mapp extends Pane implements GameUI , Cloneable {
     public Object clone() {
         try {
             Mapp clonedMap = (Mapp) super.clone();
-
-
-
             clonedMap.people = new ArrayList<>(this.people.size());
             for (Fighter fighter : this.people) {
                 Fighter person  = new Fighter(fighter.loadout.type,fighter.health, (int)fighter.coordinate.getX(),(int)fighter.getCoordinate().getY());

@@ -18,25 +18,16 @@ public class Fighter extends Rectangle {
     public static int FIGHTER_DIMENSIONS = 20;
 
     protected Loadout loadout;
-
-    @Getter
-    @Setter
-    protected int maxHealth;
-
-    @Getter
-    @Setter
-    protected int health;
-    @Getter
-    protected Coordinate coordinate = new Coordinate(0, 0);
-
-    boolean inverted = false ;
-
-    @Getter
-    @Setter
-    protected int teamNb;
+    boolean inverted = false;
     boolean highlighted;
-    @Getter @Setter
-    private Mapp map;
+    int teamOne = 1;
+    int teamTwo = 2;
+
+    @Getter @Setter protected int maxHealth;
+    @Getter @Setter protected int health;
+    @Getter protected Coordinate coordinate = new Coordinate(0, 0);
+    @Getter @Setter protected int teamNb;
+    @Getter @Setter private Mapp map;
 
     /**
      * Creates a Fighter  instance, this is what can shoot bullets in the game
@@ -127,7 +118,7 @@ public class Fighter extends Rectangle {
         level.setSelectedFighter(this);
         level.setOrigin(teamNb == 1 ? coordinate.move(new Vector(20,-20)) :  coordinate.move(new Vector(-FIGHTER_DIMENSIONS,-FIGHTER_DIMENSIONS)));
         highlighted = true;
-        this.setStroke(teamNb == 1 ? Color.CYAN :  Color.DARKRED );
+        this.setStroke(teamNb == teamOne ? Color.CYAN :  Color.DARKRED );
     }
 
     public void unhiglight(){

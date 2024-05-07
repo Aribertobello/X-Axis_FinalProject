@@ -40,41 +40,24 @@ public abstract class Level extends AnchorPane implements GameUI {
 
     public Arrow arrow;
     //Level properties-----------------
-    protected boolean dragging = false;
     @Getter @Setter public Mapp map;
-    protected Line trajectoryLine = new Line();//TODO
     @Getter @Setter protected Coordinate origin;
-    @Getter
-    @Setter
-    protected Fighter selectedFighter;
-    @Getter
-    @Setter
-    protected int type;
-    @Getter
-    @Setter
-    protected int index;
-    @Getter
-    @Setter
-    String description = "";
-
-    //private Line Xaxis;
+    @Getter @Setter protected Fighter selectedFighter;
+    @Getter @Setter protected int type;
+    @Getter @Setter protected int index;
+    @Getter @Setter String description = "";
+    @Getter @Setter private double LastAngel = 0.0;
+    protected boolean dragging = false;
+    protected Line trajectoryLine = new Line();
     private Line AngleDisp;
-    @Getter
-    @Setter
-    private double LastAngel = 0.0;
-
     public ArrayList<Fighter> team1 = new ArrayList<>();
     public ArrayList<Fighter> team2 = new ArrayList<>();
     //------------------------------------------------------------------------
 
     // Level controllers--------
-    @FXML
-    @Getter
-    @Setter
-    protected Pane headsUpDisplay;
-    @FXML
-    @Getter
-    protected AnchorPane container;
+    @FXML @Getter @Setter protected Pane headsUpDisplay;
+    @FXML @Getter protected AnchorPane container;
+    @Getter private Label descriptionLabel;
     private Label activeProjectileLabel;
     private Label GrenadeLabel;
     private Label SmokeLabel;
@@ -107,8 +90,8 @@ public abstract class Level extends AnchorPane implements GameUI {
     public double lineWidth = 1.5;
     public int straightAngle = 180;
     public double descriptionOpacity = 0.25;
-    @Getter
-    private Label descriptionLabel;
+  //  @Getter
+ //private Label descriptionLabel;
     private VBox descriptionBox;
 
     public Level(Mapp map) throws IOException {
@@ -251,8 +234,7 @@ public abstract class Level extends AnchorPane implements GameUI {
         if(selectedFighter != null) {
             if (selectedFighter.loadout.type == 1) {
                 BImg.setImage(new Image("file:Files/img/smallBullet.png"));
-
-        }
+         }
         }
     }
 

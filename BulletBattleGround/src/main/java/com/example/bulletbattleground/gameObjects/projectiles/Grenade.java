@@ -102,7 +102,7 @@ public class Grenade extends Projectile {
     }
     private void playExplosionSound() {
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Explosion.wav"));
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Files/sound/Explosion.wav"));
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);

@@ -23,12 +23,33 @@ import java.util.Scanner;
 
 public class FileManager extends ClassSelectorController {
 
-    //TODO GameRules
     private static File managerFile;
-    static User user;
-    public static int loadoutType;
     private static final String PROGRESS_FILE_PATH_PVE = "Files/txt/PVE.progress.txt";
     private static final String PROGRESS_FILE_PATH_PVC = "Files/txt/PVC.progress.txt";
+    private static final String earth ="earth";
+    private static final String typee ="type :";
+    private static final String indexx = "index :";
+    private static final String map = "map :";
+    private static final String fighters = "fighters :";
+    private static final String loot = "loot :";
+    private static final String descriptionn = "Description :";
+    private static final String forces = "Forces :";
+    private static final String obstacles = "Obstacles :";
+    private static final String coordinatee = "coordinate";
+    private static final String ally = "ally";
+    private static final String computer = "computer";
+    private static final String loadout = "loadout";
+    private static final String healthh = "health";
+    private static final String GMagnitude = "GMagnitude";
+    private static final String AirResMagnitude = "AirResMagnitude";
+    private static final String windd = "wind";
+    private static final String wall = "wall";
+    private static final String masss = "mass";
+    private static final String speedd = "speed";
+    private static final String heightt = "height";
+    private static final String widthh = "width";
+    private static final String rotationn = "rotation";
+    private static final String spaceship = "spaceship";
 
     /**
      * Constructs a new FileManager instance with the specified file path.
@@ -54,10 +75,10 @@ public class FileManager extends ClassSelectorController {
         }
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
-            if (line.startsWith("index :")) index = Integer.valueOf(line.substring(8).trim());
-            if (line.startsWith("type :")) type = Integer.valueOf(line.substring(7).trim());
-            if (line.startsWith("map :")) mapLocation = line.substring(6).trim();
-            if (line.startsWith("fighters :")) {
+            if (line.startsWith(indexx)) index = Integer.valueOf(line.substring(8).trim());
+            if (line.startsWith(typee)) type = Integer.valueOf(line.substring(7).trim());
+            if (line.startsWith(map)) mapLocation = line.substring(6).trim();
+            if (line.startsWith(fighters)) {
                 switch (type) {
                     case 1,2,3 -> level = new StandardLevel(createMap(mapLocation), type);
                     case 0 -> level = new FreePlayLevel(createMap(mapLocation));
@@ -65,8 +86,8 @@ public class FileManager extends ClassSelectorController {
                 }
                 readFighters(scanner, level);
             }
-            if(line.startsWith("loot :")) scanLoot(line,level);
-            if(line.startsWith("Description :")) {
+            if(line.startsWith(loot)) scanLoot(line,level);
+            if(line.startsWith(descriptionn)) {
                 scanner.nextLine();
                 String l = scanner.nextLine();
                 while(!l.endsWith("}")) {
@@ -91,9 +112,9 @@ public class FileManager extends ClassSelectorController {
         }
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
-            if (line.startsWith("type : ")) map = new Mapp(line.substring(7, 12));
-            if (line.startsWith("Forces :"))  readForces(scanner,map);
-            if (line.startsWith("Obstacles :")) {
+            if (line.startsWith(typee)) map = new Mapp(line.substring(7, 12));
+            if (line.startsWith(forces))  readForces(scanner,map);
+            if (line.startsWith(obstacles)) {
                 readObsctles(scanner, map);
             }
         }
@@ -106,7 +127,7 @@ public class FileManager extends ClassSelectorController {
             String str = "";
             while (!str.startsWith("}")) {
                 str = lineScanner.next();
-                if (str.equalsIgnoreCase("coordinate")) {
+                if (str.equalsIgnoreCase(coordinatee)) {
                     lineScanner.skip("...");
                     coordinate = Coordinate.valueOf(lineScanner.next());
                     ((StandardLevel)level).addLoot(new Loot((int)coordinate.getX(),(int)coordinate.getY()));
@@ -121,25 +142,25 @@ public class FileManager extends ClassSelectorController {
         String line = scanner.nextLine();
         while (!line.startsWith("}")) {
             Scanner lineScanner = new Scanner(line);
-            if (line.startsWith("ally") || line.startsWith("computer")) {
+            if (line.startsWith(ally) || line.startsWith(computer)) {
                 while (!lineScanner.next().startsWith("}")) {
                     String str = lineScanner.next();
-                    if (str.equalsIgnoreCase("loadout")) {
+                    if (str.equalsIgnoreCase(loadout)) {
                         lineScanner.skip("...");
                         loadoutType = lineScanner.nextInt();
                     }
-                    if (str.equalsIgnoreCase("health")) {
+                    if (str.equalsIgnoreCase(healthh)) {
                         lineScanner.skip("...");
                         health = lineScanner.nextInt();
                     }
-                    if (str.equalsIgnoreCase("coordinate")) {
+                    if (str.equalsIgnoreCase(coordinatee)) {
                         lineScanner.skip("...");
                         coordinate = Coordinate.valueOf(lineScanner.next());
                     }
                 }
-                if (line.startsWith("ally"))
+                if (line.startsWith(ally))
                     level.addFighter(new Ally(loadoutType, health, (int) coordinate.getX(), (int) coordinate.getY()), 1);
-                if (line.startsWith("computer"))
+                if (line.startsWith(computer))
                     level.addFighter(new Computer(loadoutType, health, (int) coordinate.getX(), (int) coordinate.getY()), 2);
             }
             line = scanner.nextLine();
@@ -152,15 +173,15 @@ public class FileManager extends ClassSelectorController {
         Vector wind = new Vector(0, 0);
         String str = scanner.next();
         while (!str.startsWith("}")) {
-            if(str.startsWith("GMagnitude")){
+            if(str.startsWith(GMagnitude)){
                 scanner.skip("...");
                 gMag = scanner.nextDouble();
             }
-            if(str.startsWith("AirResMagnitude")){
+            if(str.startsWith(AirResMagnitude)){
                 scanner.skip("...");
                 aiResMag = scanner.nextDouble();
             }
-            if(str.startsWith("wind")){
+            if(str.startsWith(windd)){
                 scanner.skip("...");
                 wind = Vector.valueOf(scanner.next());
             }
@@ -182,26 +203,26 @@ public class FileManager extends ClassSelectorController {
         String line = scanner.nextLine();
         while (!line.startsWith("}")) {
             Scanner lineScanner = new Scanner(line);
-            if (line.startsWith("wall")) {
+            if (line.startsWith(wall)) {
                 while (!lineScanner.next().startsWith("}")) {
                     String str = lineScanner.next();
-                    if (str.equalsIgnoreCase("height")) {
+                    if (str.equalsIgnoreCase(heightt)) {
                         lineScanner.skip("...");
                         height = lineScanner.nextInt();
                     }
-                    if (str.equalsIgnoreCase("width")) {
+                    if (str.equalsIgnoreCase(widthh)) {
                         lineScanner.skip("...");
                         width = lineScanner.nextInt();
                     }
-                    if (str.equalsIgnoreCase("coordinate")) {
+                    if (str.equalsIgnoreCase(coordinatee)) {
                         lineScanner.skip("...");
                         coordinate = Coordinate.valueOf(lineScanner.next());
                     }
-                    if (str.equalsIgnoreCase("rotation")) {
+                    if (str.equalsIgnoreCase(rotationn)) {
                         lineScanner.skip("...");
                         rotation = lineScanner.nextInt();
                     }
-                    if (str.equalsIgnoreCase("mass")) {
+                    if (str.equalsIgnoreCase(masss)) {
                         lineScanner.skip("...");
                         mass = lineScanner.nextInt();
                     }
@@ -214,14 +235,14 @@ public class FileManager extends ClassSelectorController {
                 wall.setVelocityX(spin);
                 map.addObstacle(wall);
             }
-            if (line.startsWith("spaceship")) {
+            if (line.startsWith(spaceship)) {
                 while (!lineScanner.next().startsWith("}")) {
                     String str = lineScanner.next();
-                    if (str.equalsIgnoreCase("speed")) {
+                    if (str.equalsIgnoreCase(speedd)) {
                         lineScanner.skip("...");
                         speed = lineScanner.nextInt();
                     }
-                    if (str.equalsIgnoreCase("coordinate")) {
+                    if (str.equalsIgnoreCase(coordinatee)) {
                         lineScanner.skip("...");
                         coordinate = Coordinate.valueOf(lineScanner.next());
                     }
@@ -265,8 +286,6 @@ public class FileManager extends ClassSelectorController {
      */
     public static boolean loadUserData(String username, String Password) throws FileNotFoundException {
         boolean matchingUserName = false;
-        boolean matchingPassWord = false;
-
         Scanner scanner = new Scanner(managerFile);
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
@@ -278,7 +297,6 @@ public class FileManager extends ClassSelectorController {
                 } else if (line.startsWith("Password: ") && matchingUserName) { //Makes sure that the password matches with the correct username
                     String storedPassword = line.substring("Password: ".length());
                     if (storedPassword.equals(Password)) {
-                        matchingPassWord = true;
                         return true; //true means valid credentials for password and username
                     }
                 }
@@ -322,7 +340,7 @@ public class FileManager extends ClassSelectorController {
     }
 
     public static HashMap<String, Integer> loadPVCProgress() {
-        HashMap<String, Integer> userPVEProgress = new HashMap<>();
+        HashMap<String, Integer> userPVCProgress = new HashMap<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(PROGRESS_FILE_PATH_PVC))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -330,13 +348,13 @@ public class FileManager extends ClassSelectorController {
                 if (parts.length == 2) {
                     String username = parts[0].trim();
                     int progress = Integer.parseInt(parts[1].trim());
-                    userPVEProgress.put(username, progress);
+                    userPVCProgress.put(username, progress);
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return userPVEProgress;
+        return userPVCProgress;
     }
 
     public static void savePVCProgress(HashMap<String, Integer> userPVCProgress) {
@@ -352,7 +370,7 @@ public class FileManager extends ClassSelectorController {
     }
 
     public static Mapp defaultEduMap() {
-        Mapp map = new Mapp("space");
+        Mapp map = new Mapp(earth);
         return map;
     }
 

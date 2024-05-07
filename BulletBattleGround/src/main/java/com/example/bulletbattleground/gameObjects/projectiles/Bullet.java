@@ -20,8 +20,10 @@ import java.io.InputStream;
 public class Bullet extends Projectile {
 
     private final static int BULLET_DAMAGE = 3;
+    private final static int SMALL_BULLET_RADIUS = 10;
     private final static double BULLET_MASS = 0.5;
     private final static Vector BULLET_LIFT = new Vector(0, -2.0);
+    private final static int TERMINAL_VELOCITY = 190;
 
     /**
      * Constructs a new Bullet object.
@@ -29,28 +31,16 @@ public class Bullet extends Projectile {
      * The bullet has a default damage value of 3, upward lift force, and a set mass.
      */
     public Bullet() {
-        Circle small_bullet = new Circle(10);
-        small_bullet.setRotate(90);
+        Circle small_bullet = new Circle(SMALL_BULLET_RADIUS);
         Image smallBulletImg = new Image("file:Files/img/smallBullet.png");
         small_bullet.setFill(new ImagePattern(smallBulletImg));
         this.getChildren().add(small_bullet);
         this.damage = BULLET_DAMAGE;
         this.lift = BULLET_LIFT;
         this.forces.add(lift);
-        setTerminalVelocity(190);
+        setTerminalVelocity(TERMINAL_VELOCITY);
         setMass(BULLET_MASS);
 
-    }
-
-    private void playGunshotSound() {
-          try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("GunShot.wav"));
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            clip.start();
-        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override

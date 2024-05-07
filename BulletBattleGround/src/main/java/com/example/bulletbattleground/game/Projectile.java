@@ -70,7 +70,7 @@ public abstract class  Projectile extends MovingBody {
     }
     private void playGunshotSound() {
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("GunShot.wav"));
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Files/sound/GunShot.wav"));
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
@@ -83,7 +83,7 @@ public abstract class  Projectile extends MovingBody {
     private void playRocketSound() {
 
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Rocket.wav"));
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Files/sound/Rocket.wav"));
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
@@ -96,7 +96,7 @@ public abstract class  Projectile extends MovingBody {
     private void playSpearSound() {
 
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Spear.wav"));
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Files/sound/Spear.wav"));
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
