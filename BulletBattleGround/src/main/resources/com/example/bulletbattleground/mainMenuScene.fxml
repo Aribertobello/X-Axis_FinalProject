@@ -21,6 +21,6 @@
                 <Button fx:id="freeplayBtn" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#freePlayButton" prefHeight="767.0" prefWidth="265.0" text="FREE PLAY" />
             </children>
         </HBox>
-      <Button layoutX="909.0" layoutY="27.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="37.0" prefWidth="77.0" text="Exit" />
+      <Button fx:id="BackBtn" layoutX="909.0" layoutY="27.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="37.0" prefWidth="77.0" text="Exit" />
     </children>
 </AnchorPane>
