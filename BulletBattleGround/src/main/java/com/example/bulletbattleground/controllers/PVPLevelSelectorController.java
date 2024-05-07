@@ -6,6 +6,7 @@ import com.example.bulletbattleground.game.Game;
 import com.example.bulletbattleground.game.Level;
 import com.example.bulletbattleground.game.levels.StandardLevel;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -13,6 +14,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class PVPLevelSelectorController {
+    @FXML
+    Button B2;
+    @FXML
+    public void BackButton(ActionEvent event){
+        BattleGround.prevScene();
+    }
 
     public void map1Selected(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

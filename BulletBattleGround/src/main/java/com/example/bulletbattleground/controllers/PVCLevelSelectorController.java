@@ -4,6 +4,7 @@ import com.example.bulletbattleground.BattleGround;
 import com.example.bulletbattleground.fileManagement.FileManager;
 import com.example.bulletbattleground.game.Game;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,6 +16,13 @@ import java.text.ParseException;
 import static com.example.bulletbattleground.fileManagement.FileManager.createLevel;
 
 public class PVCLevelSelectorController {
+
+    @FXML
+    Button B1;
+    @FXML
+    public void BackButton(ActionEvent event){
+        BattleGround.prevScene();
+    }
 
     public void launchPVCLevel1(ActionEvent event) throws IOException {
 

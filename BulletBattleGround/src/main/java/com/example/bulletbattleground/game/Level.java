@@ -198,15 +198,7 @@ public abstract class Level extends AnchorPane implements GameUI {
         setLoadoutHUD();
         setFightersCoordinates();
         setLoadoutImageHUD();
-        if(trajectoryLine != null && angleLabel != null && selectedFighter != null) {
-            Vector direction = new Vector(trajectoryLine.getEndX() - trajectoryLine.getStartX(), trajectoryLine.getEndY() - trajectoryLine.getStartY());
-            setAngleHUD(direction);
-        }
-        if(map.activeProjectile != null){
-            activeProjectileLabel.setText("Projectile Coordinates: "+ map.getActiveProjectile().getCoordinate());
-            AccLabel.setText("Acceleration: "+ map.getActiveProjectile().acceleration());
-            MomLabel.setText("Momentum: " + Math.round(map.getActiveProjectile().momentum()));
-        }
+        setInfoHud();
     }
 
     private void setLoadoutHUD() {
@@ -218,6 +210,18 @@ public abstract class Level extends AnchorPane implements GameUI {
             } else if (selectedFighter.loadout.type == 3) {
                 BltAmount.setText("Number of Rockets left: ∞");
             }
+        }
+
+    }
+    private void setInfoHud(){
+        if(trajectoryLine != null && angleLabel != null && selectedFighter != null) {
+            Vector direction = new Vector(trajectoryLine.getEndX() - trajectoryLine.getStartX(), trajectoryLine.getEndY() - trajectoryLine.getStartY());
+            setAngleHUD(direction);
+        }
+        if(map.activeProjectile != null){
+            activeProjectileLabel.setText("Projectile Coordinates: "+ map.getActiveProjectile().getCoordinate());
+            AccLabel.setText("Acceleration: "+ map.getActiveProjectile().acceleration());
+            MomLabel.setText("Momentum: " + Math.round(map.getActiveProjectile().momentum()));
         }
 
     }

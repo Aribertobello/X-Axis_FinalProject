@@ -13,6 +13,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class PVELevelSelectorController {
+    @FXML
+    Button B2;
+    @FXML
+    public void BackButton(ActionEvent event){
+        BattleGround.prevScene();
+    }
 
     public void launchPVELevel1(ActionEvent event) {
         try{
