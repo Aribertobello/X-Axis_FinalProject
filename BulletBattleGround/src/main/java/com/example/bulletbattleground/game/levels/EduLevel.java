@@ -16,7 +16,6 @@ import javafx.scene.shape.Circle;
 import java.io.IOException;
 
 public class EduLevel extends FreePlayLevel {
-    //TODO CLASS COMPLETE
 
     //Edu properties------------------------------------
     public double dataIncrement = 0;
@@ -54,14 +53,17 @@ public class EduLevel extends FreePlayLevel {
      */
     public EduLevel(Mapp map) throws IOException {
         super(map);
+        double mapBounds = 4000;
         type = -1;
-        getMap().setBounds(new double[]{4000,2000});
+        getMap().setBounds(new double[]{mapBounds,mapBounds/2});
         createEducationUI();
         initializeSeries();
     }
 
     public boolean[] update(double dt,double time) {
-
+        if (map.getActiveProjectile() != null) {
+            map.getActiveProjectile().setForcesDisplayed(true);
+        }
         boolean[] result = super.update(dt,time);
         updateCharts(dt,time);
         return result;

@@ -5,7 +5,6 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
 public class InstructionBoxController {
-    //TODO Add more info
 
     public Button backBtn1;
     public Button backBtn2;

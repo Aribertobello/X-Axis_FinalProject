@@ -1,5 +1,6 @@
 package com.example.bulletbattleground.gameObjects.Loot;
 
+import com.example.bulletbattleground.game.Fighter;
 import com.example.bulletbattleground.utility.Coordinate;
 import com.example.bulletbattleground.utility.HitBox;
 import javafx.scene.image.Image;
@@ -12,7 +13,7 @@ import lombok.Setter;
 public class Loot extends Rectangle {
 
     public Loot(int coordinateX, int coordinateY) {
-        super(40, 40);
+        super(Fighter.FIGHTER_DIMENSIONS*2, Fighter.FIGHTER_DIMENSIONS*2);
         this.setFill(Color.GOLD);
         coordinate = new Coordinate(coordinateX, coordinateY);
         this.setLayoutX(coordinateX);

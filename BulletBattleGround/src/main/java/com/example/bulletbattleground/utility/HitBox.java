@@ -23,7 +23,7 @@ public class HitBox extends Group {
     @Getter
     @Setter
     private ArrayList<Coordinate> points = new ArrayList<>();
-    private Coordinate center;
+    private final Coordinate center;
     @Getter
     @Setter
     private Coordinate overlapped;
@@ -35,8 +35,8 @@ public class HitBox extends Group {
     protected Node body;
 
     /**
-     *
-     * @param projectile
+     * creates a hitbox representing the projectile
+     * @param projectile projectile whose hitbox is created
      */
     public HitBox(Projectile projectile) {
         this.radius = ((Circle) projectile.getChildren().get(0)).getRadius();
@@ -63,9 +63,8 @@ public class HitBox extends Group {
 
 
     /**
-     *
-     * @param wall
-     *
+     *creates a wall representing the projectile
+      @param wall projectile whose hitbox is created
      */
     public HitBox(Wall wall) {
         center = new Coordinate(wall.getCoordinate().getX(), wall.getCoordinate().getY());
@@ -97,8 +96,8 @@ public class HitBox extends Group {
     }
 
     /**
-     *
-     * @param spaceShip
+     *creates a spaceship representing the projectile
+     @param spaceShip projectile whose hitbox is created
      */
     public HitBox(SpaceShip spaceShip) {
         center = new Coordinate(spaceShip.getCoordinate().getX(), spaceShip.getCoordinate().getY());
@@ -154,8 +153,8 @@ public class HitBox extends Group {
 
 
     /**
-     *
-     * @param fighter
+     *creates a hitbox representing the fighter
+     @param fighter projectile whose hitbox is created
      */
     public HitBox(Fighter fighter) {
         center = new Coordinate(fighter.getCoordinate().getX(), fighter.getCoordinate().getY());
@@ -178,8 +177,8 @@ public class HitBox extends Group {
     }
 
     /**
-     *
-     * @param loot
+     *creates a hitbox representing the loot
+     @param loot projectile whose hitbox is created
      */
     public HitBox(Loot loot) {
         center = new Coordinate(loot.getCoordinate().getX(), loot.getCoordinate().getY());
@@ -203,9 +202,9 @@ public class HitBox extends Group {
 
 
     /**
-     *
-     * @param //HitBox
-     * @return
+     * checks if this hitbox overlaps with another
+     * @param hitBox another hitbox to compare this one to
+     * @return true if it ovelaps over the given hitbox
      */
     public boolean overlaps(HitBox hitBox) {
         for (int i = 0; i < hitBox.points.size() ; i++) {
@@ -218,7 +217,7 @@ public class HitBox extends Group {
     }
 
     /**
-     *
+     * sets the hitbox to be displayed in the scene
      * @param isDisplayed
      */
     public void setDisplayed(boolean isDisplayed) {

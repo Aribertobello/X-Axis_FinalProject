@@ -55,7 +55,6 @@ public class Mapp extends Pane implements GameUI , Cloneable {
     public Mapp(String type) {
         if (type.equalsIgnoreCase("earth")) {
             Image backgroundImageSpace = new Image(skyFilePath);
-
             BackgroundImage background = new BackgroundImage(
                     backgroundImageSpace,
                     BackgroundRepeat.NO_REPEAT,
@@ -65,7 +64,10 @@ public class Mapp extends Pane implements GameUI , Cloneable {
             );
             this.setBackground(new Background(background));
             Image groundEarthImage = new Image(groundFilePath);
-            earth = new Rectangle(0, BattleGround.screenHeight-200, 3000,250);
+            int padding = 200;
+            double earthWidth = 3000;
+            double earthHeight = 300;
+            earth = new Rectangle(0, BattleGround.screenHeight-padding, earthWidth,earthHeight);
             earth.setFill(new ImagePattern(groundEarthImage));
             this.getChildren().add(earth);
             gravity  = 9.8;
@@ -83,12 +85,14 @@ public class Mapp extends Pane implements GameUI , Cloneable {
             );
             this.setBackground(new Background(background));
 
-            earth = new Circle(BattleGround.screenWidth/2.0, BattleGround.screenHeight/2.0, 120);
+            double earthRadius = 120;
+            earth = new Circle(BattleGround.screenWidth/2.0, BattleGround.screenHeight/2.0, earthRadius);
             Image earth_image = new Image(earthFilePath);
             earth.setFill(new ImagePattern(earth_image));
             this.getChildren().add(earth);
             this.type = 1;
         }
+        // object to keep background maximized
         this.getChildren().add(new Circle(2000, 1200, 1));
     }
 
@@ -172,28 +176,34 @@ public class Mapp extends Pane implements GameUI , Cloneable {
         if (type == 0) {
             environmentForces[0] = new Vector(0,gravity).multiply(projectile.getMass());
         } else {
+            double projMass = 2000;
             Circle earth = (Circle) this.earth;
-            projectile.setMass(2000);
+            projectile.setMass(projMass);
             Coordinate earthCenterOfGravity = new Coordinate(earth.getCenterX(), earth.getCenterY());
             double bigG = 6.67 * pow(10, -11);
             double massEarth = 5.97 * pow(10, 24);
             Vector distance = earthCenterOfGravity.distanceVector(projectile.getCoordinate());
-            double gMagnitude = (bigG * massEarth * projectile.getMass()) / pow(distance.magnitude() + 120 * 106183, 2);
+            double earthRadReal = 106183;
+            double earthRadPixel = 120;
+            double gMagnitude = (bigG * massEarth * projectile.getMass()) / pow(distance.magnitude() + earthRadPixel * earthRadReal, 2);
             Vector gForce = distance.scale(gMagnitude);
             environmentForces[0] = gForce.multiply(1);
             environmentForces[1] = new Vector(-0.00, 0);
             projectile.setLift(new Vector(0, 0));
         }
-        environmentForces[1] = projectile.velocity().multiply(-airResistance/1000000*Math.pow(projectile.velocity().magnitude(),2));
+        //value to properly scale large object Mathematics to fit the computer screen
+        double scalar = 1000000;
+
+        environmentForces[1] = projectile.velocity().multiply(-airResistance/scalar*Math.pow(projectile.velocity().magnitude(),2));
             projectile.forces.clear();
             projectile.forces.add(environmentForces[0]);
             projectile.forces.add(environmentForces[1]);
     }
 
     /**
-     *
-     * @param projectile
-     * @return
+     * Checks if a projectile within this collides with another game element at a given moment
+     * @param projectile projectile to check collisions for
+     * @return true if the projectile collides with something
      */
     public Boolean checkCollision(Projectile projectile) {
 
@@ -228,7 +238,7 @@ public class Mapp extends Pane implements GameUI , Cloneable {
     }
 
     /**
-     *
+     *  TRIGGERS AN EXPLOSION
      * @param coordinate
      */
     protected void explosion(Coordinate coordinate) {
@@ -236,9 +246,10 @@ public class Mapp extends Pane implements GameUI , Cloneable {
     }
 
     private boolean isInBounds(MovingBody body) {
+        int boundsPadding = 50;
         double x = body.getCoordinate().getX();
         double y = body.getCoordinate().getY();
-        return !(x < BattleGround.screenWidth-bounds[0]-50 || x > bounds[0]+50 || y <  BattleGround.screenHeight-bounds[0]-50 || y > bounds[1]+50);
+        return !(x < BattleGround.screenWidth-bounds[0]-boundsPadding|| x > bounds[0]+boundsPadding || y <  BattleGround.screenHeight-bounds[0]-boundsPadding || y > bounds[1]+boundsPadding);
     }
     public void removeActiveProjectile() {
         if(activeProjectile!=null){
@@ -255,53 +266,5 @@ public class Mapp extends Pane implements GameUI , Cloneable {
         this.getChildren().remove(loot);
         loot = null;
         hasLoot = false;
-    }
-    @Override
-    public Object clone() {
-        try {
-            Mapp clonedMap = (Mapp) super.clone();
-            clonedMap.people = new ArrayList<>(this.people.size());
-            for (Fighter fighter : this.people) {
-                Fighter person  = new Fighter(fighter.loadout.type,fighter.health, (int)fighter.coordinate.getX(),(int)fighter.getCoordinate().getY());
-                clonedMap.people.add(person);
-                person.setMap(clonedMap);
-            }
-
-            clonedMap.obstacles = new ArrayList<>(this.obstacles.size());
-            for (Obstacle obstacle : this.obstacles) {
-                if(obstacle instanceof Wall) {
-                    Wall wall = (Wall)obstacle;
-                    Wall cloneWall = new Wall(wall.getHeight(),wall.getThickness(), (int)wall.getCoordinate().getX(),(int)wall.getCoordinate().getY(),wall.getRotationAngle(),(int)wall.getMass());
-                    cloneWall.setMap(clonedMap);
-                    clonedMap.obstacles.add(cloneWall);
-                }
-                if( obstacle instanceof SpaceShip){
-                    SpaceShip spaceShip = (SpaceShip) obstacle;
-                    SpaceShip cloneSpaceShip = new SpaceShip((int)obstacle.velocity().magnitude(),(int)obstacle.getCoordinate().getX(),(int)obstacle.getCoordinate().getY());
-                    cloneSpaceShip.setMap(clonedMap);
-                    clonedMap.obstacles.add(cloneSpaceShip);
-                }
-            }
-
-            // Clone the Shape objects
-            if (this.earth instanceof Circle) {
-                Circle earthCircle = (Circle) this.earth;
-                Circle clonedEarth = new Circle(earthCircle.getCenterX(), earthCircle.getCenterY(), earthCircle.getRadius());
-                clonedEarth.setFill(earthCircle.getFill());
-                clonedMap.earth = clonedEarth;
-            } else if (this.earth instanceof Rectangle) {
-                Rectangle earthRectangle = (Rectangle) this.earth;
-                Rectangle clonedEarth = new Rectangle(earthRectangle.getX(), earthRectangle.getY(), earthRectangle.getWidth(), earthRectangle.getHeight());
-                clonedEarth.setFill(earthRectangle.getFill());
-                clonedMap.earth = clonedEarth;
-            }
-
-            // Clone other fields
-            // (you may need to implement deep copying for other fields if necessary)
-
-            return clonedMap;
-        } catch (CloneNotSupportedException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

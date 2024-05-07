@@ -15,6 +15,7 @@ import lombok.Setter;
 
 @Getter@Setter
 public class Fighter extends Rectangle {
+
     public static int FIGHTER_DIMENSIONS = 20;
 
     protected Loadout loadout;
@@ -85,22 +86,24 @@ public class Fighter extends Rectangle {
             map.setActiveProjectile(projectile);
         }
         projectile.release(velocity, new Coordinate(launchCoordinate.getX(), launchCoordinate.getY()));
+        int padding = 10;
+        double smallG = 9.8;
         map.setBuffer(0);
         if (projectile instanceof Rocket) {
-            Vector a = new Vector(0,4.9);
+            Vector a = new Vector(0,smallG/2);
             double angle = projectile.velocity().angle();
             Vector v = projectile.velocity();
             double vx = v.getX();
             double ax = a.getX();
             double ay = a.getY();
             double tan = Math.tan(Math.PI*(angle/180));
-            double dropZone = this.getCoordinate().getX()+20+(2*vx*vx*tan*(ax*tan-ay)/(ay*ay));
+            double dropZone = this.getCoordinate().getX()+Fighter.FIGHTER_DIMENSIONS+(2*vx*vx*tan*(ax*tan-ay)/(ay*ay));
             ((Rocket)projectile).setDropZone(dropZone);
-            if (((Rocket) projectile).getDropZone() >= 1915) {
-                ((Rocket) projectile).setDropZone(1915);
+            if (((Rocket) projectile).getDropZone() >= BattleGround.screenWidth) {
+                ((Rocket) projectile).setDropZone(BattleGround.screenHeight-padding);
             }
-            if (((Rocket) projectile).getDropZone() <= 5) {
-                ((Rocket) projectile).setDropZone(5);
+            if (((Rocket) projectile).getDropZone() <= padding) {
+                ((Rocket) projectile).setDropZone(padding);
             }
         }
     }
@@ -116,7 +119,7 @@ public class Fighter extends Rectangle {
         Level level = BattleGround.activeGame.getLevel();
         if(level.getSelectedFighter()!=null) level.getSelectedFighter().unhiglight();
         level.setSelectedFighter(this);
-        level.setOrigin(teamNb == 1 ? coordinate.move(new Vector(20,-20)) :  coordinate.move(new Vector(-FIGHTER_DIMENSIONS,-FIGHTER_DIMENSIONS)));
+        level.setOrigin(teamNb == 1 ? coordinate.move(new Vector(FIGHTER_DIMENSIONS,-FIGHTER_DIMENSIONS)) :  coordinate.move(new Vector(-FIGHTER_DIMENSIONS,-FIGHTER_DIMENSIONS)));
         highlighted = true;
         this.setStroke(teamNb == teamOne ? Color.CYAN :  Color.DARKRED );
     }

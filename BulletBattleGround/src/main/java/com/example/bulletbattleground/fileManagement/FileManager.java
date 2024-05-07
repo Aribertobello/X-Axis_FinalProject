@@ -368,25 +368,8 @@ public class FileManager extends ClassSelectorController {
             e.printStackTrace();
         }
     }
-
-    public static Mapp defaultEduMap() {
-        Mapp map = new Mapp(earth);
-        return map;
-    }
-
-    public static EduLevel defaultEduLevel() {
-        Mapp map = defaultEduMap();
-        try {
-            EduLevel level = new EduLevel(map);
-            level.addFighter(new Ally(2, 15, 200, 600), 1);
-            return level;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public static FreePlayLevel freePlayLevel() {
-        Mapp map = new Mapp("earth");
+        Mapp map = new Mapp("space");
         try {
             return new FreePlayLevel(map);
         } catch (IOException e) {

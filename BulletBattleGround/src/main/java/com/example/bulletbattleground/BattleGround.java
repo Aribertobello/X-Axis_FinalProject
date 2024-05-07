@@ -20,8 +20,6 @@ import java.util.Stack;
 
 public class BattleGround extends Application {
 
-    static protected String userDataLocation = "";//TODO Put User Data File Here
-
     static public Game activeGame;
     public static int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
     public static int screenHeight = (int) Screen.getPrimary().getBounds().getHeight();
@@ -29,6 +27,7 @@ public class BattleGround extends Application {
     public static Stage mainStage;
     public static String username;
     public static User user = new User();
+
 
     /**
      * The entry point for the JavaFX application. Initializes the primary stage
@@ -47,10 +46,6 @@ public class BattleGround extends Application {
         stage.show();
     }
 
-    /**
-     *
-     * @param args
-     */
     public static void main(String[] args) {
         launch();
     }
@@ -64,7 +59,6 @@ public class BattleGround extends Application {
         if(mainStage.getScene() == activeGame){
             activeGame = null;
         }
-
         workFlowStack.pop();
         mainStage.setScene(workFlowStack.peek());
         center();
@@ -94,5 +88,6 @@ public class BattleGround extends Application {
     public static FXMLLoader pvpLevelSelectorLoader(){ return new FXMLLoader(BattleGround.class.getResource("PVPLevelSelector.fxml"));}
     public static FXMLLoader classSelectorLoader(){ return new FXMLLoader(BattleGround.class.getResource("ClassSelector.fxml"));}
     public static FXMLLoader instructionBoxLoader(){ return new FXMLLoader(BattleGround.class.getResource("InstructionBox.fxml"));}
+    public static FXMLLoader mapSelectorLoader(){ return new FXMLLoader(BattleGround.class.getResource("MapSelectorScene.fxml"));}
 
 }
