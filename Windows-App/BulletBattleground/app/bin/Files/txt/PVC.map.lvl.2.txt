@@ -1,0 +1,18 @@
+index : 1
+type : space
+Forces : 
+{
+GMagnitude = 9.8
+AirResMagnitude = 2.0
+wind = <-0.9,0.0>
+}
+Obstacles :
+{
+wall : { height = 500 , width = 19 , coordinate = (668,195) , rotation  = 0 , mass = 2 }
+spaceship : { speed = -21 , coordinate = (356,1019) }
+spaceship : { speed = 21 , coordinate = (1053,1045) }
+}
+Description : 
+WOW! this map is very normal I hope its stays that way
+
+ 

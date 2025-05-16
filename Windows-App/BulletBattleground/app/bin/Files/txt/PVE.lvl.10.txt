@@ -1,0 +1,20 @@
+index : 10
+type : 1
+map : Files/txt/PVE.map.lvl.10.txt
+fighters :
+{
+ally : { loadout = 1 , health = 5 , coordinate = (106,599) }
+}
+loot : { coordinate = (1020,774) }
+loot : { coordinate = (989,109) }
+loot : { coordinate = (989,483) }
+GameRules : {
+MAX_TURN_TIMER :
+MAX_PROJ_ANIMATION_IMER
+tickspeed :
+}
+Description :
+{
+Level 10,
+You almost got all the treasure don't give up my G!
+}

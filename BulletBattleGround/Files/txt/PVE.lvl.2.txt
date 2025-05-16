@@ -1,0 +1,19 @@
+index : 2
+type : 1
+map : Files/txt/PVE.map.lvl.2.txt
+fighters :
+{
+ally : { loadout = 1 , health = 5 , coordinate = (165,170) }
+}
+loot : { coordinate = (1123,721) }
+GameRules : {
+MAX_TURN_TIMER :
+MAX_PROJ_ANIMATION_IMER
+tickspeed :
+}
+Description :
+{
+Level 2,
+Just a little bit harder,
+don't forget to look at the angle display!!!
+}

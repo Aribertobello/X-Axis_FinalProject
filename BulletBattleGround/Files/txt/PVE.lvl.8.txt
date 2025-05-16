@@ -1,0 +1,19 @@
+index : 8
+type : 1
+map : Files/txt/PVE.map.lvl.8.txt
+fighters :
+{
+ally : { loadout = 1 , health = 5 , coordinate = (586,727) }
+}
+loot : { coordinate = (1255,536) }
+loot : { coordinate = (1268,101) }
+GameRules : {
+MAX_TURN_TIMER :
+MAX_PROJ_ANIMATION_IMER
+tickspeed :
+}
+Description :
+{
+Level 8,
+Try not to rage!!
+}

@@ -1,0 +1,20 @@
+index : 4
+type : 2
+map : Files/txt/PVC.map.lvl.4.txt
+fighters :
+{
+ally : { loadout = 1 , health = 5 , coordinate = (127,690) }
+computer : { loadout = 1 , health = 5 , coordinate = (700,641) }
+computer : { loadout = 1 , health = 5 , coordinate = (630,350) }
+computer : { loadout = 1 , health = 5 , coordinate = (430,400) }
+}
+GameRules : {
+MAX_TURN_TIMER :
+MAX_PROJ_ANIMATION_IMER
+tickspeed :
+}
+Description :
+{
+Level 4,
+GoodLuck, don't miss buddy!!
+}

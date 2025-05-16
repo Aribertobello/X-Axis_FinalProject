@@ -1,0 +1,20 @@
+index : 1
+type : earth
+Forces :
+{
+GMagnitude = 9.8
+AirResMagnitude = 2.0
+wind = <-0.9,0.0>
+}
+Obstacles :
+{
+wall : { height = 199 , width = 14 , coordinate = (580,300) , rotation  = 0 , mass = 2 }
+wall : { height = 199 , width = 14 , coordinate = (750,450) , rotation  = 220 , mass = 2 }
+spaceship : { speed = -25 , coordinate = (1824,586) }
+spaceship : { speed = 25 , coordinate = (942,296) }
+}
+Description :
+You have to Hit both enemies 3 times to pass this level.
+
+
+ 

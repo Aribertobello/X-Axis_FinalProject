@@ -1,0 +1,20 @@
+index : 6
+type : 2
+map : Files/txt/PVC.map.lvl.6.txt
+fighters :
+{
+ally : { loadout = 1 , health = 5 , coordinate = (100,462) }
+computer : { loadout = 1 , health = 5 , coordinate = (932,725) }
+computer : { loadout = 1 , health = 5 , coordinate = (604,40) }
+}
+GameRules : {
+MAX_TURN_TIMER :
+MAX_PROJ_ANIMATION_IMER
+tickspeed :
+}
+Description :
+{
+Level 6,
+Be careful of the plane Buddy,
+you can miss your target!!
+}

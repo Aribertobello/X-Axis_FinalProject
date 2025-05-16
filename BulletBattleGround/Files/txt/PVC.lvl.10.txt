@@ -1,0 +1,22 @@
+index : 10
+type : 2
+map : Files/txt/PVC.map.lvl.10.txt
+fighters :
+{
+ally : { loadout = 1 , health = 5 , coordinate = (238,512) }
+computer : { loadout = 1 , health = 5 , coordinate = (1020,761) }
+computer : { loadout = 1 , health = 5 , coordinate = (1150,341) }
+computer : { loadout = 1 , health = 5 , coordinate = (1154,586) }
+computer : { loadout = 1 , health = 5 , coordinate = (992,123) }
+}
+GameRules : {
+MAX_TURN_TIMER :
+MAX_PROJ_ANIMATION_IMER
+tickspeed :
+}
+Description :
+{
+Level 10,
+even harder than level 9,
+Goodluck my friends!!
+}
