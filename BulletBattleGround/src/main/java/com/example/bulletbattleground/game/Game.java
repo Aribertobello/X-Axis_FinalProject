@@ -209,7 +209,7 @@ public class Game extends Scene {
         });
         this.setOnKeyPressed(event -> {//Pauses the game when hitting key P
 
-            if (event.getCode() == KeyCode.P) {
+            if (event.getCode() == KeyCode.P || event.getCode() == KeyCode.SPACE ) {
                 new pauseEvent().handle(event);
             }
 
@@ -286,7 +286,7 @@ public class Game extends Scene {
             timeline.play();
         } else {
             //Debug
-            var variableOfInterest = level.map.activeProjectile.acceleration();
+            //var variableOfInterest = level.map.activeProjectile.acceleration();
             //----------------
             timeline.pause();
             isTicking = false;

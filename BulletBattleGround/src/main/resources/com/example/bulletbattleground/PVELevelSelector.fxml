@@ -8,14 +8,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bulletbattleground.controllers.PVELevelSelectorController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bulletbattleground.controllers.PVELevelSelectorController">
    <children>
       <Pane prefHeight="46.0" prefWidth="600.0">
          <children>
             <Button fx:id="B2" layoutX="489.0" layoutY="11.0" mnemonicParsing="false" onAction="#BackButton" text="Exit" />
          </children>
       </Pane>
-      <Label text="Player VS Computer" />
+      <Label text="Player VS Environment" />
       <HBox alignment="CENTER" prefHeight="133.0" prefWidth="600.0" spacing="20.0">
          <children>
             <Button fx:id="lvl1Btn" mnemonicParsing="false" onAction="#launchPVELevel1" prefHeight="88.0" prefWidth="89.0" text="Level 1" />

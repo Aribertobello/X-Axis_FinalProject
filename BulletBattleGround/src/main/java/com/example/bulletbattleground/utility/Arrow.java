@@ -49,7 +49,6 @@ public class Arrow extends Polyline {
             this.getPoints().addAll(projectile.getCoordinate().getX(),projectile.getCoordinate().getY());
             penUltimateCoord = ultimateCoord;
             ultimateCoord = projectile.getCoordinate();
-
         }
         map.getChildren().add(this);
         addTip();
