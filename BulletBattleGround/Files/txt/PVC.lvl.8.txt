@@ -1,0 +1,20 @@
+index : 8
+type : 2
+map : Files/txt/PVC.map.lvl.8.txt
+fighters :
+{
+ally : { loadout = 1 , health = 5 , coordinate = (586,727) }
+computer : { loadout = 1 , health = 5 , coordinate = (1255,536) }
+computer : { loadout = 1 , health = 5 , coordinate = (1268,101) }
+}
+GameRules : {
+MAX_TURN_TIMER :
+MAX_PROJ_ANIMATION_IMER
+tickspeed :
+}
+Description :
+{
+Level 8,
+Round starts getting bummppyy, have fun Buddy!!!
+
+}

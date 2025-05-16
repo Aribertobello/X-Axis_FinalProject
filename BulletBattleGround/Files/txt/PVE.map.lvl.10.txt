@@ -1,0 +1,25 @@
+type : earth
+Forces : 
+{
+GMagnitude = 9.8
+AirResMagnitude = 2.0
+wind = <-0.9,0.0>
+}
+Obstacles :
+{
+wall : { height = 169 , width = 10 , coordinate = (1107,517) , rotation  = 238 , mass = 2 }
+wall : { height = 169 , width = 10 , coordinate = (820,98) , rotation  = 0 , mass = 2 }
+wall : { height = 100 , width = 10 , coordinate = (905,193) , rotation  = 111 , mass = 2 }
+wall : { height = 220 , width = 10 , coordinate = (1121,291) , rotation  = 238 , mass = 2 }
+wall : { height = 169 , width = 10 , coordinate = (828,440) , rotation  = 0 , mass = 2 }
+wall : { height = 169 , width = 10 , coordinate = (1066,706) , rotation  = 164 , mass = 2 }
+wall : { height = 169 , width = 10 , coordinate = (835,783) , rotation  = 0 , mass = 2 }
+spaceship : { speed = 20 , coordinate = (900,200) }
+spaceship : { speed = 20 , coordinate = (900,200) }
+spaceship : { speed = 20 , coordinate = (900,200) }
+spaceship : { speed = 20 , coordinate = (900,200) }
+}
+Description : 
+WOW! this map is very normal i hope its stays that way
+
+ 

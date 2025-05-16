@@ -4,6 +4,7 @@ plugins {
   id 'org.javamodularity.moduleplugin' version '1.8.12'
   id 'org.openjfx.javafxplugin' version '0.0.13'
   id 'org.beryx.jlink' version '2.25.0'
+  id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 group 'com.example'
@@ -15,6 +16,7 @@ repositories {
 
 ext {
   junitVersion = '5.10.0'
+  javafxVersion = '18.0.2'
 }
 
 sourceCompatibility = '18'
@@ -26,7 +28,7 @@ tasks.withType(JavaCompile) {
 
 application {
   mainModule = 'com.example.bulletbattleground'
-  mainClass = 'com.example.bulletbattleground.HelloApplication'
+  mainClass = 'com.example.bulletbattleground.BattleGround'
 }
 
 javafx {
@@ -35,6 +37,12 @@ javafx {
 }
 
 dependencies {
+
+  testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+
+  implementation "org.openjfx:javafx-controls:${javafxVersion}:${javafx.platform.classifier}"
+  implementation "org.openjfx:javafx-fxml:${javafxVersion}:${javafx.platform.classifier}"
 
   testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
@@ -59,4 +67,18 @@ jlink {
 
 jlinkZip {
   group = 'distribution'
+}
+
+jar {
+  manifest {
+    attributes(
+            'Main-Class': 'com.example.bulletbattleground.BattleGround'
+    )
+  }
+}
+
+shadowJar {
+  manifest {
+    attributes 'Main-Class': 'com.example.bulletbattleground.BattleGround'
+  }
 }

@@ -1,0 +1,20 @@
+index : 7
+type : 1
+map : Files/txt/PVE.map.lvl.7.txt
+fighters :
+{
+ally : { loadout = 1 , health = 5 , coordinate = (150,542) }
+}
+loot : { coordinate = (346,218) }
+loot : { coordinate = (750,550) }
+loot : { coordinate = (920,106) }
+GameRules : {
+MAX_TURN_TIMER :
+MAX_PROJ_ANIMATION_IMER
+tickspeed :
+}
+Description :
+{
+Level 7,
+use the wall and your grenade to try and figure out which on is the real chest!!
+}

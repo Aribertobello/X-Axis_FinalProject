@@ -1,0 +1,19 @@
+index : 5
+type : 1
+map : Files/txt/PVE.map.lvl.5.txt
+fighters :
+{
+ally : { loadout = 1 , health = 5 , coordinate = (297,502) }
+}
+loot : { coordinate = (1007,468) }
+loot : { coordinate = (900,200) }
+GameRules : {
+MAX_TURN_TIMER :
+MAX_PROJ_ANIMATION_IMER
+tickspeed :
+}
+Description :
+{
+Level 5,
+a bit more challenging but not much harderr!!
+}

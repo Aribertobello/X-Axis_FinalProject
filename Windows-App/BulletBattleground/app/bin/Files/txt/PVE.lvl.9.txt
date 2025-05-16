@@ -1,0 +1,18 @@
+index : 9
+type : 1
+map : Files/txt/PVE.map.lvl.9.txt
+fighters :
+{
+ally : { loadout = 1 , health = 5 , coordinate = (218,457) }
+}
+loot : { coordinate = (1287,212) }
+GameRules : {
+MAX_TURN_TIMER :
+MAX_PROJ_ANIMATION_IMER
+tickspeed :
+}
+Description :
+{
+Level 9,
+Pretty difficult don't give up buddy!!
+}
