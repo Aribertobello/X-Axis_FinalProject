@@ -4,16 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e810123f-c013-4985-8bfb-7c896e155b08" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/BulletBattleGround.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/BulletBattleGround.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/BulletBattleGround.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/BulletBattleGround.test.iml" afterDir="false" />
+    <list default="true" id="e810123f-c013-4985-8bfb-7c896e155b08" name="Changes" comment="windows app">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/.gradle/8.2/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/fileManagement/FileManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/fileManagement/FileManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/game/Fighter.class" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/game/Fighter.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/game/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/com/example/bulletbattleground/game/Game.class" afterDir="false" />
@@ -27,18 +23,211 @@
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/classes/java/main/module-info.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/libs/BulletBattleGround-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/libs/BulletBattleGround-1.0-SNAPSHOT.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BulletBattleGround/build/tmp/jar/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/BulletBattleGround/build/tmp/jar/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Files/txt/PVC.progress.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Files/txt/PVC.progress.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Files/txt/PVE.progress.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Files/txt/PVE.progress.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Files/txt/save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Files/txt/save.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hs_err_pid38808.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hs_err_pid39343.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hs_err_pid43796.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hs_err_pid45136.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hs_err_pid45154.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hs_err_pid45178.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hs_err_pid45196.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hs_err_pid45388.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/img/1.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/img/2.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/img/3.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/img/4.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/img/5.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/img/6.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/img/7.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/img/8.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/img/Light_Class_Img.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/img/Light_Class_Img_Inverted.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/img/Loot.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/img/SpaceShip.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/img/WallTemporary.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/img/earth_Image.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/img/grenade.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/img/ground.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/img/rocket.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/img/s4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/img/s5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/img/sky.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/img/smallBullet.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/img/spaceBackground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/img/spear.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/sound/Explosion.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/sound/GunShot.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/sound/Rocket.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/sound/Spear.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVC.lvl.1 - Copy.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVC.lvl.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVC.lvl.10.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVC.lvl.2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVC.lvl.3.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVC.lvl.4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVC.lvl.5.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVC.lvl.6.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVC.lvl.7.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVC.lvl.8.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVC.lvl.9.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVC.map.lvl.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVC.map.lvl.10.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVC.map.lvl.2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVC.map.lvl.3.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVC.map.lvl.4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVC.map.lvl.5.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVC.map.lvl.6.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVC.map.lvl.7.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVC.map.lvl.8.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVC.map.lvl.9.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVC.progress.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVE.lvl.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVE.lvl.10.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVE.lvl.2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVE.lvl.3.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVE.lvl.4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVE.lvl.5.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVE.lvl.6.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVE.lvl.7.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVE.lvl.8.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVE.lvl.9.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVE.map.lvl.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVE.map.lvl.10.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVE.map.lvl.2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVE.map.lvl.3.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVE.map.lvl.4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVE.map.lvl.5.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVE.map.lvl.6.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVE.map.lvl.7.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVE.map.lvl.8.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVE.map.lvl.9.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/PVE.progress.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/Files/txt/save.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-core-console-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-core-console-l1-2-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-core-datetime-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-core-debug-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-core-errorhandling-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-core-file-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-core-file-l1-2-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-core-file-l2-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-core-handle-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-core-heap-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-core-interlocked-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-core-libraryloader-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-core-localization-l1-2-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-core-memory-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-core-namedpipe-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-core-processenvironment-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-core-processthreads-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-core-processthreads-l1-1-1.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-core-profile-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-core-rtlsupport-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-core-string-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-core-synch-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-core-synch-l1-2-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-core-sysinfo-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-core-timezone-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-core-util-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-crt-conio-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-crt-convert-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-crt-environment-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-crt-filesystem-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-crt-heap-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-crt-locale-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-crt-math-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-crt-multibyte-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-crt-private-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-crt-process-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-crt-runtime-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-crt-stdio-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-crt-string-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-crt-time-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/api-ms-win-crt-utility-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/app" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/app.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/awt.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/fontmanager.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/freetype.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/java.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/java.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/javajpeg.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/javaw.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/jawt.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/jimage.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/jli.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/jrunscript.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/jsound.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/keytool.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/lcms.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/mlib_image.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/msvcp140.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/net.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/nio.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/prefs.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/server/jvm.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/splashscreen.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/syslookup.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/ucrtbase.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/vcruntime140.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/vcruntime140_1.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/verify.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/bin/zip.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/conf/jaxp.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/conf/net.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/conf/security/java.policy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/conf/security/java.security" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/conf/security/policy/README.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/conf/security/policy/limited/default_US_export.policy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/conf/security/policy/limited/default_local.policy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/conf/security/policy/limited/exempt_local.policy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/conf/security/policy/unlimited/default_US_export.policy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/conf/security/policy/unlimited/default_local.policy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/conf/sound.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.base/COPYRIGHT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.base/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.base/aes.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.base/asm.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.base/c-libutl.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.base/cldr.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.base/icu.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.base/public_suffix.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.base/unicode.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.base/wepoll.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.base/zlib.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.datatransfer/COPYRIGHT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.datatransfer/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.desktop/COPYRIGHT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.desktop/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.desktop/colorimaging.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.desktop/freetype.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.desktop/giflib.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.desktop/harfbuzz.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.desktop/jpeg.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.desktop/lcms.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.desktop/libpng.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.desktop/mesa3d.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.prefs/COPYRIGHT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.prefs/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.scripting/COPYRIGHT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.scripting/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.xml/COPYRIGHT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.xml/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.xml/bcel.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.xml/dom.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.xml/jcup.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.xml/xalan.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/java.xml/xerces.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/jdk.unsupported/COPYRIGHT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/legal/jdk.unsupported/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/lib/classlist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/lib/fontconfig.bfc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/lib/fontconfig.properties.src" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/lib/jawt.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/lib/jrt-fs.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/lib/jvm.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/lib/jvm.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/lib/modules" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/lib/psfont.properties.ja" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/lib/psfontj2d.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/lib/security/blocked.certs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/lib/security/cacerts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/lib/security/default.policy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/lib/security/public_suffix_list.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/lib/tzdb.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/lib/tzmappings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Windows-App/BulletBattleground/app/release" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,6 +304,7 @@
   &quot;keyToString&quot;: {
     &quot;Gradle.Build BulletBattleGround.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.BulletBattleGround [:BattleGround.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.BulletBattleGround [:com.example.bulletbattleground.BattleGround.main()].executor&quot;: &quot;Run&quot;,
     &quot;Gradle.Tests in 'BulletBattleGround.test'.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.CodyConvertUrlToCodebaseName&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.CodyHistoryLlmMigration&quot;: &quot;true&quot;,
@@ -209,7 +399,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-18.0.2-corretto-18.0.2-4caba194b151-5720f15e" />
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.26094.121" />
+        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-IU-251.26094.121" />
       </set>
     </attachedChunks>
   </component>
@@ -225,6 +416,8 @@
       <workItem from="1732840190603" duration="29000" />
       <workItem from="1732840230490" duration="431000" />
       <workItem from="1734024161206" duration="3000" />
+      <workItem from="1758513759556" duration="879000" />
+      <workItem from="1758514774220" duration="996000" />
     </task>
     <servers />
   </component>
@@ -241,6 +434,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="windows app" />
+    <option name="LAST_COMMIT_MESSAGE" value="windows app" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
